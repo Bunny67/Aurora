@@ -1,4 +1,4 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
@@ -28,8 +28,8 @@ C.modules['Blizzard_TimeManager'] = function()
 	
 	F.ReskinInput(_G['TimeManagerAlarmMessageEditBox']);
 	
-	F.StripTextures(_G['TimeManagerMilitaryTimeCheck']);
-	F.StripTextures(_G['TimeManagerLocalTimeCheck']);
+	F.ReskinCheck(_G['TimeManagerMilitaryTimeCheck']);
+	F.ReskinCheck(_G['TimeManagerLocalTimeCheck']);
 	
 	F.Reskin(_G['TimeManagerAlarmEnabledButton'], nil, true);
 	
