@@ -1,57 +1,71 @@
 local F, C = unpack(select(2, ...))
--- ПОМОЩЬ
-tinsert(C.modules["Aurora"], function()
-	local AllHelpFrameStripTextures = {'HelpFrame', 'KnowledgeBaseFrame', 'KnowledgeBaseFrameDivider', 'KnowledgeBaseFrameDivider2', 'HelpFrameOpenTicketDivider'}
-	for i = 1, #AllHelpFrameStripTextures do
-	local AllHelpFrameStripTexture = _G[AllHelpFrameStripTextures[i]]
-		if AllHelpFrameStripTexture then
-			F.StripTextures(AllHelpFrameStripTexture)
-		else
-			print('Ошибка Aurora: '..AllHelpFrameStripTextures[i]..' не был найден.')
-		end
-	end
 
-	local AllHelpFrameDropDowns = {'KnowledgeBaseFrameCategoryDropDown', 'KnowledgeBaseFrameSubCategoryDropDown'}
-	for i = 1, #AllHelpFrameDropDowns do
-		local AllHelpFrameDropDown = _G[AllHelpFrameDropDowns[i]]
-		if AllHelpFrameDropDown then
-			F.ReskinDropDown(AllHelpFrameDropDown)
-		else
-			print('Ошибка Aurora: '..AllHelpFrameDropDowns[i]..' не был найден.')
-		end
-	end
+local _G = getfenv(0)
 
-	local AllHelpFrameScrollbars = {'KnowledgeBaseArticleScrollFrameScrollBar', 'HelpFrameOpenTicketScrollFrameScrollBar'}
-	for i = 1, #AllHelpFrameScrollbars do
-		local AllHelpFrameScrollbar = _G[AllHelpFrameScrollbars[i]]
-		if AllHelpFrameScrollbar then
-			F.ReskinScroll(AllHelpFrameScrollbar)
-		else
-			print('Ошибка Aurora: '..AllHelpFrameScrollbars[i]..' не был найден.')
-		end
-	end
-
-	local AllHelpFrameInputs = {'KnowledgeBaseFrameEditBox'}
-	for i = 1, #AllHelpFrameInputs do
-		local AllHelpFrameInput = _G[AllHelpFrameInputs[i]]
-		if AllHelpFrameInput then
-			F.ReskinInput(AllHelpFrameInput)
-		else
-			print('Ошибка Aurora: '..AllHelpFrameInputs[i]..' не был найден.')
-		end
-	end
-
-	local AllHelpFrameButtons = {'GMChatOpenLog', 'KnowledgeBaseFrameTopIssuesButton', 'KnowledgeBaseFrameSearchButton', 'KnowledgeBaseFrameGMTalk', 'KnowledgeBaseFrameLag', 'KnowledgeBaseFrameReportIssue', 'KnowledgeBaseFrameStuck', 'KnowledgeBaseArticleScrollChildFrameBackButton', 'KnowledgeBaseFrameCancel', 'HelpFrameGMTalkOpenTicket', 'HelpFrameGMTalkCancel', 'HelpFrameOpenTicketSubmit', 'HelpFrameOpenTicketCancel', 'HelpFrameLagLoot', 'HelpFrameLagAuctionHouse', 'HelpFrameLagMail', 'HelpFrameLagChat', 'HelpFrameLagMovement', 'HelpFrameLagSpell', 'HelpFrameLagCancel', 'HelpFrameReportIssueOpenTicket', 'HelpFrameReportIssueCancel', 'HelpFrameStuckStuck', 'HelpFrameStuckOpenTicket', 'HelpFrameStuckCancel'}
-	for i = 1, #AllHelpFrameButtons do
-	local AllHelpFrameReskinButtons = _G[AllHelpFrameButtons[i]]
-		if AllHelpFrameReskinButtons then
-			F.Reskin(AllHelpFrameReskinButtons)
-		else
-			print('Ошибка Aurora: '..AllHelpFrameButtons[i]..' не был найден.')
-		end
-	end
-	F.SetBD(HelpFrame, 6, -6, -45, 14)
-	F.ReskinClose(HelpFrameCloseButton, 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10)
-	F.ReskinArrow(KnowledgeBaseArticleListFramePreviousButton, 'left')
-	F.ReskinArrow(KnowledgeBaseArticleListFrameNextButton, 'right')
+tinsert(C.modules['Aurora'], function()
+	F.StripTextures(_G['HelpFrame'], true);
+	F.SetBD(_G['HelpFrame'], 6, -6, -45, 14);
+	
+	F.StripTextures(_G['KnowledgeBaseFrame'], true);
+	
+	local Header = CreateFrame('Frame', nil, HelpFrame)
+	Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8)
+	Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32)
+	Header:SetFrameLevel(HelpFrame:GetFrameLevel())
+	F.CreateBD(Header, .0)
+	F.CreateGradient(Header)
+	
+	F.ReskinClose(_G['HelpFrameCloseButton'], 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
+	
+	F.Reskin(_G['GMChatOpenLog']);
+	F.Reskin(_G['KnowledgeBaseFrameTopIssuesButton']);
+	
+	F.StripTextures(_G['KnowledgeBaseFrameDivider']);
+	
+	F.ReskinInput(_G['KnowledgeBaseFrameEditBox'], 20);
+	
+	F.ReskinScroll(_G['KnowledgeBaseArticleScrollFrameScrollBar']);
+	
+	F.ReskinDropDown(_G['KnowledgeBaseFrameCategoryDropDown']);
+	F.ReskinDropDown(_G['KnowledgeBaseFrameSubCategoryDropDown']);
+	
+	F.Reskin(_G['KnowledgeBaseFrameSearchButton']);
+	
+	F.StripTextures(_G['KnowledgeBaseFrameDivider2']);
+	
+	F.Reskin(_G['KnowledgeBaseFrameGMTalk']);
+	F.Reskin(_G['KnowledgeBaseFrameLag']);
+	F.Reskin(_G['KnowledgeBaseFrameReportIssue']);
+	F.Reskin(_G['KnowledgeBaseFrameStuck']);
+	F.Reskin(_G['KnowledgeBaseFrameEditTicket']);
+	F.Reskin(_G['KnowledgeBaseFrameAbandonTicket']);
+	
+	F.Reskin(_G['KnowledgeBaseFrameCancel']);
+	
+	F.Reskin(_G['HelpFrameGMTalkOpenTicket']); -- РЎРІСЏР·Р°С‚СЃСЏ СЃ Р“Рњ
+	F.Reskin(_G['HelpFrameGMTalkCancel']);
+	
+	F.Reskin(_G['HelpFrameLagLoot'], nil, true); -- РЎРѕРѕР±С‰РёС‚СЊ Рѕ Р·Р°РґРµСЂР¶РєРё
+	F.Reskin(_G['HelpFrameLagAuctionHouse'], nil, true);
+	F.Reskin(_G['HelpFrameLagMail'], nil, true);
+	F.Reskin(_G['HelpFrameLagChat'], nil, true);
+	F.Reskin(_G['HelpFrameLagMovement'], nil, true);
+	F.Reskin(_G['HelpFrameLagSpell'], nil, true);
+	
+	F.Reskin(_G['HelpFrameLagCancel']);
+	
+	F.Reskin(_G['HelpFrameReportIssueOpenTicket']); -- РЎРѕРѕР±С‰РёС‚СЊ Рѕ РїСЂРѕР±Р»РµРјРµ
+	
+	F.Reskin(_G['HelpFrameReportIssueCancel']);
+	
+	F.StripTextures(_G['HelpFrameOpenTicketDivider']);
+	
+	F.ReskinScroll(_G['HelpFrameOpenTicketScrollFrameScrollBar']);
+	
+	F.Reskin(_G['HelpFrameOpenTicketSubmit']);
+	F.Reskin(_G['HelpFrameOpenTicketCancel']);
+	
+	F.Reskin(_G['HelpFrameStuckStuck'], nil, true); -- РџРµСЂСЃРѕРЅР°Р¶ Р·Р°СЃС‚СЂСЏР»
+	F.Reskin(_G['HelpFrameStuckOpenTicket'], nil, true);
+	F.Reskin(_G['HelpFrameStuckCancel']);
 end)
