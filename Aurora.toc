@@ -1,0 +1,13 @@
+## Interface: 30300
+## Title: |cffffffffAurora|r
+## Notes: Minimalist Window Theme.
+## Author: Haleth, Freethinker, Bynnu
+## Version: 1.0
+## SavedVariables: AuroraConfig
+
+aurora.lua
+gui.lua
+
+AddOns\AddOns.xml
+FrameXML\FrameXML.xml
+Misc\Misc.xml

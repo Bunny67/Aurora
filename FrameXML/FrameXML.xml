@@ -1,0 +1,18 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">	
+	<Script file="ArenaFrame.lua"/>
+	<Script file="ArenaRegistrarFrame.lua"/>
+	<Script file="CharacterFrame.lua"/>
+	<Script file="FriendsFrame.lua"/>
+	<Script file="GossipFrame.lua"/>
+	<Script file="HelpFrame.lua"/>
+	<Script file="ItemTextFrame.lua"/>
+	<Script file="MailFrame.lua"/>
+	<Script file="MerchantFrame.lua"/>
+	<Script file="PVPFrame.lua"/>
+	<Script file="QuestFrame.lua"/>
+	<Script file="SpellBookFrame.lua"/>
+	<Script file="Fonts.lua"/>
+	<Script file="TaxiFrame.lua"/>
+	<Script file="UIDropDownMenu.lua"/>
+	<Script file="WorldStateFrame.lua"/>
+</Ui>
