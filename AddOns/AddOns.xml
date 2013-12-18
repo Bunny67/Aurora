@@ -5,6 +5,7 @@
 	<Script file="Blizzard_Calendar.lua"/>
 	<Script file="Blizzard_DebugTools.lua"/>
 	<Script file="Blizzard_GlyphUI.lua"/>
+	<Script file="Blizzard_GuildBankUI.lua"/>
 	<Script file="Blizzard_ItemSocketingUI.lua"/>
 	<Script file="Blizzard_MacroUI.lua"/>
 	<Script file="Blizzard_RaidUI.lua"/>
