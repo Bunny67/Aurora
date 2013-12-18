@@ -1,91 +1,173 @@
 local F, C = unpack(select(2, ...))
 
+local _G = getfenv(0);
+
 tinsert(C.modules['Aurora'], function()
-	local AllFriendsFrameStripTextures = {'FriendsFrame', 'FriendsListFrame', 'FriendsTabHeader', 'WhoFrame', 'WhoListScrollFrame', 'GuildFrame', 'GuildListScrollFrame', 'GuildFrameLFGFrame', 'GuildInfoFrame', 'GuildInfoTextBackground', 'GuildEventLogFrame', 'GuildEventFrame', 'GuildMemberDetailFrame', 'GuildMemberNoteBackground', 'GuildMemberOfficerNoteBackground', 'GuildControlPopupFrame', 'ChannelFrame', 'ChannelFrameVerticalBar', 'ChannelRosterScrollFrame', 'ChannelFrameDaughterFrame', 'ChannelFrameDaughterFrameChannelName', 'RaidFrame', 'RaidInfoFrame', 'RaidInfoInstanceLabel', 'RaidInfoIDLabel'}
-	for i = 1, #AllFriendsFrameStripTextures do
-		F.StripTextures(_G[AllFriendsFrameStripTextures[i]], true)
-	end
+	F.StripTextures(_G['FriendsFrame'], true);
+	F.SetBD(FriendsFrame, 10, -12, -31, 76);
 
-	local AllFriendsFrameDropDowns = {'FriendsFrameStatusDropDown', 'WhoFrameDropDown', 'GuildControlPopupFrameDropDown'}
-	for i = 1, #AllFriendsFrameDropDowns do
-		F.ReskinDropDown(_G[AllFriendsFrameDropDowns[i]])
-	end
-
-	local AllFriendsFrameScrollbars = {'FriendsFrameFriendsScrollFrameScrollBar', 'WhoListScrollFrameScrollBar', 'GuildListScrollFrameScrollBar', 'GuildEventLogScrollFrameScrollBar', 'GuildInfoFrameScrollFrameScrollBar', 'ChannelRosterScrollFrameScrollBar', 'RaidInfoScrollFrameScrollBar'}
-	for i = 1, #AllFriendsFrameScrollbars do
-		F.ReskinScroll(_G[AllFriendsFrameScrollbars[i]])
-	end
-
-	local AllFriendsFrameInputs = {'GuildControlPopupFrameEditBox', 'GuildControlWithdrawGoldEditBox', 'GuildControlWithdrawItemsEditBox'}
-	for i = 1, #AllFriendsFrameInputs do
-		F.ReskinInput(_G[AllFriendsFrameInputs[i]], 16)
-	end
-
-	local AllFriendsFrameCheckBoxes = {'GuildFrameLFGButton'}
-	for i = 1, #AllFriendsFrameCheckBoxes do
-		F.ReskinCheck(_G[AllFriendsFrameCheckBoxes[i]])
-	end
-
-	for i = 1, 2 do
-		F.StripTextures(_G['FriendsTabHeaderTab'..i])
-	end
+	F.ReskinClose(_G['FriendsFrameCloseButton'], 'TOPRIGHT', FriendsFrame, 'TOPRIGHT', -35, -16)
+	
+	F.ReskinDropDown(_G['FriendsFrameStatusDropDown']);
 	
 	for i = 1, 5 do
-		F.ReskinTab(_G['FriendsFrameTab'..i])
+		F.ReskinTab(_G['FriendsFrameTab'..i]);
 	end
+	
+	for i = 1, 2 do -- Друзья
+		local Tab = _G['FriendsTabHeaderTab'..i];
+		F.StripTextures(Tab);
+	end
+	
+	F.ReskinScroll(_G['FriendsFrameFriendsScrollFrameScrollBar']);
+	
+	F.Reskin(_G['FriendsFrameAddFriendButton'], nil, true);
+	F.Reskin(_G['FriendsFrameSendMessageButton'], nil, true);
+	
+	F.Reskin(_G['FriendsFrameIgnorePlayerButton'], nil, true); -- Черный список
+	F.Reskin(_G['FriendsFrameUnsquelchButton'], nil, true);
+	-- Кто
+	for i = 1, 4 do
+		F.StripTextures(_G['WhoFrameColumnHeader'..i]);
+		F.StyleButton(_G['WhoFrameColumnHeader'..i]);
+	end
+	
+	F.ReskinDropDown(_G['WhoFrameDropDown']);
+	
+	F.StripTextures(_G['WhoListScrollFrame']);
+	F.ReskinScroll(_G['WhoListScrollFrameScrollBar']);
+	
+	F.Reskin(_G['WhoFrameWhoButton']);
+	F.Reskin(_G['WhoFrameAddFriendButton']);
+	F.Reskin(_G['WhoFrameGroupInviteButton']);
+	-- Гильдия
+	F.StripTextures(_G['GuildFrameLFGFrame']);
+	F.CreateBD(_G['GuildFrameLFGFrame']);
+	F.ReskinCheck(_G['GuildFrameLFGButton']);
 	
 	for i = 1, 4 do
-		F.StripTextures(_G['WhoFrameColumnHeader'..i])
-		F.StripTextures(_G['GuildFrameColumnHeader'..i])
-		F.StripTextures(_G['GuildFrameGuildStatusColumnHeader'..i])
+		F.StripTextures(_G['GuildFrameColumnHeader'..i]);
+		F.StyleButton(_G['GuildFrameColumnHeader'..i]);
+		F.StripTextures(_G['GuildFrameGuildStatusColumnHeader'..i]);
+		F.StyleButton(_G['GuildFrameGuildStatusColumnHeader'..i]);
 	end
-
-	local AllFriendsFrameButtons = {'FriendsFrameAddFriendButton', 'FriendsFrameSendMessageButton', 'FriendsFrameIgnorePlayerButton', 'FriendsFrameUnsquelchButton', 'WhoFrameWhoButton', 'WhoFrameAddFriendButton', 'WhoFrameGroupInviteButton', 'GuildFrameGuildInformationButton', 'GuildFrameAddMemberButton', 'GuildFrameControlButton', 'GuildMemberRemoveButton', 'GuildMemberGroupInviteButton', 'GuildInfoGuildEventButton', 'GuildInfoSaveButton', 'GuildInfoCancelButton', 'GuildEventLogCancelButton', 'GuildControlPopupAcceptButton', 'GuildControlPopupFrameCancelButton', 'ChannelFrameNewButton', 'ChannelFrameDaughterFrameOkayButton', 'ChannelFrameDaughterFrameCancelButton', 'RaidFrameConvertToRaidButton', 'RaidFrameRaidInfoButton', 'RaidInfoExtendButton', 'RaidInfoCancelButton', 'RaidFrameNotInRaidRaidBrowserButton'}
-	for i = 1, #AllFriendsFrameButtons do
-		F.Reskin(_G[AllFriendsFrameButtons[i]])
+	
+	F.StripTextures(_G['GuildListScrollFrame']);
+	F.ReskinScroll(_G['GuildListScrollFrameScrollBar']);
+	
+	F.ReskinArrow(_G['GuildFrameGuildListToggleButton'], 'right');
+	
+	F.Reskin(_G['GuildFrameGuildInformationButton']);
+	F.Reskin(_G['GuildFrameAddMemberButton']);
+	F.Reskin(_G['GuildFrameControlButton']);
+	
+	F.StripTextures(_G['GuildMemberDetailFrame']); -- Иформация о персонаже
+	F.CreateBD(_G['GuildMemberDetailFrame']);
+	
+	F.ReskinClose(_G['GuildMemberDetailCloseButton']);
+	
+	F.CreateBD(_G['GuildMemberNoteBackground']);
+	F.CreateGradient(_G['GuildMemberNoteBackground']);
+	
+	F.CreateBD(_G['GuildMemberOfficerNoteBackground']);
+	F.CreateGradient(_G['GuildMemberOfficerNoteBackground']);
+	
+	F.Reskin(_G['GuildMemberRemoveButton']);
+	F.Reskin(_G['GuildMemberGroupInviteButton']);
+	
+	F.StripTextures(_G['GuildInfoFrame']); -- Информация
+	F.SetBD(_G['GuildInfoFrame'], 5, -6, -2, 6);
+	
+	F.ReskinClose(_G['GuildInfoCloseButton'], 'TOPRIGHT', GuildInfoFrame, 'TOPRIGHT', -6, -10);
+	
+	F.CreateBD(_G['GuildInfoTextBackground']);
+	
+	F.ReskinScroll(_G['GuildInfoFrameScrollFrameScrollBar']);
+	
+	F.Reskin(_G['GuildInfoGuildEventButton']);
+	F.Reskin(_G['GuildInfoSaveButton']);
+	F.Reskin(_G['GuildInfoCancelButton']);
+	
+	F.StripTextures(_G['GuildEventLogFrame']); -- Журнал
+	F.SetBD(_G['GuildEventLogFrame'], 5, -6, -2, 6);
+	
+	F.ReskinClose(_G['GuildEventLogCloseButton'], 'TOPRIGHT', GuildEventLogFrame, 'TOPRIGHT', -6, -10);
+	
+	F.CreateBD(_G['GuildEventFrame']);
+	
+	F.ReskinScroll(_G['GuildEventLogScrollFrameScrollBar']);
+	
+	F.Reskin(_G['GuildEventLogCancelButton']);
+	
+	F.StripTextures(_G['GuildControlPopupFrame']); -- Управление
+	F.SetBD(_G['GuildControlPopupFrame'], 3, -5, -27, 27);
+	
+	F.ReskinDropDown(_G['GuildControlPopupFrameDropDown']);
+	--_G['GuildControlPopupFrameDropDownButton']:SetSize(16, 16);
+	
+	F.ReskinInput(_G['GuildControlPopupFrameEditBox']);
+	
+	for i = 1, 17 do
+		local Checkbox = _G['GuildControlPopupFrameCheckbox'..i];
+		
+		if (Checkbox) then
+			F.ReskinCheck(Checkbox);
+		end
 	end
-
-	F.SetBD(FriendsFrame, 10, -12, -31, 76)
-	F.ReskinClose(FriendsFrameCloseButton, 'TOPRIGHT', FriendsFrame, 'TOPRIGHT', -35, -16)
-	FriendsFrameStatusDropDown:ClearAllPoints()
-	FriendsFrameStatusDropDown:SetPoint('TOPLEFT', FriendsFrame, 'TOPLEFT', 10, -28)
 	
-	for i = 1, FRIENDS_TO_DISPLAY do
-		local FriendsFrameFriendsScrollFrameButtons = _G['FriendsFrameFriendsScrollFrameButton'..i]
-		FriendsFrameFriendsScrollFrameButtons.background:Hide()
-		FriendsFrameFriendsScrollFrameButtons:SetHighlightTexture(C.media.backdrop)
-		FriendsFrameFriendsScrollFrameButtons:GetHighlightTexture():SetVertexColor(.24, .56, 1, .2)
+	F.ReskinInput(_G['GuildControlWithdrawGoldEditBox']);
+	
+	for i = 1, MAX_GUILDBANK_TABS do
+		local Tab = _G['GuildBankTabPermissionsTab'..i];
+		F.StripTextures(Tab);
 	end
-	F.ReskinArrow(GuildFrameGuildListToggleButton, 'right')
 	
-	F.CreateBD(GuildInfoFrame)
-	GuildInfoFrame:SetPoint('TOPLEFT', GuildFrame, 'TOPRIGHT', -30, -14)
-	F.ReskinClose(GuildInfoCloseButton, 'TOPRIGHT', GuildInfoFrame, 'TOPRIGHT', -4, -4)
+	--_G['GuildControlPopupFrameTabPermissions'];
 	
-	F.CreateBD(GuildEventLogFrame)
-	GuildEventLogFrame:SetPoint('TOPLEFT', GuildFrame, 'TOPRIGHT', -30, -14)
-	F.ReskinClose(GuildEventLogCloseButton, 'TOPRIGHT', GuildEventLogFrame, 'TOPRIGHT', -4, -4)
+	F.ReskinCheck(_G['GuildControlTabPermissionsViewTab']);
+	F.ReskinCheck(_G['GuildControlTabPermissionsDepositItems']);
+	F.ReskinCheck(_G['GuildControlTabPermissionsUpdateText']);
 	
-	F.CreateBD(GuildMemberDetailFrame)
-	GuildMemberDetailFrame:SetPoint('TOPLEFT', GuildFrame, 'TOPRIGHT', -30, -14)
-	F.ReskinClose(GuildMemberDetailCloseButton, 'TOPRIGHT', GuildMemberDetailFrame, 'TOPRIGHT', -4, -4)
+	F.ReskinInput(_G['GuildControlWithdrawItemsEditBox']);
 	
-	F.SetBD(GuildControlPopupFrame, 3, -6, -28, 27)
-	GuildControlPopupFrame:SetPoint('TOPLEFT', GuildFrame, 'TOPRIGHT', -22, -6)
-	F.ReskinExpandOrCollapse(GuildControlPopupFrameAddRankButton)
-	
+	--F.ReskinCheck(_G['(GuildControlPopupAcceptButton']);
+	--F.ReskinCheck(_G['GuildControlPopupFrameCancelButton']);
+	-- Каналы
 	for i = 1, MAX_DISPLAY_CHANNEL_BUTTONS do
-		F.StripTextures(_G['ChannelButton'..i])
-		F.StyleButton(_G['ChannelButton'..i])
+		F.StripTextures(_G['ChannelButton'..i]);
+		F.StyleButton(_G['ChannelButton'..i]);
 	end
 	
-	F.SetBD(ChannelFrameDaughterFrame, 5, -6, -5, 0)
-	F.ReskinClose(ChannelFrameDaughterFrameDetailCloseButton, 'TOPRIGHT', ChannelFrameDaughterFrame, 'TOPRIGHT', -10, -9)
-	F.StripTextures(ChannelFrameDaughterFrameChannelName)
-	F.CreateBD(ChannelFrameDaughterFrameChannelName)
-	F.StripTextures(ChannelFrameDaughterFrameChannelPassword)
-	F.CreateBD(ChannelFrameDaughterFrameChannelPassword)
+	F.Kill(_G['ChannelFrameVerticalBar']);
 	
-	F.CreateBD(RaidInfoFrame)
-	F.ReskinClose(RaidInfoCloseButton, 'TOPRIGHT', RaidInfoFrame, 'TOPRIGHT', -4, -4)
+	F.StripTextures(_G['ChannelRosterScrollFrame']);
+	F.ReskinScroll(_G['ChannelRosterScrollFrameScrollBar']);
+	
+	F.Reskin(_G['ChannelFrameNewButton']);
+	
+	F.StripTextures(_G['ChannelFrameDaughterFrame']); -- Новый канал
+	F.CreateBD(_G['ChannelFrameDaughterFrame']);
+	
+	F.ReskinInput(_G['ChannelFrameDaughterFrameChannelName']);
+	F.ReskinInput(_G['ChannelFrameDaughterFrameChannelPassword']);
+	
+	F.ReskinClose(_G['ChannelFrameDaughterFrameDetailCloseButton']);
+	
+	F.Reskin(_G['ChannelFrameDaughterFrameOkayButton']);
+	F.Reskin(_G['ChannelFrameDaughterFrameCancelButton']);
+	-- Рейд
+	F.Reskin(_G['RaidFrameConvertToRaidButton']);
+	F.Reskin(_G['RaidFrameRaidInfoButton']);
+	F.Reskin(_G['RaidFrameNotInRaidRaidBrowserButton'], nil, true);
+	
+	F.StripTextures(_G['RaidInfoFrame'], true); -- Информация
+	F.CreateBD(_G['RaidInfoFrame']);
+	
+	F.ReskinClose(_G['RaidInfoCloseButton']);
+	
+	F.StripTextures(_G['RaidInfoInstanceLabel']);
+	F.StripTextures(_G['RaidInfoIDLabel']);
+	
+	F.Reskin(_G['RaidInfoExtendButton'], nil, true);
+	F.Reskin(_G['RaidInfoCancelButton'], nil, true);
 end)
