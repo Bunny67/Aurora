@@ -1,55 +1,60 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
-local _G = _G
+local _G = getfenv(0);
 
 C.modules['Blizzard_TalentUI'] = function()
-	local AllTalentUIStripTextures = {'PlayerTalentFrame', 'PlayerTalentFrameStatusFrame', 'PlayerTalentFrameScrollFrame', 'PlayerTalentFramePointsBar', 'PlayerTalentFramePreviewBar', 'PlayerTalentFramePreviewBarFiller'}
-	for i = 1, #AllTalentUIStripTextures do
-		F.StripTextures(_G[AllTalentUIStripTextures[i]], true)
+	F.StripTextures(_G['PlayerTalentFrame'], true);
+	F.SetBD(_G['PlayerTalentFrame'], 10, -12, -31, 76);
+	
+	F.ReskinClose(_G['PlayerTalentFrameCloseButton'], 'TOPRIGHT', PlayerTalentFrame, 'TOPRIGHT', -35, -16);
+	
+	F.StripTextures(_G['PlayerTalentFrameStatusFrame']);
+	
+	F.Reskin(_G['PlayerTalentFrameActivateButton'], nil, true);
+	
+	for i=1, MAX_NUM_TALENTS do
+		local Talent = _G['PlayerTalentFrameTalent'..i];
+		local IconTexture = _G['PlayerTalentFrameTalent'..i..'IconTexture'];
+		
+		if Talent then
+			F.StripTextures(Talent);
+			F.CreateBD(Talent);
+			F.StyleButton(Talent);
+			
+			IconTexture:SetPoint('TOPLEFT', 1, -1);
+			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+			IconTexture:SetTexCoord(unpack(F.TexCoords));
+		end
 	end
 	
+	F.StripTextures(_G['PlayerTalentFrameScrollFrame']);
 	F.ReskinScroll(_G['PlayerTalentFrameScrollFrameScrollBar']);
+	
+	F.StripTextures(_G['PlayerTalentFramePointsBar']);
+	F.StripTextures(_G['PlayerTalentFramePreviewBar']);
+	F.StripTextures(_G['PlayerTalentFramePreviewBarFiller']);
+	
+	F.Reskin(_G['PlayerTalentFrameLearnButton']);
+	F.Reskin(_G['PlayerTalentFrameResetButton']);
 	
 	for i = 1, 4 do
 		F.ReskinTab(_G['PlayerTalentFrameTab'..i]);
 	end
 	
 	for i=1, MAX_TALENT_TABS do
-		local tab = _G['PlayerSpecTab'..i]
-		if tab then
-			local a = tab:GetRegions()
-			a:Hide()
-			F.StripTextures(tab)
-			tab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
-			
-			tab:GetNormalTexture():ClearAllPoints()
-			tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1)
-			tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1)
-
-			F.CreateBD(tab, .25)
-			F.StyleButton(tab, nil, true)
-		end
-	end
-	
-	F.Reskin(_G['PlayerTalentFrameActivateButton'], nil, true)
-	F.Reskin(_G['PlayerTalentFrameLearnButton'])
-	F.Reskin(_G['PlayerTalentFrameResetButton'])
-	
-	for i=1, MAX_NUM_TALENTS do
-		local bu = _G['PlayerTalentFrameTalent'..i]
-		local ic = _G['PlayerTalentFrameTalent'..i..'IconTexture']	
-		if bu then
-			F.StripTextures(bu)
-			F.CreateBD(bu, .25)
-			F.StyleButton(bu)
+		local Tab = _G['PlayerSpecTab'..i];
 		
-			ic:SetTexCoord(.08, .92, .08, .92)
-			ic:ClearAllPoints()
-			ic:SetPoint("TOPLEFT", 1, -1)
-			ic:SetPoint("BOTTOMRIGHT", -1, 1)
+		if Tab then
+			local Regions = Tab:GetRegions();
+			Regions:Hide();
+			
+			F.StripTextures(Tab);
+			F.CreateBD(Tab);
+			F.StyleButton(Tab, nil, true);
+			
+			Tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
+			Tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
+			Tab:GetNormalTexture():SetTexCoord(unpack(F.TexCoords));
 		end
 	end
-	
-	F.SetBD(_G['PlayerTalentFrame'], 10, -12, -31, 76)
-	F.ReskinClose(_G['PlayerTalentFrameCloseButton'], 'TOPRIGHT', _G['PlayerTalentFrame'], 'TOPRIGHT', -35, -16)
 end
