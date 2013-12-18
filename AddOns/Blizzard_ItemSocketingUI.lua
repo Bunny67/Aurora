@@ -1,35 +1,42 @@
 local F, C = unpack(select(2, ...))
--- »Õ –”—“»–Œ¬¿Õ»≈
+
+local _G = getfenv(0);
+
 C.modules['Blizzard_ItemSocketingUI'] = function()
-	F.StripTextures(ItemSocketingFrame, true)
-	F.StripTextures(ItemSocketingScrollFrame)
+	F.StripTextures(_G['ItemSocketingFrame'], true);
+	F.SetBD(_G['ItemSocketingFrame'], 10, -12, -4, 31);
 	
-	F.ReskinScroll(ItemSocketingScrollFrameScrollBar)
+	F.ReskinClose(_G['ItemSocketingCloseButton'], 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -8, -16);
 	
-	F.Reskin(ItemSocketingSocketButton)
+	F.StripTextures(_G['ItemSocketingScrollFrame']);
+	F.ReskinScroll(_G['ItemSocketingScrollFrameScrollBar']);
 	
 	for i = 1, MAX_NUM_SOCKETS  do
-		local button = _G['ItemSocketingSocket'..i]
-		local button_bracket = _G['ItemSocketingSocket'..i..'BracketFrame']
-		local button_bg = _G['ItemSocketingSocket'..i..'Background']
-		local button_icon = _G['ItemSocketingSocket'..i..'IconTexture']
-		F.StripTextures(button)
-		F.StyleButton(button)
-		F.CreateBD(button, .25)
-		F.Kill(button_bracket)
-		F.Kill(button_bg)
-		button_icon:SetTexCoord(.08, .92, .08, .92)
-		button_icon:ClearAllPoints()
-		button_icon:SetPoint('TOPLEFT', 1, -1)
-		button_icon:SetPoint('BOTTOMRIGHT', -1, 1)
-		ItemSocketingFrame:HookScript('OnUpdate', function(self)
-			gemColor = GetSocketTypes(i)
-			local color = GEM_TYPE_INFO[gemColor]
-			button:SetBackdropColor(color.r, color.g, color.b, 0.15)
-			button:SetBackdropBorderColor(color.r, color.g, color.b)
+		local Button = _G['ItemSocketingSocket'..i];
+		local BracketFrame = _G['ItemSocketingSocket'..i..'BracketFrame'];
+		local Background = _G['ItemSocketingSocket'..i..'Background'];
+		local IconTexture = _G['ItemSocketingSocket'..i..'IconTexture'];
+		
+		F.StripTextures(Button);
+		F.StyleButton(Button);
+		F.CreateBD(Button);
+		
+		F.Kill(BracketFrame);
+		F.Kill(Background);
+		
+		IconTexture:ClearAllPoints();
+		IconTexture:SetPoint('TOPLEFT', 1, -1);
+		IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+		IconTexture:SetTexCoord(unpack(F.TexCoords));
+		
+		_G['ItemSocketingFrame']:HookScript('OnUpdate', function(self)
+			Types = GetSocketTypes(i);
+			local Color = GEM_TYPE_INFO[Types];
+			
+			Button:SetBackdropColor(Color.r, Color.g, Color.b, 0.15);
+			Button:SetBackdropBorderColor(Color.r, Color.g, Color.b);
 		end)
 	end
 	
-	F.SetBD(ItemSocketingFrame, 10, -12, -4, 31)
-	F.ReskinClose(ItemSocketingCloseButton, 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -8, -16)
+	F.Reskin(_G['ItemSocketingSocketButton'], nil, true);
 end
