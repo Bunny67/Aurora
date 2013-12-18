@@ -1,26 +1,54 @@
 local F, C = unpack(select(2, ...))
--- РЕЙД
+
+local _G = getfenv(0);
+
 C.modules["Blizzard_RaidUI"] = function()
-	if AuroraConfig.RaidUI then
-	-- [[ Кнопки ]]
-		local AllRaidUIButtons = {'RaidFrameRaidBrowserButton', 'RaidFrameReadyCheckButton'}
-		for i = 1, #AllRaidUIButtons do
-		local AllRaidUIButton = _G[AllRaidUIButtons[i]]
-			if AllRaidUIButton then
-				F.Reskin(AllRaidUIButton)
-			else
-				print("Ошибка Aurora: "..AllRaidUIButtons[i].." не был найден.")
-			end
-		end
-		for i = 1, MAX_RAID_GROUPS do
-			local rGrp = _G["RaidGroup"..i]
-			F.StripTextures(rGrp)
-		end
-		for i = 1, MAX_RAID_GROUPS * 5 do
-			local bu = _G["RaidGroupButton"..i]
-			F.StripTextures(bu)
-			F.CreateBD(bu, 1)
-			F.StyleButton(bu)
+	F.Reskin(_G['RaidFrameRaidBrowserButton']);
+	F.Reskin(_G['RaidFrameReadyCheckButton']);
+	F.Reskin(_G['RaidFrameRaidInfoButton']);
+	
+	for i = 1, MAX_RAID_GROUPS do
+		local Group = _G['RaidGroup'..i];
+		F.StripTextures(Group);
+	end
+	
+	for i = 1, MAX_RAID_GROUPS * 5 do
+		local GroupButton = _G['RaidGroupButton'..i];
+		
+		F.StripTextures(GroupButton);
+		F.StyleButton(GroupButton);
+		F.Reskin(GroupButton);
+	end
+	
+	for i=1, 8 do
+		for j=1, 5 do
+			F.StripTextures(_G['RaidGroup'..i..'Slot'..j]);
 		end
 	end
+	
+	hooksecurefunc('RaidClassButton_Update', function()
+		local Button, Icon, Count;
+		for index, value in pairs(RAID_CLASS_BUTTONS) do
+			Button  = _G['RaidClassButton'..value.button];
+			Count = _G['RaidClassButton'..value.button..'Count'];
+			Icon = _G['RaidClassButton'..value.button..'IconTexture'];
+			
+			F.StripTextures(Button);
+			
+			if ( Button:GetID() ==  value.button ) then
+				Button.class = index;
+				if ( index == 'PETS' ) then
+					Icon:SetTexture('Interface\\RaidFrame\\UI-RaidFrame-Pets');
+				elseif ( index == 'MAINTANK' ) then
+					Icon:SetTexture('Interface\\RaidFrame\\UI-RaidFrame-MainTank');
+				elseif ( index == 'MAINASSIST' ) then
+					Icon:SetTexture('Interface\\RaidFrame\\UI-RaidFrame-MainAssist');
+				else
+					Icon:SetTexture('Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes');
+				end
+				
+				Icon:SetTexCoord(value.coords[1] + 0.015, value.coords[2] - 0.02, value.coords[3] + 0.018, value.coords[4] - 0.02);
+			end
+		end
+	end)
 end

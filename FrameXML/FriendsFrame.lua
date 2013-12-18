@@ -4,7 +4,7 @@ local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
 	F.StripTextures(_G['FriendsFrame'], true);
-	F.SetBD(FriendsFrame, 10, -12, -31, 76);
+	F.SetBD(_G['FriendsFrame'], 10, -12, -31, 76);
 
 	F.ReskinClose(_G['FriendsFrameCloseButton'], 'TOPRIGHT', FriendsFrame, 'TOPRIGHT', -35, -16)
 	
