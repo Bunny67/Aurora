@@ -1,25 +1,30 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
-C.modules["Blizzard_DebugTools"] = function()
-		ScriptErrorsFrame:SetScale(UIParent:GetScale())
-		ScriptErrorsFrame:SetSize(386, 274)
-		ScriptErrorsFrame:DisableDrawLayer("OVERLAY")
-		ScriptErrorsFrameTitleBG:Hide()
-		ScriptErrorsFrameDialogBG:Hide()
-		F.CreateBD(ScriptErrorsFrame)
+local _G = getfenv(0);
 
-		FrameStackTooltip:SetScale(UIParent:GetScale())
-		FrameStackTooltip:SetBackdrop(nil)
-
-		local bg = CreateFrame("Frame", nil, FrameStackTooltip)
-		bg:SetPoint("TOPLEFT")
-		bg:SetPoint("BOTTOMRIGHT")
-		bg:SetFrameLevel(FrameStackTooltip:GetFrameLevel()-1)
-		F.CreateBD(bg, .6)
-
-		F.ReskinClose(ScriptErrorsFrameClose)
-		F.ReskinScroll(ScriptErrorsFrameScrollFrameScrollBar)
-		F.Reskin(select(4, ScriptErrorsFrame:GetChildren()))
-		F.Reskin(select(5, ScriptErrorsFrame:GetChildren()))
-		F.Reskin(select(6, ScriptErrorsFrame:GetChildren()))
+C.modules['Blizzard_DebugTools'] = function()
+	local Texures = { 'TopLeft', 'TopRight', 'Top', 'BottomLeft', 'BottomRight', 'Bottom', 'Left', 'Right', 'TitleBG', 'DialogBG' };
+	for i=1, #Texures do
+		_G['ScriptErrorsFrame'..Texures[i]]:SetTexture(nil);
+		_G['EventTraceFrame'..Texures[i]]:SetTexture(nil);
+	end
+	-- ScriptErrors
+	F.CreateBD(_G['ScriptErrorsFrame']);
+	
+	F.ReskinClose(_G['ScriptErrorsFrameClose']);
+	
+	F.ReskinScroll(_G['ScriptErrorsFrameScrollFrameScrollBar']);
+	
+	for i=1, _G['ScriptErrorsFrame']:GetNumChildren() do
+		local Child = select(i, _G['ScriptErrorsFrame']:GetChildren());
+		if Child:GetObjectType() == 'Button' and not Child:GetName() then
+			F.Reskin(Child);
+		end
+	end
+	-- EventTrace
+	F.CreateBD(_G['EventTraceFrame']);
+	
+	F.ReskinClose(_G['EventTraceFrameCloseButton']);
+	-- FrameStack
+	F.CreateBD(_G['FrameStackTooltip']);
 end
