@@ -1,5 +1,7 @@
 local F, C = unpack(select(2, ...));
 
+local _G = getfenv(0);
+
 C.modules['Blizzard_GlyphUI'] = function()
 	F.StripTextures(_G['GlyphFrame'], true);
 	

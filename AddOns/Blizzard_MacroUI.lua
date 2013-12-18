@@ -1,79 +1,92 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
-C.modules["Blizzard_MacroUI"] = function()
-	local AllMacroUIStripTextures = {'MacroFrame', 'MacroFrameTab1', 'MacroFrameTab2', 'MacroFrameSelectedMacroButton', 'MacroFrameTextBackground', 'MacroButtonScrollFrame', 'MacroPopupFrame', 'MacroPopupScrollFrame'}
-	for i = 1, #AllMacroUIStripTextures do
-		F.StripTextures(_G[AllMacroUIStripTextures[i]])
-	end
+local _G = getfenv(0);
+
+C.modules['Blizzard_MacroUI'] = function()
+	F.StripTextures(_G['MacroFrame']);
+	F.SetBD(_G['MacroFrame'], 10, -11, -32, 71);
 	
-	MacroPopupNameLeft:SetTexture(nil)
-	MacroPopupNameMiddle:SetTexture(nil)
-	MacroPopupNameRight:SetTexture(nil)
-
-	local AllMacroUIScrollbars = {'MacroFrameScrollFrameScrollBar', 'MacroButtonScrollFrameScrollBar', 'MacroPopupScrollFrameScrollBar'}
-	for i = 1, #AllMacroUIScrollbars do
-		F.ReskinScroll(_G[AllMacroUIScrollbars[i]])
-	end
-
-	local AllMacroUIButtons = {'MacroFrameTab1', 'MacroFrameTab2', 'MacroDeleteButton', 'MacroNewButton', 'MacroExitButton', 'MacroEditButton', 'MacroPopupOkayButton', 'MacroPopupCancelButton'}
-	for i = 1, #AllMacroUIButtons do
-		F.Reskin(_G[AllMacroUIButtons[i]])
-	end
-
+	F.ReskinClose(_G['MacroFrameCloseButton'], 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15);
+	
 	for i = 1, 2 do
-		tab = _G[format("MacroFrameTab%s", i)]
-		tab:SetHeight(20)
+		Tab = _G['MacroFrameTab'..i];
+		F.StripTextures(Tab);
 	end
 	
-	MacroFrameTab1:SetPoint("TOPLEFT", MacroFrame, "TOPLEFT", 85, -39)
-	MacroFrameTab2:SetPoint("LEFT", MacroFrameTab1, "RIGHT", 4, 0)
-
-	F.StyleButton(MacroFrameSelectedMacroButton)
-	MacroFrameSelectedMacroButton:GetNormalTexture():SetTexture(nil)
-	F.CreateBD(MacroFrameSelectedMacroButton, .25)
-	MacroFrameSelectedMacroButtonIcon:SetTexCoord(.08, .92, .08, .92)
-	MacroFrameSelectedMacroButtonIcon:SetPoint("BOTTOMRIGHT", -1, 1)
-	MacroFrameSelectedMacroButtonIcon:SetPoint("TOPLEFT", 1, -1)
+	F.ReskinScroll(_G['MacroFrameScrollFrameScrollBar']);
 	
 	for i = 1, MAX_ACCOUNT_MACROS do
-		local b = _G["MacroButton"..i]
-		local t = _G["MacroButton"..i.."Icon"]
-		local pb = _G["MacroPopupButton"..i]
-		local pt = _G["MacroPopupButton"..i.."Icon"]
+		local Button = _G['MacroButton'..i];
+		local Icon = _G['MacroButton'..i..'Icon'];
 		
-		if b then
-			F.StripTextures(b)
-			F.StyleButton(b, nil, true)
-			F.CreateBD(b, .25)
+		if Button then
+			F.StripTextures(Button);
+			F.StyleButton(Button, nil, true);
+			F.CreateBD(Button);
 		end
 		
-		if t then
-			t:SetTexCoord(.08, .92, .08, .92)
-			t:SetPoint("BOTTOMRIGHT", -1, 1)
-			t:SetPoint("TOPLEFT", 1, -1)
-		end
-
-		if pb then
-			F.StripTextures(pb)
-			F.StyleButton(pb, nil, true)
-			F.CreateBD(pb, .25)
-		end
-		
-		if pt then
-			pt:SetTexCoord(.08, .92, .08, .92)
-			pt:SetPoint("BOTTOMRIGHT", -1, 1)
-			pt:SetPoint("TOPLEFT", 1, -1)
+		if Icon then
+			Icon:SetPoint('TOPLEFT', 1, -1);
+			Icon:SetPoint('BOTTOMRIGHT', -1, 1);
+			Icon:SetTexCoord(unpack(F.TexCoords));
 		end
 	end
 	
-	F.ReskinInput(_G['MacroPopupEditBox'])
+	local SelectedButton = _G['MacroFrameSelectedMacroButton'];
+	local SelectedButtonIcon = _G['MacroFrameSelectedMacroButtonIcon'];
 	
-	MacroFrameCharLimitText:ClearAllPoints()
-	MacroFrameCharLimitText:SetPoint("BOTTOM", MacroFrameTextBackground, -40, -30)
+	F.StripTextures(MacroFrameSelectedMacroButton);
+	F.StyleButton(SelectedButton, nil, true);
+	F.CreateBD(SelectedButton);
+	SelectedButton:GetNormalTexture():SetTexture(nil);
 	
-	F.SetBD(MacroFrame, 10, -11, -32, 71)
-	F.ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15)
-	F.CreateBD(MacroFrameTextBackground, .25)
-	F.CreateBD(MacroPopupFrame)
-	MacroPopupFrame:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", -30, -14)
+	SelectedButtonIcon:SetPoint("TOPLEFT", 1, -1);
+	SelectedButtonIcon:SetPoint("BOTTOMRIGHT", -1, 1);
+	SelectedButtonIcon:SetTexCoord(unpack(F.TexCoords));
+	
+	F.Reskin(_G['MacroEditButton']);
+	
+	F.CreateBD(_G['MacroFrameTextBackground']);
+	
+	F.StripTextures(_G['MacroButtonScrollFrame']);
+	F.ReskinScroll(_G['MacroButtonScrollFrameScrollBar']);
+	
+	F.Reskin(_G['MacroDeleteButton']);
+	
+	_G['MacroFrameCharLimitText']:ClearAllPoints();
+	_G['MacroFrameCharLimitText']:SetPoint('BOTTOM', MacroFrameTextBackground, -40, -30);
+	
+	F.Reskin(_G['MacroNewButton']);
+	F.Reskin(_G['MacroExitButton']);
+	
+	F.StripTextures(_G['MacroPopupFrame']);
+	F.SetBD(_G['MacroPopupFrame'], 7, -10, -5, 7);
+	
+	_G['MacroPopupNameLeft']:SetTexture(nil);
+	_G['MacroPopupNameMiddle']:SetTexture(nil);
+	_G['MacroPopupNameRight']:SetTexture(nil);
+	F.ReskinInput(_G['MacroPopupEditBox']);
+	
+	for i = 1, MAX_ACCOUNT_MACROS do
+		local Button = _G['MacroPopupButton'..i];
+		local Icon = _G['MacroPopupButton'..i..'Icon'];
+
+		if Button then
+			F.StripTextures(Button);
+			F.StyleButton(Button, nil, true);
+			F.CreateBD(Button, .25);
+		end
+		
+		if Icon then
+			Icon:SetPoint('TOPLEFT', 1, -1);
+			Icon:SetPoint('BOTTOMRIGHT', -1, 1);
+			Icon:SetTexCoord(.08, .92, .08, .92);
+		end
+	end
+	
+	F.StripTextures(_G['MacroPopupScrollFrame']);
+	F.ReskinScroll(_G['MacroPopupScrollFrameScrollBar']);
+	
+	F.Reskin(_G['MacroPopupOkayButton']);
+	F.Reskin(_G['MacroPopupCancelButton']);
 end
