@@ -3,20 +3,22 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 C.modules['Blizzard_GuildBankUI'] = function()
-	F.StripTextures(_G['GuildBankFrame']);
-	F.SetBD(_G['GuildBankFrame'], 12, -11, 0, 6);
+	F.StripTextures(GuildBankFrame);
+	F.SetBD(GuildBankFrame, 12, -11, 0, 6);
 	
-	for i=1, _G['GuildBankFrame']:GetNumChildren() do
+	for i = 1, _G['GuildBankFrame']:GetNumChildren() do
 		local Child = select(i, _G['GuildBankFrame']:GetChildren());
 		if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
 			F.ReskinClose(Child, 'TOPRIGHT', GuildBankFrame, 'TOPRIGHT', -4, -15);
 		end
 	end
 	
-	for i=1, NUM_GUILDBANK_COLUMNS do
-		F.StripTextures(_G['GuildBankColumn'..i]);
+	for i = 1, NUM_GUILDBANK_COLUMNS do
+		local Column = _G['GuildBankColumn'..i];
 		
-		for x=1, NUM_SLOTS_PER_GUILDBANK_GROUP do
+		F.StripTextures(Column);
+		
+		for x = 1, NUM_SLOTS_PER_GUILDBANK_GROUP do
 			local Button = _G['GuildBankColumn'..i..'Button'..x];
 			local IconTexture = _G['GuildBankColumn'..i..'Button'..x..'IconTexture'];
 			local NormalTexture = _G['GuildBankColumn'..i..'Button'..x..'NormalTexture'];
@@ -70,7 +72,7 @@ C.modules['Blizzard_GuildBankUI'] = function()
 		end		
 	end)
 	
-	for i=1, 6 do
+	for i = 1, 6 do
 		local Tab = _G['GuildBankTab'..i];
 		local Button = _G['GuildBankTab'..i..'Button'];
 		local IconTexture = _G['GuildBankTab'..i..'ButtonIconTexture'];
@@ -86,37 +88,39 @@ C.modules['Blizzard_GuildBankUI'] = function()
 		IconTexture:SetTexCoord(unpack(F.TexCoords));
 	end
 	
-	F.Reskin(_G['GuildBankFrameWithdrawButton'], nil, true);
-	F.Reskin(_G['GuildBankFrameDepositButton'], nil, true);
-	F.Reskin(_G['GuildBankInfoSaveButton'], nil, true);
-	F.Reskin(_G['GuildBankFramePurchaseButton'], nil, true);
+	F.Reskin(GuildBankFrameWithdrawButton, nil, true);
+	F.Reskin(GuildBankFrameDepositButton, nil, true);
+	F.Reskin(GuildBankInfoSaveButton, nil, true);
+	F.Reskin(GuildBankFramePurchaseButton, nil, true);
 	
-	F.StripTextures(_G['GuildBankTransactionsScrollFrame']);
-	F.ReskinScroll(_G['GuildBankTransactionsScrollFrameScrollBar']);
+	F.StripTextures(GuildBankTransactionsScrollFrame);
+	F.ReskinScroll(GuildBankTransactionsScrollFrameScrollBar);
 	
-	F.StripTextures(_G['GuildBankInfoScrollFrame']);
-	F.ReskinScroll(_G['GuildBankInfoScrollFrameScrollBar']);
+	F.StripTextures(GuildBankInfoScrollFrame);
+	F.ReskinScroll(GuildBankInfoScrollFrameScrollBar);
 	
 	for i=1, 4 do
-		F.ReskinTab(_G['GuildBankFrameTab'..i]);
+		local Tab = _G['GuildBankFrameTab'..i];
+		
+		F.ReskinTab(Tab);
 	end
 	
-	F.StripTextures(_G['GuildBankEmblemFrame'], true);
+	F.StripTextures(GuildBankEmblemFrame, true);
 	
 	
-	F.StripTextures(_G['GuildBankPopupFrame']);
-	F.CreateBD(_G['GuildBankPopupFrame']);
+	F.StripTextures(GuildBankPopupFrame);
+	F.CreateBD(GuildBankPopupFrame);
 	_G['GuildBankPopupFrame']:SetPoint('TOPLEFT', GuildBankFrame, 'TOPRIGHT', 1, -30);
 	
-	F.StripTextures(_G['GuildBankPopupScrollFrame']);
+	F.StripTextures(GuildBankPopupScrollFrame);
 	
-	_G['GuildBankPopupNameLeft']:Kill();
-	_G['GuildBankPopupNameRight']:Kill();
-	_G['GuildBankPopupNameMiddle']:Kill();
+	F.Kill(GuildBankPopupNameLeft);
+	F.Kill(GuildBankPopupNameRight);
+	F.Kill(GuildBankPopupNameMiddle);
 	
-	F.ReskinInput(_G['GuildBankPopupEditBox']);
+	F.ReskinInput(GuildBankPopupEditBox);
 
-	for i=1, 16 do
+	for i = 1, 16 do
 		local Button = _G['GuildBankPopupButton'..i];
 		local Icon = _G[Button:GetName()..'Icon'];
 		
@@ -129,6 +133,6 @@ C.modules['Blizzard_GuildBankUI'] = function()
 		Icon:SetTexCoord(unpack(F.TexCoords));
 	end
 	
-	F.Reskin(_G['GuildBankPopupOkayButton']);
-	F.Reskin(_G['GuildBankPopupCancelButton']);
+	F.Reskin(GuildBankPopupOkayButton);
+	F.Reskin(GuildBankPopupCancelButton);
 end
