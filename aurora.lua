@@ -43,7 +43,7 @@ C.defaults = {
 
 	["buttonGradientColour"] = {.3, .3, .3, .3},
 	["buttonSolidColour"] = {.2, .2, .2, 1},
-	["useButtonGradientColour"] = false,
+	["useButtonGradientColour"] = true,
 	["useCustomColour"] = false,
 		["customColour"] = {r = 1, g = 1, b = 1},
 		
@@ -175,18 +175,28 @@ local function ClearButton(Frame)
 end
 
 F.Reskin = function(Frame, NoHighlight, Strip)
-	Frame:SetNormalTexture('');
-	Frame:SetHighlightTexture('');
-	Frame:SetPushedTexture('');
-	Frame:SetDisabledTexture('');
+	if Frame:GetName() then
+		local Left = _G[Frame:GetName()..'Left'];
+		local Middle = _G[Frame:GetName()..'Middle'];
+		local Right = _G[Frame:GetName()..'Right'];
+
+
+		if Left then Left:SetAlpha(0); end
+		if Middle then Middle:SetAlpha(0); end
+		if Right then Right:SetAlpha(0); end
+	end
 
 	if Frame.Left then Frame.Left:SetAlpha(0); end
+	if Frame.Right then Frame.Right:SetAlpha(0); end	
 	if Frame.Middle then Frame.Middle:SetAlpha(0); end
-	if Frame.Right then Frame.Right:SetAlpha(0); end
+	if Frame.SetNormalTexture then Frame:SetNormalTexture(''); end	
+	if Frame.SetHighlightTexture then Frame:SetHighlightTexture(''); end
+	if Frame.SetPushedTexture then Frame:SetPushedTexture(''); end	
+	if Frame.SetDisabledTexture then Frame:SetDisabledTexture(''); end
 	
 	if Strip then F.StripTextures(Frame, true); end
 	
-	F.CreateBD(Frame, .0);
+	F.CreateBD(Frame, 0);
 
 	Frame.Gradient = F.CreateGradient(Frame);
 
@@ -288,30 +298,30 @@ F.ColourArrow = ColourArrow;
 F.ClearArrow = ClearArrow;
 
 F.ReskinDropDown = function(Frame)
-	if _G[Frame:GetName()..'Left'] then _G[Frame:GetName()..'Left']:SetAlpha(0); end
-	if _G[Frame:GetName()..'Middle'] then _G[Frame:GetName()..'Middle']:SetAlpha(0); end
-	if _G[Frame:GetName()..'Right'] then _G[Frame:GetName()..'Right']:SetAlpha(0); end
+	local Button = _G[Frame:GetName()..'Button']
+	
+	F.StripTextures(Frame)
+	
+	Button:SetSize(20, 20);
+	Button:ClearAllPoints();
+	Button:SetPoint('RIGHT', -18, 2);
 
-	_G[Frame:GetName()..'Button']:SetSize(20, 20)
-	_G[Frame:GetName()..'Button']:ClearAllPoints()
-	_G[Frame:GetName()..'Button']:SetPoint("RIGHT", -18, 2)
+	F.Reskin(Button, true);
 
-	F.Reskin(_G[Frame:GetName()..'Button'], true);
+	Button:SetDisabledTexture(C.media.backdrop);
+	Button:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
+	Button:GetDisabledTexture():SetDrawLayer('OVERLAY');
+	Button:GetDisabledTexture():SetAllPoints();
 
-	_G[Frame:GetName()..'Button']:SetDisabledTexture(C.media.backdrop);
-	_G[Frame:GetName()..'Button']:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
-	_G[Frame:GetName()..'Button']:GetDisabledTexture():SetDrawLayer('OVERLAY');
-	_G[Frame:GetName()..'Button']:GetDisabledTexture():SetAllPoints();
-
-	local Texture = _G[Frame:GetName()..'Button']:CreateTexture(nil, 'ARTWORK');
+	local Texture = Button:CreateTexture(nil, 'ARTWORK');
 	Texture:SetTexture(C.media.arrowDown);
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
 	Texture:SetVertexColor(1, 1, 1);
-	_G[Frame:GetName()..'Button'].Texture = Texture;
+	Button.Texture = Texture;
 
-	_G[Frame:GetName()..'Button']:HookScript('OnEnter', ColourArrow);
-	_G[Frame:GetName()..'Button']:HookScript('OnLeave', ClearArrow);
+	Button:HookScript('OnEnter', ColourArrow);
+	Button:HookScript('OnLeave', ClearArrow);
 
 	local BD = CreateFrame('Frame', nil, Frame);
 	BD:SetPoint('TOPLEFT', 16, -4);

@@ -1,4 +1,6 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
+
+local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
 	local TinyWorldMap = function()
@@ -48,8 +50,8 @@ tinsert(C.modules['Aurora'], function()
 	
 	local function QuestSkin()
 		WorldMapFrame.backdrop:ClearAllPoints();
-		WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70);
-		WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235);
+		WorldMapFrame.backdrop:SetPoint("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70);
+		WorldMapFrame.backdrop:SetPoint("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235);
 	end	
 	
 	local function FixSkin()
@@ -61,7 +63,7 @@ tinsert(C.modules['Aurora'], function()
 			SmallSkin();
 		elseif WORLDMAP_SETTINGS.size == WORLDMAP_QUESTLIST_SIZE then
 			QuestSkin();
-		end	
+		end
 		
 		if InCombatLockdown() then return; end
 		
@@ -79,14 +81,14 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinClose(_G['WorldMapFrameSizeDownButton']);
 	F.ReskinClose(_G['WorldMapFrameSizeUpButton']);
 	
-	F.ReskinDropDown(_G['WorldMapLevelDropDown']);
+	F.ReskinDropDown(WorldMapLevelDropDown);
 	
 	F.ReskinCheck(_G['WorldMapTrackQuest']);
 	F.ReskinCheck(_G['WorldMapQuestShowObjectives']);
 	
-	F.ReskinDropDown(_G['WorldMapZoneMinimapDropDown']);
-	F.ReskinDropDown(_G['WorldMapContinentDropDown']);
-	F.ReskinDropDown(_G['WorldMapZoneDropDown']);
+	F.ReskinDropDown(WorldMapZoneMinimapDropDown);
+	F.ReskinDropDown(WorldMapContinentDropDown);
+	F.ReskinDropDown(WorldMapZoneDropDown);
 	
 	F.Reskin(_G['WorldMapZoomOutButton']);
 	
