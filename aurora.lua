@@ -511,8 +511,8 @@ local function ClearExpandOrCollapse(Frame)
 	Frame.Minus:SetVertexColor(1, 1, 1)
 end
 
-F.colourExpandOrCollapse = ColourExpandOrCollapse
-F.clearExpandOrCollapse = ClearExpandOrCollapse
+F.ColourExpandOrCollapse = ColourExpandOrCollapse
+F.ClearExpandOrCollapse = ClearExpandOrCollapse
 
 F.ReskinExpandOrCollapse = function(Frame)
 	Frame:SetSize(13, 13);
@@ -619,10 +619,9 @@ end
 F.Kill = function(object)
 	if object.UnregisterAllEvents then
 		object:UnregisterAllEvents()
-	else
-		object.Show = object.Hide
 	end
 	
+	object.Show = F.dummy
 	object:Hide()
 end
 

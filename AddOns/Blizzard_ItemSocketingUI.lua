@@ -1,15 +1,15 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
 C.modules['Blizzard_ItemSocketingUI'] = function()
-	F.StripTextures(_G['ItemSocketingFrame'], true);
-	F.SetBD(_G['ItemSocketingFrame'], 10, -12, -4, 31);
+	F.StripTextures(ItemSocketingFrame, true);
+	F.SetBD(ItemSocketingFrame, 10, -12, -4, 31);
 	
-	F.ReskinClose(_G['ItemSocketingCloseButton'], 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -8, -16);
+	F.ReskinClose(ItemSocketingCloseButton, 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -8, -16);
 	
-	F.StripTextures(_G['ItemSocketingScrollFrame']);
-	F.ReskinScroll(_G['ItemSocketingScrollFrameScrollBar']);
+	F.StripTextures(ItemSocketingScrollFrame);
+	F.ReskinScroll(ItemSocketingScrollFrameScrollBar);
 	
 	for i = 1, MAX_NUM_SOCKETS  do
 		local Button = _G['ItemSocketingSocket'..i];
@@ -38,5 +38,5 @@ C.modules['Blizzard_ItemSocketingUI'] = function()
 		end)
 	end
 	
-	F.Reskin(_G['ItemSocketingSocketButton'], nil, true);
+	F.Reskin(ItemSocketingSocketButton, nil, true);
 end

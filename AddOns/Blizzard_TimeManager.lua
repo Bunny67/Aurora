@@ -3,40 +3,40 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 C.modules['Blizzard_TimeManager'] = function()
-	F.StripTextures(_G['TimeManagerFrame']);
-	F.SetBD(_G['TimeManagerFrame'], 14, -11, -49, 9);
+	F.StripTextures(TimeManagerFrame);
+	F.SetBD(TimeManagerFrame, 14, -11, -49, 9);
 	
-	F.ReskinClose(_G['TimeManagerCloseButton'], 'TOPRIGHT', TimeManagerFrame, 'TOPRIGHT', -53, -15);
+	F.ReskinClose(TimeManagerCloseButton, 'TOPRIGHT', TimeManagerFrame, 'TOPRIGHT', -53, -15);
 	
-	F.StripTextures(_G['TimeManagerStopwatchFrame']);
+	F.StripTextures(TimeManagerStopwatchFrame);
 	
-	F.CreateBD(_G['TimeManagerStopwatchCheck'], .25);
-	F.StyleButton(_G['TimeManagerStopwatchCheck'], nil, true);
+	F.CreateBD(TimeManagerStopwatchCheck, .25);
+	F.StyleButton(TimeManagerStopwatchCheck, nil, true);
 	
 	_G['TimeManagerStopwatchCheck']:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
 	_G['TimeManagerStopwatchCheck']:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
 	_G['TimeManagerStopwatchCheck']:GetNormalTexture():SetTexCoord(unpack(F.TexCoords));
 	
 	_G['TimeManagerAlarmHourDropDown']:SetWidth(80);
-	F.ReskinDropDown(_G['TimeManagerAlarmHourDropDown']);
+	F.ReskinDropDown(TimeManagerAlarmHourDropDown);
 	
 	_G['TimeManagerAlarmMinuteDropDown']:SetWidth(80);
-	F.ReskinDropDown(_G['TimeManagerAlarmMinuteDropDown']);
+	F.ReskinDropDown(TimeManagerAlarmMinuteDropDown);
 	
 	_G['TimeManagerAlarmAMPMDropDown']:SetWidth(90);
-	F.ReskinDropDown(_G['TimeManagerAlarmAMPMDropDown']);
+	F.ReskinDropDown(TimeManagerAlarmAMPMDropDown);
 	
-	F.ReskinInput(_G['TimeManagerAlarmMessageEditBox']);
+	F.ReskinInput(TimeManagerAlarmMessageEditBox);
 	
-	F.ReskinCheck(_G['TimeManagerMilitaryTimeCheck']);
-	F.ReskinCheck(_G['TimeManagerLocalTimeCheck']);
+	F.ReskinCheck(TimeManagerMilitaryTimeCheck);
+	F.ReskinCheck(TimeManagerLocalTimeCheck);
 	
-	F.Reskin(_G['TimeManagerAlarmEnabledButton'], nil, true);
+	F.Reskin(TimeManagerAlarmEnabledButton, nil, true);
 	
-	F.StripTextures(_G['StopwatchFrame']);
-	F.SetBD(_G['StopwatchFrame'], 0, -16, 0, 2);
+	F.StripTextures(StopwatchFrame);
+	F.SetBD(StopwatchFrame, 0, -16, 0, 2);
 	
-	F.ReskinClose(_G['StopwatchCloseButton'], 'TOPRIGHT', StopwatchFrame, 'TOPRIGHT', 0, 6);
+	F.ReskinClose(StopwatchCloseButton, 'TOPRIGHT', StopwatchFrame, 'TOPRIGHT', 0, 6);
 	
-	F.StripTextures(_G['StopwatchTabFrame']);
+	F.StripTextures(StopwatchTabFrame);
 end

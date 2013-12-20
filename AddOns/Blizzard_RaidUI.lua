@@ -1,14 +1,15 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
 C.modules["Blizzard_RaidUI"] = function()
-	F.Reskin(_G['RaidFrameRaidBrowserButton']);
-	F.Reskin(_G['RaidFrameReadyCheckButton']);
-	F.Reskin(_G['RaidFrameRaidInfoButton']);
+	F.Reskin(RaidFrameRaidBrowserButton);
+	F.Reskin(RaidFrameReadyCheckButton);
+	F.Reskin(RaidFrameRaidInfoButton);
 	
 	for i = 1, MAX_RAID_GROUPS do
 		local Group = _G['RaidGroup'..i];
+		
 		F.StripTextures(Group);
 	end
 	
@@ -20,8 +21,8 @@ C.modules["Blizzard_RaidUI"] = function()
 		F.Reskin(GroupButton);
 	end
 	
-	for i=1, 8 do
-		for j=1, 5 do
+	for i = 1, 8 do
+		for j = 1, 5 do
 			F.StripTextures(_G['RaidGroup'..i..'Slot'..j]);
 		end
 	end

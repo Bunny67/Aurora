@@ -3,17 +3,18 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 C.modules['Blizzard_MacroUI'] = function()
-	F.StripTextures(_G['MacroFrame']);
+	F.StripTextures(MacroFrame);
 	F.SetBD(_G['MacroFrame'], 10, -11, -32, 71);
 	
-	F.ReskinClose(_G['MacroFrameCloseButton'], 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15);
+	F.ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15);
 	
 	for i = 1, 2 do
 		Tab = _G['MacroFrameTab'..i];
+		
 		F.StripTextures(Tab);
 	end
 	
-	F.ReskinScroll(_G['MacroFrameScrollFrameScrollBar']);
+	F.ReskinScroll(MacroFrameScrollFrameScrollBar);
 	
 	for i = 1, MAX_ACCOUNT_MACROS do
 		local Button = _G['MacroButton'..i];
@@ -32,8 +33,8 @@ C.modules['Blizzard_MacroUI'] = function()
 		end
 	end
 	
-	local SelectedButton = _G['MacroFrameSelectedMacroButton'];
-	local SelectedButtonIcon = _G['MacroFrameSelectedMacroButtonIcon'];
+	local SelectedButton = MacroFrameSelectedMacroButton;
+	local SelectedButtonIcon = MacroFrameSelectedMacroButtonIcon;
 	
 	F.StripTextures(MacroFrameSelectedMacroButton);
 	F.StyleButton(SelectedButton, nil, true);
@@ -44,28 +45,28 @@ C.modules['Blizzard_MacroUI'] = function()
 	SelectedButtonIcon:SetPoint("BOTTOMRIGHT", -1, 1);
 	SelectedButtonIcon:SetTexCoord(unpack(F.TexCoords));
 	
-	F.Reskin(_G['MacroEditButton']);
+	F.Reskin(MacroEditButton);
 	
-	F.CreateBD(_G['MacroFrameTextBackground']);
+	F.CreateBD(MacroFrameTextBackground);
 	
-	F.StripTextures(_G['MacroButtonScrollFrame']);
-	F.ReskinScroll(_G['MacroButtonScrollFrameScrollBar']);
+	F.StripTextures(MacroButtonScrollFrame);
+	F.ReskinScroll(MacroButtonScrollFrameScrollBar);
 	
-	F.Reskin(_G['MacroDeleteButton']);
+	F.Reskin(MacroDeleteButton);
 	
 	_G['MacroFrameCharLimitText']:ClearAllPoints();
 	_G['MacroFrameCharLimitText']:SetPoint('BOTTOM', MacroFrameTextBackground, -40, -30);
 	
-	F.Reskin(_G['MacroNewButton']);
-	F.Reskin(_G['MacroExitButton']);
+	F.Reskin(MacroNewButton);
+	F.Reskin(MacroExitButton);
 	
-	F.StripTextures(_G['MacroPopupFrame']);
-	F.SetBD(_G['MacroPopupFrame'], 7, -10, -5, 7);
+	F.StripTextures(MacroPopupFrame);
+	F.SetBD(MacroPopupFrame, 7, -10, -5, 7);
 	
 	_G['MacroPopupNameLeft']:SetTexture(nil);
 	_G['MacroPopupNameMiddle']:SetTexture(nil);
 	_G['MacroPopupNameRight']:SetTexture(nil);
-	F.ReskinInput(_G['MacroPopupEditBox']);
+	F.ReskinInput(MacroPopupEditBox);
 	
 	for i = 1, MAX_ACCOUNT_MACROS do
 		local Button = _G['MacroPopupButton'..i];
@@ -84,9 +85,9 @@ C.modules['Blizzard_MacroUI'] = function()
 		end
 	end
 	
-	F.StripTextures(_G['MacroPopupScrollFrame']);
-	F.ReskinScroll(_G['MacroPopupScrollFrameScrollBar']);
+	F.StripTextures(MacroPopupScrollFrame);
+	F.ReskinScroll(MacroPopupScrollFrameScrollBar);
 	
-	F.Reskin(_G['MacroPopupOkayButton']);
-	F.Reskin(_G['MacroPopupCancelButton']);
+	F.Reskin(MacroPopupOkayButton);
+	F.Reskin(MacroPopupCancelButton);
 end
