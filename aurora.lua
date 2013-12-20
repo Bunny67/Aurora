@@ -400,6 +400,10 @@ F.ReskinInput = function(Frame, Height, Width)
 	BD:SetPoint('BOTTOMRIGHT');
 	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
 	F.CreateBD(BD, 0);
+	
+	if Frame:GetName() and Frame:GetName():find('Silver') or Frame:GetName():find('Copper') then
+		BD:SetPoint('BOTTOMRIGHT', -10, 0)
+	end
 
 	local Gradient = F.CreateGradient(Frame);
 	Gradient:SetPoint('TOPLEFT', BD, 1, -1);
