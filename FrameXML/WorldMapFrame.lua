@@ -77,9 +77,9 @@ tinsert(C.modules['Aurora'], function()
 	hooksecurefunc('WorldMapFrame_SetQuestMapView', QuestSkin);
 	hooksecurefunc('WorldMap_ToggleSizeUp', FixSkin);
 	
-	F.ReskinClose(_G['WorldMapFrameCloseButton']);
-	F.ReskinClose(_G['WorldMapFrameSizeDownButton']);
-	F.ReskinClose(_G['WorldMapFrameSizeUpButton']);
+	F.ReskinClose(WorldMapFrameCloseButton);
+	F.ReskinClose(WorldMapFrameSizeDownButton);
+	F.ReskinClose(WorldMapFrameSizeUpButton);
 	
 	F.ReskinDropDown(WorldMapLevelDropDown);
 	

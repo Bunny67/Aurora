@@ -1,161 +1,159 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
+
+local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
-	hooksecurefunc("UIDropDownMenu_CreateFrames", function(level, index)
+	local r, g, b = C.r, C.g, C.b
+	
+	hooksecurefunc('UIDropDownMenu_CreateFrames', function(level, index)
 		for i = 1, UIDROPDOWNMENU_MAXLEVELS do
-			local menu = _G["DropDownList"..i.."MenuBackdrop"]
-			local backdrop = _G["DropDownList"..i.."Backdrop"]
-			if not backdrop.reskinned then
-				F.CreateBD(menu)
-				F.CreateBD(backdrop)
-				backdrop.reskinned = true
+			local MenuBackdrop = _G['DropDownList'..i..'MenuBackdrop'];
+			local Backdrop = _G['DropDownList'..i..'Backdrop'];
+			
+			if not Backdrop.reskinned then
+				F.CreateBD(MenuBackdrop);
+				F.CreateBD(Backdrop);
+				
+				Backdrop.reskinned = true;
 			end
 		end
 	end)
 
-	local createBackdrop = function(parent, texture)
-		local bg = parent:CreateTexture(nil, "BACKGROUND")
-		bg:SetTexture(0, 0, 0, .5)
-		bg:SetPoint("CENTER", texture)
-		bg:SetSize(12, 12)
-		parent.bg = bg
+	local CreateBackdrop = function(Parent, Texture)
+		local BG = Parent:CreateTexture(nil, 'BACKGROUND');
+		BG:SetTexture(0, 0, 0, .5);
+		BG:SetPoint('CENTER', Texture);
+		BG:SetSize(12, 12);
+		Parent.BG = BG;
 
-		local left = parent:CreateTexture(nil, "BACKGROUND")
-		left:SetWidth(1)
-		left:SetTexture(0, 0, 0)
-		left:SetPoint("TOPLEFT", bg)
-		left:SetPoint("BOTTOMLEFT", bg)
-		parent.left = left
+		local Left = Parent:CreateTexture(nil, 'BACKGROUND');
+		Left:SetWidth(1);
+		Left:SetTexture(0, 0, 0);
+		Left:SetPoint('TOPLEFT', BG);
+		Left:SetPoint('BOTTOMLEFT', BG);
+		Parent.Left = Left;
 
-		local right = parent:CreateTexture(nil, "BACKGROUND")
-		right:SetWidth(1)
-		right:SetTexture(0, 0, 0)
-		right:SetPoint("TOPRIGHT", bg)
-		right:SetPoint("BOTTOMRIGHT", bg)
-		parent.right = right
+		local Right = Parent:CreateTexture(nil, 'BACKGROUND');
+		Right:SetWidth(1);
+		Right:SetTexture(0, 0, 0);
+		Right:SetPoint('TOPRIGHT', BG);
+		Right:SetPoint('BOTTOMRIGHT', BG);
+		Parent.Right = Right;
 
-		local top = parent:CreateTexture(nil, "BACKGROUND")
-		top:SetHeight(1)
-		top:SetTexture(0, 0, 0)
-		top:SetPoint("TOPLEFT", bg)
-		top:SetPoint("TOPRIGHT", bg)
-		parent.top = top
+		local Top = Parent:CreateTexture(nil, 'BACKGROUND');
+		Top:SetHeight(1);
+		Top:SetTexture(0, 0, 0);
+		Top:SetPoint('TOPLEFT', BG);
+		Top:SetPoint('TOPRIGHT', BG);
+		Parent.Top = Top;
 
-		local bottom = parent:CreateTexture(nil, "BACKGROUND")
-		bottom:SetHeight(1)
-		bottom:SetTexture(0, 0, 0)
-		bottom:SetPoint("BOTTOMLEFT", bg)
-		bottom:SetPoint("BOTTOMRIGHT", bg)
-		parent.bottom = bottom
+		local Bottom = Parent:CreateTexture(nil, 'BACKGROUND');
+		Bottom:SetHeight(1);
+		Bottom:SetTexture(0, 0, 0);
+		Bottom:SetPoint('BOTTOMLEFT', BG);
+		Bottom:SetPoint('BOTTOMRIGHT', BG);
+		Parent.Bottom = Bottom;
 	end
 
-	local toggleBackdrop = function(bu, show)
-		if show then
-			bu.bg:Show()
-			bu.left:Show()
-			bu.right:Show()
-			bu.top:Show()
-			bu.bottom:Show()
+	local ToggleBackdrop = function(Button, Show)
+		if Show then
+			Button.BG:Show(); Button.Left:Show(); Button.Right:Show(); Button.Top:Show(); Button.Bottom:Show();
 		else
-			bu.bg:Hide()
-			bu.left:Hide()
-			bu.right:Hide()
-			bu.top:Hide()
-			bu.bottom:Hide()
+			Button.BG:Hide(); Button.Left:Hide(); Button.Right:Hide(); Button.Top:Hide(); Button.Bottom:Hide();
 		end
 	end
 
-	hooksecurefunc("ToggleDropDownMenu", function(level, _, dropDownFrame, anchorName)
-		if not level then level = 1 end
-
-		local uiScale = UIParent:GetScale()
-
-		local listFrame = _G["DropDownList"..level]
+	hooksecurefunc('ToggleDropDownMenu', function(level, _, dropDownFrame, anchorName)
+		if not level then level = 1; end
+		
+		local UIScale = UIParent:GetScale();
+		local ListFrame = _G['DropDownList'..level];
 
 		if level == 1 then
 			if not anchorName then
-				local xOffset = dropDownFrame.xOffset and dropDownFrame.xOffset or 16
-				local yOffset = dropDownFrame.yOffset and dropDownFrame.yOffset or 9
-				local point = dropDownFrame.point and dropDownFrame.point or "TOPLEFT"
-				local relativeTo = dropDownFrame.relativeTo and dropDownFrame.relativeTo or dropDownFrame
-				local relativePoint = dropDownFrame.relativePoint and dropDownFrame.relativePoint or "BOTTOMLEFT"
+				local xOffset = dropDownFrame.xOffset and dropDownFrame.xOffset or 16;
+				local yOffset = dropDownFrame.yOffset and dropDownFrame.yOffset or 9;
+				local point = dropDownFrame.point and dropDownFrame.point or "TOPLEFT";
+				local relativeTo = dropDownFrame.relativeTo and dropDownFrame.relativeTo or dropDownFrame;
+				local relativePoint = dropDownFrame.relativePoint and dropDownFrame.relativePoint or "BOTTOMLEFT";
 
-				listFrame:ClearAllPoints()
-				listFrame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset)
-
-				local offLeft = listFrame:GetLeft()/uiScale
-				local offRight = (GetScreenWidth() - listFrame:GetRight())/uiScale
-				local offTop = (GetScreenHeight() - listFrame:GetTop())/uiScale
-				local offBottom = listFrame:GetBottom()/uiScale
-
-				local xAddOffset, yAddOffset = 0, 0
+				ListFrame:ClearAllPoints();
+				ListFrame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset);
+				local offLeft = ListFrame:GetLeft() / UIScale;
+				local offRight = (GetScreenWidth() - ListFrame:GetRight()) / UIScale;
+				local offTop = (GetScreenHeight() - ListFrame:GetTop()) / UIScale;
+				local offBottom = ListFrame:GetBottom() / UIScale;
+				local xAddOffset, yAddOffset = 0, 0;
+				
 				if offLeft < 0 then
-					xAddOffset = -offLeft
+					xAddOffset = -offLeft;
 				elseif offRight < 0 then
-					xAddOffset = offRight
+					xAddOffset = offRight;
 				end
 
 				if offTop < 0 then
-					yAddOffset = offTop
+					yAddOffset = offTop;
 				elseif offBottom < 0 then
-					yAddOffset = -offBottom
+					yAddOffset = -offBottom;
 				end
-				listFrame:ClearAllPoints()
-				listFrame:SetPoint(point, relativeTo, relativePoint, xOffset + xAddOffset, yOffset + yAddOffset)
-			elseif anchorName ~= "cursor" then
-				local _, _, relPoint, xOff, yOff = listFrame:GetPoint()
-				if relPoint == "BOTTOMLEFT" and xOff == 0 and floor(yOff) == 5 then
-					listFrame:SetPoint("TOPLEFT", anchorName, "BOTTOMLEFT", 16, 9)
+				
+				ListFrame:ClearAllPoints();
+				ListFrame:SetPoint(point, relativeTo, relativePoint, xOffset + xAddOffset, yOffset + yAddOffset);
+			elseif anchorName ~= 'cursor' then
+				local _, _, relPoint, xOff, yOff = ListFrame:GetPoint();
+				
+				if relPoint == 'BOTTOMLEFT' and xOff == 0 and floor(yOff) == 5 then
+					ListFrame:SetPoint('TOPLEFT', anchorName, 'BOTTOMLEFT', 16, 9);
 				end
 			end
 		else
-			local point, anchor, relPoint, _, y = listFrame:GetPoint()
-			if point:find("RIGHT") then
-				listFrame:SetPoint(point, anchor, relPoint, -14, y)
+			local point, anchor, relPoint, _, y = ListFrame:GetPoint();
+			
+			if point:find('RIGHT') then
+				ListFrame:SetPoint(point, anchor, relPoint, -14, y);
 			else
-				listFrame:SetPoint(point, anchor, relPoint, 9, y)
+				ListFrame:SetPoint(point, anchor, relPoint, 9, y);
 			end
 		end
 
 		for j = 1, UIDROPDOWNMENU_MAXBUTTONS do
-			local bu = _G["DropDownList"..level.."Button"..j]
-			local _, _, _, x = bu:GetPoint()
-			if bu:IsShown() and x then
-				local hl = _G["DropDownList"..level.."Button"..j.."Highlight"]
-				local check = _G["DropDownList"..level.."Button"..j.."Check"]
+			local Button = _G['DropDownList'..level..'Button'..j];
+			local _, _, _, x = Button:GetPoint();
+			
+			if Button:IsShown() and x then
+				local Highlight = _G['DropDownList'..level..'Button'..j..'Highlight']
+				local Check = _G['DropDownList'..level..'Button'..j..'Check'];
 
-				hl:SetPoint("TOPLEFT", -x + 1, 0)
-				hl:SetPoint("BOTTOMRIGHT", listFrame:GetWidth() - bu:GetWidth() - x - 1, 0)
+				Highlight:SetPoint('TOPLEFT', - x + 1, 0);
+				Highlight:SetPoint('BOTTOMRIGHT', ListFrame:GetWidth() - Button:GetWidth() - x - 1, 0);
 
-				if not bu.bg then
-					createBackdrop(bu, check)
-					hl:SetTexture(r, g, b, .2)
+				if not Button.BG then
+					CreateBackdrop(Button, Check);
+					Highlight:SetTexture(r, g, b, .2);
 
-					local arrow = _G["DropDownList"..level.."Button"..j.."ExpandArrow"]
-					arrow:SetNormalTexture(C.media.arrowRight)
-					arrow:SetSize(8, 8)
+					local ExpandArrow = _G['DropDownList'..level..'Button'..j..'ExpandArrow'];
+					ExpandArrow:SetNormalTexture(C.media.arrowRight);
+					ExpandArrow:SetSize(8, 8);
 				end
 
-				if not bu.notCheckable then
-					toggleBackdrop(bu, true)
-
-					local _, co = check:GetTexCoord()
+				if not Button.notCheckable then
+					ToggleBackdrop(Button, true);
+					
+					local _, co = Check:GetTexCoord();
 
 					if co == 0 then
-						check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
-						check:SetVertexColor(r, g, b, 1)
-						check:SetSize(20, 20)
-						check:SetDesaturated(true)
+						Check:SetTexture('Interface\\Buttons\\UI-CheckBox-Check');
+						Check:SetVertexColor(r, g, b, 1);
+						Check:SetSize(20, 20);
 					else
-						check:SetTexture(C.media.backdrop)
-						check:SetVertexColor(r, g, b, .6)
-						check:SetSize(10, 10)
-						check:SetDesaturated(false)
+						Check:SetTexture(C.media.backdrop);
+						Check:SetVertexColor(r, g, b, .6);
+						Check:SetSize(10, 10);
 					end
 
-					check:SetTexCoord(0, 1, 0, 1)
+					Check:SetTexCoord(0, 1, 0, 1);
 				else
-					toggleBackdrop(bu, false)
+					ToggleBackdrop(Button, false);
 				end
 			end
 		end

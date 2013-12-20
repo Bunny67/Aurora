@@ -11,6 +11,7 @@
 	<Script file="PVPFrame.lua"/>
 	<Script file="QuestFrame.lua"/>
 	<Script file="SpellBookFrame.lua"/>
+	<Script file="StaticPopup.lua"/>
 	<Script file="Fonts.lua"/>
 	<Script file="TaxiFrame.lua"/>
 	<Script file="UIDropDownMenu.lua"/>

@@ -1,4 +1,4 @@
-﻿local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...))
 
 local _G = _G
 local gsub = string.gsub

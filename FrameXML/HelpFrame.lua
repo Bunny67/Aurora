@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...))
 
-local _G = getfenv(0)
+local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
 	F.StripTextures(_G['HelpFrame'], true);
@@ -8,12 +8,12 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.StripTextures(_G['KnowledgeBaseFrame'], true);
 	
-	local Header = CreateFrame('Frame', nil, HelpFrame)
-	Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8)
-	Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32)
-	Header:SetFrameLevel(HelpFrame:GetFrameLevel())
-	F.CreateBD(Header, .0)
-	F.CreateGradient(Header)
+	local Header = CreateFrame('Frame', nil, HelpFrame);
+	Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8);
+	Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32);
+	Header:SetFrameLevel(HelpFrame:GetFrameLevel());
+	F.CreateBD(Header, .0);
+	F.CreateGradient(Header);
 	
 	F.ReskinClose(_G['HelpFrameCloseButton'], 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
 	
