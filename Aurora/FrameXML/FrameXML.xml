@@ -2,6 +2,7 @@
 	<Script file="ArenaFrame.lua"/>
 	<Script file="ArenaRegistrarFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
+	<Script file="DressUpFrame.lua"/>
 	<Script file="FriendsFrame.lua"/>
 	<Script file="GossipFrame.lua"/>
 	<Script file="HelpFrame.lua"/>

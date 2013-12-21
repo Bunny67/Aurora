@@ -3,6 +3,18 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
+	local r, g, b = C.r, C.g, C.b
+	
+	local function ColourMinimize(Frame)
+		if Frame:IsEnabled() then
+			Frame.Minimize:SetVertexColor(r, g, b);
+		end
+	end
+
+	local function ClearMinimize(Frame)
+		Frame.Minimize:SetVertexColor(1, 1, 1);
+	end
+	
 	F.StripTextures(LFDQueueFrame, true)
 	F.SetBD(LFDQueueFrame, 10, -12, -2, 1);
 	
@@ -59,12 +71,26 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.CreateBD(LFDDungeonReadyDialog); -- LFDDungeonReadyDialog
 	
-	--LFDDungeonReadyDialogCloseButton -
-	
+	F.ReskinClose(LFDDungeonReadyDialogCloseButton);
+	LFDDungeonReadyDialogCloseButton.Minimize = LFDDungeonReadyDialogCloseButton:CreateTexture(nil, 'OVERLAY');
+	LFDDungeonReadyDialogCloseButton.Minimize:SetSize(9, 1);
+	LFDDungeonReadyDialogCloseButton.Minimize:SetPoint('CENTER');
+	LFDDungeonReadyDialogCloseButton.Minimize:SetTexture(C.media.backdrop);
+	LFDDungeonReadyDialogCloseButton.Minimize:SetVertexColor(1, 1, 1);
+	LFDDungeonReadyDialogCloseButton:HookScript('OnEnter', ColourMinimize);
+	LFDDungeonReadyDialogCloseButton:HookScript('OnLeave', ClearMinimize);
+		
 	F.Reskin(LFDDungeonReadyDialogEnterDungeonButton);
 	F.Reskin(LFDDungeonReadyDialogLeaveQueueButton);
 	
 	F.CreateBD(LFDDungeonReadyStatus); -- LFDDungeonReadyStatus
 	
-	-- LFDDungeonReadyStatusCloseButton -
+	F.ReskinClose(LFDDungeonReadyStatusCloseButton);
+	LFDDungeonReadyStatusCloseButton.Minimize = LFDDungeonReadyStatusCloseButton:CreateTexture(nil, 'OVERLAY');
+	LFDDungeonReadyStatusCloseButton.Minimize:SetSize(9, 1);
+	LFDDungeonReadyStatusCloseButton.Minimize:SetPoint('CENTER');
+	LFDDungeonReadyStatusCloseButton.Minimize:SetTexture(C.media.backdrop);
+	LFDDungeonReadyStatusCloseButton.Minimize:SetVertexColor(1, 1, 1);
+	LFDDungeonReadyStatusCloseButton:HookScript('OnEnter', ColourMinimize);
+	LFDDungeonReadyStatusCloseButton:HookScript('OnLeave', ClearMinimize);
 end)
