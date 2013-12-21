@@ -2,7 +2,7 @@
 ## Title: |cffffffffAurora|r
 ## Notes: Minimalist Window Theme.
 ## Author: Haleth, Freethinker, Bynnu
-## Version: 1.03
+## Version: 1.04
 ## SavedVariables: AuroraConfig
 
 aurora.lua

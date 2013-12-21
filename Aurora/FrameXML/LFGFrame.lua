@@ -79,7 +79,10 @@ tinsert(C.modules['Aurora'], function()
 	LFDDungeonReadyDialogCloseButton.Minimize:SetVertexColor(1, 1, 1);
 	LFDDungeonReadyDialogCloseButton:HookScript('OnEnter', ColourMinimize);
 	LFDDungeonReadyDialogCloseButton:HookScript('OnLeave', ClearMinimize);
-		
+	for _, pixel in pairs(LFDDungeonReadyDialogCloseButton.Pixels) do
+		pixel:Hide();
+	end
+	
 	F.Reskin(LFDDungeonReadyDialogEnterDungeonButton);
 	F.Reskin(LFDDungeonReadyDialogLeaveQueueButton);
 	
@@ -93,4 +96,7 @@ tinsert(C.modules['Aurora'], function()
 	LFDDungeonReadyStatusCloseButton.Minimize:SetVertexColor(1, 1, 1);
 	LFDDungeonReadyStatusCloseButton:HookScript('OnEnter', ColourMinimize);
 	LFDDungeonReadyStatusCloseButton:HookScript('OnLeave', ClearMinimize);
+	for _, pixel in pairs(LFDDungeonReadyStatusCloseButton.Pixels) do
+		pixel:Hide();
+	end
 end)

@@ -3,6 +3,8 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
+	local r, g, b = C.r, C.g, C.b
+	
 	local TinyWorldMap = function()
 		WorldMapFrame:SetParent(UIParent);
 		WorldMapFrame:EnableMouse(false);
@@ -38,8 +40,8 @@ tinsert(C.modules['Aurora'], function()
 	
 	local function SmallSkin()
 		WorldMapFrame.backdrop:ClearAllPoints();
-		WorldMapFrame.backdrop:SetPoint("TOPLEFT", 2, 2);
-		WorldMapFrame.backdrop:SetPoint("BOTTOMRIGHT", 2, -2);
+		WorldMapFrame.backdrop:SetPoint('TOPLEFT', 2, 2);
+		WorldMapFrame.backdrop:SetPoint('BOTTOMRIGHT', 2, 0);
 	end
 	
 	local function LargeSkin()
@@ -78,8 +80,60 @@ tinsert(C.modules['Aurora'], function()
 	hooksecurefunc('WorldMap_ToggleSizeUp', FixSkin);
 	
 	F.ReskinClose(WorldMapFrameCloseButton);
-	F.ReskinClose(WorldMapFrameSizeDownButton);
-	F.ReskinClose(WorldMapFrameSizeUpButton);
+	
+	local SizeUp = _G['WorldMapFrameSizeUpButton'];
+	F.ReskinClose(SizeUp, 'TOPLEFT', WorldMapFrameSizeDownButton);
+	SizeUp.Texs = {};
+	
+	SizeUp.Top = SizeUp:CreateTexture(nil, 'OVERLAY');
+	SizeUp.Top:SetSize(7, 1);
+	SizeUp.Top:SetPoint('TOP', 2, -3);
+	SizeUp.Top:SetTexture(C.media.backdrop);
+	SizeUp.Top:SetVertexColor(1, 1, 1);
+	SizeUp.Right = WorldMapFrameSizeUpButton:CreateTexture(nil, 'OVERLAY');
+	SizeUp.Right:SetSize(1, 7);
+	SizeUp.Right:SetPoint('RIGHT', -3, 2);
+	SizeUp.Right:SetTexture(C.media.backdrop);
+	SizeUp.Right:SetVertexColor(1, 1, 1);
+	
+	for i = 1, 9 do
+		local Texture = SizeUp:CreateTexture();
+		Texture:SetTexture(1, 1, 1);
+		Texture:SetSize(1, 1);
+		Texture:SetPoint('BOTTOMLEFT', 3 + i, 3 + i);
+		tinsert(SizeUp.Texs, Texture);
+	end
+	
+	for _, pixel in pairs(SizeUp.Pixels) do pixel:Hide(); end
+	SizeUp:HookScript('OnEnter', function(self) if self:IsEnabled() then for _, Tex in pairs(self.Texs) do Tex:SetVertexColor(r, g, b); end self.Top:SetVertexColor(r, g, b); self.Right:SetVertexColor(r, g, b); end end);
+	SizeUp:HookScript('OnLeave', function(self) if self:IsEnabled() then for _, Tex in pairs(self.Texs) do Tex:SetVertexColor(1, 1, 1); end self.Top:SetVertexColor(1, 1, 1); self.Right:SetVertexColor(1, 1, 1); end end);
+	
+	local SizeDown = _G['WorldMapFrameSizeDownButton'];
+	F.ReskinClose(SizeDown);
+	
+	SizeDown.Texs = {};
+	SizeDown.Bottom = SizeDown:CreateTexture(nil, 'OVERLAY');
+	SizeDown.Bottom:SetSize(7, 1);
+	SizeDown.Bottom:SetPoint('BOTTOM', -2, 3);
+	SizeDown.Bottom:SetTexture(C.media.backdrop);
+	SizeDown.Bottom:SetVertexColor(1, 1, 1);
+	SizeDown.Left = SizeDown:CreateTexture(nil, 'OVERLAY');
+	SizeDown.Left:SetSize(1, 7);
+	SizeDown.Left:SetPoint('LEFT', 3, -2);
+	SizeDown.Left:SetTexture(C.media.backdrop);
+	SizeDown.Left:SetVertexColor(1, 1, 1);
+	
+	for i = 1, 9 do
+		local Texture = SizeDown:CreateTexture();
+		Texture:SetTexture(1, 1, 1);
+		Texture:SetSize(1, 1);
+		Texture:SetPoint('BOTTOMLEFT', 3 + i, 3 + i);
+		tinsert(SizeDown.Texs, Texture);
+	end
+	
+	for _, pixel in pairs(SizeDown.Pixels) do pixel:Hide(); end
+	SizeDown:HookScript('OnEnter', function(self) if self:IsEnabled() then for _, Tex in pairs(self.Texs) do Tex:SetVertexColor(r, g, b); end self.Bottom:SetVertexColor(r, g, b); self.Left:SetVertexColor(r, g, b); end end);
+	SizeDown:HookScript('OnLeave', function(self) if self:IsEnabled() then for _, Tex in pairs(self.Texs) do Tex:SetVertexColor(1, 1, 1); end self.Bottom:SetVertexColor(1, 1, 1); self.Left:SetVertexColor(1, 1, 1); end end);
 	
 	F.ReskinDropDown(WorldMapLevelDropDown);
 	
