@@ -1,4 +1,4 @@
-﻿local alpha, useButtonGradientColour
+local alpha, useButtonGradientColour
 
 local _G = getfenv(0);
 
@@ -47,19 +47,6 @@ C.defaults = {
 	["useCustomColour"] = false,
 		["customColour"] = {r = 1, g = 1, b = 1},
 		
-	-- [[ AddOns ]]
-	['AchievementUI'] = true,														-- Достижения
-	['AuctionUI'] = true,															-- Аукцион
-	['GlyphUI'] = true,																-- Символы
-	['GuildBankUI'] = true,															-- Банк гильдии
-	['ItemSocketingUI'] = true,														-- Инкрустирование
-	['MacroUI'] = true,																-- Макросы
-	['RaidUI'] = true,																-- Рейд
-	['TalentUI'] = true,															-- Таланты
-	['TimeManager'] = true,															-- Время
-	['TradeSkillUI'] = true,														-- Профессии
-	['TrainerUI'] = true,															-- Учитель
-	
 	['enableFont'] = true,
 	
 	['Bags'] = true,																-- Сумки
