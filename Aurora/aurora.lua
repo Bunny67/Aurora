@@ -779,11 +779,10 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 	end
 end)
 
-local AutoCast = CreateFrame('Frame')
-AutoCast:RegisterEvent('PLAYER_ENTERING_WORLD')
-AutoCast:SetScript('OnEvent', function()
-	GetSpellAutocast("Огненный шар")
-end)
+local f = CreateFrame('Frame');
+f:RegisterEvent('PLAYER_LOGIN')
+f:SetScript('OnEvent', function() SetCVar('useUiScale', 1); SetCVar('uiScale', 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)')); end);
+
 local Delay = CreateFrame('Frame')
 Delay:RegisterEvent('PLAYER_ENTERING_WORLD')
 Delay:SetScript('OnEvent', function()
