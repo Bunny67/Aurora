@@ -729,30 +729,7 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 		F.ReskinArrow(_G["TabardFrameCustomization"..i.."RightButton"], "right")
 	end
 	
-		local AllLFGFrameStripTextures = {'LFDParentFrame', 'LFDParentFramePortrait', 'LFDQueueFrame'}
-		for i = 1, #AllLFGFrameStripTextures do
-			F.StripTextures(_G[AllLFGFrameStripTextures[i]], true)
-		end
 		
-		local AllLFGFrameDropDowns = {'LFDQueueFrameTypeDropDown'}
-		for i = 1, #AllLFGFrameDropDowns do
-			F.ReskinDropDown(_G[AllLFGFrameDropDowns[i]])
-		end
-		
-		local AllLFGFrameCheckBoxes = {'LFDQueueFrameRoleButtonTank', 'LFDQueueFrameRoleButtonHealer', 'LFDQueueFrameRoleButtonDPS', 'LFDQueueFrameRoleButtonLeader'}
-		for _, object in pairs(AllLFGFrameCheckBoxes) do
-			_G[object].checkButton:SetFrameLevel(_G[object].checkButton:GetFrameLevel() + 2)
-			F.ReskinCheck(_G[object].checkButton)
-		end
-		
-		local AllLFGFrameButtons = {'LFDQueueFrameFindGroupButton', 'LFDQueueFrameCancelButton', 'LFDQueueFramePartyBackfillBackfillButton', 'LFDQueueFramePartyBackfillNoBackfillButton'}
-		for i = 1, #AllLFGFrameButtons do
-			F.Reskin(_G[AllLFGFrameButtons[i]])
-		end
-		
-		F.SetBD(LFDParentFrame, 10, -12, -2, 0)
-
-	
 		local AllUIStripTextures = {'GameMenuFrame', 'VideoOptionsFrame', 'VideoOptionsFrameCategoryFrame', 'VideoOptionsEffectsPanelQuality', 'VideoOptionsEffectsPanelShaders', 'VideoOptionsFramePanelContainer', 'VideoOptionsResolutionPanelBrightness', 'AudioOptionsFrame', 'AudioOptionsFrameCategoryFrame', 'AudioOptionsSoundPanelPlayback', 'AudioOptionsSoundPanelHardware', 'AudioOptionsSoundPanelVolume', 'AudioOptionsFramePanelContainer', 'InterfaceOptionsFrame', 'InterfaceOptionsFrameCategories', 'InterfaceOptionsFramePanelContainer', 'InterfaceOptionsFrameAddOns'}
 		for i = 1, #AllUIStripTextures do
 			F.StripTextures(_G[AllUIStripTextures[i]], true)

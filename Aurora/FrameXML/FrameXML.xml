@@ -6,6 +6,8 @@
 	<Script file="GossipFrame.lua"/>
 	<Script file="HelpFrame.lua"/>
 	<Script file="ItemTextFrame.lua"/>
+	<Script file="LFDFrame.lua"/>
+	<Script file="LFGFrame.lua"/>
 	<Script file="MailFrame.lua"/>
 	<Script file="MerchantFrame.lua"/>
 	<Script file="PVPFrame.lua"/>
