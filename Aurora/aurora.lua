@@ -84,7 +84,7 @@ F.dummy = function() end;
 F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 	if Button.SetHighlightTexture and not Button.Hover and not NoHover then
 		local Hover = Button:CreateTexture('frame', nil, self);
-		Hover:SetTexture(1, 1, 1, 0.3);
+		Hover:SetTexture(r, g, b, 0.3);
 		Hover:SetPoint('TOPLEFT', 1, -1);
 		Hover:SetPoint('BOTTOMRIGHT', -1, 1);
 		Button.Hover = Hover;
@@ -102,7 +102,7 @@ F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 	
 	if Button.SetCheckedTexture and not Button.Checked and not NoChecked then
 		local Checked = Button:CreateTexture('frame', nil, self);
-		Checked:SetTexture(r, g, b);
+		Checked:SetTexture(1, 1, 1);
 		Checked:SetPoint('TOPLEFT', 1, -1);
 		Checked:SetPoint('BOTTOMRIGHT', -1, 1);
 		Checked:SetAlpha(0.3);

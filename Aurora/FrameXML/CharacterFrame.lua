@@ -294,12 +294,8 @@ tinsert(C.modules['Aurora'], function()
 		local StatusBarBackground = _G['SkillRankFrame'..statusBarID..'Background'];
 		
 		StatusBar:SetStatusBarTexture(C.media.backdrop);
-		
-		if not StatusBar.Backdrop then
-			F.CreateBD(StatusBar, .25)
-			
-			StatusBar.Backdrop = true
-		end
+
+		F.CreateBD(StatusBar, .25)
 		
 		F.StripTextures(StatusBarBorder);
 		StatusBarBackground:SetTexture(nil);
@@ -323,12 +319,7 @@ tinsert(C.modules['Aurora'], function()
 		local StatusBarBackground = _G['SkillDetailStatusBarBackground'];
 		
 		StatusBar:SetStatusBarTexture(C.media.backdrop);
-		
-		if not StatusBar.Backdrop then
-			F.CreateBD(StatusBar, .25);
-			
-			StatusBar.Backdrop = true;
-		end
+		F.CreateBD(StatusBar, .25);
 		
 		StatusBarBorder:SetTexture(nil);
 		StatusBarBackground:SetTexture(nil);

@@ -75,8 +75,8 @@ C.modules['Blizzard_InspectUI'] = function()
 	InspectFrame:HookScript('OnShow', ColorItemBorder);
 	ColorItemBorder(CheckItemBorderColor);
 	
-	--InspectModelRotateLeftButton
-	--InspectModelRotateRightButton
+	F.ReskinArrow(InspectModelRotateLeftButton, 'left');
+	F.ReskinArrow(InspectModelRotateRightButton, 'right');
 	
 	F.StripTextures(InspectPVPFrame);
 
@@ -86,7 +86,7 @@ C.modules['Blizzard_InspectUI'] = function()
 		F.StripTextures(PVPTeam);
 	end
 	
-	F.StripTextures(InspectTalentFrame);
+	F.StripTextures(InspectTalentFrame, true);
 	
 	F.ReskinClose(InspectTalentFrameCloseButton, 'TOPRIGHT', InspectTalentFrame, 'TOPRIGHT', -35, -16);
 	
@@ -111,9 +111,8 @@ C.modules['Blizzard_InspectUI'] = function()
 		end
 	end
 	
-	F.StripTextures(InspectTalentFrameScrollFrame)
-
-	F.ReskinScroll(InspectTalentFrameScrollFrameScrollBar)
+	F.StripTextures(InspectTalentFrameScrollFrame);
+	F.ReskinScroll(InspectTalentFrameScrollFrameScrollBar);
 
 	F.StripTextures(InspectTalentFramePointsBar);
 end

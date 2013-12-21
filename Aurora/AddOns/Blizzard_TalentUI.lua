@@ -27,7 +27,7 @@ C.modules['Blizzard_TalentUI'] = function()
 		end
 	end
 	
-	F.StripTextures(PlayerTalentFrameScrollFrame);
+	F.StripTextures(PlayerTalentFrameScrollFrame, true);
 	F.ReskinScroll(PlayerTalentFrameScrollFrameScrollBar);
 	
 	F.StripTextures(PlayerTalentFramePointsBar);
