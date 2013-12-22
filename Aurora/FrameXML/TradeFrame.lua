@@ -25,7 +25,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		F.StripTextures(PlayerButton);
 		F.StyleButton(PlayerButton);
-		F.CreateBD(PlayerButton);
+		F.CreateBD(PlayerButton, .25);
 		
 		PlayerButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 		PlayerButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -33,7 +33,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		F.StripTextures(RecipientButton);
 		F.StyleButton(RecipientButton);
-		F.CreateBD(RecipientButton);
+		F.CreateBD(RecipientButton, .25);
 		
 		RecipientButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 		RecipientButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
