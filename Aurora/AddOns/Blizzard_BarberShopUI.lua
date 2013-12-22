@@ -8,7 +8,7 @@ C.modules['Blizzard_BarbershopUI'] = function()
 	
 	for i = 1, 4 do
 		local Prev = _G['BarberShopFrameSelector'..i..'Prev'];
-		local Next = _G['BarberShopFrameSelector'..i..'Next']
+		local Next = _G['BarberShopFrameSelector'..i..'Next'];
 		
 		F.ReskinArrow(Prev, 'left');
 		F.ReskinArrow(Next, 'right');

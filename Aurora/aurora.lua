@@ -696,27 +696,6 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 	end
 
 	if addon == 'Aurora' then
-	
-	local AllTabardFrameStripTextures = {'TabardFrame'}
-	for i = 1, #AllTabardFrameStripTextures do
-		F.StripTextures(_G[AllTabardFrameStripTextures[i]])
-	end
-	F.Kill(TabardFramePortrait)
-	
-	local AllTabardFrameButtons = {'TabardFrameAcceptButton', 'TabardFrameCancelButton'}
-	for i = 1, #AllTabardFrameButtons do
-		F.Reskin(_G[AllTabardFrameButtons[i]])
-	end
-			
-	F.SetBD(TabardFrame, 10, -12, -34, 74)
-	F.ReskinClose(TabardFrameCloseButton, "TOPRIGHT", TabardFrame, "TOPRIGHT", -38, -16)
-	
-	for i = 1, 5 do
-		F.ReskinArrow(_G["TabardFrameCustomization"..i.."LeftButton"], "left")
-		F.ReskinArrow(_G["TabardFrameCustomization"..i.."RightButton"], "right")
-	end
-	
-		
 		local AllUIStripTextures = {'GameMenuFrame', 'VideoOptionsFrame', 'VideoOptionsFrameCategoryFrame', 'VideoOptionsEffectsPanelQuality', 'VideoOptionsEffectsPanelShaders', 'VideoOptionsFramePanelContainer', 'VideoOptionsResolutionPanelBrightness', 'AudioOptionsFrame', 'AudioOptionsFrameCategoryFrame', 'AudioOptionsSoundPanelPlayback', 'AudioOptionsSoundPanelHardware', 'AudioOptionsSoundPanelVolume', 'AudioOptionsFramePanelContainer', 'InterfaceOptionsFrame', 'InterfaceOptionsFrameCategories', 'InterfaceOptionsFramePanelContainer', 'InterfaceOptionsFrameAddOns'}
 		for i = 1, #AllUIStripTextures do
 			F.StripTextures(_G[AllUIStripTextures[i]], true)
