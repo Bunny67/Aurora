@@ -17,6 +17,7 @@
 	<Script file="StaticPopup.lua"/>
 	<Script file="Fonts.lua"/>
 	<Script file="TaxiFrame.lua"/>
+	<Script file="TradeFrame.lua"/>
 	<Script file="UIDropDownMenu.lua"/>
 	<Script file="WorldMapFrame.lua"/>
 	<Script file="WorldStateFrame.lua"/>
