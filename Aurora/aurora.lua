@@ -1,7 +1,4 @@
 local alpha, useButtonGradientColour
-
-local _G = getfenv(0);
-
 local addon, core = ...
 
 core[1] = {}
@@ -12,6 +9,8 @@ Aurora = core
 AuroraConfig = {}
 
 local F, C = unpack(select(2, ...))
+
+local _G = getfenv(0);
 
 C.classcolours = {
 	['HUNTER'] = { r = 0.58, g = 0.86, b = 0.49 },
@@ -71,7 +70,7 @@ F.dummy = function() end;
 F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 	if Button.SetHighlightTexture and not Button.Hover and not NoHover then
 		local Hover = Button:CreateTexture('frame', nil, self);
-		Hover:SetTexture(r, g, b, 0.3);
+		Hover:SetTexture(r, g, b, .25);
 		Hover:SetPoint('TOPLEFT', 1, -1);
 		Hover:SetPoint('BOTTOMRIGHT', -1, 1);
 		Button.Hover = Hover;
@@ -80,7 +79,7 @@ F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 	
 	if Button.SetPushedTexture and not Button.Pushed and not NoPushed then
 		local Pushed = Button:CreateTexture('frame', nil, self);
-		Pushed:SetTexture(0.9, 0.8, 0.1, 0.3);
+		Pushed:SetTexture(0.9, 0.8, 0.1, .25);
 		Pushed:SetPoint('TOPLEFT', 1, -1);
 		Pushed:SetPoint('BOTTOMRIGHT', -1, 1);
 		Button.Pushed = Pushed;
@@ -92,7 +91,7 @@ F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 		Checked:SetTexture(1, 1, 1);
 		Checked:SetPoint('TOPLEFT', 1, -1);
 		Checked:SetPoint('BOTTOMRIGHT', -1, 1);
-		Checked:SetAlpha(0.3);
+		Checked:SetAlpha(.25);
 		Button.Checked = Checked;
 		Button:SetCheckedTexture(Checked);
 	end
