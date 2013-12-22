@@ -5,6 +5,7 @@
 	<Script file="DressUpFrame.lua"/>
 	<Script file="FriendsFrame.lua"/>
 	<Script file="GossipFrame.lua"/>
+	<Script file="GuildRegistrarFrame.lua"/>
 	<Script file="HelpFrame.lua"/>
 	<Script file="ItemTextFrame.lua"/>
 	<Script file="LFDFrame.lua"/>
