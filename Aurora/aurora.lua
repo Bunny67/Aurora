@@ -34,6 +34,7 @@ C.media = {
 	['checked'] = 'Interface\\AddOns\\Aurora\\media\\CheckButtonHilight',
 	['font'] = 'Interface\\AddOns\\Aurora\\media\\font.ttf',
 	['glow'] = 'Interface\\AddOns\\Aurora\\media\\glow',
+	["gradient"] = 'Interface\\AddOns\\Aurora\\media\\gradient',
 	['roleIcons'] = 'Interface\\Addons\\Aurora\\media\\UI-LFG-ICON-ROLES',
 }
 
