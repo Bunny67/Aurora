@@ -109,7 +109,7 @@ tinsert(C.modules['Aurora'], function()
 	SizeUp:HookScript('OnLeave', function(self) if self:IsEnabled() then for _, Tex in pairs(self.Texs) do Tex:SetVertexColor(1, 1, 1); end self.Top:SetVertexColor(1, 1, 1); self.Right:SetVertexColor(1, 1, 1); end end);
 	
 	local SizeDown = _G['WorldMapFrameSizeDownButton'];
-	F.ReskinClose(SizeDown);
+	F.ReskinClose(SizeDown, "TOPRIGHT", WorldMapPositioningGuide, -16, 4);
 	
 	SizeDown.Texs = {};
 	SizeDown.Bottom = SizeDown:CreateTexture(nil, 'OVERLAY');

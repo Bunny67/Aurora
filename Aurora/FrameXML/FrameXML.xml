@@ -2,6 +2,7 @@
 	<Script file="ArenaFrame.lua"/>
 	<Script file="ArenaRegistrarFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
+	<Script file="ChatConfigFrame.lua"/>
 	<Script file="DressUpFrame.lua"/>
 	<Script file="FriendsFrame.lua"/>
 	<Script file="GossipFrame.lua"/>
@@ -14,6 +15,7 @@
 	<Script file="MerchantFrame.lua"/>
 	<Script file="PVPFrame.lua"/>
 	<Script file="QuestFrame.lua"/>
+	<Script file="ReadyCheck.lua"/>
 	<Script file="SpellBookFrame.lua"/>
 	<Script file="StaticPopup.lua"/>
 	<Script file="Fonts.lua"/>

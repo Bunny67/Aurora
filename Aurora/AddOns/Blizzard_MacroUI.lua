@@ -23,7 +23,7 @@ C.modules['Blizzard_MacroUI'] = function()
 		if Button then
 			F.StripTextures(Button);
 			F.StyleButton(Button, nil, true);
-			F.CreateBD(Button);
+			F.CreateBD(Button, .25);
 		end
 		
 		if Icon then
@@ -47,7 +47,7 @@ C.modules['Blizzard_MacroUI'] = function()
 	
 	F.Reskin(MacroEditButton);
 	
-	F.CreateBD(MacroFrameTextBackground);
+	F.CreateBD(MacroFrameTextBackground, .25);
 	
 	F.StripTextures(MacroButtonScrollFrame);
 	F.ReskinScroll(MacroButtonScrollFrameScrollBar);
