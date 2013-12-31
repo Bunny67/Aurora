@@ -25,7 +25,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		F.StripTextures(Button);
 		F.StyleButton(Button, nil, true);
-		F.CreateBD(Button);
+		F.CreateBD(Button, .25);
 		
 		Icon:SetPoint('TOPLEFT', 1, -1);
 		Icon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -178,39 +178,46 @@ tinsert(C.modules['Aurora'], function()
 	F.Reskin(PetPaperDollCloseButton);
 	
 	F.StripTextures(PetPaperDollFrameExpBar)
-	--PetPaperDollFrameExpBar:SetStatusBarTexture()
-	--PetPaperDollFrameExpBar
+	PetPaperDollFrameExpBar:SetStatusBarTexture(C.media.backdrop)
+	F.CreateBDFrame(PetPaperDollFrameExpBar, .25)
 	
 	F.StripTextures(PetPaperDollFrameCompanionFrame);
 	
+	F.CreateBD(CompanionModelFrame, .25);
+	
+	CompanionModelFrameRotateLeftButton:SetPoint('TOPLEFT', PetPaperDollFrame, 39, -90);
 	F.ReskinArrow(CompanionModelFrameRotateLeftButton, 'left');
 	F.ReskinArrow(CompanionModelFrameRotateRightButton, 'right');
 	
 	F.Reskin(CompanionSummonButton);
 	
 	hooksecurefunc('PetPaperDollFrame_UpdateCompanions', function()
+		local Button, IconNormal, IconDisabled, ActiveTexture;
+		
 		for i = 1, NUM_COMPANIONS_PER_PAGE do
-			local Button = _G["CompanionButton"..i];
-			local Icon = Button:GetNormalTexture();
-			local ActiveTexture = _G['CompanionButton'..i..'ActiveTexture'];
+			Button = _G["CompanionButton"..i];
+			IconNormal = Button:GetNormalTexture();
+			IconDisabled = Button:GetDisabledTexture();
+			ActiveTexture = _G['CompanionButton'..i..'ActiveTexture'];
 			
-			if Icon then
-				F.StyleButton(Button, nil, true);
-				F.CreateBD(Button);
-				
-				Icon:SetPoint('TOPLEFT', 1, -1);
-				Icon:SetPoint('BOTTOMRIGHT', -1, 1);
-				Icon:SetTexCoord(unpack(F.TexCoords));
-			else
-				Button:SetBackdrop(nil);
+			F.StyleButton(Button, nil, true);
+			F.CreateBD(Button, .25);
+			
+			if IconNormal then
+				IconNormal:SetPoint('TOPLEFT', 1, -1);
+				IconNormal:SetPoint('BOTTOMRIGHT', -1, 1);
+				IconNormal:SetTexCoord(unpack(F.TexCoords));
 			end
+			
+			IconDisabled:SetTexture(nil);
 			
 			ActiveTexture:SetPoint('TOPLEFT', Button, 1, -1);
 			ActiveTexture:SetPoint('BOTTOMRIGHT', Button, -1, 1);
-			ActiveTexture:SetTexture(1, 1, 1, .3);
+			ActiveTexture:SetTexture(1, 1, 1, .25);
 		end
 	end)
 	
+	CompanionPrevPageButton:SetPoint('BOTTOMLEFT', 123, 91);
 	F.ReskinArrow(CompanionPrevPageButton, 'left');
     F.ReskinArrow(CompanionNextPageButton, 'right');
 	-- Репутация

@@ -25,7 +25,7 @@ C.modules['Blizzard_GuildBankUI'] = function()
 			local Count = _G['GuildBankColumn'..i..'Button'..x..'Count'];
 			
 			F.StyleButton(Button);
-			F.CreateBD(Button);
+			F.CreateBD(Button, .25);
 			
 			if NormalTexture then NormalTexture:SetTexture(nil); end
 			
