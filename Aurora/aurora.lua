@@ -52,6 +52,7 @@ C.defaults = {
 	['Bags'] = true,																-- Сумки
 	['ChatBubbles'] = true, 														-- Сообщение в облачках
 	['Tooltips'] = true,															-- Подсказки
+	['Maps'] = true,																-- Карта мира
 }
 
 C.frames = {}

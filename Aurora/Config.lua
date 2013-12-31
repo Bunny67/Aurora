@@ -119,6 +119,9 @@ Config.Tooltips:SetPoint('LEFT', Config.Bags, 'RIGHT', 90, 0);
 Config.ChatBubbles = CreateToggleBox(Config, 'ChatBubbles', 'Сообщения в облачках');
 Config.ChatBubbles:SetPoint('LEFT', Config.Tooltips, 'RIGHT', 90, 0);
 
+Config.Maps = CreateToggleBox(Config, 'Maps', 'Карта мира');
+Config.Maps:SetPoint('TOPLEFT', Config.Bags, 'BOTTOMLEFT', 0, -8);
+
 Config.ReloadText = Config:CreateFontString(nil, 'ARTWORK', 'GameFontHighlight');
 Config.ReloadText:SetPoint('BOTTOM', 0, 70)
 Config.ReloadText:SetText([=[Требуется перезагрузить пользовательский 
