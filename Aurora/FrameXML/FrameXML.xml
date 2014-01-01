@@ -1,4 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">	
+	<Script file="AlertFrames.lua"/>
 	<Script file="ArenaFrame.lua"/>
 	<Script file="ArenaRegistrarFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
