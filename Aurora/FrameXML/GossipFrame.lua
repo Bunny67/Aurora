@@ -4,35 +4,34 @@ local _G = _G
 local gsub = string.gsub
 
 tinsert(C.modules['Aurora'], function()
-	ItemTextPageText:SetTextColor(1, 1, 1)
-	ItemTextPageText.SetTextColor = F.dummy		
+	F.SetBD(GossipFrame, 14, -18, -30, 67);
 	
-	F.ReskinScroll(_G['GossipGreetingScrollFrameScrollBar'])
-
-	F.StripTextures(_G['GossipFrameGreetingPanel']);
-
-	F.Kill(_G['GossipFramePortrait']);
-
-	F.Reskin(_G['GossipFrameGreetingGoodbyeButton'])
-
+	F.Kill(GossipFramePortrait);
+	
+	F.ReskinClose(GossipFrameCloseButton, 'TOPRIGHT', GossipFrame, 'TOPRIGHT', -34, -22);
+	
+	F.StripTextures(GossipFrameGreetingPanel);
+	
+	F.Reskin(GossipFrameGreetingGoodbyeButton);
+	
+	F.ReskinScroll(GossipGreetingScrollFrameScrollBar);
+	
+	GossipGreetingText:SetTextColor(1, 1, 1);
+	
 	for i = 1, NUMGOSSIPBUTTONS do
-		obj = select(3,_G["GossipTitleButton"..i]:GetRegions())
-		obj:SetTextColor(1,1,1)
+		local Button = select(3, _G['GossipTitleButton'..i]:GetRegions());
+		
+		Button:SetTextColor(1, 1, 1);
 	end
-
-	GossipGreetingText:SetTextColor(1,1,1)
-
-	F.SetBD(GossipFrame, 10, -12, -31, 67)
-	F.ReskinClose(GossipFrameCloseButton, 'TOPRIGHT', GossipFrame, 'TOPRIGHT', -35, -16)
 	
 	hooksecurefunc('GossipFrameUpdate', function()
 		GossipFrame.buttonIndex = 1;
-		for i=GossipFrame.buttonIndex, NUMGOSSIPBUTTONS do
-			local button = _G['GossipTitleButton' .. i]
+		for i = GossipFrame.buttonIndex, NUMGOSSIPBUTTONS do
+			local Button = _G['GossipTitleButton' .. i];
 			
-			if button:GetFontString() then
-				if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
-					button:GetFontString():SetText(gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))
+			if Button:GetFontString() then
+				if Button:GetFontString():GetText() and Button:GetFontString():GetText():find('|cff000000') then
+					Button:GetFontString():SetText(gsub(Button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
 				end
 			end
 		end
