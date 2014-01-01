@@ -16,6 +16,7 @@
 	<Script file="MerchantFrame.lua"/>
 	<Script file="PVPFrame.lua"/>
 	<Script file="QuestFrame.lua"/>
+	<Script file="QuestLogFrame.lua"/>
 	<Script file="ReadyCheck.lua"/>
 	<Script file="SpellBookFrame.lua"/>
 	<Script file="StaticPopup.lua"/>
