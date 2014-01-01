@@ -32,7 +32,7 @@ C.media = {
 	['arrowRight'] = 'Interface\\AddOns\\Aurora\\media\\arrow-right-active',
 	['backdrop'] = 'Interface\\ChatFrame\\ChatFrameBackground',
 	['checked'] = 'Interface\\AddOns\\Aurora\\media\\CheckButtonHilight',
-	['font'] = 'Interface\\AddOns\\Aurora\\media\\font.ttf',
+	['Font'] = 'Interface\\AddOns\\Aurora\\media\\font.ttf',						-- Шрифт
 	['glow'] = 'Interface\\AddOns\\Aurora\\media\\glow',
 	["gradient"] = 'Interface\\AddOns\\Aurora\\media\\gradient',
 	['roleIcons'] = 'Interface\\Addons\\Aurora\\media\\UI-LFG-ICON-ROLES',
@@ -49,6 +49,7 @@ C.defaults = {
 		
 	['enableFont'] = true,
 	
+	['Font'] = true,																-- Шрифт
 	['Bags'] = true,																-- Сумки
 	['ChatBubbles'] = true, 														-- Сообщение в облачках
 	['Tooltips'] = true,															-- Подсказки

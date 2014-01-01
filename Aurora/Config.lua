@@ -28,8 +28,8 @@ local function CreateToggleBox(Parent, Value, Text)
 	local Check = CreateFrame('CheckButton', nil, Parent, 'InterfaceOptionsCheckButtonTemplate');
 	Check.Value = Value;
 	
-	local Font = Check:CreateFontString(nil, 'ARTWORK', 'GameFontHighlight')
-	Font:SetPoint('LEFT', Check, 'RIGHT', 1, 1);
+	local Font = Check:CreateFontString(nil, 'ARTWORK', 'GameFontHighlight');
+	Font:SetPoint('LEFT', Check, 'RIGHT', 0, 1);
 	Font:SetText(Text);
 	
 	Check:SetScript('OnClick', Toggle);
@@ -78,7 +78,7 @@ Config.Alpha:SetScript('OnValueChanged', function(_, value)
 	UpdateFrames()
 end)
 
-Config.Font = CreateToggleBox(Config, 'enableFont', 'Replace default game fonts');
+Config.Font = CreateToggleBox(Config, 'Font', 'Заменить шрифты игры по умолчанию');
 Config.Font:SetPoint('TOPLEFT', 16, -140);
 
 Config.Colour = CreateToggleBox(Config, 'useCustomColour', 'Изменить цвет');
@@ -96,7 +96,7 @@ end)
 Config.ColourButton = CreateFrame('Button', 'AuroraConfigColourButton', Config, 'UIPanelButtonTemplate');
 Config.ColourButton:SetPoint('LEFT', Config.Colour, 'RIGHT', 128, 0);
 Config.ColourButton:SetSize(128, 25);
-Config.ColourButton:SetText('Change...');
+Config.ColourButton:SetText('Изменить...');
 Config.ColourButton:SetScript('OnClick', function()
 	local r, g, b = AuroraConfig.customColour.r, AuroraConfig.customColour.g, AuroraConfig.customColour.b;
 	ColorPickerFrame:SetColorRGB(r, g, b);
