@@ -84,11 +84,9 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinClose(GuildMemberDetailCloseButton);
 	
-	F.CreateBD(GuildMemberNoteBackground);
-	F.CreateGradient(GuildMemberNoteBackground);
+	F.CreateBD(GuildMemberNoteBackground, .25);
 	
-	F.CreateBD(GuildMemberOfficerNoteBackground);
-	F.CreateGradient(GuildMemberOfficerNoteBackground);
+	F.CreateBD(GuildMemberOfficerNoteBackground, .25);
 	
 	F.Reskin(GuildMemberRemoveButton);
 	F.Reskin(GuildMemberGroupInviteButton);
@@ -98,7 +96,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinClose(GuildInfoCloseButton, 'TOPRIGHT', GuildInfoFrame, 'TOPRIGHT', -6, -10);
 	
-	F.CreateBD(GuildInfoTextBackground);
+	F.CreateBD(GuildInfoTextBackground, .25);
 	
 	F.ReskinScroll(GuildInfoFrameScrollFrameScrollBar);
 	
@@ -111,7 +109,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinClose(GuildEventLogCloseButton, 'TOPRIGHT', GuildEventLogFrame, 'TOPRIGHT', -6, -10);
 	
-	F.CreateBD(GuildEventFrame);
+	F.CreateBD(GuildEventFrame, .25);
 	
 	F.ReskinScroll(GuildEventLogScrollFrameScrollBar);
 	
@@ -123,7 +121,9 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinDropDown(GuildControlPopupFrameDropDown);
 	--_G['GuildControlPopupFrameDropDownButton']:SetSize(16, 16);
 	
-	F.ReskinInput(GuildControlPopupFrameEditBox);
+	F.ReskinExpandOrCollapse(GuildControlPopupFrameAddRankButton);
+	
+	F.ReskinInput(GuildControlPopupFrameEditBox, 14);
 	
 	for i = 1, 17 do
 		local Checkbox = _G['GuildControlPopupFrameCheckbox'..i];
@@ -133,7 +133,7 @@ tinsert(C.modules['Aurora'], function()
 		end
 	end
 	
-	F.ReskinInput(GuildControlWithdrawGoldEditBox);
+	F.ReskinInput(GuildControlWithdrawGoldEditBox, 14);
 	
 	for i = 1, MAX_GUILDBANK_TABS do
 		local Tab = _G['GuildBankTabPermissionsTab'..i];
@@ -147,10 +147,10 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinCheck(GuildControlTabPermissionsDepositItems);
 	F.ReskinCheck(GuildControlTabPermissionsUpdateText);
 	
-	F.ReskinInput(GuildControlWithdrawItemsEditBox);
+	F.ReskinInput(GuildControlWithdrawItemsEditBox, 14);
 	
-	--F.ReskinCheck(_G['(GuildControlPopupAcceptButton']);
-	--F.ReskinCheck(_G['GuildControlPopupFrameCancelButton']);
+	F.Reskin(GuildControlPopupAcceptButton);
+	F.Reskin(GuildControlPopupFrameCancelButton);
 	-- Каналы
 	for i = 1, MAX_DISPLAY_CHANNEL_BUTTONS do
 		local Button = _G['ChannelButton'..i];
