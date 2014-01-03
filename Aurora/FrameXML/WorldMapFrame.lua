@@ -116,8 +116,14 @@ tinsert(C.modules['Aurora'], function()
 			if InCombatLockdown() then return; end
 			
 			WorldMapFrame.BG:ClearAllPoints();
-			WorldMapFrame.BG:SetPoint('TOPLEFT', 12, -12);
-			WorldMapFrame.BG:SetPoint('BOTTOMRIGHT', -20, -10);
+			
+			if not WORLDMAP_SETTINGS.advanced then
+				WorldMapFrame.BG:SetPoint('TOPLEFT', 12, -12);
+				WorldMapFrame.BG:SetPoint('BOTTOMRIGHT', -20, -10);
+			else
+				WorldMapFrame.BG:SetPoint('TOPLEFT', 0, 2);
+				WorldMapFrame.BG:SetPoint('BOTTOMRIGHT', 0, 2);
+			end
 			
 			WorldMapFrame:SetScale(1);
 			
@@ -170,6 +176,7 @@ tinsert(C.modules['Aurora'], function()
 			BlackoutWorld:SetTexture(nil);
 		end
 		
+		AdjustMapSize();
 		WorldMapFrame:HookScript('OnShow', AdjustMapSize);
 		
 		hooksecurefunc('WorldMap_ToggleSizeUp', AdjustMapSize);
