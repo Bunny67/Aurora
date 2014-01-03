@@ -2,6 +2,7 @@
 	<Script file="AlertFrames.lua"/>
 	<Script file="ArenaFrame.lua"/>
 	<Script file="ArenaRegistrarFrame.lua"/>
+	<Script file="BattlefieldFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
 	<Script file="ChatConfigFrame.lua"/>
 	<Script file="DressUpFrame.lua"/>
