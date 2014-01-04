@@ -852,7 +852,7 @@ Delay:SetScript('OnEvent', function()
 				if region:GetObjectType() == 'Texture' then
 					region:SetTexture(nil)
 				elseif region:GetObjectType() == 'FontString' then
-					region:SetFont(C.media.font, 13)
+					region:SetFont(C.media.Font, 13)
 				end
 			end
 
