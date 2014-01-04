@@ -55,31 +55,51 @@ local function ResetColour(restore)
 end
 
 local Config = CreateFrame('Frame', 'AuroraConfig', UIParent);
+Config:EnableMouse(true)
+Config:SetMovable(true)
 Config:SetSize(400, 496);
 Config:SetPoint('CENTER');
 Config:SetFrameStrata('HIGH');
 Config:Hide();
 
-Config.Title = Config:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge');
-Config.Title:SetPoint('TOP', 0, -12);
-Config.Title:SetText('Aurora v'..GetAddOnMetadata('Aurora', 'Version'));
+Config.Header = CreateFrame('Button', 'AuroraConfigHeader', Config);
+Config.Header:SetWidth(140); Config.Header:SetHeight(24);
+Config.Header:SetPoint('CENTER', Config, 'TOP');
+Config.Header:SetFrameLevel(Config.Header:GetFrameLevel() + 2);
+Config.Header:EnableMouse(true);
+Config.Header:RegisterForClicks('AnyUp', 'AnyDown');
+Config.Header:SetScript('OnMouseDown', function() Config:StartMoving(); end);
+Config.Header:SetScript('OnMouseUp', function() Config:StopMovingOrSizing(); end);
+
+Config.Header.Gradient = Config.Header:CreateTexture(nil, 'BORDER');
+Config.Header.Gradient:SetPoint('TOPLEFT', 1, -1);
+Config.Header.Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
+Config.Header.Gradient:SetTexture(C.media.backdrop);
+Config.Header.Gradient:SetVertexColor(.2, .2, .2, 1);
+
+Config.Header.Title = Config.Header:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge');
+Config.Header.Title:SetPoint('CENTER');
+Config.Header.Title:SetText('|cffffffffAurora v'..GetAddOnMetadata('Aurora', 'Version')..'|r');
 
 Config.Close = CreateFrame('Button', 'AuroraConfigClose', Config);
 Config.Close:SetScript('OnClick', function() Config:Hide(); end);
 
 Config.Alpha = CreateFrame('Slider', 'AuroraConfigAlpha', Config, 'OptionsSliderTemplate');
-Config.Alpha:SetPoint('TOP', 0, -80);
+Config.Alpha:SetPoint('TOP', 0, -38);
 Config.Alpha:SetMinMaxValues(0, 1);
-Config.Alpha:SetValueStep(0.1);
+Config.Alpha:SetValueStep(0.01);
 AuroraConfigAlphaText:SetText('Прозрачность');
 
 Config.Alpha:SetScript('OnValueChanged', function(_, value)
 	AuroraConfig.alpha = value
+	value = value * 100;
+	value = math.floor(value + .05);
+	AuroraConfigAlphaText:SetText('Прозрачность: '..string.format('%d', value));
 	UpdateFrames()
 end)
 
 Config.Font = CreateToggleBox(Config, 'Font', 'Заменить шрифты игры по умолчанию');
-Config.Font:SetPoint('TOPLEFT', 16, -140);
+Config.Font:SetPoint('TOPLEFT', 16, -76);
 
 Config.Colour = CreateToggleBox(Config, 'useCustomColour', 'Изменить цвет');
 Config.Colour:SetPoint('TOPLEFT', Config.Font, 'BOTTOMLEFT', 0, -8);
@@ -154,6 +174,9 @@ Config:SetScript('OnEvent', function(self, _, addon)
 	Config.Refresh();
 	
 	F.CreateBD(Config);
+	
+	F.CreateBD(Config.Header);
+	F.StyleButton(Config.Header);
 	
 	F.ReskinClose(Config.Close, 'TOPRIGHT', Config, 'TOPRIGHT', -4, -4);
 	F.ReskinSlider(Config.Alpha);
