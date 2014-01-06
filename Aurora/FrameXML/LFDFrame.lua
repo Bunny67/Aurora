@@ -155,6 +155,71 @@ tinsert(C.modules['Aurora'], function()
 	-- LFDSearchStatus
 	F.CreateBD(LFDSearchStatus);
 	
+	hooksecurefunc('LFDSearchStatusPlayer_SetFound', function(button, isFound)
+		if ( isFound ) then
+			SetDesaturation(button.texture, false);
+			button.cover:Hide();
+		else
+			SetDesaturation(button.texture, true);
+			button.cover:Hide();
+		end
+	end);
+	
+	hooksecurefunc('LFDSearchStatus_UpdateRoles', function()
+		local _, Tank, Healer, Damage = GetLFGRoles();
+		local CurrentIcon = 1;
+		
+		if ( Tank ) then
+			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
+			Icon:SetTexture(C.media.roleIcons);
+			CurrentIcon = CurrentIcon + 1;
+		end
+		
+		if ( Healer ) then
+			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
+			Icon:SetTexture(C.media.roleIcons);
+			CurrentIcon = CurrentIcon + 1;
+		end
+		
+		if ( Damage ) then
+			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
+			Icon:SetTexture(C.media.roleIcons);
+			CurrentIcon = CurrentIcon + 1;
+		end
+	end);
+	
+	for _, RoleButton in pairs({ LFDSearchStatusTank1, LFDSearchStatusHealer1, LFDSearchStatusDamage1, LFDSearchStatusDamage2, LFDSearchStatusDamage3 }) do
+		RoleButton.texture:SetTexture(C.media.roleIcons);
+		
+		local Left = RoleButton:CreateTexture(nil, 'OVERLAY');
+		Left:SetWidth(1);
+		Left:SetTexture(C.media.backdrop);
+		Left:SetVertexColor(0, 0, 0);
+		Left:SetPoint('TOPLEFT', 7, -6);
+		Left:SetPoint('BOTTOMLEFT', 7, 8);
+
+		local Right = RoleButton:CreateTexture(nil, 'OVERLAY');
+		Right:SetWidth(1);
+		Right:SetTexture(C.media.backdrop);
+		Right:SetVertexColor(0, 0, 0);
+		Right:SetPoint('TOPRIGHT', -7, -6);
+		Right:SetPoint('BOTTOMRIGHT', -7, 8);
+
+		local Top = RoleButton:CreateTexture(nil, 'OVERLAY');
+		Top:SetHeight(1);
+		Top:SetTexture(C.media.backdrop);
+		Top:SetVertexColor(0, 0, 0);
+		Top:SetPoint('TOPLEFT', 7, -5);
+		Top:SetPoint('TOPRIGHT', -7, -6);
+
+		local Bottom = RoleButton:CreateTexture(nil, 'OVERLAY');
+		Bottom:SetHeight(1);
+		Bottom:SetTexture(C.media.backdrop);
+		Bottom:SetVertexColor(0, 0, 0);
+		Bottom:SetPoint('BOTTOMLEFT', 7, 8);
+		Bottom:SetPoint('BOTTOMRIGHT', -7, 8);
+	end
+
 	-- LFDParentFrame
 	F.StripTextures(LFDQueueFrame, true);
 	F.SetBD(LFDQueueFrame, 10, -12, -2, 1);
