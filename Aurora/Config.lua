@@ -54,7 +54,7 @@ local function ResetColour(restore)
 	AuroraConfig.customColour.r, AuroraConfig.customColour.g, AuroraConfig.customColour.b = restore.r, restore.g, restore.b;
 end
 
-local Config = CreateFrame('Frame', 'AuroraConfig', UIParent);
+local Config = CreateFrame('Frame', 'AuroraConfigs', UIParent);
 Config:EnableMouse(true)
 Config:SetMovable(true)
 Config:SetSize(400, 496);
@@ -141,6 +141,9 @@ Config.ChatBubbles:SetPoint('LEFT', Config.Tooltips, 'RIGHT', 90, 0);
 
 Config.Maps = CreateToggleBox(Config, 'Maps', 'Карта мира');
 Config.Maps:SetPoint('TOPLEFT', Config.Bags, 'BOTTOMLEFT', 0, -8);
+
+Config.Loot = CreateToggleBox(Config, 'Loot', 'Добыча');
+Config.Loot:SetPoint('LEFT', Config.Maps, 'RIGHT', 90, 0);
 
 Config.ReloadText = Config:CreateFontString(nil, 'ARTWORK', 'GameFontHighlight');
 Config.ReloadText:SetPoint('BOTTOM', 0, 70)

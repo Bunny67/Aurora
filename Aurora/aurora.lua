@@ -54,6 +54,7 @@ C.defaults = {
 	['ChatBubbles'] = true, 														-- Сообщение в облачках
 	['Tooltips'] = true,															-- Подсказки
 	['Maps'] = true,																-- Карта мира
+	['Loot'] = true,																-- Добыча
 }
 
 C.frames = {}
@@ -938,5 +939,46 @@ Delay:SetScript('OnEvent', function()
 		StatusBarTexture:SetVertexColor(0, 0, 0)
 
 		F.CreateBD(FriendsTooltip)
+	end
+	
+	if AuroraConfig.Loot == true and not(IsAddOnLoaded('Butsu') or IsAddOnLoaded('LovelyLoot') or IsAddOnLoaded('XLoot')) then
+		F.StripTextures(LootFrame, true);
+		F.SetBD(LootFrame, 12, -14, -68, 5);
+		
+		F.ReskinClose(LootCloseButton, 'TOPRIGHT', LootFrame, 'TOPRIGHT', -72, -18);
+
+		hooksecurefunc('LootFrame_UpdateButton', function(index)
+			local ButtonIconTexture = _G['LootButton'..index..'IconTexture'];
+
+			if not ButtonIconTexture.BG then
+				local Button = _G['LootButton'..index];
+				local ButtonNameFrame = _G['LootButton'..index..'NameFrame'];
+				
+				Button:SetNormalTexture('');
+				Button:SetPushedTexture('');
+				Button:GetHighlightTexture():SetTexture(C.r, C.g, C.b, .25);
+				
+				local BD = CreateFrame("Frame", nil, Button);
+				BD:SetPoint('TOPLEFT');
+				BD:SetPoint('BOTTOMRIGHT', 114, 0);
+				BD:SetFrameLevel(Button:GetFrameLevel() - 1);
+				F.CreateBD(BD, .25);
+				
+				ButtonNameFrame:Hide();
+				
+				ButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
+				ButtonIconTexture.BG = F.CreateBG(ButtonIconTexture);
+			end
+		end);
+		
+		LootFrameDownButton:ClearAllPoints();
+		LootFrameDownButton:SetPoint('BOTTOMRIGHT', -84, 16);
+		LootFramePrev:ClearAllPoints();
+		LootFramePrev:SetPoint('LEFT', LootFrameUpButton, 'RIGHT', 4, 0);
+		LootFrameNext:ClearAllPoints();
+		LootFrameNext:SetPoint('RIGHT', LootFrameDownButton, 'LEFT', -4, 0);
+		
+		F.ReskinArrow(LootFrameUpButton, 'up');
+		F.ReskinArrow(LootFrameDownButton, 'down');
 	end
 end)
