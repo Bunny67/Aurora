@@ -574,38 +574,28 @@ F.ReskinColourSwatch = function(f)
 	bg:SetPoint("BOTTOMRIGHT", -2, 2)
 end
 
-F.ColourQuality = function(button, id)
-	local quality, texture, _
-	local quest = _G[button:GetName().."IconQuestTexture"]
+F.ColourQuality = function(Button, ID)
+	local Quality, Texture, _;
+	local Quest = _G[Button:GetName()..'IconQuestTexture'];
 
-	if id then
-		quality, _, _, _, _, _, _, texture = select(3, GetItemInfo(id))
+	if ( ID ) then
+		Quality, _, _, _, _, _, _, Texture = select(3, GetItemInfo(ID));
 	end
 
-	local glow = button.AuroraGlow
-	if not glow then
-		glow = button:CreateTexture(nil, "BACKGROUND")
-		glow:SetPoint("TOPLEFT", -1, 1)
-		glow:SetPoint("BOTTOMRIGHT", 1, -1)
-		glow:SetTexture(C.media.backdrop)
+	if ( Texture ) then
+		local r, g, b;
 
-		button.AuroraGlow = glow
-	end
-
-	if texture then
-		local r, g, b
-
-		if quest and quest:IsShown() then
-			r, g, b = 1, 0, 0
+		if ( Quest and Quest:IsShown() ) then
+			r, g, b = 1, 0, 0;
 		else
-			r, g, b = GetItemQualityColor(quality)
-			if r == 1 and g == 1 then r, g, b = 0, 0, 0 end
+			r, g, b = GetItemQualityColor(Quality);
+			
+			if ( r == 1 and g == 1 ) then r, g, b = 0, 0, 0; end
 		end
 
-		glow:SetVertexColor(r, g, b)
-		glow:Show()
+		Button:SetBackdropBorderColor(r, g, b);
 	else
-		glow:Hide()
+		Button:SetBackdropBorderColor(0, 0, 0);
 	end
 end
 
@@ -770,77 +760,93 @@ Delay:SetScript('OnEvent', function()
 	Delay:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	-- Сумки
 	if AuroraConfig.Bags == true and not(IsAddOnLoaded('Baggins') or IsAddOnLoaded('Stuffing') or IsAddOnLoaded('Combuctor') or IsAddOnLoaded('cargBags') or IsAddOnLoaded('famBags') or IsAddOnLoaded('ArkInventory') or IsAddOnLoaded('Bagnon')) then
-		BackpackTokenFrame:GetRegions():Hide()
-
 		for i = 1, 12 do
-			local ContainerFrame = _G['ContainerFrame'..i]
-
-			for j = 1, 7 do
-				select(j, ContainerFrame:GetRegions()):SetAlpha(0)
-			end
+			local Container = _G['ContainerFrame'..i];
+			local ContainerCloseButton = _G['ContainerFrame'..i..'CloseButton'];
+			
+			F.StripTextures(Container, true);
+			F.SetBD(Container, 1, -1, -1, 1);
+			
+			F.ReskinClose(ContainerCloseButton, 'TOPRIGHT', Container, 'TOPRIGHT', -5, -5);
 
 			for k = 1, MAX_CONTAINER_ITEMS do
-				local ContainerItem = 'ContainerFrame'..i..'Item'..k
-				local ContainerItemButton = _G[ContainerItem]
-				local ContainerItemIconTexture = _G[ContainerItem..'IconTexture']
+				local ContainerItem = 'ContainerFrame'..i..'Item'..k;
+				local ContainerItemButton = _G[ContainerItem];
+				local ContainerItemIconTexture = _G[ContainerItem..'IconTexture'];
 
-				_G[ContainerItem..'IconQuestTexture']:SetAlpha(0)
+				_G[ContainerItem..'IconQuestTexture']:SetAlpha(0);
 
-				F.StripTextures(ContainerItemButton)
-				F.StyleButton(ContainerItemButton)
-				F.CreateBD(ContainerItemButton, .25)
+				F.StripTextures(ContainerItemButton);
+				F.StyleButton(ContainerItemButton);
+				F.CreateBD(ContainerItemButton, .25);
 				
-				ContainerItemIconTexture:SetTexCoord(.08, .92, .08, .92)
-				ContainerItemIconTexture:SetPoint('TOPLEFT', 1, -1)
-				ContainerItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1)
+				ContainerItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+				ContainerItemIconTexture:SetPoint('TOPLEFT', 1, -1);
+				ContainerItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
 			end
 			
-			F.SetBD(ContainerFrame, 8, -4, -3, 4)
-			F.ReskinClose(_G['ContainerFrame'..i..'CloseButton'], 'TOPRIGHT', ContainerFrame, 'TOPRIGHT', -8, -8)
+			if i == 1 then
+				F.StripTextures(BackpackTokenFrame);
+				
+				for i = 1, MAX_WATCHED_TOKENS do
+					local TokenIcon = _G['BackpackTokenFrameToken'..i..'Icon'];
+					
+					TokenIcon:SetTexCoord(unpack(F.TexCoords));
+				end
+			end
 		end
-
-		for i = 1, 3 do
-			local TokenIcon = _G['BackpackTokenFrameToken'..i..'Icon']
-			TokenIcon:SetDrawLayer('OVERLAY')
-			TokenIcon:SetGradient('VERTICAL', .35, .35, .35, 1, 1, 1)
-			TokenIcon:SetTexCoord(.08, .92, .08, .92)
-		end
-
-		F.StripTextures(BankFrame, true)
 		
-		F.Reskin(BankFramePurchaseButton)
+		hooksecurefunc('ContainerFrame_Update', function(self)
+			local Name = self:GetName();
+			local ID = self:GetID();
+
+			for i = 1, self.size do
+				local Button = _G[Name..'Item'..i];
+				local ItemID = GetContainerItemID(ID, Button:GetID());
+				
+				F.ColourQuality(Button, ItemID);
+			end
+		end);
+		
+		F.StripTextures(BankFrame, true);
+		F.SetBD(BankFrame, 10, -11, -25, 91);
+		
+		F.ReskinClose(BankCloseButton, 'TOPRIGHT', BankFrame, 'TOPRIGHT', -29, -15);
+		
+		F.Reskin(BankFramePurchaseButton);
 
 		for i = 1, 28 do
-			local BankItem = 'BankFrameItem'..i
-			local BankItemButton = _G[BankItem]
-			local BankItemIconTexture = _G[BankItem..'IconTexture']
+			local BankItem = 'BankFrameItem'..i;
+			local BankItemButton = _G[BankItem];
+			local BankItemIconTexture = _G[BankItem..'IconTexture'];
 
-			_G[BankItem..'IconQuestTexture']:SetAlpha(0)
+			_G[BankItem..'IconQuestTexture']:SetAlpha(0);
 			
-			F.StripTextures(BankItemButton)
-			F.StyleButton(BankItemButton)
-			F.CreateBD(BankItemButton, .25)
+			F.StripTextures(BankItemButton);
+			F.StyleButton(BankItemButton);
+			F.CreateBD(BankItemButton, .25);
 			
-			BankItemIconTexture:SetTexCoord(.08, .92, .08, .92)
-			BankItemIconTexture:SetPoint('TOPLEFT', 1, -1)
-			BankItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1)
+			BankItemIconTexture:SetPoint('TOPLEFT', 1, -1);
+			BankItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+			BankItemIconTexture:SetTexCoord(unpack(F.TexCoords));
 		end
 
 		for i = 1, 7 do
-			local BankFrameBag = _G['BankFrameBag'..i]
-			local BankFrameBagIconTexture = _G['BankFrameBag'..i..'IconTexture']
+			local BankFrameBag = _G['BankFrameBag'..i];
+			local BankFrameBagIconTexture = _G['BankFrameBag'..i..'IconTexture'];
 			
-			F.StripTextures(BankFrameBag)
-			F.StyleButton(BankFrameBag)
-			F.CreateBD(BankFrameBag, .25)
+			F.StripTextures(BankFrameBag);
+			F.StyleButton(BankFrameBag);
+			F.CreateBD(BankFrameBag, .25);
 			
-			BankFrameBagIconTexture:SetTexCoord(.08, .92, .08, .92)
-			BankFrameBagIconTexture:SetPoint('TOPLEFT', 1, -1)
-			BankFrameBagIconTexture:SetPoint('BOTTOMRIGHT', -1, 1)
+			BankFrameBagIconTexture:SetPoint('TOPLEFT', 1, -1);
+			BankFrameBagIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+			BankFrameBagIconTexture:SetTexCoord(unpack(F.TexCoords));
 		end
 		
-		F.SetBD(BankFrame, 10, -11, -25, 91)
-		F.ReskinClose(BankCloseButton, 'TOPRIGHT', BankFrame, 'TOPRIGHT', -29, -15)
+		hooksecurefunc('BankFrameItemButton_Update', function(self)
+			F.ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
+		end);
 	end
 	-- Сообщения в облачках
 	if AuroraConfig.ChatBubbles then
