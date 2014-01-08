@@ -125,6 +125,16 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinScroll(PlayerTitlePickerScrollFrameScrollBar);
 	
+	local PlayerStatsLeft = CreateFrame('Frame', nil, CharacterAttributesFrame)
+	PlayerStatsLeft:SetPoint('TOPLEFT', -1, -1);
+	PlayerStatsLeft:SetPoint('BOTTOMRIGHT', -116, -7);
+	F.CreateBD(PlayerStatsLeft, .25);
+	
+	local PlayerStatsRight = CreateFrame('Frame', nil, CharacterAttributesFrame)
+	PlayerStatsRight:SetPoint('TOPLEFT', 116, -1);
+	PlayerStatsRight:SetPoint('BOTTOMRIGHT', -1, -7);
+	F.CreateBD(PlayerStatsRight, .25);
+	
 	local Slots = { 'HeadSlot', 'NeckSlot', 'ShoulderSlot', 'BackSlot', 'ChestSlot', 'ShirtSlot', 'TabardSlot', 'WristSlot', 'HandsSlot', 'WaistSlot', 'LegsSlot', 'FeetSlot', 'Finger0Slot', 'Finger1Slot', 'Trinket0Slot', 'Trinket1Slot', 'MainHandSlot', 'SecondaryHandSlot', 'RangedSlot' };
 	for _, slot in pairs(Slots) do
 		local Slot = _G['Character'..slot];
@@ -196,6 +206,20 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinDropDown(PlayerStatFrameLeftDropDown);
 	F.ReskinDropDown(PlayerStatFrameRightDropDown);
+	
+	F.CreateBDFrame(CharacterResistanceFrame);
+	CharacterResistanceFrame:SetSize(24, 120);
+	
+	MagicResFrame1:SetSize(24, 24);
+	select(1, MagicResFrame1:GetRegions()):SetTexCoord(.22, .84, .25, .32);
+	MagicResFrame2:SetSize(24, 24);
+	select(1, MagicResFrame2:GetRegions()):SetTexCoord(.22, .84, .02, .10);
+	MagicResFrame3:SetSize(24, 24);
+	select(1, MagicResFrame3:GetRegions()):SetTexCoord(.22, .84, .14, .20);
+	MagicResFrame4:SetSize(24, 24);
+	select(1, MagicResFrame4:GetRegions()):SetTexCoord(.22, .84, .36, 0.44);
+	MagicResFrame5:SetSize(24, 24);
+	select(1, MagicResFrame5:GetRegions()):SetTexCoord(.22, .84, 0.475, .55);
 	
 	F.StripTextures(CharacterAttributesFrame);
 	-- Питомцы
