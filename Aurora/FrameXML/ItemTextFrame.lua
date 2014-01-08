@@ -1,31 +1,17 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
-tinsert(C.modules["Aurora"], function()
-	local AllItemTextFrameStripTextures = {'ItemTextFrame', 'ItemTextScrollFrame'}
-	for i = 1, #AllItemTextFrameStripTextures do
-	local AllItemTextFrameStripTexture = _G[AllItemTextFrameStripTextures[i]]
-		if AllItemTextFrameStripTexture then
-			F.StripTextures(AllItemTextFrameStripTexture)
-		else
-			print('Ошибка Aurora: '..AllItemTextFrameStripTextures[i]..' не был найден.')
-		end
-	end
-
-	local AllItemTextFrameScrollbars = {'ItemTextScrollFrameScrollBar'}
-	for i = 1, #AllItemTextFrameScrollbars do
-		local AllItemTextFrameScrollbar = _G[AllItemTextFrameScrollbars[i]]
-		if AllItemTextFrameScrollbar then
-			F.ReskinScroll(AllItemTextFrameScrollbar)
-		else
-			print('Ошибка Aurora: '..AllItemTextFrameScrollbars[i]..' не был найден.')
-		end
-	end
-
-	ItemTextPageText:SetTextColor(1, 1, 1)
-	ItemTextPageText.SetTextColor = F.dummy
+tinsert(C.modules['Aurora'], function()
+	F.StripTextures(ItemTextFrame);
+	F.SetBD(ItemTextFrame, 12, -13, -32, 74)
 	
-	F.SetBD(ItemTextFrame, 16, -12, -34, 74)
-	F.ReskinClose(ItemTextCloseButton, 'TOPRIGHT', ItemTextFrame, 'TOPRIGHT', -38, -16)
-	F.ReskinArrow(ItemTextPrevPageButton, 'left')
-	F.ReskinArrow(ItemTextNextPageButton, 'right')
-end)
+	ItemTextPageText:SetTextColor(1, 1, 1);
+	ItemTextPageText.SetTextColor = F.dummy;
+	
+	F.StripTextures(ItemTextScrollFrame);
+	F.ReskinScroll(ItemTextScrollFrameScrollBar);
+	
+	F.ReskinArrow(ItemTextPrevPageButton, 'left');
+	F.ReskinArrow(ItemTextNextPageButton, 'right');
+	
+	F.ReskinClose(ItemTextCloseButton, 'TOPRIGHT', ItemTextFrame, 'TOPRIGHT', -36, -17);
+end);
