@@ -208,18 +208,18 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinDropDown(PlayerStatFrameRightDropDown);
 	
 	F.CreateBDFrame(CharacterResistanceFrame);
-	CharacterResistanceFrame:SetSize(24, 120);
+	CharacterResistanceFrame:SetSize(28, 140);
 	
-	MagicResFrame1:SetSize(24, 24);
-	select(1, MagicResFrame1:GetRegions()):SetTexCoord(.22, .84, .25, .32);
-	MagicResFrame2:SetSize(24, 24);
-	select(1, MagicResFrame2:GetRegions()):SetTexCoord(.22, .84, .02, .10);
-	MagicResFrame3:SetSize(24, 24);
-	select(1, MagicResFrame3:GetRegions()):SetTexCoord(.22, .84, .14, .20);
-	MagicResFrame4:SetSize(24, 24);
-	select(1, MagicResFrame4:GetRegions()):SetTexCoord(.22, .84, .36, 0.44);
-	MagicResFrame5:SetSize(24, 24);
-	select(1, MagicResFrame5:GetRegions()):SetTexCoord(.22, .84, 0.475, .55);
+	MagicResFrame1:SetSize(28, 28);
+	select(1, MagicResFrame1:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.25, 0.3203125);
+	MagicResFrame2:SetSize(28, 28);
+	select(1, MagicResFrame2:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.0234375, 0.09375);
+	MagicResFrame3:SetSize(28, 28);
+	select(1, MagicResFrame3:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.13671875, 0.20703125);
+	MagicResFrame4:SetSize(28, 28);
+	select(1, MagicResFrame4:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.36328125, 0.43359375);
+	MagicResFrame5:SetSize(28, 28);
+	select(1, MagicResFrame5:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.4765625, 0.546875);
 	
 	F.StripTextures(CharacterAttributesFrame);
 	-- Питомцы
