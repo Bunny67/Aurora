@@ -117,12 +117,13 @@ F.CreateBD = function(Frame, A)
 end
 
 F.CreateBG = function(Frame)
-	if ( Frame:GetObjectType() == 'Texture' ) then Frame = Frame:GetParent(); end
+	local f = Frame;
+	if ( Frame:GetObjectType() == 'Texture' ) then f = Frame:GetParent(); end
 
-	local BG = Frame:CreateTexture(nil, 'BACKGROUND');
+	local BG = f:CreateTexture(nil, 'BACKGROUND');
 	BG:SetPoint('TOPLEFT', Frame, -1, 1);
 	BG:SetPoint('BOTTOMRIGHT', Frame, 1, -1);
-	BG:SetTexture(C.media.backdrop);
+	BG:SetTexture(C.media.backdrop)
 	BG:SetVertexColor(0, 0, 0);
 
 	return BG

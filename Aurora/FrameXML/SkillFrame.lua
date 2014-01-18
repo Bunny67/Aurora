@@ -22,7 +22,7 @@ tinsert(C.modules['Aurora'], function()
 		F.StripTextures(StatusBarBorder);
 		StatusBarBackground:SetTexture(nil);
 		
-		local Label = _G['SkillTypeLabel'..statusBarID];
+		--[[local Label = _G['SkillTypeLabel'..statusBarID];
 		
 		F.ReskinExpandOrCollapse(Label);
 		
@@ -32,7 +32,9 @@ tinsert(C.modules['Aurora'], function()
 			else
 				Label.Plus:Show();
 			end
-		end
+		else
+			Label.Plus:Hide();
+		end]]
 	end)
 	
 	hooksecurefunc('SkillDetailFrame_SetStatusBar', function()

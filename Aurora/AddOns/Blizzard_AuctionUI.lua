@@ -57,8 +57,18 @@ C.modules['Blizzard_AuctionUI'] = function()
 		F.Kill(_G[AllAuctionUISortTab..'Left']);
 		F.Kill(_G[AllAuctionUISortTab..'Middle']);
 		F.Kill(_G[AllAuctionUISortTab..'Right']);
+
+		local bg = CreateFrame("Frame", nil, _G[AllAuctionUISortTab]);
+		bg:SetPoint("TOPLEFT", 2, 0);
+		bg:SetPoint("BOTTOMRIGHT", -1, 0);
+		bg:SetFrameLevel(_G[AllAuctionUISortTab]:GetFrameLevel() -1 );
+		F.CreateBD(bg, .25);
+		
 		_G[AllAuctionUISortTab]:SetHighlightTexture(C.media.backdrop);
 		local ght = _G[AllAuctionUISortTab]:GetHighlightTexture();
+		ght:ClearAllPoints();
+		ght:SetPoint("TOPLEFT", 3, -1);
+		ght:SetPoint("BOTTOMRIGHT", -2, 1);
 		ght:SetVertexColor(r, g, b, .25)
 	end
 	

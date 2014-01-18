@@ -65,9 +65,34 @@ tinsert(C.modules['Aurora'], function()
 		local Header2 = _G['GuildFrameGuildStatusColumnHeader'..i];
 		
 		F.StripTextures(Header1);
-		F.StyleButton(Header1);
+		
+		Header1:SetHighlightTexture(C.media.backdrop);
+		local Highlight1 = Header1:GetHighlightTexture();
+		Highlight1:ClearAllPoints();
+		Highlight1:SetPoint('TOPLEFT', 3, -1);
+		Highlight1:SetPoint('BOTTOMRIGHT', -2, 1);
+		Highlight1:SetVertexColor(C.r, C.g, C.b, .25);
+		
+		local Header1BG = CreateFrame('Frame', nil, Header1);
+		Header1BG:SetPoint('TOPLEFT', 2, 0);
+		Header1BG:SetPoint('BOTTOMRIGHT', -1, 0);
+		Header1BG:SetFrameLevel(Header1:GetFrameLevel() - 1);
+		F.CreateBD(Header1BG, .25);
+		
 		F.StripTextures(Header2);
-		F.StyleButton(Header2);
+		
+		Header2:SetHighlightTexture(C.media.backdrop);
+		local Highlight2 = Header2:GetHighlightTexture();
+		Highlight2:ClearAllPoints();
+		Highlight2:SetPoint('TOPLEFT', 3, -1);
+		Highlight2:SetPoint('BOTTOMRIGHT', -2, 1);
+		Highlight2:SetVertexColor(C.r, C.g, C.b, .25);
+		
+		local Header2BG = CreateFrame('Frame', nil, Header2);
+		Header2BG:SetPoint('TOPLEFT', 2, 0);
+		Header2BG:SetPoint('BOTTOMRIGHT', -1, 0);
+		Header2BG:SetFrameLevel(Header2:GetFrameLevel() - 1);
+		F.CreateBD(Header2BG, .25);
 	end
 	
 	F.StripTextures(GuildListScrollFrame);
@@ -188,7 +213,14 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.StripTextures(RaidInfoInstanceLabel);
 	F.StripTextures(RaidInfoIDLabel);
-	
+	local RaidInfo = { 'RaidInfoInstanceLabel', 'RaidInfoIDLabel'};
+	for _, RaidInfoL in pairs(RaidInfo) do
+		local RaidInfoLBG = CreateFrame('Frame', nil, _G[RaidInfoL]);
+		RaidInfoLBG:SetPoint('TOPLEFT', 2, 0);
+		RaidInfoLBG:SetPoint('BOTTOMRIGHT', -1, 0);
+		RaidInfoLBG:SetFrameLevel(_G[RaidInfoL]:GetFrameLevel() - 1);
+		F.CreateBD(RaidInfoLBG, .25);
+	end
 	F.Reskin(RaidInfoExtendButton, nil, true);
 	F.Reskin(RaidInfoCancelButton, nil, true);
 end)

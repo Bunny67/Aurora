@@ -135,23 +135,22 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 	end)
 	
 	for i = 1, MAX_TRADE_SKILL_REAGENTS do
-		local Reagent = _G['TradeSkillReagent'..i];
-		local IconTexture = _G['TradeSkillReagent'..i..'IconTexture'];
-		local NameFrame = _G['TradeSkillReagent'..i..'NameFrame'];
-		local Name = _G['TradeSkillReagent'..i..'Name'];
-		
-		local BD = CreateFrame('Frame', nil, Reagent);
-		BD:SetPoint('TOPLEFT', -1, 1);
-		BD:SetPoint('BOTTOMRIGHT', 0, 1);
-		BD:SetFrameLevel(0);
-		F.CreateBD(BD, .25);
-		
-		IconTexture:SetTexCoord(unpack(F.TexCoords));
-		IconTexture:SetDrawLayer('ARTWORK');
-		
-		NameFrame:SetAlpha(0);
-		
-		Name:SetParent(BD);
+		local bu = _G["TradeSkillReagent"..i]
+		local ic = _G["TradeSkillReagent"..i.."IconTexture"]
+
+		_G["TradeSkillReagent"..i.."NameFrame"]:SetAlpha(0)
+
+		ic:SetTexCoord(.08, .92, .08, .92)
+		ic:SetDrawLayer("ARTWORK")
+		F.CreateBG(ic)
+
+		local bd = CreateFrame("Frame", nil, bu)
+		bd:SetPoint("TOPLEFT", 39, -1)
+		bd:SetPoint("BOTTOMRIGHT", 0, 1)
+		bd:SetFrameLevel(0)
+		F.CreateBD(bd, .25)
+
+		_G["TradeSkillReagent"..i.."Name"]:SetParent(bd)
 	end
 	
 	F.StripTextures(TradeSkillDetailScrollFrame);
