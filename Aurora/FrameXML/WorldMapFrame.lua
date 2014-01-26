@@ -158,16 +158,16 @@ tinsert(C.modules['Aurora'], function()
 		end
 		
 		local function AdjustMapSize()
-			if InCombatLockdown() then return; end
-			
 			F.StripTextures(WorldMapFrame);
 			
-			if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
-				SetLargeWorldMap();
-			elseif WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
-				SetSmallWorldMap();
-			elseif WORLDMAP_SETTINGS.size == WORLDMAP_QUESTLIST_SIZE then
-				SetQuestWorldMap();
+			if ( not InCombatLockdown() ) then
+				if ( WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE ) then
+					SetLargeWorldMap();
+				elseif ( WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE ) then
+					SetSmallWorldMap();
+				elseif ( WORLDMAP_SETTINGS.size == WORLDMAP_QUESTLIST_SIZE ) then
+					SetQuestWorldMap();
+				end
 			end
 			
 			WorldMapFrameCloseButton:SetPoint('TOPRIGHT', WorldMapFrame.BG, 'TOPRIGHT', -4, -4);

@@ -18,11 +18,12 @@ C.modules['Blizzard_TalentUI'] = function()
 		
 		if Talent then
 			F.StripTextures(Talent);
-			F.CreateBD(Talent);
+			F.CreateBG(Talent);
 			F.StyleButton(Talent);
 			
-			IconTexture:SetPoint('TOPLEFT', 1, -1);
-			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+			Talent.Hover:SetAllPoints();
+			Talent.Pushed:SetAllPoints();
+			
 			IconTexture:SetTexCoord(unpack(F.TexCoords));
 		end
 	end

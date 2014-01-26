@@ -1,8 +1,8 @@
 ## Interface: 30300
 ## Title: |cffffffffAurora|r
 ## Notes: Minimalist Window Theme.
-## Author: Haleth, Freethinker, Bynnu
-## Version: 1.12
+## Author: Haleth, Freethinker, Bunny
+## Version: 1.13
 ## SavedVariables: AuroraConfig
 
 Aurora.lua

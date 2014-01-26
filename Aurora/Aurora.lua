@@ -207,6 +207,7 @@ F.ReskinTab = function(Frame)
 	F.CreateBD(BG);
 
 	Frame:SetHighlightTexture(C.media.backdrop);
+	Frame:GetHighlightTexture():ClearAllPoints();
 	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 9, -4);
 	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -9, 1);
 	Frame:GetHighlightTexture():SetVertexColor(r, g, b, .25);

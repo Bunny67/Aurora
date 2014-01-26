@@ -1,7 +1,5 @@
 local F, C = unpack(select(2, ...));
 
-local _G = getfenv(0);
-
 C.modules['Blizzard_GlyphUI'] = function()
 	local r, g, b = C.r, C.g, C.b;
 	
@@ -14,7 +12,7 @@ C.modules['Blizzard_GlyphUI'] = function()
 		self.background:Hide();
 		self.ring:Hide();
 		
-		if not self.bg then
+		if ( not self.bg ) then
 			self.bg = CreateFrame('Frame', nil, self);
 			self.bg:SetPoint('TOPLEFT', self.glyph, -1, 1);
 			self.bg:SetPoint('BOTTOMRIGHT', self.glyph, 1, -1);
@@ -23,7 +21,7 @@ C.modules['Blizzard_GlyphUI'] = function()
 			F.CreateBD(self.bg, .25);
 		end
 	end);
-	
+	--[[
 	hooksecurefunc('GlyphFrameGlyph_OnUpdate', function(self)
 		local id = self:GetID();
 		
@@ -32,5 +30,5 @@ C.modules['Blizzard_GlyphUI'] = function()
 		else
 			self.bg:SetBackdropBorderColor(0, 0, 0);
 		end
-	end);
+	end);]]
 end

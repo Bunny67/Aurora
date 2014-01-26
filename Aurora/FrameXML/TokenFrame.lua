@@ -23,7 +23,13 @@ tinsert(C.modules['Aurora'], function()
 				F.Kill(button.categoryRight);
 				F.Kill(button.highlight);
 				
+				if not button.bg then
+					button.bg = F.CreateBG(button.icon);
+				end
+				
 				if ( not isHeader ) then
+					button.bg:Show();
+					
 					if ( extraCurrencyType == 1 ) then
 						button.icon:SetTexCoord(unpack(F.TexCoords));
 					elseif ( extraCurrencyType == 2 ) then
@@ -38,6 +44,8 @@ tinsert(C.modules['Aurora'], function()
 						button.icon:SetTexture(icon);
 						button.icon:SetTexCoord(unpack(F.TexCoords));
 					end
+				else
+					button.bg:Hide();
 				end
 			end
 		end

@@ -62,7 +62,8 @@ C.modules['Blizzard_AuctionUI'] = function()
 		bg:SetPoint("TOPLEFT", 2, 0);
 		bg:SetPoint("BOTTOMRIGHT", -1, 0);
 		bg:SetFrameLevel(_G[AllAuctionUISortTab]:GetFrameLevel() -1 );
-		F.CreateBD(bg, .25);
+		F.CreateBD(bg, 0);
+		F.CreateGradient(bg);
 		
 		_G[AllAuctionUISortTab]:SetHighlightTexture(C.media.backdrop);
 		local ght = _G[AllAuctionUISortTab]:GetHighlightTexture();
@@ -101,6 +102,9 @@ C.modules['Blizzard_AuctionUI'] = function()
 			F.StyleButton(it);
 			F.CreateBG(it);
 			
+			it.Hover:SetAllPoints();
+			it.Pushed:SetAllPoints();
+			
 			F.StripTextures(bu)
 			local bd = CreateFrame("Frame", nil, bu)
 			bd:SetPoint("TOPLEFT")
@@ -128,7 +132,10 @@ C.modules['Blizzard_AuctionUI'] = function()
 		it:SetNormalTexture("")
 		F.StyleButton(it)
 		F.CreateBG(it)
-
+		
+		it.Hover:SetAllPoints();
+		it.Pushed:SetAllPoints();
+		
 		F.StripTextures(bu)
 		local bd = CreateFrame("Frame", nil, bu)
 		bd:SetPoint("TOPLEFT")
@@ -155,7 +162,10 @@ C.modules['Blizzard_AuctionUI'] = function()
 		it:SetNormalTexture("")
 		F.StyleButton(it)
 		F.CreateBG(it)
-
+		
+		it.Hover:SetAllPoints();
+		it.Pushed:SetAllPoints();
+		
 		F.StripTextures(bu)
 		local bd = CreateFrame("Frame", nil, bu)
 		bd:SetPoint("TOPLEFT")
@@ -172,7 +182,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 	end
 	
 	F.StripTextures(AuctionsItemButton)
-	F.StyleButton(AuctionsItemButton)
+	F.StyleButton(AuctionsItemButton, nil, true)
 	F.CreateBD(AuctionsItemButton, .25)
 
 	AuctionsItemButton:SetScript("OnUpdate", function()
