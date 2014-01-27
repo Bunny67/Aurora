@@ -517,7 +517,7 @@ F.ClearExpandOrCollapse = ClearExpandOrCollapse
 F.ReskinExpandOrCollapse = function(Frame)
 	Frame:SetSize(13, 13);
 
-	F.Reskin(Frame, true, true);
+	F.Reskin(Frame, true);
 	Frame.SetNormalTexture = F.dummy;
 
 	Frame.Minus = Frame:CreateTexture(nil, 'OVERLAY');

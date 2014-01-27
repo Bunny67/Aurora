@@ -26,6 +26,7 @@
 	<Script file="ReputationFrame.lua"/>
 	<Script file="SkillFrame.lua"/>
 	<Script file="SpellBookFrame.lua"/>
+	<Script file="StackSplitFrame.lua"/>
 	<Script file="StaticPopup.lua"/>
 	<Script file="Fonts.lua"/>
 	<Script file="TabardFrame.lua"/>
