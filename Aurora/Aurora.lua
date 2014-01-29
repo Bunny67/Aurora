@@ -48,6 +48,7 @@ C.defaults = {
 		["customColour"] = {r = 1, g = 1, b = 1},
 		
 	['enableFont'] = true,
+	['qualityColour'] = true,
 	
 	['Font'] = true,																-- Шрифт
 	['Bags'] = true,																-- Сумки
@@ -536,13 +537,29 @@ F.ReskinExpandOrCollapse = function(Frame)
 	Frame:HookScript('OnLeave', ClearExpandOrCollapse);
 end
 
-F.SetBD = function(Frame, x, y, x2, y2)
-	local BD = CreateFrame('Frame', nil, Frame)
-	BD:SetFrameLevel(0);
+F.SetBD = function(Frame, x1, y1, x2, y2)
+	local xOfs1 = x1 or 0;
+	local yOfs1 = y1 or 0;
+	local xOfs2 = x2 or 0;
+	local yOfs2 = y2 or 0;
 	
-	if ( not x ) then BD:SetPoint('TOPLEFT'); BD:SetPoint('BOTTOMRIGHT'); else BD:SetPoint('TOPLEFT', x, y); BD:SetPoint('BOTTOMRIGHT', x2, y2); end
+	F.StripTextures(Frame);
+	
+	local BD = CreateFrame('Frame', nil, Frame);
+	BD:ClearAllPoints();
+	if ( xOfs1 == 0 and yOfs1 == 0 and xOfs2 == 0 and yOfs2 == 0 ) then
+	 	BD:SetAllPoints(Frame);
+	else
+		BD:SetPoint('TOPLEFT', Frame, 'TOPLEFT', xOfs1, yOfs1);
+		BD:SetPoint('BOTTOMRIGHT', Frame, 'BOTTOMRIGHT', xOfs2, yOfs2);
+	end
 	
 	F.CreateBD(BD);
+	
+	local success, err = pcall(LowerFrameLevel, BD);
+	if ( not success ) then RaiseFrameLevel(Frame); end
+	
+	return BD
 end
 
 F.CreateBDFrame = function(f, a)
