@@ -31,7 +31,7 @@ tinsert(C.modules['Aurora'], function()
 		_G['MerchantItem'..i..'NameFrame']:Hide();
 		
 		merchantButton.BD = CreateFrame('Frame', nil, merchantButton);
-		merchantButton.BD:SetPoint('BOTTOMRIGHT', 0, 0);
+		merchantButton.BD:SetPoint('BOTTOMRIGHT');
 		merchantButton.BD:SetFrameLevel(merchantButton:GetFrameLevel() - 1);
 		F.CreateBD(merchantButton.BD, .25);
 		

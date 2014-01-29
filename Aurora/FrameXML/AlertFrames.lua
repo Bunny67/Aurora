@@ -4,77 +4,74 @@ local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
 	hooksecurefunc('AchievementAlertFrame_FixAnchors', function()
-		local Frame, FrameBackground, FrameUnlocked, FrameGlow, FrameShine, FrameIcon, FrameIconTexture, FrameIconOverlay;
+		local frame, frameBackground, frameUnlocked, frameIcon, frameIconTexture;
 		
 		for i = 1, MAX_ACHIEVEMENT_ALERTS do
-			Frame = _G['AchievementAlertFrame'..i];
-			FrameBackground = _G['AchievementAlertFrame'..i..'Background'];
-			FrameUnlocked = _G['AchievementAlertFrame'..i..'Unlocked'];
-			FrameGlow = _G['AchievementAlertFrame'..i..'Glow'];
-			FrameShine = _G['AchievementAlertFrame'..i..'Shine'];
-			FrameIcon = _G['AchievementAlertFrame'..i..'Icon'];
-			FrameIconTexture = _G['AchievementAlertFrame'..i..'IconTexture'];
-			FrameIconOverlay = _G['AchievementAlertFrame'..i..'IconOverlay'];
+			frame = _G['AchievementAlertFrame'..i];
+			frameBackground = _G['AchievementAlertFrame'..i..'Background'];
+			frameUnlocked = _G['AchievementAlertFrame'..i..'Unlocked'];
+			frameIcon = _G['AchievementAlertFrame'..i..'Icon'];
+			frameIconTexture = _G['AchievementAlertFrame'..i..'IconTexture'];
 			
-			if Frame then
-				F.CreateBD(Frame);
+			if ( frame and not frame.BG ) then
+				frame.BG = CreateFrame('Frame', nil, frame);
+				frame.BG:SetPoint('TOPLEFT', 2, -6);
+				frame.BG:SetPoint('BOTTOMRIGHT', -2, 6);
+				frame.BG:SetFrameLevel(frame:GetFrameLevel() - 1);
+				F.CreateBD(frame.BG);
 				
-				FrameBackground:SetTexture(nil);
-				FrameUnlocked:SetTextColor(1, 1, 1);
+				frameBackground:Hide();
+				frameUnlocked:SetTextColor(1, 1, 1);
 				
-				F.Kill(FrameGlow);
-				F.Kill(FrameShine);
+				F.Kill(frame.glow);
+				F.Kill(frame.shine);
 				
-				select(8, FrameIcon:GetRegions()):Hide();
-				FrameIconTexture:SetTexCoord(unpack(F.TexCoords));
+				frameIcon:DisableDrawLayer('BACKGROUND');
+				frameIcon:DisableDrawLayer('BORDER');
+				frameIcon:DisableDrawLayer('OVERLAY');
 				
-				if not FrameIconTexture.BG then
-					FrameIconTexture.BG = CreateFrame('Frame', nil, Frame);
-					F.CreateBD(FrameIconTexture.BG);
-					FrameIconTexture.BG:SetPoint('TOPLEFT', FrameIconTexture, -1, 1);
-					FrameIconTexture.BG:SetPoint('BOTTOMRIGHT', FrameIconTexture, 1, -1);
+				frameIconTexture:SetTexCoord(unpack(F.TexCoords));
+				
+				if ( not frameIconTexture.BG ) then
+					frameIconTexture.BG = CreateFrame('Frame', nil, frame);
+					frameIconTexture.BG:SetPoint('TOPLEFT', frameIconTexture, -1, 1);
+					frameIconTexture.BG:SetPoint('BOTTOMRIGHT', frameIconTexture, 1, -1);
+					F.CreateBD(frameIconTexture.BG);
 				end
-				
-				F.Kill(FrameIconOverlay);
 			end
 		end	
 	end);
 	
 	hooksecurefunc('DungeonCompletionAlertFrame_FixAnchors', function()
-		local Frame, FrameDungeonTexture, FrameShine, FrameGlowFrame;
+		local frame, frameDungeonTexture, frameGlowFrame;
 		
 		for i = 1, DUNGEON_COMPLETION_MAX_REWARDS do
-			Frame = _G['DungeonCompletionAlertFrame'..i];
-			FrameDungeonTexture = _G['DungeonCompletionAlertFrame'..i..'DungeonTexture'];
-			FrameShine = _G['DungeonCompletionAlertFrame'..i..'Shine'];
-			FrameGlowFrame = _G['DungeonCompletionAlertFrame'..i..'GlowFrame'];
+			frame = _G['DungeonCompletionAlertFrame'..i];
+			frameDungeonTexture = _G['DungeonCompletionAlertFrame'..i..'DungeonTexture'];
+			frameGlowFrame = _G['DungeonCompletionAlertFrame'..i..'GlowFrame'];
 			
-			if Frame then
-				F.CreateBD(Frame);
+			if ( frame and not frame.BG ) then
+				frame.BG = CreateFrame('Frame', nil, frame);
+				frame.BG:SetPoint('TOPLEFT', 0, -6);
+				frame.BG:SetPoint('BOTTOMRIGHT', 0, -3);
+				frame.BG:SetFrameLevel(frame:GetFrameLevel() - 1);
+				F.CreateBD(frame.BG);
 				
-				FrameDungeonTexture:SetTexCoord(unpack(F.TexCoords));
+				frame:DisableDrawLayer('OVERLAY');
+				frame:DisableDrawLayer('BORDER');
 				
-				if not FrameDungeonTexture.BG then
-					FrameDungeonTexture.BG = CreateFrame('Frame', nil, Frame);
-					FrameDungeonTexture.BG:SetFrameLevel(0);
-					F.CreateBD(FrameDungeonTexture.BG);
-					FrameDungeonTexture.BG:SetPoint('TOPLEFT', FrameDungeonTexture, -1, 1);
-					FrameDungeonTexture.BG:SetPoint('BOTTOMRIGHT', FrameDungeonTexture, 1, -1);
+				frameDungeonTexture:SetTexCoord(unpack(F.TexCoords));
+				
+				if ( not frameDungeonTexture.BG ) then
+					frameDungeonTexture.BG = CreateFrame('Frame', nil, frame);
+					frameDungeonTexture.BG:SetFrameLevel(0);
+					F.CreateBD(frameDungeonTexture.BG);
+					frameDungeonTexture.BG:SetPoint('TOPLEFT', frameDungeonTexture, -1, 1);
+					frameDungeonTexture.BG:SetPoint('BOTTOMRIGHT', frameDungeonTexture, 1, -1);
 				end
 				
-				for i=1, Frame:GetNumRegions() do
-					local Region = select(i, Frame:GetRegions());
-					if Region:GetObjectType() == 'Texture' then
-						if Region:GetTexture() == 'Interface\\LFGFrame\\UI-LFG-DUNGEONTOAST' then
-							F.Kill(Region);
-						end
-					end
-				end
-				
-				F.Kill(FrameShine);
-				
-				F.Kill(FrameGlowFrame);
-				F.Kill(FrameGlowFrame.glow);
+				F.Kill(frameGlowFrame);
+				F.Kill(frameGlowFrame.glow);
 			end
 		end
 	end);
