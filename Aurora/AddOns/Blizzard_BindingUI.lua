@@ -3,7 +3,6 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 C.modules['Blizzard_BindingUI'] = function()
-	F.StripTextures(KeyBindingFrame);
 	F.SetBD(KeyBindingFrame, 2, 0, -42, 12);
 	
 	F.ReskinCheck(KeyBindingFrameCharacterButton);
