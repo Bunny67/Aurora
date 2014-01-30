@@ -1,14 +1,16 @@
 local F, C = unpack(select(2, ...));
 
 tinsert(C.modules['Aurora'], function()
-	F.StripTextures(ItemTextFrame);
-	F.SetBD(ItemTextFrame, 12, -13, -32, 74)
+	F.SetBD(ItemTextFrame, 13, -13, -32, 74);
+	
+	ItemTextScrollFrameMiddle:SetAlpha(0);
+	ItemTextScrollFrameTop:SetAlpha(0);
+	ItemTextScrollFrameBottom:SetAlpha(0);
+	
+	F.ReskinScroll(ItemTextScrollFrameScrollBar);
 	
 	ItemTextPageText:SetTextColor(1, 1, 1);
 	ItemTextPageText.SetTextColor = F.dummy;
-	
-	F.StripTextures(ItemTextScrollFrame);
-	F.ReskinScroll(ItemTextScrollFrameScrollBar);
 	
 	F.ReskinArrow(ItemTextPrevPageButton, 'left');
 	F.ReskinArrow(ItemTextNextPageButton, 'right');

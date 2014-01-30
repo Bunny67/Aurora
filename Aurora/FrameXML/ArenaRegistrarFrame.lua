@@ -4,8 +4,9 @@ local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
 	-- ArenaRegistrarFrame;
-	F.StripTextures(ArenaRegistrarFrame, true);
 	F.SetBD(ArenaRegistrarFrame, 14, -18, -30, 67);
+	
+	ArenaRegistrarFramePortrait:Hide();
 	
 	F.ReskinClose(ArenaRegistrarFrameCloseButton, 'TOPRIGHT', ArenaRegistrarFrame, 'TOPRIGHT', -34, -22);
 	
@@ -38,10 +39,9 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinInput(ArenaRegistrarFrameEditBox, 18);
 	-- PVPBannerFrame;
-	F.StripTextures(PVPBannerFrame);
 	F.SetBD(PVPBannerFrame, 10, -12, -33, 73);
 	
-	F.Kill(PVPBannerFramePortrait);
+	PVPBannerFramePortrait:Hide();
 	
 	F.StripTextures(PVPBannerFrameCustomizationFrame) -- PVPBannerFrameCustomizationFrame;
 	

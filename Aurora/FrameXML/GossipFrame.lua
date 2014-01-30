@@ -1,12 +1,12 @@
 local F, C = unpack(select(2, ...))
 
-local _G = _G
+local _G = getfenv(0);
 local gsub = string.gsub
 
 tinsert(C.modules['Aurora'], function()
 	F.SetBD(GossipFrame, 14, -18, -30, 67);
 	
-	F.Kill(GossipFramePortrait);
+	GossipFramePortrait:Hide();
 	
 	F.ReskinClose(GossipFrameCloseButton, 'TOPRIGHT', GossipFrame, 'TOPRIGHT', -34, -22);
 	

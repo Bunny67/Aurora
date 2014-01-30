@@ -3,22 +3,24 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
-	F.StripTextures(TabardFrame);
-	F.Kill(TabardFramePortrait);
-	F.SetBD(TabardFrame, 10, -12, -32, 74);
+	F.SetBD(TabardFrame, 11, -12, -34, 74);
 	
-	F.ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -36, -16);
+	TabardFramePortrait:Hide();
+	
+	F.ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TabardFrame, 'TOPRIGHT', -38, -16);
 	
 	F.CreateBD(TabardFrameCostFrame, .25);
 	
-	F.StripTextures(TabardFrameCustomizationFrame);
+	TabardFrameCustomizationBorder:Hide();
 	
 	for i = 1, 5 do
 		local Button = _G['TabardFrameCustomization'..i];
 		local LeftButton = _G['TabardFrameCustomization'..i..'LeftButton'];
 		local RightButton = _G['TabardFrameCustomization'..i..'RightButton'];
 		
-		F.StripTextures(Button);
+		_G['TabardFrameCustomization'..i..'Left']:Hide();
+		_G['TabardFrameCustomization'..i..'Middle']:Hide();
+		_G['TabardFrameCustomization'..i..'Right']:Hide();
 		
 		F.ReskinArrow(LeftButton, 'left');
 		F.ReskinArrow(RightButton, 'right');

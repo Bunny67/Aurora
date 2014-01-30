@@ -1,8 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 tinsert(C.modules['Aurora'], function()
-	F.StripTextures(TaxiFrame);
-	F.SetBD(TaxiFrame, 10, -12, -34, 75);
+	F.SetBD(TaxiFrame, 11, -12, -34, 75);
 	
 	TaxiPortrait:Hide();
 	

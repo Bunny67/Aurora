@@ -3,8 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
-	F.StripTextures(PetitionFrame, true);
 	F.SetBD(PetitionFrame, 15, -19, -30, 68);
+	
+	PetitionFramePortrait:Hide();
 	
 	PetitionFrameCharterTitle:SetTextColor(1, 1, 1);
 	PetitionFrameCharterTitle:SetShadowColor(0, 0, 0);
