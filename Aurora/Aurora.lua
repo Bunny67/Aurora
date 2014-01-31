@@ -202,14 +202,14 @@ F.ReskinTab = function(Frame)
 	Frame:DisableDrawLayer('BACKGROUND');
 
 	local BG = CreateFrame('Frame', nil, Frame);
-	BG:SetPoint('TOPLEFT', 8, -4);
+	BG:SetPoint('TOPLEFT', 8, -3);
 	BG:SetPoint('BOTTOMRIGHT', -8, 3);
 	BG:SetFrameLevel(Frame:GetFrameLevel() - 1);
 	F.CreateBD(BG);
 
 	Frame:SetHighlightTexture(C.media.backdrop);
 	Frame:GetHighlightTexture():ClearAllPoints();
-	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 9, -5);
+	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 9, -4);
 	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -9, 4);
 	Frame:GetHighlightTexture():SetVertexColor(r, g, b, .25);
 end

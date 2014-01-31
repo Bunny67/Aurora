@@ -3,7 +3,6 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 C.modules['Blizzard_GuildBankUI'] = function()
-	F.StripTextures(GuildBankFrame);
 	F.SetBD(GuildBankFrame, 12, -11, 0, 6);
 	
 	for i = 1, _G['GuildBankFrame']:GetNumChildren() do

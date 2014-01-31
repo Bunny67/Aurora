@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
-	F.SetBD(CharacterFrame, 13, -13, -32, 75);
+	F.SetBD(CharacterFrame, 13, -13, -32, 76);
 	
 	CharacterFramePortrait:Hide();
 	
