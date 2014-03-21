@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local pairs = pairs;
 
 C.modules["Blizzard_RaidUI"] = function()
 	F.Reskin(RaidFrameRaidBrowserButton);

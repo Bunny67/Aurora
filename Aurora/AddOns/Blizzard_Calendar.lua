@@ -1,5 +1,9 @@
 local F, C = unpack(select(2, ...))
 
+local _G = getfenv(0);
+local ipairs = ipairs;
+local select = select;
+
 C.modules["Blizzard_Calendar"] = function()
 	local r, g, b = C.r, C.g, C.b
 

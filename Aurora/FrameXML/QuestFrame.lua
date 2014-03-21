@@ -1,6 +1,9 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local unpack = unpack;
+local find = string.find;
+local gsub = string.gsub;
 
 tinsert(C.modules['Aurora'], function()
 	F.StripTextures(QuestFrame, true);
@@ -78,7 +81,7 @@ tinsert(C.modules['Aurora'], function()
 			
 			if Button:GetFontString() then
 				if Button:GetFontString():GetText() and Button:GetFontString():GetText():find('|cff000000') then
-					Button:GetFontString():SetText(string.gsub(Button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'));
+					Button:GetFontString():SetText(gsub(Button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'));
 				end
 			end
 		end

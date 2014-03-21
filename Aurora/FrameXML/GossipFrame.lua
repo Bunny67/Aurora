@@ -1,7 +1,8 @@
 local F, C = unpack(select(2, ...))
 
 local _G = getfenv(0);
-local gsub = string.gsub
+local select = select;
+local gsub = string.gsub;
 
 tinsert(C.modules['Aurora'], function()
 	F.SetBD(GossipFrame, 14, -18, -30, 67);

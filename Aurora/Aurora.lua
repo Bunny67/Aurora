@@ -15,6 +15,10 @@ AuroraConfig = {}
 local F, C = unpack(select(2, ...))
 
 local _G = getfenv(0);
+local select = select;
+local pairs = pairs;
+local pcall = pcall;
+local type = type;
 
 C.ClassColors = {
 	['HUNTER'] = { r = 0.58, g = 0.86, b = 0.49 },

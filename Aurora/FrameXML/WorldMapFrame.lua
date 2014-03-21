@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local pairs = pairs;
 
 tinsert(C.modules['Aurora'], function()
 	if AuroraConfig.Maps == true then

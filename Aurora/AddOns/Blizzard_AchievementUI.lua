@@ -1,6 +1,9 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local unpack = unpack;
+local pairs = pairs;
+local select = select;
 
 C.modules['Blizzard_AchievementUI'] = function()
 	local r, g, b = C.r, C.g, C.b

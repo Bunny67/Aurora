@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 
 tinsert(C.modules['Aurora'], function()
 	F.SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
