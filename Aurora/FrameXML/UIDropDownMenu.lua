@@ -146,7 +146,7 @@ tinsert(C.modules['Aurora'], function()
 						Check:SetVertexColor(r, g, b, 1);
 						Check:SetSize(20, 20);
 					else
-						Check:SetTexture(C.media.backdrop);
+						Check:SetTexture(C.Media.Backdrop);
 						Check:SetVertexColor(r, g, b, .6);
 						Check:SetSize(10, 10);
 					end

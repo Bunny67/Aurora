@@ -30,16 +30,16 @@ C.ClassColors = {
 }
 
 C.Media = {
-	['ArrowUp'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Up-Active',
-	['ArrowDown'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Down-Active',
-	['ArrowLeft'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Left-Active',
-	['ArrowRight'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Right-Active',
-	['Backdrop'] = 'Interface\\ChatFrame\\ChatFrameBackground',
-	['Checked'] = 'Interface\\AddOns\\Aurora\\Media\\CheckButtonHilight',
-	['Font'] = 'Interface\\AddOns\\Aurora\\Media\\Font.ttf',						-- Шрифт
-	['Glow'] = 'Interface\\AddOns\\Aurora\\Media\\Glow',
-	['Gradient'] = 'Interface\\AddOns\\Aurora\\Media\\Gradient',
-	['RoleIcons'] = 'Interface\\Addons\\Aurora\\Media\\UI-LFG-ICON-ROLES'
+	['ArrowUp'] = [[Interface\AddOns\Aurora\Media\Arrow-Up-Active]],
+	['ArrowDown'] = [[Interface\AddOns\Aurora\Media\Arrow-Down-Active]],
+	['ArrowLeft'] = [[Interface\AddOns\Aurora\Media\Arrow-Left-Active]],
+	['ArrowRight'] = [[Interface\AddOns\Aurora\Media\Arrow-Right-Active]],
+	['Backdrop'] = [[Interface\BUTTONS\WHITE8X8]],
+	['Checked'] = [[Interface\AddOns\Aurora\Media\CheckButtonHilight]],
+	['Font'] = [[Interface\AddOns\Aurora\Media\Font.ttf]],						-- Шрифт
+	['Glow'] = [[Interface\AddOns\Aurora\Media\Glow]],
+	['Gradient'] = [[Interface\AddOns\Aurora\Media\Gradient]],
+	['RoleIcons'] = [[Interface\Addons\Aurora\Media\UI-LFG-ICON-ROLES]]
 }
 
 C.Defaults = {
@@ -423,7 +423,7 @@ F.ReskinArrow = function(Frame, Direction)
 	Frame:GetDisabledTexture():SetDrawLayer('OVERLAY');
 
 	local Texture = Frame:CreateTexture(nil, 'ARTWORK');
-	Texture:SetTexture('Interface\\AddOns\\Aurora\\media\\Arrow-'..Direction..'-Active');
+	Texture:SetTexture([[Interface\AddOns\Aurora\Media\Arrow-]]..Direction..[[-Active]]);
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
 	Frame.Texture = Texture;
@@ -499,7 +499,7 @@ F.ReskinSlider = function(Frame)
 	F.CreateGradient(BD);
 
 	local Slider = select(4, Frame:GetRegions());
-	Slider:SetTexture('Interface\\CastingBar\\UI-CastingBar-Spark');
+	Slider:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]]);
 	Slider:SetBlendMode('ADD');
 end
 
