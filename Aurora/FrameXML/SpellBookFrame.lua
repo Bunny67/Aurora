@@ -14,8 +14,8 @@ tinsert(C.modules['Aurora'], function()
 		Tab:SetHeight(32);
 	end
 	
-	F.ReskinArrow(SpellBookPrevPageButton, 'left');
-	F.ReskinArrow(SpellBookNextPageButton, 'right');
+	F.ReskinArrow(SpellBookPrevPageButton, 'Left');
+	F.ReskinArrow(SpellBookNextPageButton, 'Right');
 	
 	F.ReskinClose(SpellBookCloseButton, 'TOPRIGHT', SpellBookFrame, 'TOPRIGHT', -35, -16);
 	

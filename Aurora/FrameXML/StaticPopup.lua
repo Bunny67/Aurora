@@ -47,7 +47,7 @@ tinsert(C.modules['Aurora'], function()
 		Close.Minimize = Close:CreateTexture(nil, 'OVERLAY');
 		Close.Minimize:SetSize(9, 1);
 		Close.Minimize:SetPoint('CENTER');
-		Close.Minimize:SetTexture(C.media.backdrop);
+		Close.Minimize:SetTexture(C.Media.Backdrop);
 		Close.Minimize:SetVertexColor(1, 1, 1);
 		Close:HookScript('OnEnter', ColourMinimize);
 		Close:HookScript('OnLeave', ClearMinimize);

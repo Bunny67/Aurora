@@ -16,7 +16,7 @@ local F, C = unpack(select(2, ...))
 
 local _G = getfenv(0);
 
-C.classcolours = {
+C.ClassColors = {
 	['HUNTER'] = { r = 0.58, g = 0.86, b = 0.49 },
 	['WARLOCK'] = { r = 0.6, g = 0.47, b = 0.85 },
 	['PALADIN'] = { r = 1, g = 0.22, b = 0.52 },
@@ -29,20 +29,20 @@ C.classcolours = {
 	['DEATHKNIGHT'] = { r = 0.77, g = 0.12 , b = 0.23 },
 }
 
-C.media = {
-	['arrowUp'] = 'Interface\\AddOns\\Aurora\\media\\arrow-up-active',
-	['arrowDown'] = 'Interface\\AddOns\\Aurora\\media\\arrow-down-active',
-	['arrowLeft'] = 'Interface\\AddOns\\Aurora\\media\\arrow-left-active',
-	['arrowRight'] = 'Interface\\AddOns\\Aurora\\media\\arrow-right-active',
-	['backdrop'] = 'Interface\\ChatFrame\\ChatFrameBackground',
-	['checked'] = 'Interface\\AddOns\\Aurora\\media\\CheckButtonHilight',
-	['Font'] = 'Interface\\AddOns\\Aurora\\media\\font.ttf',						-- Шрифт
-	['glow'] = 'Interface\\AddOns\\Aurora\\media\\glow',
-	["gradient"] = 'Interface\\AddOns\\Aurora\\media\\gradient',
-	['roleIcons'] = 'Interface\\Addons\\Aurora\\media\\UI-LFG-ICON-ROLES',
+C.Media = {
+	['ArrowUp'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Up-Active',
+	['ArrowDown'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Down-Active',
+	['ArrowLeft'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Left-Active',
+	['ArrowRight'] = 'Interface\\AddOns\\Aurora\\Media\\Arrow-Right-Active',
+	['Backdrop'] = 'Interface\\ChatFrame\\ChatFrameBackground',
+	['Checked'] = 'Interface\\AddOns\\Aurora\\Media\\CheckButtonHilight',
+	['Font'] = 'Interface\\AddOns\\Aurora\\Media\\Font.ttf',						-- Шрифт
+	['Glow'] = 'Interface\\AddOns\\Aurora\\Media\\Glow',
+	['Gradient'] = 'Interface\\AddOns\\Aurora\\Media\\Gradient',
+	['RoleIcons'] = 'Interface\\Addons\\Aurora\\Media\\UI-LFG-ICON-ROLES'
 }
 
-C.defaults = {
+C.Defaults = {
 	['alpha'] = 0.5,
 
 	["buttonGradientColour"] = {.3, .3, .3, .3},
@@ -62,16 +62,16 @@ C.defaults = {
 	['Loot'] = true,																-- Добыча
 }
 
-C.frames = {}
+C.Frames = {}
 
 -- [[ Functions ]]
 _, F.Class = UnitClass('player')
 
 if CUSTOM_CLASS_COLORS then
-	C.classcolours = CUSTOM_CLASS_COLORS
+	C.ClassColors = CUSTOM_CLASS_COLORS
 end
 
-local r, g, b = C.classcolours[F.Class].r, C.classcolours[F.Class].g, C.classcolours[F.Class].b
+local r, g, b = C.ClassColors[F.Class].r, C.ClassColors[F.Class].g, C.ClassColors[F.Class].b
 
 F.TexCoords = {.08, .92, .08, .92};
 F.dummy = function() end;
@@ -114,11 +114,11 @@ F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 end
 
 F.CreateBD = function(Frame, A)
-	Frame:SetBackdrop({ bgFile = C.media.backdrop, edgeFile = C.media.backdrop, edgeSize = 1 });
+	Frame:SetBackdrop({ bgFile = C.Media.Backdrop, edgeFile = C.Media.Backdrop, edgeSize = 1 });
 	Frame:SetBackdropColor(0, 0, 0, A or alpha);
 	Frame:SetBackdropBorderColor(0, 0, 0);
 	
-	if ( not A ) then tinsert(C.frames, Frame); end
+	if ( not A ) then tinsert(C.Frames, Frame); end
 end
 
 F.CreateBG = function(Frame)
@@ -128,7 +128,7 @@ F.CreateBG = function(Frame)
 	local BG = f:CreateTexture(nil, 'BACKGROUND');
 	BG:SetPoint('TOPLEFT', Frame, -1, 1);
 	BG:SetPoint('BOTTOMRIGHT', Frame, 1, -1);
-	BG:SetTexture(C.media.backdrop)
+	BG:SetTexture(C.Media.Backdrop)
 	BG:SetVertexColor(0, 0, 0);
 
 	return BG
@@ -142,7 +142,7 @@ F.CreateGradient = function(Frame)
 	local Gradient = Frame:CreateTexture(nil, 'BORDER');
 	Gradient:SetPoint('TOPLEFT', 1, -1);
 	Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
-	Gradient:SetTexture(useButtonGradientColour and C.media.gradient or C.media.backdrop);
+	Gradient:SetTexture(useButtonGradientColour and C.Media.Gradient or C.Media.Backdrop);
 	Gradient:SetVertexColor(buttonR, buttonG, buttonB, buttonA);
 
 	return Gradient;
@@ -211,7 +211,7 @@ F.ReskinTab = function(Frame)
 	BG:SetFrameLevel(Frame:GetFrameLevel() - 1);
 	F.CreateBD(BG);
 
-	Frame:SetHighlightTexture(C.media.backdrop);
+	Frame:SetHighlightTexture(C.Media.Backdrop);
 	Frame:GetHighlightTexture():ClearAllPoints();
 	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 9, -4);
 	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -9, 4);
@@ -255,23 +255,23 @@ F.ReskinScroll = function(Frame)
 	F.Reskin(_G[Scroll..'ScrollUpButton'], true);
 	F.Reskin(_G[Scroll..'ScrollDownButton'], true);
 
-	_G[Scroll..'ScrollUpButton']:SetDisabledTexture(C.media.backdrop);
+	_G[Scroll..'ScrollUpButton']:SetDisabledTexture(C.Media.Backdrop);
 	_G[Scroll..'ScrollUpButton']:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
 	_G[Scroll..'ScrollUpButton']:GetDisabledTexture():SetDrawLayer('OVERLAY');
 
-	_G[Scroll..'ScrollDownButton']:SetDisabledTexture(C.media.backdrop);
+	_G[Scroll..'ScrollDownButton']:SetDisabledTexture(C.Media.Backdrop);
 	_G[Scroll..'ScrollDownButton']:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
 	_G[Scroll..'ScrollDownButton']:GetDisabledTexture():SetDrawLayer('OVERLAY');
 
 	local UpTexture = _G[Scroll..'ScrollUpButton']:CreateTexture(nil, 'ARTWORK');
-	UpTexture:SetTexture(C.media.arrowUp);
+	UpTexture:SetTexture(C.Media.ArrowUp);
 	UpTexture:SetSize(8, 8);
 	UpTexture:SetPoint('CENTER');
 	UpTexture:SetVertexColor(1, 1, 1);
 	_G[Scroll..'ScrollUpButton'].Texture = UpTexture;
 
 	local DownTexture = _G[Scroll..'ScrollDownButton']:CreateTexture(nil, 'ARTWORK');
-	DownTexture:SetTexture(C.media.arrowDown);
+	DownTexture:SetTexture(C.Media.ArrowDown);
 	DownTexture:SetSize(8, 8);
 	DownTexture:SetPoint('CENTER');
 	DownTexture:SetVertexColor(1, 1, 1);
@@ -307,13 +307,13 @@ F.ReskinDropDown = function(Frame)
 
 	F.Reskin(Button, true);
 
-	Button:SetDisabledTexture(C.media.backdrop);
+	Button:SetDisabledTexture(C.Media.Backdrop);
 	Button:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
 	Button:GetDisabledTexture():SetDrawLayer('OVERLAY');
 	Button:GetDisabledTexture():SetAllPoints();
 
 	local Texture = Button:CreateTexture(nil, 'ARTWORK');
-	Texture:SetTexture(C.media.arrowDown);
+	Texture:SetTexture(C.Media.ArrowDown);
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
 	Texture:SetVertexColor(1, 1, 1);
@@ -361,7 +361,7 @@ F.ReskinClose = function(Frame, a1, p, a2, x, y)
 
 	F.CreateGradient(Frame);
 
-	Frame:SetDisabledTexture(C.media.backdrop);
+	Frame:SetDisabledTexture(C.Media.Backdrop);
 	Frame:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
 	Frame:GetDisabledTexture():SetDrawLayer('OVERLAY');
 	Frame:GetDisabledTexture():SetAllPoints();
@@ -418,12 +418,12 @@ F.ReskinArrow = function(Frame, Direction)
 	Frame:SetSize(18, 18);
 	F.Reskin(Frame, true);
 
-	Frame:SetDisabledTexture(C.media.backdrop);
+	Frame:SetDisabledTexture(C.Media.Backdrop);
 	Frame:GetDisabledTexture():SetVertexColor(0, 0, 0, .3);
 	Frame:GetDisabledTexture():SetDrawLayer('OVERLAY');
 
 	local Texture = Frame:CreateTexture(nil, 'ARTWORK');
-	Texture:SetTexture('Interface\\AddOns\\Aurora\\media\\arrow-'..Direction..'-active');
+	Texture:SetTexture('Interface\\AddOns\\Aurora\\media\\Arrow-'..Direction..'-Active');
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
 	Frame.Texture = Texture;
@@ -435,7 +435,7 @@ end
 F.ReskinCheck = function(Frame)
 	Frame:SetNormalTexture('');
 	Frame:SetPushedTexture('');
-	Frame:SetHighlightTexture(C.media.backdrop);
+	Frame:SetHighlightTexture(C.Media.Backdrop);
 	
 	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 5, -5);
 	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -5, 5);
@@ -465,7 +465,7 @@ end
 F.ReskinRadio = function(Frame)
 	Frame:SetNormalTexture('');
 	Frame:SetHighlightTexture('');
-	Frame:SetCheckedTexture(C.media.backdrop);
+	Frame:SetCheckedTexture(C.Media.Backdrop);
 	
 	Frame:GetCheckedTexture():SetPoint('TOPLEFT', 4, -4);
 	Frame:GetCheckedTexture():SetPoint('BOTTOMRIGHT', -4, 4);
@@ -527,13 +527,13 @@ F.ReskinExpandOrCollapse = function(Frame)
 	Frame.Minus = Frame:CreateTexture(nil, 'OVERLAY');
 	Frame.Minus:SetSize(7, 1);
 	Frame.Minus:SetPoint('CENTER');
-	Frame.Minus:SetTexture(C.media.backdrop);
+	Frame.Minus:SetTexture(C.Media.Backdrop);
 	Frame.Minus:SetVertexColor(1, 1, 1);
 
 	Frame.Plus = Frame:CreateTexture(nil, 'OVERLAY');
 	Frame.Plus:SetSize(1, 7);
 	Frame.Plus:SetPoint('CENTER');
-	Frame.Plus:SetTexture(C.media.backdrop);
+	Frame.Plus:SetTexture(C.Media.Backdrop);
 	Frame.Plus:SetVertexColor(1, 1, 1);
 
 	Frame:HookScript('OnEnter', ColourExpandOrCollapse);
@@ -559,8 +559,8 @@ F.SetBD = function(Frame, x1, y1, x2, y2)
 	
 	F.CreateBD(BD);
 	
-	local success, err = pcall(LowerFrameLevel, BD);
-	if ( not success ) then RaiseFrameLevel(Frame); end
+	local Success, Err = pcall(LowerFrameLevel, BD);
+	if ( not Success ) then RaiseFrameLevel(Frame); end
 	
 	return BD
 end
@@ -590,7 +590,7 @@ F.ReskinColourSwatch = function(f)
 
 	local bg = _G[name.."SwatchBg"]
 
-	f:SetNormalTexture(C.media.backdrop)
+	f:SetNormalTexture(C.Media.Backdrop)
 	local nt = f:GetNormalTexture()
 
 	nt:SetPoint("TOPLEFT", 3, -3)
@@ -665,13 +665,13 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 
 		-- remove deprecated or corrupt variables
 		for key, value in pairs(AuroraConfig) do
-			if C.defaults[key] == nil then
+			if C.Defaults[key] == nil then
 				AuroraConfig[key] = nil
 			end
 		end
 
 		-- load or init variables
-		for key, value in pairs(C.defaults) do
+		for key, value in pairs(C.Defaults) do
 			if AuroraConfig[key] == nil then
 				if type(value) == "table" then
 					AuroraConfig[key] = {}
@@ -885,13 +885,13 @@ Delay:SetScript('OnEvent', function()
 				if region:GetObjectType() == 'Texture' then
 					region:SetTexture(nil)
 				elseif region:GetObjectType() == 'FontString' then
-					region:SetFont(C.media.Font, 13)
+					region:SetFont(C.Media.Font, 13)
 				end
 			end
 
 			frame:SetBackdrop({
-				bgFile = C.media.backdrop,
-				edgeFile = C.media.backdrop,
+				bgFile = C.Media.Backdrop,
+				edgeFile = C.Media.Backdrop,
 				edgeSize = UIParent:GetScale(),
 			})
 			frame:SetBackdropColor(0, 0, 0, AuroraConfig.alpha)
@@ -929,7 +929,7 @@ Delay:SetScript('OnEvent', function()
 	if AuroraConfig.Tooltips == true and not(IsAddOnLoaded('CowTip') or IsAddOnLoaded('TipTac') or IsAddOnLoaded('FreebTip') or IsAddOnLoaded('lolTip') or IsAddOnLoaded('StarTip') or IsAddOnLoaded('TipTop')) then
 		local Tooltips = {'GameTooltip', 'ItemRefTooltip', 'ShoppingTooltip1', 'ShoppingTooltip2', 'ShoppingTooltip3', 'WorldMapTooltip', 'ChatMenu', 'EmoteMenu', 'LanguageMenu', 'VoiceMacroMenu'}
 
-		local Backdrop = {bgFile = C.media.backdrop, edgeFile = C.media.backdrop, edgeSize = 1}
+		local Backdrop = {bgFile = C.Media.Backdrop, edgeFile = C.Media.Backdrop, edgeSize = 1}
 		local GetBackdrop = function() return Backdrop end
 		local GetBackdropColor = function() return 0, 0, 0, .6 end
 		local GetBackdropBorderColor = function() return 0, 0, 0 end
@@ -955,13 +955,13 @@ Delay:SetScript('OnEvent', function()
 		StatusBar:ClearAllPoints()
 		StatusBar:SetPoint('BOTTOMLEFT', GameTooltip, 'BOTTOMLEFT', 1, 1)
 		StatusBar:SetPoint('BOTTOMRIGHT', GameTooltip, 'BOTTOMRIGHT', -1, 1)
-		StatusBar:SetStatusBarTexture(C.media.backdrop)
+		StatusBar:SetStatusBarTexture(C.Media.Backdrop)
 
 		local StatusBarTexture = GameTooltipStatusBar:CreateTexture(nil, 'ARTWORK')
 		StatusBarTexture:SetHeight(1)
 		StatusBarTexture:SetPoint('BOTTOMLEFT', 0, 5)
 		StatusBarTexture:SetPoint('BOTTOMRIGHT', 0, 5)
-		StatusBarTexture:SetTexture(C.media.backdrop)
+		StatusBarTexture:SetTexture(C.Media.Backdrop)
 		StatusBarTexture:SetVertexColor(0, 0, 0)
 
 		F.CreateBD(FriendsTooltip)

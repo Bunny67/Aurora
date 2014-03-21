@@ -12,8 +12,8 @@ tinsert(C.modules['Aurora'], function()
 	ItemTextPageText:SetTextColor(1, 1, 1);
 	ItemTextPageText.SetTextColor = F.dummy;
 	
-	F.ReskinArrow(ItemTextPrevPageButton, 'left');
-	F.ReskinArrow(ItemTextNextPageButton, 'right');
+	F.ReskinArrow(ItemTextPrevPageButton, 'Left');
+	F.ReskinArrow(ItemTextNextPageButton, 'Right');
 	
 	F.ReskinClose(ItemTextCloseButton, 'TOPRIGHT', ItemTextFrame, 'TOPRIGHT', -36, -17);
 end);

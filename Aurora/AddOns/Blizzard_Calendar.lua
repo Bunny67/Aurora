@@ -27,7 +27,7 @@ C.modules["Blizzard_Calendar"] = function()
 		_G["CalendarDayButton"..i.."DarkFrame"]:SetAlpha(.5)
 		local bu = _G["CalendarDayButton"..i]
 		bu:DisableDrawLayer("BACKGROUND")
-		bu:SetHighlightTexture(C.media.backdrop)
+		bu:SetHighlightTexture(C.Media.Backdrop)
 		local hl = bu:GetHighlightTexture()
 		hl:SetVertexColor(r, g, b, .2)
 		hl.SetAlpha = F.dummy
@@ -97,7 +97,7 @@ C.modules["Blizzard_Calendar"] = function()
 	CalendarTodayTexture:Hide()
 
 	CalendarTodayFrame:SetBackdrop({
-		edgeFile = C.media.backdrop,
+		edgeFile = C.Media.Backdrop,
 		edgeSize = 1,
 	})
 	CalendarTodayFrame:SetBackdropBorderColor(r, g, b)
@@ -121,7 +121,7 @@ C.modules["Blizzard_Calendar"] = function()
 	F.CreateGradient(bd)
 
 	local downtex = CalendarFilterButton:CreateTexture(nil, "ARTWORK")
-	downtex:SetTexture(C.media.arrowDown)
+	downtex:SetTexture(C.Media.ArrowDown)
 	downtex:SetSize(8, 8)
 	downtex:SetPoint("CENTER")
 	downtex:SetVertexColor(1, 1, 1)
@@ -168,7 +168,7 @@ C.modules["Blizzard_Calendar"] = function()
 	local line = CalendarMassInviteFrame:CreateTexture(nil, "BACKGROUND")
 	line:SetSize(240, 1)
 	line:SetPoint("TOP", CalendarMassInviteFrame, "TOP", 0, -150)
-	line:SetTexture(C.media.backdrop)
+	line:SetTexture(C.Media.Backdrop)
 	line:SetVertexColor(0, 0, 0)
 
 	CalendarMassInviteFrame:ClearAllPoints()
@@ -203,8 +203,8 @@ C.modules["Blizzard_Calendar"] = function()
 	F.ReskinInput(CalendarCreateEventInviteEdit)
 	F.ReskinInput(CalendarMassInviteGuildMinLevelEdit)
 	F.ReskinInput(CalendarMassInviteGuildMaxLevelEdit)
-	F.ReskinArrow(CalendarPrevMonthButton, "left")
-	F.ReskinArrow(CalendarNextMonthButton, "right")
+	F.ReskinArrow(CalendarPrevMonthButton, "Left")
+	F.ReskinArrow(CalendarNextMonthButton, "Right")
 	CalendarPrevMonthButton:SetSize(19, 19)
 	CalendarNextMonthButton:SetSize(19, 19)
 	F.ReskinCheck(CalendarCreateEventLockEventCheck)

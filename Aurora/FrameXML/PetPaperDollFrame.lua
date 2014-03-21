@@ -6,11 +6,11 @@ tinsert(C.modules['Aurora'], function()
 	F.StripTextures(PetPaperDollFrame, true);
 	
 	F.StripTextures(PetPaperDollFrameExpBar);
-	PetPaperDollFrameExpBar:SetStatusBarTexture(C.media.backdrop);
+	PetPaperDollFrameExpBar:SetStatusBarTexture(C.Media.Backdrop);
 	F.CreateBDFrame(PetPaperDollFrameExpBar, .25);
 	
-	F.ReskinArrow(PetModelFrameRotateLeftButton, 'left');
-	F.ReskinArrow(PetModelFrameRotateRightButton, 'right');
+	F.ReskinArrow(PetModelFrameRotateLeftButton, 'Left');
+	F.ReskinArrow(PetModelFrameRotateRightButton, 'Right');
 	
 	F.Reskin(PetPaperDollCloseButton);
 	
@@ -45,8 +45,8 @@ tinsert(C.modules['Aurora'], function()
 	F.CreateBD(CompanionModelFrame, .25);
 	
 	CompanionModelFrameRotateLeftButton:SetPoint('TOPLEFT', PetPaperDollFrame, 39, -90);
-	F.ReskinArrow(CompanionModelFrameRotateLeftButton, 'left');
-	F.ReskinArrow(CompanionModelFrameRotateRightButton, 'right');
+	F.ReskinArrow(CompanionModelFrameRotateLeftButton, 'Left');
+	F.ReskinArrow(CompanionModelFrameRotateRightButton, 'Right');
 	
 	F.Reskin(CompanionSummonButton);
 	
@@ -77,8 +77,8 @@ tinsert(C.modules['Aurora'], function()
 	end)
 	
 	CompanionPrevPageButton:SetPoint('BOTTOMLEFT', 123, 91);
-	F.ReskinArrow(CompanionPrevPageButton, 'left');
-    F.ReskinArrow(CompanionNextPageButton, 'right');
+	F.ReskinArrow(CompanionPrevPageButton, 'Left');
+    F.ReskinArrow(CompanionNextPageButton, 'Right');
 	
 	for i = 1, 3 do
 		local Tab = _G['PetPaperDollFrameTab'..i];

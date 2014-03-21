@@ -9,12 +9,12 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 	F.ReskinClose(TradeSkillFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -35, -16);
 	
 	F.StripTextures(TradeSkillRankFrame, true);
-	TradeSkillRankFrame:SetStatusBarTexture(C.media.backdrop);
+	TradeSkillRankFrame:SetStatusBarTexture(C.Media.Backdrop);
 	TradeSkillRankFrame.SetStatusBarColor = F.dummy;
 	TradeSkillRankFrame:GetStatusBarTexture():SetGradient('VERTICAL', .1, .3, .9, .2, .4, 1);
 	
 	local BD = CreateFrame('Frame', nil, TradeSkillRankFrame);
-	BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel()-1);
+	BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel() - 1);
 	BD:SetPoint('TOPLEFT', -1, 1);
 	BD:SetPoint('BOTTOMRIGHT', 1, -1);
 	F.CreateBD(BD, .25);
@@ -49,13 +49,13 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 		SkillButton.Minus = SkillButton:CreateTexture(nil, 'OVERLAY');
 		SkillButton.Minus:SetSize(7, 1);
 		SkillButton.Minus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Minus:SetTexture(C.media.backdrop);
+		SkillButton.Minus:SetTexture(C.Media.Backdrop);
 		SkillButton.Minus:SetVertexColor(1, 1, 1);
 
 		SkillButton.Plus = SkillButton:CreateTexture(nil, 'OVERLAY');
 		SkillButton.Plus:SetSize(1, 7);
 		SkillButton.Plus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Plus:SetTexture(C.media.backdrop);
+		SkillButton.Plus:SetTexture(C.Media.Backdrop);
 		SkillButton.Plus:SetVertexColor(1, 1, 1);
 
 		SkillButton:HookScript('OnEnter', ColourExpandOrCollapse);
@@ -158,9 +158,9 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 	
 	F.Reskin(TradeSkillCreateAllButton);
 	
-	F.ReskinArrow(TradeSkillDecrementButton, 'left');
+	F.ReskinArrow(TradeSkillDecrementButton, 'Left');
 	F.ReskinInput(TradeSkillInputBox);
-	F.ReskinArrow(TradeSkillIncrementButton, 'right');
+	F.ReskinArrow(TradeSkillIncrementButton, 'Right');
 	
 	F.Reskin(TradeSkillCreateButton);
 	F.Reskin(TradeSkillCancelButton);

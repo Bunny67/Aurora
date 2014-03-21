@@ -15,7 +15,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.Reskin(PlayerTitleFrameButton);
 	local PTFB = PlayerTitleFrameButton:CreateTexture(nil, 'ARTWORK');
-	PTFB:SetTexture(C.media.arrowDown);
+	PTFB:SetTexture(C.Media.ArrowDown);
 	PTFB:SetSize(10, 10);
 	PTFB:SetPoint('CENTER');
 	PTFB:SetVertexColor(1, 1, 1);
@@ -25,8 +25,8 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinScroll(PlayerTitlePickerScrollFrameScrollBar);
 	
-	F.ReskinArrow(CharacterModelFrameRotateLeftButton, 'left');
-	F.ReskinArrow(CharacterModelFrameRotateRightButton, 'right');
+	F.ReskinArrow(CharacterModelFrameRotateLeftButton, 'Left');
+	F.ReskinArrow(CharacterModelFrameRotateRightButton, 'Right');
 	
 	F.StripTextures(CharacterAttributesFrame);
 	
@@ -77,11 +77,11 @@ tinsert(C.modules['Aurora'], function()
 
 		if Slot.verticalFlyout then
 			PopoutButton.Arrow:SetSize(13, 8);
-			PopoutButton.Arrow:SetTexture(C.media.arrowDown);
+			PopoutButton.Arrow:SetTexture(C.Media.ArrowDown);
 			PopoutButton.Arrow:SetPoint('TOP', Slot, 'BOTTOM', 0, 3);
 		else
 			PopoutButton.Arrow:SetSize(8, 14);
-			PopoutButton.Arrow:SetTexture(C.media.arrowRight);
+			PopoutButton.Arrow:SetTexture(C.Media.ArrowRight);
 			PopoutButton.Arrow:SetPoint('LEFT', Slot, 'RIGHT', -3, 0);
 		end
 	end

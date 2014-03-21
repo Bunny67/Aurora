@@ -28,10 +28,10 @@ tinsert(C.modules['Aurora'], function()
 	F.Reskin(ChatConfigCombatSettingsFiltersCopyFilterButton);
 	ChatConfigCombatSettingsFiltersCopyFilterButton:SetPoint('RIGHT', ChatConfigCombatSettingsFiltersAddFilterButton, 'LEFT', -1, 0);
 	
-	F.ReskinArrow(ChatConfigMoveFilterUpButton, 'up');
+	F.ReskinArrow(ChatConfigMoveFilterUpButton, 'Up');
 	ChatConfigMoveFilterUpButton:SetSize(28, 28);
 	ChatConfigMoveFilterUpButton:SetPoint('TOPLEFT', ChatConfigCombatSettingsFilters, 'BOTTOMLEFT', 3, 0);
-	F.ReskinArrow(ChatConfigMoveFilterDownButton, 'down');
+	F.ReskinArrow(ChatConfigMoveFilterDownButton, 'Down');
 	ChatConfigMoveFilterDownButton:SetSize(28, 28);
 	ChatConfigMoveFilterDownButton:SetPoint('LEFT', ChatConfigMoveFilterUpButton, 'RIGHT', 1, 0);
 	
@@ -80,7 +80,7 @@ tinsert(C.modules['Aurora'], function()
 		_G['CombatConfigTab'..i..'Middle']:Hide();
 		_G['CombatConfigTab'..i..'Right']:Hide();
 		
-		Tab:SetHighlightTexture(C.media.backdrop);
+		Tab:SetHighlightTexture(C.Media.Backdrop);
 		local Highlight = Tab:GetHighlightTexture();
 		Highlight:ClearAllPoints();
 		Highlight:SetPoint('TOPLEFT', 2, -11);

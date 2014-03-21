@@ -78,10 +78,10 @@ tinsert(C.modules['Aurora'], function()
 	MerchantBuyBackItemItemButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
 	
 	select(2, MerchantPrevPageButton:GetRegions()):Hide();
-	F.ReskinArrow(MerchantPrevPageButton, 'left');
+	F.ReskinArrow(MerchantPrevPageButton, 'Left');
 	
 	select(2, MerchantNextPageButton:GetRegions()):Hide();
-	F.ReskinArrow(MerchantNextPageButton, 'right');
+	F.ReskinArrow(MerchantNextPageButton, 'Right');
 	
 	F.ReskinClose(MerchantFrameCloseButton, 'TOPRIGHT', MerchantFrame, 'TOPRIGHT', -38, -16);
 	

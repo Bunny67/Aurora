@@ -15,7 +15,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		F.CreateBD(BG, 0);
 		F.CreateGradient(BG);
 		
-		Frame:SetHighlightTexture(C.media.backdrop);
+		Frame:SetHighlightTexture(C.Media.Backdrop);
 		Frame:GetHighlightTexture():ClearAllPoints();
 		Frame:GetHighlightTexture():SetPoint('TOPLEFT', 3, -1);
 		Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -2, 1);
@@ -66,7 +66,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		
 		select(6, Button:GetRegions()):Hide();
 		
-		Button:SetHighlightTexture(C.media.backdrop);
+		Button:SetHighlightTexture(C.Media.Backdrop);
 		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
 		Button:GetHighlightTexture():ClearAllPoints();
 		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
@@ -102,7 +102,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 	F.Reskin(BrowseDropDownButton, true);
 
 	local Texture = BrowseDropDownButton:CreateTexture(nil, 'OVERLAY');
-	Texture:SetTexture(C.media.arrowDown);
+	Texture:SetTexture(C.Media.ArrowDown);
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
 	Texture:SetVertexColor(1, 1, 1);
@@ -123,8 +123,8 @@ C.modules['Blizzard_AuctionUI'] = function()
 	
 	F.Reskin(BrowseSearchButton);
 	
-	F.ReskinArrow(BrowsePrevPageButton, 'left');
-	F.ReskinArrow(BrowseNextPageButton, 'right');
+	F.ReskinArrow(BrowsePrevPageButton, 'Left');
+	F.ReskinArrow(BrowseNextPageButton, 'Right');
 	
 	F.Reskin(BrowseCloseButton);
 	BrowseBuyoutButton:SetPoint('RIGHT', BrowseCloseButton, 'LEFT', -1, 0);
@@ -158,7 +158,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		
 		select(6, Button:GetRegions()):Hide();
 		
-		Button:SetHighlightTexture(C.media.backdrop);
+		Button:SetHighlightTexture(C.Media.Backdrop);
 		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
 		Button:GetHighlightTexture():ClearAllPoints();
 		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
@@ -208,7 +208,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		
 		select(5, Button:GetRegions()):Hide();
 		
-		Button:SetHighlightTexture(C.media.backdrop);
+		Button:SetHighlightTexture(C.Media.Backdrop);
 		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
 		Button:GetHighlightTexture():ClearAllPoints();
 		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
@@ -275,7 +275,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 	select(2, AuctionProgressBar:GetRegions()):Hide();
 	
 	F.CreateBD(AuctionProgressBar, .25);
-	AuctionProgressBar:SetStatusBarTexture(C.media.backdrop);
+	AuctionProgressBar:SetStatusBarTexture(C.Media.Backdrop);
 	
 	AuctionProgressBarIcon:SetTexCoord(unpack(F.TexCoords))
 	F.CreateBG(AuctionProgressBarIcon);
@@ -288,9 +288,9 @@ C.modules['Blizzard_AuctionUI'] = function()
 	F.CreateBD(AuctionDressUpFrame);
 	
 	AuctionDressUpModelRotateLeftButton:SetPoint('TOPLEFT', AuctionDressUpFrame, 4, -4);
-	F.ReskinArrow(AuctionDressUpModelRotateLeftButton, 'left');
+	F.ReskinArrow(AuctionDressUpModelRotateLeftButton, 'Left');
 	AuctionDressUpModelRotateRightButton:SetPoint('TOPLEFT', AuctionDressUpModelRotateLeftButton, 'TOPRIGHT', -1, 0);
-	F.ReskinArrow(AuctionDressUpModelRotateRightButton, 'right');
+	F.ReskinArrow(AuctionDressUpModelRotateRightButton, 'Right');
 	
 	F.Reskin(AuctionDressUpFrameResetButton);
 	

@@ -75,8 +75,8 @@ C.modules['Blizzard_InspectUI'] = function()
 	InspectFrame:HookScript('OnShow', ColorItemBorder);
 	ColorItemBorder(CheckItemBorderColor);
 	
-	F.ReskinArrow(InspectModelRotateLeftButton, 'left');
-	F.ReskinArrow(InspectModelRotateRightButton, 'right');
+	F.ReskinArrow(InspectModelRotateLeftButton, 'Left');
+	F.ReskinArrow(InspectModelRotateRightButton, 'Right');
 	
 	F.StripTextures(InspectPVPFrame);
 

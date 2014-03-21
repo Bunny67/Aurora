@@ -7,8 +7,8 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinClose(DressUpFrameCloseButton, 'TOPRIGHT', DressUpFrame, 'TOPRIGHT', -38, -16);
 	
-	F.ReskinArrow(DressUpModelRotateLeftButton, 'left');
-	F.ReskinArrow(DressUpModelRotateRightButton, 'right');
+	F.ReskinArrow(DressUpModelRotateLeftButton, 'Left');
+	F.ReskinArrow(DressUpModelRotateRightButton, 'Right');
 	
 	F.Reskin(DressUpFrameResetButton);
 	F.Reskin(DressUpFrameCancelButton);

@@ -66,13 +66,13 @@ tinsert(C.modules['Aurora'], function()
 				QuestLogTitle.Minus = QuestLogTitle:CreateTexture(nil, 'OVERLAY');
 				QuestLogTitle.Minus:SetSize(7, 1);
 				QuestLogTitle.Minus:SetPoint('CENTER', QuestLogTitle.BG);
-				QuestLogTitle.Minus:SetTexture(C.media.backdrop);
+				QuestLogTitle.Minus:SetTexture(C.Media.Backdrop);
 				QuestLogTitle.Minus:SetVertexColor(1, 1, 1);
 
 				QuestLogTitle.Plus = QuestLogTitle:CreateTexture(nil, 'OVERLAY');
 				QuestLogTitle.Plus:SetSize(1, 7);
 				QuestLogTitle.Plus:SetPoint('CENTER', QuestLogTitle.BG);
-				QuestLogTitle.Plus:SetTexture(C.media.backdrop);
+				QuestLogTitle.Plus:SetTexture(C.Media.Backdrop);
 				QuestLogTitle.Plus:SetVertexColor(1, 1, 1);
 				
 				QuestLogTitle.Skins = true;

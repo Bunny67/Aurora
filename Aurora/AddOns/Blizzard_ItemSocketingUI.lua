@@ -23,7 +23,7 @@ C.modules['Blizzard_ItemSocketingUI'] = function()
 		F.CreateBD(socket.bg, .25);
 
 		socket.glow = CreateFrame('Frame', nil, socket);
-		socket.glow:SetBackdrop({ edgeFile = C.media.glow, edgeSize = 5 });
+		socket.glow:SetBackdrop({ edgeFile = C.Media.Glow, edgeSize = 5 });
 		socket.glow:SetPoint('TOPLEFT', -5, 5);
 		socket.glow:SetPoint('BOTTOMRIGHT', 5, -5);
 		

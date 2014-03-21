@@ -20,7 +20,7 @@ tinsert(C.modules['Aurora'], function()
 	LFDDungeonReadyStatusCloseButton.Minimize = LFDDungeonReadyStatusCloseButton:CreateTexture(nil, 'OVERLAY');
 	LFDDungeonReadyStatusCloseButton.Minimize:SetSize(9, 1);
 	LFDDungeonReadyStatusCloseButton.Minimize:SetPoint('CENTER');
-	LFDDungeonReadyStatusCloseButton.Minimize:SetTexture(C.media.backdrop);
+	LFDDungeonReadyStatusCloseButton.Minimize:SetTexture(C.Media.Backdrop);
 	LFDDungeonReadyStatusCloseButton.Minimize:SetVertexColor(1, 1, 1);
 	LFDDungeonReadyStatusCloseButton:HookScript('OnEnter', ColourMinimize);
 	LFDDungeonReadyStatusCloseButton:HookScript('OnLeave', ClearMinimize);
@@ -36,33 +36,33 @@ tinsert(C.modules['Aurora'], function()
 		end
 
 		for _, RoleButton in pairs(RoleButtons) do
-			RoleButton.texture:SetTexture(C.media.roleIcons);
+			RoleButton.texture:SetTexture(C.Media.RoleIcons);
 			RoleButton.statusIcon:SetDrawLayer('OVERLAY', 2);
 
 			local Left = RoleButton:CreateTexture(nil, 'OVERLAY');
 			Left:SetWidth(1);
-			Left:SetTexture(C.media.backdrop);
+			Left:SetTexture(C.Media.Backdrop);
 			Left:SetVertexColor(0, 0, 0);
 			Left:SetPoint('TOPLEFT', 7, -6);
 			Left:SetPoint('BOTTOMLEFT', 7, 8);
 
 			local Right = RoleButton:CreateTexture(nil, 'OVERLAY');
 			Right:SetWidth(1);
-			Right:SetTexture(C.media.backdrop);
+			Right:SetTexture(C.Media.Backdrop);
 			Right:SetVertexColor(0, 0, 0);
 			Right:SetPoint('TOPRIGHT', -7, -6);
 			Right:SetPoint('BOTTOMRIGHT', -7, 8);
 
 			local Top = RoleButton:CreateTexture(nil, 'OVERLAY');
 			Top:SetHeight(1);
-			Top:SetTexture(C.media.backdrop);
+			Top:SetTexture(C.Media.Backdrop);
 			Top:SetVertexColor(0, 0, 0);
 			Top:SetPoint('TOPLEFT', 7, -5);
 			Top:SetPoint('TOPRIGHT', -7, -6);
 
 			local Bottom = RoleButton:CreateTexture(nil, 'OVERLAY');
 			Bottom:SetHeight(1);
-			Bottom:SetTexture(C.media.backdrop);
+			Bottom:SetTexture(C.Media.Backdrop);
 			Bottom:SetVertexColor(0, 0, 0);
 			Bottom:SetPoint('BOTTOMLEFT', 7, 8);
 			Bottom:SetPoint('BOTTOMRIGHT', -7, 8);
@@ -79,7 +79,7 @@ tinsert(C.modules['Aurora'], function()
 	LFDDungeonReadyDialogCloseButton.Minimize = LFDDungeonReadyDialogCloseButton:CreateTexture(nil, 'OVERLAY');
 	LFDDungeonReadyDialogCloseButton.Minimize:SetSize(9, 1);
 	LFDDungeonReadyDialogCloseButton.Minimize:SetPoint('CENTER');
-	LFDDungeonReadyDialogCloseButton.Minimize:SetTexture(C.media.backdrop);
+	LFDDungeonReadyDialogCloseButton.Minimize:SetTexture(C.Media.Backdrop);
 	LFDDungeonReadyDialogCloseButton.Minimize:SetVertexColor(1, 1, 1);
 	LFDDungeonReadyDialogCloseButton:HookScript('OnEnter', ColourMinimize);
 	LFDDungeonReadyDialogCloseButton:HookScript('OnLeave', ClearMinimize);
@@ -95,8 +95,8 @@ tinsert(C.modules['Aurora'], function()
 	LFDDungeonReadyDialogRoleIconBG:SetPoint('BOTTOMRIGHT', -9, 10);
 	F.CreateBD(LFDDungeonReadyDialogRoleIconBG, 0);
 	
-	LFDDungeonReadyDialogRoleIconTexture:SetTexture(C.media.roleIcons);
-	LFDDungeonReadyDialogRoleIconLeaderIcon:SetTexture(C.media.roleIcons);
+	LFDDungeonReadyDialogRoleIconTexture:SetTexture(C.Media.RoleIcons);
+	LFDDungeonReadyDialogRoleIconLeaderIcon:SetTexture(C.Media.RoleIcons);
 	LFDDungeonReadyDialogRoleIconLeaderIcon:SetTexCoord(0, 0.296875, 0.015625, 0.2875);
 	
 	for i = 1, 2 do
@@ -114,35 +114,35 @@ tinsert(C.modules['Aurora'], function()
 	F.CreateBD(LFDRoleCheckPopup);
 	
 	for _, RoleButton in pairs({ LFDRoleCheckPopupRoleButtonTank, LFDRoleCheckPopupRoleButtonHealer, LFDRoleCheckPopupRoleButtonDPS }) do
-		RoleButton.cover:SetTexture(C.media.roleIcons);
-		RoleButton:SetNormalTexture(C.media.roleIcons);
+		RoleButton.cover:SetTexture(C.Media.RoleIcons);
+		RoleButton:SetNormalTexture(C.Media.RoleIcons);
 
 		RoleButton.checkButton:SetFrameLevel(RoleButton:GetFrameLevel() + 2);
 
 		local Left = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Left:SetWidth(1);
-		Left:SetTexture(C.media.backdrop);
+		Left:SetTexture(C.Media.Backdrop);
 		Left:SetVertexColor(0, 0, 0);
 		Left:SetPoint('TOPLEFT', RoleButton, 9, -7);
 		Left:SetPoint('BOTTOMLEFT', RoleButton, 9, 11);
 
 		local Right = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Right:SetWidth(1);
-		Right:SetTexture(C.media.backdrop);
+		Right:SetTexture(C.Media.Backdrop);
 		Right:SetVertexColor(0, 0, 0);
 		Right:SetPoint('TOPRIGHT', RoleButton, -9, -7);
 		Right:SetPoint('BOTTOMRIGHT', RoleButton, -9, 11);
 
 		local Top = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Top:SetHeight(1);
-		Top:SetTexture(C.media.backdrop);
+		Top:SetTexture(C.Media.Backdrop);
 		Top:SetVertexColor(0, 0, 0);
 		Top:SetPoint('TOPLEFT', RoleButton, 9, -6);
 		Top:SetPoint('TOPRIGHT', RoleButton, -9, -7);
 
 		local Bottom = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Bottom:SetHeight(1);
-		Bottom:SetTexture(C.media.backdrop);
+		Bottom:SetTexture(C.Media.Backdrop);
 		Bottom:SetVertexColor(0, 0, 0);
 		Bottom:SetPoint('BOTTOMLEFT', RoleButton, 9, 11);
 		Bottom:SetPoint('BOTTOMRIGHT', RoleButton, -9, 11);
@@ -171,50 +171,50 @@ tinsert(C.modules['Aurora'], function()
 		
 		if ( Tank ) then
 			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
-			Icon:SetTexture(C.media.roleIcons);
+			Icon:SetTexture(C.Media.RoleIcons);
 			CurrentIcon = CurrentIcon + 1;
 		end
 		
 		if ( Healer ) then
 			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
-			Icon:SetTexture(C.media.roleIcons);
+			Icon:SetTexture(C.Media.RoleIcons);
 			CurrentIcon = CurrentIcon + 1;
 		end
 		
 		if ( Damage ) then
 			local Icon = _G['LFDSearchStatusRoleIcon'..CurrentIcon];
-			Icon:SetTexture(C.media.roleIcons);
+			Icon:SetTexture(C.Media.RoleIcons);
 			CurrentIcon = CurrentIcon + 1;
 		end
 	end);
 	
 	for _, RoleButton in pairs({ LFDSearchStatusTank1, LFDSearchStatusHealer1, LFDSearchStatusDamage1, LFDSearchStatusDamage2, LFDSearchStatusDamage3 }) do
-		RoleButton.texture:SetTexture(C.media.roleIcons);
+		RoleButton.texture:SetTexture(C.Media.RoleIcons);
 		
 		local Left = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Left:SetWidth(1);
-		Left:SetTexture(C.media.backdrop);
+		Left:SetTexture(C.Media.Backdrop);
 		Left:SetVertexColor(0, 0, 0);
 		Left:SetPoint('TOPLEFT', 7, -6);
 		Left:SetPoint('BOTTOMLEFT', 7, 8);
 
 		local Right = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Right:SetWidth(1);
-		Right:SetTexture(C.media.backdrop);
+		Right:SetTexture(C.Media.Backdrop);
 		Right:SetVertexColor(0, 0, 0);
 		Right:SetPoint('TOPRIGHT', -7, -6);
 		Right:SetPoint('BOTTOMRIGHT', -7, 8);
 
 		local Top = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Top:SetHeight(1);
-		Top:SetTexture(C.media.backdrop);
+		Top:SetTexture(C.Media.Backdrop);
 		Top:SetVertexColor(0, 0, 0);
 		Top:SetPoint('TOPLEFT', 7, -5);
 		Top:SetPoint('TOPRIGHT', -7, -6);
 
 		local Bottom = RoleButton:CreateTexture(nil, 'OVERLAY');
 		Bottom:SetHeight(1);
-		Bottom:SetTexture(C.media.backdrop);
+		Bottom:SetTexture(C.Media.Backdrop);
 		Bottom:SetVertexColor(0, 0, 0);
 		Bottom:SetPoint('BOTTOMLEFT', 7, 8);
 		Bottom:SetPoint('BOTTOMRIGHT', -7, 8);
@@ -229,8 +229,8 @@ tinsert(C.modules['Aurora'], function()
 			RoleButton.background:SetTexture('');
 		end
 
-		RoleButton.cover:SetTexture(C.media.roleIcons);
-		RoleButton:SetNormalTexture(C.media.roleIcons);
+		RoleButton.cover:SetTexture(C.Media.RoleIcons);
+		RoleButton:SetNormalTexture(C.Media.RoleIcons);
 
 		RoleButton.checkButton:SetFrameLevel(RoleButton:GetFrameLevel() + 2);
 
@@ -238,7 +238,7 @@ tinsert(C.modules['Aurora'], function()
 			local Left = RoleButton:CreateTexture();
 			Left:SetDrawLayer('OVERLAY', i);
 			Left:SetWidth(1);
-			Left:SetTexture(C.media.backdrop);
+			Left:SetTexture(C.Media.Backdrop);
 			Left:SetVertexColor(0, 0, 0);
 			Left:SetPoint('TOPLEFT', RoleButton, 6, -5);
 			Left:SetPoint('BOTTOMLEFT', RoleButton, 6, 7);
@@ -247,7 +247,7 @@ tinsert(C.modules['Aurora'], function()
 			local Right = RoleButton:CreateTexture();
 			Right:SetDrawLayer('OVERLAY', i);
 			Right:SetWidth(1);
-			Right:SetTexture(C.media.backdrop);
+			Right:SetTexture(C.Media.Backdrop);
 			Right:SetVertexColor(0, 0, 0);
 			Right:SetPoint('TOPRIGHT', RoleButton, -6, -5);
 			Right:SetPoint('BOTTOMRIGHT', RoleButton, -6, 7);
@@ -256,7 +256,7 @@ tinsert(C.modules['Aurora'], function()
 			local Top = RoleButton:CreateTexture();
 			Top:SetDrawLayer('OVERLAY', i);
 			Top:SetHeight(1);
-			Top:SetTexture(C.media.backdrop);
+			Top:SetTexture(C.Media.Backdrop);
 			Top:SetVertexColor(0, 0, 0);
 			Top:SetPoint('TOPLEFT', RoleButton, 6, -5);
 			Top:SetPoint('TOPRIGHT', RoleButton, -6, -5);
@@ -265,7 +265,7 @@ tinsert(C.modules['Aurora'], function()
 			local Bottom = RoleButton:CreateTexture();
 			Bottom:SetDrawLayer('OVERLAY', i);
 			Bottom:SetHeight(1);
-			Bottom:SetTexture(C.media.backdrop);
+			Bottom:SetTexture(C.Media.Backdrop);
 			Bottom:SetVertexColor(0, 0, 0);
 			Bottom:SetPoint('BOTTOMLEFT', RoleButton, 6, 7);
 			Bottom:SetPoint('BOTTOMRIGHT', RoleButton, -6, 7);

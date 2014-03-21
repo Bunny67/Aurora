@@ -1,25 +1,32 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
+
+local _G = getfenv(0);
 
 tinsert(C.modules['Aurora'], function()
-	local AllWorldStateFrameStripTextures = {'WorldStateScoreFrame', 'WorldStateScoreScrollFrame'}
-	for i = 1, #AllWorldStateFrameStripTextures do
-		F.StripTextures(_G[AllWorldStateFrameStripTextures[i]], true)
-	end
-
-	local AllWorldStateFrameScrollbars = {'WorldStateScoreScrollFrameScrollBar'}
-	for i = 1, #AllWorldStateFrameScrollbars do
-		F.ReskinScroll(_G[AllWorldStateFrameScrollbars[i]])
-	end
-
+	F.SetBD(WorldStateScoreFrame, 10, -15, -113, 68);
+	
+	F.StripTextures(WorldStateScoreScrollFrame, true);
+	F.ReskinScroll(WorldStateScoreScrollFrameScrollBar);
+	
 	for i = 1, 3 do
-		F.ReskinTab(_G['WorldStateScoreFrameTab'..i])
-	end
-
-	local AllWorldStateFrameButtons = {'WorldStateScoreFrameLeaveButton'}
-	for i = 1, #AllWorldStateFrameButtons do
-		F.Reskin(_G[AllWorldStateFrameButtons[i]])
+		local Tab = _G['WorldStateScoreFrameTab'..i];
+		
+		F.ReskinTab(Tab);
 	end
 	
-	F.SetBD(WorldStateScoreFrame, 10, -15, -113, 68)
-	F.ReskinClose(WorldStateScoreFrameCloseButton, 'TOPRIGHT', WorldStateScoreFrame, 'TOPRIGHT', -117, -19)
-end)
+	F.Reskin(WorldStateScoreFrameLeaveButton);
+	
+	F.ReskinClose(WorldStateScoreFrameCloseButton, 'TOPRIGHT', WorldStateScoreFrame, 'TOPRIGHT', -117, -19);
+	
+	hooksecurefunc('TokenFrame_Update', function()
+		local scoreButtonLeft;
+		local scoreButtonRight;
+		
+		for i = 1, MAX_WORLDSTATE_SCORE_BUTTONS do
+			scoreButtonLeft = _G['WorldStateScoreButton'..i..'FactionLeft'];
+			scoreButtonRight = _G['WorldStateScoreButton'..i..'FactionRight'];
+			scoreButtonLeft:SetTexture(C.Media.Backdrop);
+			scoreButtonRight:SetTexture(C.Media.Backdrop);
+		end
+	end);
+end);

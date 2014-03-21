@@ -48,7 +48,7 @@ C.modules['Blizzard_AchievementUI'] = function()
 	
 	local function SkinStatusBar(bar)
 		F.StripTextures(bar);
-		bar:SetStatusBarTexture(C.media.backdrop);
+		bar:SetStatusBarTexture(C.Media.Backdrop);
 		bar:GetStatusBarTexture():SetGradient('VERTICAL', 0, .4, 0, 0, .6, 0);
 		local BD = CreateFrame('Frame', nil, bar)
 		BD:SetPoint('TOPLEFT', -1, 1);
@@ -122,7 +122,7 @@ C.modules['Blizzard_AchievementUI'] = function()
 			local Background = _G['AchievementFrameSummaryAchievement'..i..'Background'];
 			
 			F.StripTextures(Frame);
-			Background:SetTexture(C.media.backdrop)
+			Background:SetTexture(C.Media.Backdrop)
 			Background:SetVertexColor(0, 0, 0, .25);
 			F.Kill(Highlight);
 			
@@ -259,7 +259,7 @@ C.modules['Blizzard_AchievementUI'] = function()
 		
 		if not Bar.Skinned then
 			F.StripTextures(Bar);
-			Bar:SetStatusBarTexture(C.media.backdrop);
+			Bar:SetStatusBarTexture(C.Media.Backdrop);
 
 			_G['AchievementFrameProgressBar'..index..'BG']:SetTexture(0, 0, 0, .25);
 

@@ -22,8 +22,8 @@ tinsert(C.modules['Aurora'], function()
 		ItemButtonIcon:SetTexCoord(unpack(F.TexCoords));
 	end
 	
-	F.ReskinArrow(InboxPrevPageButton, 'left');
-	F.ReskinArrow(InboxNextPageButton, 'right');
+	F.ReskinArrow(InboxPrevPageButton, 'Left');
+	F.ReskinArrow(InboxNextPageButton, 'Right');
 	-- SendMailFrame
 	F.StripTextures(SendMailFrame);
 	

@@ -38,8 +38,8 @@ local function CreateToggleBox(Parent, Value, Text)
 end
 
 local function UpdateFrames()
-	for i = 1, #C.frames do
-		F.CreateBD(C.frames[i], AuroraConfig.alpha);
+	for i = 1, #C.Frames do
+		F.CreateBD(C.Frames[i], AuroraConfig.alpha);
 	end
 end
 
@@ -92,7 +92,7 @@ Config.Header:SetScript('OnMouseUp', function() Config:StopMovingOrSizing(); end
 Config.Header.Gradient = Config.Header:CreateTexture(nil, 'BORDER');
 Config.Header.Gradient:SetPoint('TOPLEFT', 1, -1);
 Config.Header.Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
-Config.Header.Gradient:SetTexture(C.media.backdrop);
+Config.Header.Gradient:SetTexture(C.Media.Backdrop);
 Config.Header.Gradient:SetVertexColor(.2, .2, .2, 1);
 
 Config.Header.Title = Config.Header:CreateFontString(nil, 'ARTWORK', 'GameFontNormalLarge');

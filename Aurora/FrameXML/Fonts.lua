@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...));
 
 tinsert(C.modules["Aurora"], function()
 	if AuroraConfig.Font then
-		local Font = C.media.Font;
+		local Font = C.Media.Font;
 
 		RaidWarningFrame.slot1:SetFont(Font, 20, 'OUTLINE');
 		RaidWarningFrame.slot2:SetFont(Font, 20, 'OUTLINE');

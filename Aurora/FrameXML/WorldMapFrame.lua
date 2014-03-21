@@ -29,12 +29,12 @@ tinsert(C.modules['Aurora'], function()
 		SizeUp.Top = SizeUp:CreateTexture(nil, 'OVERLAY');
 		SizeUp.Top:SetSize(7, 1);
 		SizeUp.Top:SetPoint('TOP', 2, -3);
-		SizeUp.Top:SetTexture(C.media.backdrop);
+		SizeUp.Top:SetTexture(C.Media.Backdrop);
 		SizeUp.Top:SetVertexColor(1, 1, 1);
 		SizeUp.Right = WorldMapFrameSizeUpButton:CreateTexture(nil, 'OVERLAY');
 		SizeUp.Right:SetSize(1, 7);
 		SizeUp.Right:SetPoint('RIGHT', -3, 2);
-		SizeUp.Right:SetTexture(C.media.backdrop);
+		SizeUp.Right:SetTexture(C.Media.Backdrop);
 		SizeUp.Right:SetVertexColor(1, 1, 1);
 		
 		for i = 1, 9 do
@@ -56,12 +56,12 @@ tinsert(C.modules['Aurora'], function()
 		SizeDown.Bottom = SizeDown:CreateTexture(nil, 'OVERLAY');
 		SizeDown.Bottom:SetSize(7, 1);
 		SizeDown.Bottom:SetPoint('BOTTOM', -2, 3);
-		SizeDown.Bottom:SetTexture(C.media.backdrop);
+		SizeDown.Bottom:SetTexture(C.Media.Backdrop);
 		SizeDown.Bottom:SetVertexColor(1, 1, 1);
 		SizeDown.Left = SizeDown:CreateTexture(nil, 'OVERLAY');
 		SizeDown.Left:SetSize(1, 7);
 		SizeDown.Left:SetPoint('LEFT', 3, -2);
-		SizeDown.Left:SetTexture(C.media.backdrop);
+		SizeDown.Left:SetTexture(C.Media.Backdrop);
 		SizeDown.Left:SetVertexColor(1, 1, 1);
 		
 		for i = 1, 9 do

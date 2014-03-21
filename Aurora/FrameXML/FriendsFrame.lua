@@ -68,7 +68,7 @@ tinsert(C.modules['Aurora'], function()
 		for _, Header in pairs(Headers) do
 			F.StripTextures(Header);
 			
-			Header:SetHighlightTexture(C.media.backdrop);
+			Header:SetHighlightTexture(C.Media.Backdrop);
 			local Highlight = Header:GetHighlightTexture();
 			Highlight:ClearAllPoints();
 			Highlight:SetPoint('TOPLEFT', 3, -4);
@@ -87,7 +87,7 @@ tinsert(C.modules['Aurora'], function()
 	F.StripTextures(GuildListScrollFrame);
 	F.ReskinScroll(GuildListScrollFrameScrollBar);
 	
-	F.ReskinArrow(GuildFrameGuildListToggleButton, 'right');
+	F.ReskinArrow(GuildFrameGuildListToggleButton, 'Right');
 	
 	F.Reskin(GuildFrameGuildInformationButton);
 	F.Reskin(GuildFrameAddMemberButton);

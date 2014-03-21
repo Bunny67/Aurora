@@ -33,7 +33,7 @@ tinsert(C.modules['Aurora'], function()
 	F.CreateBD(PVPTeamDetails)
 	PVPTeamDetails:SetPoint('TOPLEFT', PVPFrame, 'TOPRIGHT', -30, -14)
 	F.ReskinClose(PVPTeamDetailsCloseButton, 'TOPRIGHT', PVPTeamDetails, 'TOPRIGHT', -4, -4)
-	F.ReskinArrow(PVPTeamDetailsToggleButton, 'right')
+	F.ReskinArrow(PVPTeamDetailsToggleButton, 'Right')
 	
 	F.SetBD(PVPBattlegroundFrame, 8, -11, -33, 77)
 end)

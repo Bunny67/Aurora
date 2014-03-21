@@ -132,14 +132,14 @@ tinsert(C.modules['Aurora'], function()
 					Highlight:SetTexture(r, g, b, .2);
 
 					local ExpandArrow = _G['DropDownList'..level..'Button'..j..'ExpandArrow'];
-					ExpandArrow:SetNormalTexture(C.media.arrowRight);
+					ExpandArrow:SetNormalTexture(C.Media.ArrowRight);
 					ExpandArrow:SetSize(8, 8);
 				end
 
 				if not Button.notCheckable then
 					ToggleBackdrop(Button, true);
 					
-					local _, co = Check:GetTexCoord();
+					local _, _, _, co = Check:GetTexCoord();
 
 					if co == 0 then
 						Check:SetTexture('Interface\\Buttons\\UI-CheckBox-Check');

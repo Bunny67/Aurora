@@ -10,8 +10,8 @@ C.modules['Blizzard_BarbershopUI'] = function()
 		local Prev = _G['BarberShopFrameSelector'..i..'Prev'];
 		local Next = _G['BarberShopFrameSelector'..i..'Next'];
 		
-		F.ReskinArrow(Prev, 'left');
-		F.ReskinArrow(Next, 'right');
+		F.ReskinArrow(Prev, 'Left');
+		F.ReskinArrow(Next, 'Right');
 	end
 	
 	BarberShopFrameMoneyFrame:GetRegions():Hide();

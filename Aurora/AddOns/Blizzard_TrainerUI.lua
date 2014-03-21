@@ -29,13 +29,13 @@ C.modules['Blizzard_TrainerUI'] = function()
 		SkillButton.Minus = SkillButton:CreateTexture(nil, 'OVERLAY');
 		SkillButton.Minus:SetSize(7, 1);
 		SkillButton.Minus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Minus:SetTexture(C.media.backdrop);
+		SkillButton.Minus:SetTexture(C.Media.Backdrop);
 		SkillButton.Minus:SetVertexColor(1, 1, 1);
 
 		SkillButton.Plus = SkillButton:CreateTexture(nil, 'OVERLAY');
 		SkillButton.Plus:SetSize(1, 7);
 		SkillButton.Plus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Plus:SetTexture(C.media.backdrop);
+		SkillButton.Plus:SetTexture(C.Media.Backdrop);
 		SkillButton.Plus:SetVertexColor(1, 1, 1);
 
 		SkillButton:HookScript('OnEnter', ColourExpandOrCollapse);

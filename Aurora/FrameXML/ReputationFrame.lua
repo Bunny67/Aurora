@@ -10,7 +10,7 @@ tinsert(C.modules['Aurora'], function()
 			local ReputationBar = _G["ReputationBar"..i.."ReputationBar"];
 
 			if ReputationBar then
-				ReputationBar:SetStatusBarTexture(C.media.backdrop);
+				ReputationBar:SetStatusBarTexture(C.Media.Backdrop);
 
 				if not ReputationBar.Skins then
 					F.CreateBD(ReputationBar, .25);

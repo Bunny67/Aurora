@@ -22,13 +22,13 @@ tinsert(C.modules['Aurora'], function()
 		_G['TabardFrameCustomization'..i..'Middle']:Hide();
 		_G['TabardFrameCustomization'..i..'Right']:Hide();
 		
-		F.ReskinArrow(LeftButton, 'left');
-		F.ReskinArrow(RightButton, 'right');
+		F.ReskinArrow(LeftButton, 'Left');
+		F.ReskinArrow(RightButton, 'Right');
 	end
 	
-	F.ReskinArrow(TabardCharacterModelRotateLeftButton, 'left');
+	F.ReskinArrow(TabardCharacterModelRotateLeftButton, 'Left');
 	TabardCharacterModelRotateLeftButton:SetPoint('BOTTOMLEFT', 4, 4);
-	F.ReskinArrow(TabardCharacterModelRotateRightButton, 'right');
+	F.ReskinArrow(TabardCharacterModelRotateRightButton, 'Right');
 	TabardCharacterModelRotateRightButton:SetPoint('TOPLEFT', TabardCharacterModelRotateLeftButton, 'TOPRIGHT', 4, 0);
 	
 	F.Reskin(TabardFrameAcceptButton);

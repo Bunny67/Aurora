@@ -15,7 +15,7 @@ tinsert(C.modules['Aurora'], function()
 		local StatusBarBorder = _G['SkillRankFrame'..statusBarID..'Border'];
 		local StatusBarBackground = _G['SkillRankFrame'..statusBarID..'Background'];
 		
-		StatusBar:SetStatusBarTexture(C.media.backdrop);
+		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
 
 		F.CreateBD(StatusBar, .25)
 		
@@ -46,7 +46,7 @@ tinsert(C.modules['Aurora'], function()
 		local StatusBarBorder = _G['SkillDetailStatusBarBorder'];
 		local StatusBarBackground = _G['SkillDetailStatusBarBackground'];
 		
-		StatusBar:SetStatusBarTexture(C.media.backdrop);
+		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
 		F.CreateBD(StatusBar, .25);
 		
 		StatusBarBorder:SetTexture(nil);
