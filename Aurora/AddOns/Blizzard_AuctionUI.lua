@@ -1,16 +1,96 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
-local _G = _G
-local r, g, b = C.classcolours[F.Class].r, C.classcolours[F.Class].g, C.classcolours[F.Class].b
+local _G = getfenv(0);
+local unpack = unpack;
+local select = select;
 
 C.modules['Blizzard_AuctionUI'] = function()
-	local AllAuctionUIStripTextures = {'AuctionFrame', 'BrowseFilterScrollFrame', 'BrowseScrollFrame', 'BidScrollFrame', 'AuctionsScrollFrame'}
-	for i = 1, #AllAuctionUIStripTextures do
-		F.StripTextures(_G[AllAuctionUIStripTextures[i]], true);
+	local function AuctionSortButton(Frame)
+		Frame:DisableDrawLayer('BACKGROUND');
+
+		local BG = CreateFrame('Frame', nil, Frame);
+		BG:SetPoint('TOPLEFT', 2, 0);
+		BG:SetPoint('BOTTOMRIGHT', -1, 0);
+		BG:SetFrameLevel(Frame:GetFrameLevel() -1 );
+		F.CreateBD(BG, 0);
+		F.CreateGradient(BG);
+		
+		Frame:SetHighlightTexture(C.media.backdrop);
+		Frame:GetHighlightTexture():ClearAllPoints();
+		Frame:GetHighlightTexture():SetPoint('TOPLEFT', 3, -1);
+		Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -2, 1);
+		Frame:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
+	end
+	-- AuctionFrame;
+	AuctionFrame:DisableDrawLayer('BACKGROUND');
+	AuctionFrame:DisableDrawLayer('ARTWORK');
+	
+	F.SetBD(AuctionFrame, 11, -12, -1, 10);
+	
+	for i = 1, 3 do
+		local Tab = _G['AuctionFrameTab'..i];
+		
+		F.ReskinTab(Tab);
 	end
 	
-	F.ReskinDropDown(_G['PriceDropDown']);
-	F.ReskinDropDown(_G['DurationDropDown']);
+	F.ReskinClose(AuctionFrameCloseButton, 'TOPRIGHT', AuctionFrame, 'TOPRIGHT', -5, -16);
+	-- AuctionFrameBrowse;
+	for i = 1, NUM_FILTERS_TO_DISPLAY do
+		local Button = _G['AuctionFilterButton'..i];
+		
+		Button:DisableDrawLayer('BACKGROUND');
+		Button:GetNormalTexture():SetTexture(nil);
+		
+		F.StyleButton(Button);
+	end
+	
+	BrowseFilterScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(BrowseFilterScrollFrameScrollBar);
+	
+	BrowseScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(BrowseScrollFrameScrollBar);
+	
+	AuctionSortButton(BrowseQualitySort);
+	AuctionSortButton(BrowseLevelSort);
+	AuctionSortButton(BrowseDurationSort);
+	AuctionSortButton(BrowseHighBidderSort);
+	AuctionSortButton(BrowseCurrentBidSort);
+	
+	for i = 1, NUM_BROWSE_TO_DISPLAY do
+		local Button = _G['BrowseButton'..i];
+		local Item = _G['BrowseButton'..i..'Item'];
+		local ItemIconTexture = _G['BrowseButton'..i..'ItemIconTexture'];
+		
+		_G['BrowseButton'..i..'Left']:Hide();
+		_G['BrowseButton'..i..'Right']:Hide();
+		
+		select(6, Button:GetRegions()):Hide();
+		
+		Button:SetHighlightTexture(C.media.backdrop);
+		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
+		Button:GetHighlightTexture():ClearAllPoints();
+		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
+		Button:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -1, 6);
+		
+		local BD = CreateFrame('Frame', nil, Button);
+		BD:SetPoint('TOPLEFT');
+		BD:SetPoint('BOTTOMRIGHT', 0, 5);
+		BD:SetFrameLevel(Button:GetFrameLevel() - 1);
+		F.CreateBD(BD, .25);
+		
+		Item:SetNormalTexture(nil);
+		F.StyleButton(Item);
+		F.CreateBG(Item);
+		
+		Item.Hover:SetAllPoints();
+		Item.Pushed:SetAllPoints();
+		
+		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+	end
+	
+	F.ReskinInput(BrowseName);
+	F.ReskinInput(BrowseMinLevel);
+	F.ReskinInput(BrowseMaxLevel);
 	
 	BrowseDropDownLeft:SetAlpha(0);
 	BrowseDropDownMiddle:SetAlpha(0);
@@ -21,178 +101,199 @@ C.modules['Blizzard_AuctionUI'] = function()
 	BrowseDropDownButton:SetSize(16, 16);
 	F.Reskin(BrowseDropDownButton, true);
 
-	local tex = BrowseDropDownButton:CreateTexture(nil, 'OVERLAY');
-	tex:SetTexture(C.media.arrowDown);
-	tex:SetSize(8, 8);
-	tex:SetPoint('CENTER');
-	tex:SetVertexColor(1, 1, 1);
-	BrowseDropDownButton.tex = tex;
-
+	local Texture = BrowseDropDownButton:CreateTexture(nil, 'OVERLAY');
+	Texture:SetTexture(C.media.arrowDown);
+	Texture:SetSize(8, 8);
+	Texture:SetPoint('CENTER');
+	Texture:SetVertexColor(1, 1, 1);
+	BrowseDropDownButton.Texture = Texture;
+	
+	BrowseDropDownButton:HookScript('OnEnter', F.ColourArrow);
+	BrowseDropDownButton:HookScript('OnLeave', F.ClearArrow);
+	
 	local bg = CreateFrame('Frame', nil, BrowseDropDown);
-	bg:SetPoint('TOPLEFT', 16, -5);
+	bg:SetPoint('TOPLEFT', 22, -5);
 	bg:SetPoint('BOTTOMRIGHT', 109, 11);
-	bg:SetFrameLevel(BrowseDropDown:GetFrameLevel(-1));
+	bg:SetFrameLevel(BrowseDropDown:GetFrameLevel() - 1);
 	F.CreateBD(bg, 0);
 	F.CreateGradient(bg);
-
-	local AllAuctionUIScrollbars = {'BrowseFilterScrollFrameScrollBar', 'BrowseScrollFrameScrollBar', 'BidScrollFrameScrollBar', 'AuctionsScrollFrameScrollBar'}
-	for i = 1, #AllAuctionUIScrollbars do
-		F.ReskinScroll(_G[AllAuctionUIScrollbars[i]])
-	end
 	
-	local AllAuctionUIInputs = {'BrowseName', 'BrowseMinLevel', 'BrowseMaxLevel', 'BrowseBidPriceGold', 'BrowseBidPriceSilver', 'BrowseBidPriceCopper', 'BidBidPriceGold', 'BidBidPriceSilver', 'BidBidPriceCopper', 'AuctionsStackSizeEntry', 'AuctionsNumStacksEntry', 'StartPriceGold', 'StartPriceSilver', 'StartPriceCopper', 'BuyoutPriceGold', 'BuyoutPriceSilver', 'BuyoutPriceCopper'}
-	for i = 1, #AllAuctionUIInputs do
-		F.ReskinInput(_G[AllAuctionUIInputs[i]])
-	end
+	F.ReskinCheck(IsUsableCheckButton);
+	F.ReskinCheck(ShowOnPlayerCheckButton);
 	
-	F.ReskinCheck(_G['IsUsableCheckButton']);
-	F.ReskinCheck(_G['ShowOnPlayerCheckButton']);
+	F.Reskin(BrowseSearchButton);
 	
-	for i = 1, 3 do
-		F.ReskinTab(_G['AuctionFrameTab'..i]);
-	end
+	F.ReskinArrow(BrowsePrevPageButton, 'left');
+	F.ReskinArrow(BrowseNextPageButton, 'right');
 	
-	local AllAuctionUISortTabs = {'BrowseQualitySort', 'BrowseLevelSort', 'BrowseDurationSort', 'BrowseHighBidderSort', 'BrowseCurrentBidSort', 'BidQualitySort', 'BidLevelSort', 'BidDurationSort', 'BidBuyoutSort', 'BidStatusSort', 'BidBidSort', 'AuctionsQualitySort', 'AuctionsDurationSort', 'AuctionsHighBidderSort', 'AuctionsBidSort'}
-	for _, AllAuctionUISortTab in pairs(AllAuctionUISortTabs) do
-		F.Kill(_G[AllAuctionUISortTab..'Left']);
-		F.Kill(_G[AllAuctionUISortTab..'Middle']);
-		F.Kill(_G[AllAuctionUISortTab..'Right']);
-
-		local bg = CreateFrame("Frame", nil, _G[AllAuctionUISortTab]);
-		bg:SetPoint("TOPLEFT", 2, 0);
-		bg:SetPoint("BOTTOMRIGHT", -1, 0);
-		bg:SetFrameLevel(_G[AllAuctionUISortTab]:GetFrameLevel() -1 );
-		F.CreateBD(bg, 0);
-		F.CreateGradient(bg);
-		
-		_G[AllAuctionUISortTab]:SetHighlightTexture(C.media.backdrop);
-		local ght = _G[AllAuctionUISortTab]:GetHighlightTexture();
-		ght:ClearAllPoints();
-		ght:SetPoint("TOPLEFT", 3, -1);
-		ght:SetPoint("BOTTOMRIGHT", -2, 1);
-		ght:SetVertexColor(r, g, b, .25)
-	end
+	F.Reskin(BrowseCloseButton);
+	BrowseBuyoutButton:SetPoint('RIGHT', BrowseCloseButton, 'LEFT', -1, 0);
+	F.Reskin(BrowseBuyoutButton);
+	BrowseBidButton:SetPoint('RIGHT', BrowseBuyoutButton, 'LEFT', -1, 0);
+	F.Reskin(BrowseBidButton);
 	
-	local AllAuctionUIButtons = {'BrowseResetButton', 'BrowseSearchButton', 'BrowseBidButton', 'BrowseBuyoutButton', 'BrowseCloseButton', 'BidBidButton', 'BidBuyoutButton', 'BidCloseButton', 'AuctionsCloseButton'}
-	for i = 1, #AllAuctionUIButtons do
-		F.Reskin(_G[AllAuctionUIButtons[i]]);
-	end
+	F.ReskinInput(BrowseBidPriceGold);
+	F.ReskinInput(BrowseBidPriceSilver);
+	F.ReskinInput(BrowseBidPriceCopper);
 	
-	F.Reskin(_G['AuctionsStackSizeMaxButton'], nil, true);
-	F.Reskin(_G['AuctionsNumStacksMaxButton'], nil, true);
-	F.Reskin(_G['AuctionsCreateAuctionButton'], nil, true);
-	F.Reskin(_G['AuctionsCancelAuctionButton'], nil, true);
+	F.Reskin(BrowseResetButton);
+	-- AuctionFrameBid;
+	AuctionSortButton(BidQualitySort);
+	AuctionSortButton(BidLevelSort);
+	AuctionSortButton(BidDurationSort);
+	AuctionSortButton(BidBuyoutSort);
+	AuctionSortButton(BidStatusSort);
+	AuctionSortButton(BidBidSort);
 	
-	for i=1, NUM_FILTERS_TO_DISPLAY do
-		local btn = _G['AuctionFilterButton'..i];
-		F.StripTextures(btn);
-		F.StyleButton(btn);
-	end
+	BidScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(BidScrollFrameScrollBar);
 	
-	for i = 1, NUM_BROWSE_TO_DISPLAY do
-		local bu = _G["BrowseButton"..i];
-		local it = _G["BrowseButton"..i.."Item"];
-		
-		if _G["BrowseButton"..i.."ItemIconTexture"] then
-			_G["BrowseButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92);
-		end
-		
-		if bu and it then
-			it:SetNormalTexture("");
-			F.StyleButton(it);
-			F.CreateBG(it);
-			
-			it.Hover:SetAllPoints();
-			it.Pushed:SetAllPoints();
-			
-			F.StripTextures(bu)
-			local bd = CreateFrame("Frame", nil, bu)
-			bd:SetPoint("TOPLEFT")
-			bd:SetPoint("BOTTOMRIGHT", 0, 5)
-			bd:SetFrameLevel(bu:GetFrameLevel()-1)
-			F.CreateBD(bd, .25)
-
-			bu:SetHighlightTexture(C.media.backdrop)
-			local hl = bu:GetHighlightTexture()
-			hl:SetVertexColor(r, g, b, .25)
-			hl:ClearAllPoints()
-			hl:SetPoint("TOPLEFT", 0, -1)
-			hl:SetPoint("BOTTOMRIGHT", -1, 6)
-		end
-	end
-
 	for i = 1, NUM_BIDS_TO_DISPLAY do
-		local bu = _G["BidButton"..i]
-		local it = _G["BidButton"..i.."Item"]
+		local Button = _G['BidButton'..i];
+		local Item = _G['BidButton'..i..'Item'];
+		local ItemIconTexture = _G['BidButton'..i..'ItemIconTexture'];
 		
-		if _G["BidButton"..i.."ItemIconTexture"] then
-			_G["BidButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		end
-
-		it:SetNormalTexture("")
-		F.StyleButton(it)
-		F.CreateBG(it)
+		_G['BidButton'..i..'Left']:Hide();
+		_G['BidButton'..i..'Right']:Hide();
 		
-		it.Hover:SetAllPoints();
-		it.Pushed:SetAllPoints();
+		select(6, Button:GetRegions()):Hide();
 		
-		F.StripTextures(bu)
-		local bd = CreateFrame("Frame", nil, bu)
-		bd:SetPoint("TOPLEFT")
-		bd:SetPoint("BOTTOMRIGHT", 0, 5)
-		bd:SetFrameLevel(bu:GetFrameLevel()-1)
-		F.CreateBD(bd, .25)
-
-		bu:SetHighlightTexture(C.media.backdrop)
-		local hl = bu:GetHighlightTexture()
-		hl:SetVertexColor(r, g, b, .25)
-		hl:ClearAllPoints()
-		hl:SetPoint("TOPLEFT", 0, -1)
-		hl:SetPoint("BOTTOMRIGHT", -1, 6)
+		Button:SetHighlightTexture(C.media.backdrop);
+		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
+		Button:GetHighlightTexture():ClearAllPoints();
+		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
+		Button:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -1, 6);
+		
+		local BD = CreateFrame('Frame', nil, Button);
+		BD:SetPoint('TOPLEFT');
+		BD:SetPoint('BOTTOMRIGHT', 0, 5);
+		BD:SetFrameLevel(Button:GetFrameLevel() - 1);
+		F.CreateBD(BD, .25);
+		
+		Item:SetNormalTexture(nil);
+		F.StyleButton(Item);
+		F.CreateBG(Item);
+		
+		Item.Hover:SetAllPoints();
+		Item.Pushed:SetAllPoints();
+		
+		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
 	end
-
+	
+	F.ReskinInput(BidBidPriceGold);
+	F.ReskinInput(BidBidPriceSilver);
+	F.ReskinInput(BidBidPriceCopper);
+	
+	F.Reskin(BidCloseButton);
+	BidBuyoutButton:SetPoint('RIGHT', BidCloseButton, 'LEFT', -1, 0);
+	F.Reskin(BidBuyoutButton);
+	BidBidButton:SetPoint('RIGHT', BidBuyoutButton, 'LEFT', -1, 0);
+	F.Reskin(BidBidButton);
+	-- AuctionFrameAuctions;
+	AuctionSortButton(AuctionsQualitySort);
+	AuctionSortButton(AuctionsDurationSort);
+	AuctionSortButton(AuctionsHighBidderSort);
+	AuctionSortButton(AuctionsBidSort);
+	
+	AuctionsScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(AuctionsScrollFrameScrollBar);
+	
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
-		local bu = _G["AuctionsButton"..i]
-		local it = _G["AuctionsButton"..i.."Item"]
+		local Button = _G['AuctionsButton'..i];
+		local Item = _G['AuctionsButton'..i..'Item'];
+		local ItemIconTexture = _G['AuctionsButton'..i..'ItemIconTexture'];
 		
-		if _G["AuctionsButton"..i.."ItemIconTexture"] then
-			_G["AuctionsButton"..i.."ItemIconTexture"]:SetTexCoord(.08, .92, .08, .92)
-		end
-
-		it:SetNormalTexture("")
-		F.StyleButton(it)
-		F.CreateBG(it)
+		_G['AuctionsButton'..i..'Left']:Hide();
+		_G['AuctionsButton'..i..'Right']:Hide();
 		
-		it.Hover:SetAllPoints();
-		it.Pushed:SetAllPoints();
+		select(5, Button:GetRegions()):Hide();
 		
-		F.StripTextures(bu)
-		local bd = CreateFrame("Frame", nil, bu)
-		bd:SetPoint("TOPLEFT")
-		bd:SetPoint("BOTTOMRIGHT", 0, 5)
-		bd:SetFrameLevel(bu:GetFrameLevel()-1)
-		F.CreateBD(bd, .25)
-
-		bu:SetHighlightTexture(C.media.backdrop)
-		local hl = bu:GetHighlightTexture()
-		hl:SetVertexColor(r, g, b, .25)
-		hl:ClearAllPoints()
-		hl:SetPoint("TOPLEFT", 0, -1)
-		hl:SetPoint("BOTTOMRIGHT", -1, 6)
+		Button:SetHighlightTexture(C.media.backdrop);
+		Button:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
+		Button:GetHighlightTexture():ClearAllPoints();
+		Button:GetHighlightTexture():SetPoint('TOPLEFT', 0, -1);
+		Button:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -1, 6);
+		
+		local BD = CreateFrame('Frame', nil, Button);
+		BD:SetPoint('TOPLEFT');
+		BD:SetPoint('BOTTOMRIGHT', 0, 5);
+		BD:SetFrameLevel(Button:GetFrameLevel() - 1);
+		F.CreateBD(BD, .25);
+		
+		Item:SetNormalTexture(nil);
+		F.StyleButton(Item);
+		F.CreateBG(Item);
+		
+		Item.Hover:SetAllPoints();
+		Item.Pushed:SetAllPoints();
+		
+		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
 	end
 	
-	F.StripTextures(AuctionsItemButton)
-	F.StyleButton(AuctionsItemButton, nil, true)
-	F.CreateBD(AuctionsItemButton, .25)
-
-	AuctionsItemButton:SetScript("OnUpdate", function()
-		if AuctionsItemButton:GetNormalTexture() then
-			AuctionsItemButton:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
-		end
-	end)
+	select(2, AuctionsItemButton:GetRegions()):Hide();
 	
-	F.SetBD(AuctionFrame, 10, -12, 0, 10)
-	F.ReskinClose(AuctionFrameCloseButton, 'TOPRIGHT', AuctionFrame, 'TOPRIGHT', -4, -16)
-	F.ReskinArrow(BrowsePrevPageButton, "left")
-	F.ReskinArrow(BrowseNextPageButton, "right")
+	F.StyleButton(AuctionsItemButton, nil, true);
+	F.CreateBD(AuctionsItemButton, .25);
+	
+	AuctionsItemButton:HookScript('OnEvent', function(self, event)
+		if ( event == 'NEW_AUCTION_UPDATE' and self:GetNormalTexture() ) then
+			self:GetNormalTexture():SetTexCoord(unpack(F.TexCoords));
+			self:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
+			self:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
+		end
+	end);
+	
+	F.ReskinInput(AuctionsStackSizeEntry);
+	F.Reskin(AuctionsStackSizeMaxButton, nil, true);
+	
+	F.ReskinInput(AuctionsNumStacksEntry);
+	F.Reskin(AuctionsNumStacksMaxButton, nil, true);
+	
+	F.ReskinDropDown(PriceDropDown);
+	
+	F.ReskinInput(StartPriceGold);
+	F.ReskinInput(StartPriceSilver);
+	F.ReskinInput(StartPriceCopper);
+	
+	F.ReskinInput(BuyoutPriceGold);
+	F.ReskinInput(BuyoutPriceSilver);
+	F.ReskinInput(BuyoutPriceCopper);
+	
+	F.ReskinDropDown(DurationDropDown);
+	
+	F.Reskin(AuctionsCloseButton);
+	AuctionsCancelAuctionButton:SetPoint('RIGHT', AuctionsCloseButton, 'LEFT', -1, 0);
+	F.Reskin(AuctionsCancelAuctionButton, nil, true);
+	F.Reskin(AuctionsCreateAuctionButton, nil, true);
+	-- AuctionProgressFrame;
+	AuctionProgressFrame:DisableDrawLayer('ARTWORK');
+	
+	F.CreateBD(AuctionProgressFrame);
+	
+	AuctionProgressFrameFill:Hide();
+	
+	select(2, AuctionProgressBar:GetRegions()):Hide();
+	
+	F.CreateBD(AuctionProgressBar, .25);
+	AuctionProgressBar:SetStatusBarTexture(C.media.backdrop);
+	
+	AuctionProgressBarIcon:SetTexCoord(unpack(F.TexCoords))
+	F.CreateBG(AuctionProgressBarIcon);
+	--AuctionDressUpFrame
+	AuctionDressUpFrameTop:Hide()
+	select(2, AuctionDressUpFrame:GetRegions()):Hide();
+	AuctionDressUpBackgroundTop:Hide();
+	AuctionDressUpBackgroundBot:Hide();
+	
+	F.CreateBD(AuctionDressUpFrame);
+	
+	AuctionDressUpModelRotateLeftButton:SetPoint('TOPLEFT', AuctionDressUpFrame, 4, -4);
+	F.ReskinArrow(AuctionDressUpModelRotateLeftButton, 'left');
+	AuctionDressUpModelRotateRightButton:SetPoint('TOPLEFT', AuctionDressUpModelRotateLeftButton, 'TOPRIGHT', -1, 0);
+	F.ReskinArrow(AuctionDressUpModelRotateRightButton, 'right');
+	
+	F.Reskin(AuctionDressUpFrameResetButton);
+	
+	AuctionDressUpFrameCloseButton:DisableDrawLayer('BACKGROUND');
+	F.ReskinClose(AuctionDressUpFrameCloseButton, 'CENTER', AuctionDressUpFrame, 'TOPRIGHT', -14, -13);
 end
