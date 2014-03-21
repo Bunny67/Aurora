@@ -48,8 +48,6 @@ tinsert(C.modules['Aurora'], function()
 			QuestIndex = i + ScrollOffset;
 			
 			if not QuestLogTitle.Skins then
-				QuestLogTitle.Skins = true
-
 				QuestLogTitle:SetNormalTexture('');
 				QuestLogTitle.SetNormalTexture = F.dummy;
 				QuestLogTitle:SetPushedTexture('');
@@ -76,6 +74,8 @@ tinsert(C.modules['Aurora'], function()
 				QuestLogTitle.Plus:SetPoint('CENTER', QuestLogTitle.BG);
 				QuestLogTitle.Plus:SetTexture(C.media.backdrop);
 				QuestLogTitle.Plus:SetVertexColor(1, 1, 1);
+				
+				QuestLogTitle.Skins = true;
 			end
 			
 			if ( QuestIndex <= NumEntries ) then
@@ -83,12 +83,13 @@ tinsert(C.modules['Aurora'], function()
 				
 				if ( isHeader ) then
 					QuestLogTitle.BG:Show();
-					QuestLogTitle.Gradient:Hide();
-					QuestLogTitle.Minus:Show()
-					if isCollapsed then
-						QuestLogTitle.Plus:Show()
+					QuestLogTitle.Gradient:Show();
+					QuestLogTitle.Minus:Show();
+					
+					if ( isCollapsed ) then
+						QuestLogTitle.Plus:Show();
 					else
-						QuestLogTitle.Plus:Hide()
+						QuestLogTitle.Plus:Hide();
 					end
 				else
 					QuestLogTitle.BG:Hide();

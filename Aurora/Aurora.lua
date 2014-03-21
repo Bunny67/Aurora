@@ -1,3 +1,7 @@
+--   _  _   _ ___  ___  ___   _   --
+--  /,\| | | | , |/ _ \| , | /,\  --
+-- / _ | |_| |   \ (_) |   \/ _ \ --
+--/_/ \_\__,_|_|\_\___/|_|\_\/ \_\--
 local alpha, useButtonGradientColour
 local addon, core = ...
 
@@ -489,7 +493,6 @@ F.ReskinSlider = function(Frame)
 	local BD = CreateFrame('Frame', nil, Frame);
 	BD:SetPoint('TOPLEFT', 14, -2);
 	BD:SetPoint('BOTTOMRIGHT', -15, 3);
-	BD:SetFrameStrata('BACKGROUND');
 	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
 	F.CreateBD(BD, 0);
 
@@ -761,9 +764,9 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 
 		hooksecurefunc('OptionsListButtonToggle_OnClick', function(self)
 			if self:GetParent().element.collapsed then
-				self.plus:Show()
+				self.Plus:Show()
 			else
-				self.plus:Hide()
+				self.Plus:Hide()
 			end
 		end)
 		
