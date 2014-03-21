@@ -34,6 +34,7 @@
 	<Script file="TokenFrame.lua"/>
 	<Script file="TradeFrame.lua"/>
 	<Script file="UIDropDownMenu.lua"/>
+	<Script file="WatchFrame.lua"/>
 	<Script file="WorldMapFrame.lua"/>
 	<Script file="WorldStateFrame.lua"/>
 </Ui>
