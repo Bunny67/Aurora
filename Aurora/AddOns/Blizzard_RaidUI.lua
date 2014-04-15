@@ -24,7 +24,7 @@ C.modules["Blizzard_RaidUI"] = function()
 		GroupButton.Gradient = GroupButton:CreateTexture(nil, 'BORDER');
 		GroupButton.Gradient:SetPoint('TOPLEFT', 1, -1);
 		GroupButton.Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
-		GroupButton.Gradient:SetTexture(C.media.backdrop)
+		GroupButton.Gradient:SetTexture(C.Media.Backdrop)
 		GroupButton.Gradient:SetVertexColor(.2, .2, .2, 1)
 	end
 	

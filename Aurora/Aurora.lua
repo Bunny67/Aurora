@@ -1008,7 +1008,7 @@ Delay:SetScript('OnEvent', function()
 		LootFrameNext:ClearAllPoints();
 		LootFrameNext:SetPoint('RIGHT', LootFrameDownButton, 'LEFT', -4, 0);
 		
-		F.ReskinArrow(LootFrameUpButton, 'up');
-		F.ReskinArrow(LootFrameDownButton, 'down');
+		F.ReskinArrow(LootFrameUpButton, 'Up');
+		F.ReskinArrow(LootFrameDownButton, 'Down');
 	end
 end)
