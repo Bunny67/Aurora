@@ -226,6 +226,14 @@ tinsert(C.modules['Aurora'], function()
 	F.StripTextures(LFDQueueFrame, true);
 	F.SetBD(LFDQueueFrame, 10, -12, -2, 1);
 	
+	for i = 1, _G['LFDParentFrame']:GetNumChildren() do
+		local Child = select(i, _G['LFDParentFrame']:GetChildren());
+		
+		if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
+			F.ReskinClose(Child, 'TOPRIGHT', LFDParentFrame, 'TOPRIGHT', -6, -16);
+		end
+	end
+	
 	for _, RoleButton in pairs({LFDQueueFrameRoleButtonTank, LFDQueueFrameRoleButtonHealer, LFDQueueFrameRoleButtonDPS, LFDQueueFrameRoleButtonLeader}) do
 		if RoleButton.background then
 			RoleButton.background:SetTexture('');
