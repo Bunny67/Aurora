@@ -1,39 +1,61 @@
 local F, C = unpack(select(2, ...))
 
+local _G = getfenv(0);
+local select = select;
+
+local Hoop = F.dummy;
+
 tinsert(C.modules['Aurora'], function()
-	local AllPVPFrameStripTextures = {'PVPFrame', 'PVPTeamDetails', 'PVPBattlegroundFrame', 'PVPBattlegroundFrameTypeScrollFrame'}
-	for i = 1, #AllPVPFrameStripTextures do
-		F.StripTextures(_G[AllPVPFrameStripTextures[i]], true)
+	-- PVPParentFrame;
+	F.SetBD(PVPParentFrame, 13, -13, -32, 76);
+	
+	F.ReskinClose(PVPParentFrameCloseButton, 'TOPRIGHT', PVPParentFrame, 'TOPRIGHT', -36, -17);
+	-- PVPFrame;
+	PVPFramePortrait:Hide();
+	
+	for i = 1, PVPFrame:GetNumRegions() do
+		local Region = select(i, PVPFrame:GetRegions());
+		
+		if ( Region and Region:GetObjectType() == 'Texture' ) then
+			Region:Hide();
+		end
 	end
-
-	local AllPVPFrameScrollbars = {'PVPBattlegroundFrameTypeScrollFrameScrollBar'}
-	for i = 1, #AllPVPFrameScrollbars do
-		F.ReskinScroll(_G[AllPVPFrameScrollbars[i]])
+	
+	for i = 1, MAX_ARENA_TEAMS do
+		local Team = _G['PVPTeam'..i];
+		local TeamHighlight = _G['PVPTeam'..i..'Highlight'];
+		
+		F.SetBD(Team, 9, -4, -24, 3);
+		
+		TeamHighlight:Hide();
+		TeamHighlight.Show = Hoop;
 	end
-
-	for i = 1, 2 do
-		F.ReskinTab(_G['PVPParentFrameTab'..i])
+	-- PVPTeamDetails;
+	F.CreateBD(PVPTeamDetails);
+	
+	for i = 1, PVPTeamDetails:GetNumRegions() do
+		local Region = select(i, PVPTeamDetails:GetRegions());
+		
+		if ( Region and Region:GetObjectType() == 'Texture' ) then
+			Region:Hide();
+		end
 	end
+	
+	F.ReskinClose(PVPTeamDetailsCloseButton, 'TOPRIGHT', PVPTeamDetails, 'TOPRIGHT', -4, -4);
 	
 	for i = 1, 5 do
-		F.StripTextures(_G['PVPTeamDetailsFrameColumnHeader'..i])
-	end
+		local Header = _G['PVPTeamDetailsFrameColumnHeader'..i];
 
-	local AllPVPFrameButtons = {'PVPTeamDetailsAddTeamMember', 'PVPBattlegroundFrameGroupJoinButton', 'PVPBattlegroundFrameJoinButton', 'PVPBattlegroundFrameCancelButton'}
-	for i = 1, #AllPVPFrameButtons do
-		F.Reskin(_G[AllPVPFrameButtons[i]])
+		F.ReskinHeader(Header);
 	end
-
-	PVPBattlegroundFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1)
-	PVPBattlegroundFrameInfoScrollFrameChildFrameRewardsInfo.description:SetTextColor(1, 1, 1)
 	
-	F.SetBD(PVPFrame, 10, -12, -31, 76)
-	F.ReskinClose(PVPParentFrameCloseButton, 'TOPRIGHT', PVPFrame, 'TOPRIGHT', -35, -16)
+	F.Reskin(PVPTeamDetailsAddTeamMember);
 	
-	F.CreateBD(PVPTeamDetails)
-	PVPTeamDetails:SetPoint('TOPLEFT', PVPFrame, 'TOPRIGHT', -30, -14)
-	F.ReskinClose(PVPTeamDetailsCloseButton, 'TOPRIGHT', PVPTeamDetails, 'TOPRIGHT', -4, -4)
-	F.ReskinArrow(PVPTeamDetailsToggleButton, 'Right')
+	F.ReskinArrow(PVPTeamDetailsToggleButton, 'Right');
 	
-	F.SetBD(PVPBattlegroundFrame, 8, -11, -33, 77)
+	for i = 1, 2 do
+		local Tab = _G['PVPParentFrameTab'..i];
+		
+		F.ReskinTab(Tab);
+	end
 end)

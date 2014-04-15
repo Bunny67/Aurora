@@ -507,6 +507,35 @@ F.ReskinSlider = function(Frame)
 	Slider:SetBlendMode('ADD');
 end
 
+F.ReskinHeader = function(Frame)
+	if ( Frame:GetName() ) then
+		local Left = _G[Frame:GetName()..'Left'];
+		local Middle = _G[Frame:GetName()..'Middle'];
+		local Right = _G[Frame:GetName()..'Right'];
+
+
+		if ( Left ) then Left:SetAlpha(0); end
+		if ( Middle ) then Middle:SetAlpha(0); end
+		if ( Right ) then Right:SetAlpha(0); end
+	end
+	
+	Frame:SetHighlightTexture(C.Media.Backdrop);
+	local Highlight = Frame:GetHighlightTexture();
+	Highlight:ClearAllPoints();
+	Highlight:SetPoint('TOPLEFT', 3, -4);
+	Highlight:SetPoint('BOTTOMRIGHT', -2, 4);
+	Highlight:SetVertexColor(r, g, b, .25);
+	
+	local HeaderBG = CreateFrame('Frame', nil, Frame);
+	HeaderBG:SetPoint('TOPLEFT', 2, -3);
+	HeaderBG:SetPoint('BOTTOMRIGHT', -1, 3);
+	HeaderBG:SetFrameLevel(Frame:GetFrameLevel() - 1);
+	F.CreateBD(HeaderBG, 0);
+	F.CreateGradient(HeaderBG);
+	
+	return Frame;
+end
+
 local function ColourExpandOrCollapse(Frame)
 	if ( Frame:IsEnabled() ) then
 		Frame.Plus:SetVertexColor(r, g, b)

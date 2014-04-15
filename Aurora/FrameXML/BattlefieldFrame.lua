@@ -8,6 +8,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.Reskin(BattlefieldFrameCancelButton);
 	F.Reskin(BattlefieldFrameJoinButton);
+	BattlefieldFrameGroupJoinButton:SetPoint('RIGHT', BattlefieldFrameJoinButton, 'LEFT', -1, 0);
 	F.Reskin(BattlefieldFrameGroupJoinButton);
 	
 	F.ReskinClose(BattlefieldFrameCloseButton, 'TOPRIGHT', BattlefieldFrame, 'TOPRIGHT', -38, -16);
