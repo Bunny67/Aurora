@@ -17,7 +17,7 @@ tinsert(C.modules['Aurora'], function()
 		Frame.Minimize:SetVertexColor(1, 1, 1);
 	end
 
-	for i = 1, 4 do
+	for i = 1, STATICPOPUP_NUMDIALOGS do
 		local Frame = _G['StaticPopup'..i];
 		local Item = _G['StaticPopup'..i..'ItemFrame'];
 		local ItemIconTexture = _G['StaticPopup'..i..'ItemFrameIconTexture'];
@@ -25,9 +25,10 @@ tinsert(C.modules['Aurora'], function()
 		local Close = _G['StaticPopup'..i..'CloseButton'];
 		
 		local EditBox = _G['StaticPopup'..i..'EditBox'];
-		local Gold = _G["StaticPopup"..i.."MoneyInputFrameGold"];
-		local Silver = _G["StaticPopup"..i.."MoneyInputFrameSilver"];
-		local Copper = _G["StaticPopup"..i.."MoneyInputFrameCopper"];
+		local WideEditBox = _G['StaticPopup'..i..'WideEditBox'];
+		local Gold = _G['StaticPopup'..i..'MoneyInputFrameGold'];
+		local Silver = _G['StaticPopup'..i..'MoneyInputFrameSilver'];
+		local Copper = _G['StaticPopup'..i..'MoneyInputFrameCopper'];
 		
 		F.CreateBD(Frame);
 
@@ -36,9 +37,11 @@ tinsert(C.modules['Aurora'], function()
 		end
 		
 		Item:SetNormalTexture('');
-		Item:SetHighlightTexture('');
-		Item:SetPushedTexture('');
+		F.StyleButton(Item);
 		F.CreateBG(Item);
+		
+		Item.Hover:SetAllPoints();
+		Item.Pushed:SetAllPoints();
 		
 		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
 		
@@ -53,8 +56,13 @@ tinsert(C.modules['Aurora'], function()
 		Close.Minimize:SetVertexColor(1, 1, 1);
 		Close:HookScript('OnEnter', ColourMinimize);
 		Close:HookScript('OnLeave', ClearMinimize);
-
-		F.ReskinInput(EditBox);
+		
+		select(6, EditBox:GetRegions()):Hide();
+		select(7, EditBox:GetRegions()):Hide();
+		F.ReskinInput(EditBox, 22);
+		
+		select(8, WideEditBox:GetRegions()):Hide();
+		F.ReskinInput(WideEditBox, 22);
 		
 		F.ReskinInput(Gold);
 		F.ReskinInput(Silver);

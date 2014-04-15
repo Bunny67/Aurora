@@ -18,7 +18,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	F.ReskinClose(WorldStateScoreFrameCloseButton, 'TOPRIGHT', WorldStateScoreFrame, 'TOPRIGHT', -117, -19);
 	
-	hooksecurefunc('TokenFrame_Update', function()
+	--[[hooksecurefunc('TokenFrame_Update', function()
 		local scoreButtonLeft;
 		local scoreButtonRight;
 		
@@ -28,5 +28,5 @@ tinsert(C.modules['Aurora'], function()
 			scoreButtonLeft:SetTexture(C.Media.Backdrop);
 			scoreButtonRight:SetTexture(C.Media.Backdrop);
 		end
-	end);
+	end);]]
 end);
