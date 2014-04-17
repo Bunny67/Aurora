@@ -1,4 +1,4 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 tinsert(C.modules['Aurora'], function()
 	KnowledgeBaseFrameHeader:Hide();
@@ -29,4 +29,4 @@ tinsert(C.modules['Aurora'], function()
 	KnowledgeBaseFrameLag:SetPoint('LEFT', KnowledgeBaseFrameGMTalk, 'RIGHT', 1, 0);
 	F.Reskin(KnowledgeBaseFrameLag);
 	F.Reskin(KnowledgeBaseFrameCancel);
-end)
+end);

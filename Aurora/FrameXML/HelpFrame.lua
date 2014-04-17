@@ -1,4 +1,4 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 tinsert(C.modules['Aurora'], function()
 	-- HelpFrame;
@@ -61,4 +61,4 @@ tinsert(C.modules['Aurora'], function()
 	F.Reskin(HelpFrameWelcomeReportIssue);
 	F.Reskin(HelpFrameWelcomeStuck);
 	F.Reskin(HelpFrameWelcomeCancel);
-end)
+end);
