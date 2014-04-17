@@ -1,71 +1,64 @@
 local F, C = unpack(select(2, ...))
 
-local _G = getfenv(0);
-
 tinsert(C.modules['Aurora'], function()
-	F.StripTextures(_G['HelpFrame'], true);
-	F.SetBD(_G['HelpFrame'], 6, -6, -45, 14);
+	-- HelpFrame;
+	F.SetBD(HelpFrame, 6, -6, -45, 14);
 	
-	F.StripTextures(_G['KnowledgeBaseFrame'], true);
-	
-	local Header = CreateFrame('Frame', nil, HelpFrame);
+	local Header = F.CreateBG(HelpFrameHeader);
 	Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8);
 	Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32);
-	Header:SetFrameLevel(HelpFrame:GetFrameLevel());
-	F.CreateBD(Header, .0);
-	F.CreateGradient(Header);
 	
-	F.ReskinClose(_G['HelpFrameCloseButton'], 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
+	HelpFrame.Gradient = HelpFrame:CreateTexture(nil, 'ARTWORK');
+	HelpFrame.Gradient:SetPoint('TOPLEFT', Header, 1, -1);
+	HelpFrame.Gradient:SetPoint('BOTTOMRIGHT', Header, -1, 1);
+	HelpFrame.Gradient:SetTexture(C.Media.Backdrop);
+	HelpFrame.Gradient:SetVertexColor(.2, .2, .2, 1);
 	
-	F.Reskin(_G['GMChatOpenLog']);
-	F.Reskin(_G['KnowledgeBaseFrameTopIssuesButton']);
+	F.ReskinClose(HelpFrameCloseButton, 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
+	-- HelpFrameGMTalk;
+	F.Reskin(HelpFrameGMTalkOpenTicket);
+	F.Reskin(HelpFrameGMTalkCancel);
+	-- HelpFrameReportIssue;
+	F.Reskin(HelpFrameReportIssueOpenTicket);
+	F.Reskin(HelpFrameReportIssueCancel);
+	-- HelpFrameLag;
+	F.Reskin(HelpFrameLagLoot, nil, true);
+	F.Reskin(HelpFrameLagAuctionHouse, nil, true);
+	F.Reskin(HelpFrameLagMail, nil, true);
+	F.Reskin(HelpFrameLagChat, nil, true);
+	F.Reskin(HelpFrameLagMovement, nil, true);
+	F.Reskin(HelpFrameLagSpell, nil, true);
 	
-	F.StripTextures(_G['KnowledgeBaseFrameDivider']);
+	F.Reskin(HelpFrameLagCancel);
+	-- HelpFrameStuck;
+	F.Reskin(HelpFrameStuckStuck, nil, true);
+	F.Reskin(HelpFrameStuckOpenTicket, nil, true);
 	
-	F.ReskinInput(_G['KnowledgeBaseFrameEditBox'], 20);
+	F.Reskin(HelpFrameStuckCancel);
+	-- HelpFrameOpenTicket;
+	HelpFrameOpenTicketDividerLeft:Hide();
+	HelpFrameOpenTicketDividerMiddle:Hide();
+	HelpFrameOpenTicketDividerRight:Hide();
 	
-	F.ReskinScroll(_G['KnowledgeBaseArticleScrollFrameScrollBar']);
+	F.ReskinScroll(HelpFrameOpenTicketScrollFrameScrollBar);
 	
-	F.ReskinDropDown(_G['KnowledgeBaseFrameCategoryDropDown']);
-	F.ReskinDropDown(_G['KnowledgeBaseFrameSubCategoryDropDown']);
+	F.Reskin(HelpFrameOpenTicketCancel);
+	HelpFrameOpenTicketSubmit:SetPoint('RIGHT', HelpFrameOpenTicketCancel, 'LEFT', -1, 0);
+	F.Reskin(HelpFrameOpenTicketSubmit);
+	-- HelpFrameViewResponse;
+	F.ReskinScroll(HelpFrameViewResponseIssueScrollFrameScrollBar);
 	
-	F.Reskin(_G['KnowledgeBaseFrameSearchButton']);
+	HelpFrameViewResponseDivider:Hide();
 	
-	F.StripTextures(_G['KnowledgeBaseFrameDivider2']);
+	F.ReskinScroll(HelpFrameViewResponseMessageScrollFrameScrollBar);
 	
-	F.Reskin(_G['KnowledgeBaseFrameGMTalk']);
-	F.Reskin(_G['KnowledgeBaseFrameLag']);
-	F.Reskin(_G['KnowledgeBaseFrameReportIssue']);
-	F.Reskin(_G['KnowledgeBaseFrameStuck']);
-	F.Reskin(_G['KnowledgeBaseFrameEditTicket']);
-	F.Reskin(_G['KnowledgeBaseFrameAbandonTicket']);
-	
-	F.Reskin(_G['KnowledgeBaseFrameCancel']);
-	
-	F.Reskin(_G['HelpFrameGMTalkOpenTicket']); -- Связатся с ГМ
-	F.Reskin(_G['HelpFrameGMTalkCancel']);
-	
-	F.Reskin(_G['HelpFrameLagLoot'], nil, true); -- Сообщить о задержки
-	F.Reskin(_G['HelpFrameLagAuctionHouse'], nil, true);
-	F.Reskin(_G['HelpFrameLagMail'], nil, true);
-	F.Reskin(_G['HelpFrameLagChat'], nil, true);
-	F.Reskin(_G['HelpFrameLagMovement'], nil, true);
-	F.Reskin(_G['HelpFrameLagSpell'], nil, true);
-	
-	F.Reskin(_G['HelpFrameLagCancel']);
-	
-	F.Reskin(_G['HelpFrameReportIssueOpenTicket']); -- Сообщить о проблеме
-	
-	F.Reskin(_G['HelpFrameReportIssueCancel']);
-	
-	F.StripTextures(_G['HelpFrameOpenTicketDivider']);
-	
-	F.ReskinScroll(_G['HelpFrameOpenTicketScrollFrameScrollBar']);
-	
-	F.Reskin(_G['HelpFrameOpenTicketSubmit']);
-	F.Reskin(_G['HelpFrameOpenTicketCancel']);
-	
-	F.Reskin(_G['HelpFrameStuckStuck'], nil, true); -- Персонаж застрял
-	F.Reskin(_G['HelpFrameStuckOpenTicket'], nil, true);
-	F.Reskin(_G['HelpFrameStuckCancel']);
+	F.Reskin(HelpFrameViewResponseCancel);
+	F.Reskin(HelpFrameViewResponseMoreHelp);
+	HelpFrameViewResponseIssueResolved:SetPoint('LEFT', HelpFrameViewResponseMoreHelp, 'RIGHT', -1, 0);
+	F.Reskin(HelpFrameViewResponseIssueResolved);
+	-- HelpFrameWelcome;
+	F.Reskin(HelpFrameWelcomeGMTalk);
+	F.Reskin(HelpFrameWelcomeReportIssue);
+	F.Reskin(HelpFrameWelcomeStuck);
+	F.Reskin(HelpFrameWelcomeCancel);
 end)
