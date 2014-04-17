@@ -4,8 +4,8 @@ local _G = getfenv(0);
 local unpack = unpack;
 
 C.modules['Blizzard_TalentUI'] = function()
-	F.StripTextures(PlayerTalentFrame, true);
 	F.SetBD(PlayerTalentFrame, 10, -12, -31, 76);
+	PlayerTalentFramePortrait:Hide();
 	
 	F.ReskinClose(PlayerTalentFrameCloseButton, 'TOPRIGHT', PlayerTalentFrame, 'TOPRIGHT', -35, -16);
 	
@@ -36,8 +36,9 @@ C.modules['Blizzard_TalentUI'] = function()
 	F.StripTextures(PlayerTalentFramePreviewBar);
 	F.StripTextures(PlayerTalentFramePreviewBarFiller);
 	
-	F.Reskin(PlayerTalentFrameLearnButton);
 	F.Reskin(PlayerTalentFrameResetButton);
+	PlayerTalentFrameLearnButton:SetPoint('RIGHT', PlayerTalentFrameResetButton, 'LEFT', -1, 0);
+	F.Reskin(PlayerTalentFrameLearnButton);
 	
 	for i = 1, 4 do
 		local Tab = _G['PlayerTalentFrameTab'..i];

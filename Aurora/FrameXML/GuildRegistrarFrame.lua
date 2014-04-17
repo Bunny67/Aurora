@@ -5,7 +5,6 @@ local select = select;
 
 tinsert(C.modules['Aurora'], function()
 	F.SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
-	
 	GuildRegistrarFramePortrait:Hide();
 	
 	F.ReskinClose(GuildRegistrarFrameCloseButton, 'TOPRIGHT', GuildRegistrarFrame, 'TOPRIGHT', -34, -23);

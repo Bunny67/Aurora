@@ -857,10 +857,10 @@ Delay:SetScript('OnEvent', function()
 		end
 		
 		hooksecurefunc('ContainerFrame_Update', function(self)
-			local Name = self:GetName();
 			local ID = self:GetID();
+			local Name = self:GetName();
 
-			for i = 1, self.size do
+			for i = 1, self.size, 1 do
 				local Button = _G[Name..'Item'..i];
 				local ItemID = GetContainerItemID(ID, Button:GetID());
 				

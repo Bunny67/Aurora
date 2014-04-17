@@ -23,14 +23,15 @@ tinsert(C.modules['Aurora'], function()
 		
 		Button:SetTextColor(1, 1, 1);
 	end
-	
-	ArenaRegistrarPurchaseText:SetTextColor(1, 1, 1); -- ArenaRegistrarPurchaseFrame;
+	-- ArenaRegistrarPurchaseFrame;
+	ArenaRegistrarPurchaseText:SetTextColor(1, 1, 1);
 
 	F.Reskin(ArenaRegistrarFrameCancelButton);
 	F.Reskin(ArenaRegistrarFramePurchaseButton);
 	
 	for i = 1, ArenaRegistrarFrameEditBox:GetNumRegions() do
-		local Region = select(i, ArenaRegistrarFrameEditBox:GetRegions())
+		local Region = select(i, ArenaRegistrarFrameEditBox:GetRegions());
+		
 		if ( Region and Region:GetObjectType() == 'Texture' ) then
 			if ( Region:GetTexture() == 'Interface\\ChatFrame\\UI-ChatInputBorder-Left' ) or ( Region:GetTexture() == 'Interface\\ChatFrame\\UI-ChatInputBorder-Right' ) then
 				F.Kill(Region);
@@ -43,8 +44,8 @@ tinsert(C.modules['Aurora'], function()
 	F.SetBD(PVPBannerFrame, 10, -12, -33, 73);
 	
 	PVPBannerFramePortrait:Hide();
-	
-	F.StripTextures(PVPBannerFrameCustomizationFrame) -- PVPBannerFrameCustomizationFrame;
+	-- PVPBannerFrameCustomizationFrame;
+	F.StripTextures(PVPBannerFrameCustomizationFrame);
 	
 	for i = 1, 2 do
 		local Customization = _G['PVPBannerFrameCustomization'..i];

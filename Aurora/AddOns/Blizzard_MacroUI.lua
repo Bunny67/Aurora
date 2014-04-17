@@ -4,7 +4,6 @@ local _G = getfenv(0);
 local unpack = unpack;
 
 C.modules['Blizzard_MacroUI'] = function()
-	F.StripTextures(MacroFrame);
 	F.SetBD(_G['MacroFrame'], 10, -11, -32, 71);
 	
 	F.ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15);

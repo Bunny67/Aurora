@@ -11,6 +11,7 @@
 	<Script file="GuildRegistrarFrame.lua"/>
 	<Script file="HelpFrame.lua"/>
 	<Script file="ItemTextFrame.lua"/>
+	<Script file="KnowledgeBaseFrame.lua"/>
 	<Script file="LFDFrame.lua"/>
 	<Script file="LFGFrame.lua"/>
 	<Script file="MailFrame.lua"/>
