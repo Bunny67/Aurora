@@ -6,125 +6,134 @@ local unpack = unpack;
 local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
 
+local ColourExpandOrCollapse = F.ColourExpandOrCollapse;
+local ClearExpandOrCollapse = F.ClearExpandOrCollapse;
+
+local function StyleSkillButton(self)
+	self:SetNormalTexture('');
+	self.SetNormalTexture = Hoop;
+	self:SetPushedTexture('');
+	
+	self.BD = CreateFrame('Frame', nil, self);
+	self.BD:SetSize(13, 13);
+	self.BD:SetPoint('LEFT', 4, 1);
+	self.BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F.CreateBD(self.BD, 0);
+	
+	self.Gradient = F.CreateGradient(self);
+	self.Gradient:SetPoint('TOPLEFT', self.BD, 1, -1);
+	self.Gradient:SetPoint('BOTTOMRIGHT', self.BD, -1, 1);
+	
+	self.Minus = self:CreateTexture(nil, 'OVERLAY');
+	self.Minus:SetSize(7, 1);
+	self.Minus:SetPoint('CENTER', self.BD);
+	self.Minus:SetTexture(C.Media.Backdrop);
+	self.Minus:SetVertexColor(1, 1, 1);
+	
+	self.Plus = self:CreateTexture(nil, 'OVERLAY');
+	self.Plus:SetSize(1, 7);
+	self.Plus:SetPoint('CENTER', self.BD);
+	self.Plus:SetTexture(C.Media.Backdrop);
+	self.Plus:SetVertexColor(1, 1, 1);
+	
+	self:HookScript('OnEnter', ColourExpandOrCollapse);
+	self:HookScript('OnLeave', ClearExpandOrCollapse);
+end
+
 C.Modules['Blizzard_TrainerUI'] = function()
-	F.StripTextures(ClassTrainerFrame, true);
-	F.SetBD(ClassTrainerFrame, 10, -12, -31, 76);
+	F.SetBD(ClassTrainerFrame, 10, -12, -34, 74);
+	ClassTrainerFramePortrait:Hide();
 	
-	F.ReskinClose(ClassTrainerFrameCloseButton, 'TOPRIGHT', ClassTrainerFrame, 'TOPRIGHT', -35, -16);
+	select(2, ClassTrainerFrame:GetRegions()):Hide();
+	select(3, ClassTrainerFrame:GetRegions()):Hide();
 	
-	local ColourExpandOrCollapse = F.ColourExpandOrCollapse
-	local ClearExpandOrCollapse = F.ClearExpandOrCollapse
+	ClassTrainerFrameBottomLeft:Hide();
+	ClassTrainerFrameBottomRight:Hide();
 	
-	local function StyleSkillButton(SkillButton)
-		SkillButton:SetNormalTexture('');
-		SkillButton.SetNormalTexture = Hoop;
-		SkillButton:SetPushedTexture('');
-
-		SkillButton.BD = CreateFrame('Frame', nil, SkillButton);
-		SkillButton.BD:SetSize(13, 13);
-		SkillButton.BD:SetPoint("LEFT", 4, 1);
-		SkillButton.BD:SetFrameLevel(SkillButton:GetFrameLevel()-1);
-		F.CreateBD(SkillButton.BD, 0);
-
-		SkillButton.Gradient = F.CreateGradient(SkillButton);
-		SkillButton.Gradient:SetPoint('TOPLEFT', SkillButton.BD, 1, -1);
-		SkillButton.Gradient:SetPoint('BOTTOMRIGHT', SkillButton.BD, -1, 1);
-
-		SkillButton.Minus = SkillButton:CreateTexture(nil, 'OVERLAY');
-		SkillButton.Minus:SetSize(7, 1);
-		SkillButton.Minus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Minus:SetTexture(C.Media.Backdrop);
-		SkillButton.Minus:SetVertexColor(1, 1, 1);
-
-		SkillButton.Plus = SkillButton:CreateTexture(nil, 'OVERLAY');
-		SkillButton.Plus:SetSize(1, 7);
-		SkillButton.Plus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Plus:SetTexture(C.Media.Backdrop);
-		SkillButton.Plus:SetVertexColor(1, 1, 1);
-
-		SkillButton:HookScript('OnEnter', ColourExpandOrCollapse);
-		SkillButton:HookScript('OnLeave', ClearExpandOrCollapse);
-	end
+	ClassTrainerFrame:DisableDrawLayer('ARTWORK');
 	
-	F.StripTextures(ClassTrainerExpandButtonFrame);
+	ClassTrainerExpandButtonFrame:DisableDrawLayer('BACKGROUND');
 	
-	StyleSkillButton(ClassTrainerCollapseAllButton);
-	ClassTrainerCollapseAllButton:SetDisabledTexture('');
-	ClassTrainerCollapseAllButton:SetHighlightTexture('');
+	F.ReskinExpandOrCollapse(ClassTrainerCollapseAllButton);
 	
 	F.ReskinDropDown(ClassTrainerFrameFilterDropDown);
 	
+	ClassTrainerListScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(ClassTrainerListScrollFrameScrollBar);
+	
+	ClassTrainerDetailScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(ClassTrainerDetailScrollFrameScrollBar);
+	
+	ClassTrainerSkillIcon:GetRegions():Hide();
+	
+	F.Reskin(ClassTrainerTrainButton);
+	F.Reskin(ClassTrainerCancelButton);
+	
+	F.ReskinClose(ClassTrainerFrameCloseButton, 'TOPRIGHT', ClassTrainerFrame, 'TOPRIGHT', -38, -16);
+	
 	hooksecurefunc('ClassTrainerFrame_Update', function()
-		local numTrainerServices = GetNumTrainerServices();
-		local skillOffset = FauxScrollFrame_GetOffset(ClassTrainerListScrollFrame);
-		local diplayedSkills = TRADE_SKILLS_DISPLAYED
-		local serviceType, isExpanded;
-		local buttonIndex = 0
+		local NumTrainerServices = GetNumTrainerServices();
+		local SkillOffset = FauxScrollFrame_GetOffset(ClassTrainerListScrollFrame);
+		local DiplayedSkills = TRADE_SKILLS_DISPLAYED;
+		local ServiceType, IsExpanded;
+		local ButtonIndex = 0;
 		
 		for i = 1, CLASS_TRAINER_SKILLS_DISPLAYED, 1 do
-			local skillIndex = i + skillOffset;
-			buttonIndex = i
+			local SkillIndex = i + SkillOffset;
+			ButtonIndex = i;
 			
-			local skillButton = _G['ClassTrainerSkill'..buttonIndex]
+			local SkillButton = _G['ClassTrainerSkill'..ButtonIndex];
 
-			if not skillButton.styled then
-				skillButton.styled = true
+			if ( SkillButton and not SkillButton.BD ) then
+				local ButtonHighlight = _G['ClassTrainerSkill'..ButtonIndex..'Highlight'];
+				ButtonHighlight:SetTexture('');
+				ButtonHighlight.SetTexture = Hoop;
 
-				local buttonHighlight = _G['ClassTrainerSkill'..buttonIndex..'Highlight']
-				buttonHighlight:SetTexture('')
-				buttonHighlight.SetTexture = Hoop
-
-				StyleSkillButton(skillButton)
+				StyleSkillButton(SkillButton);
 			end
 
-			if skillIndex <= numTrainerServices then
-				_, _, serviceType, isExpanded = GetTrainerServiceInfo(skillIndex);
+			if ( SkillIndex <= NumTrainerServices ) then
+				_, _, ServiceType, IsExpanded = GetTrainerServiceInfo(SkillIndex);
 				
-				if serviceType == 'header' then
-					skillButton.BD:SetPoint('LEFT', 4, 1);
+				if ( ServiceType == 'header' ) then
+					SkillButton.BD:SetPoint('LEFT', 4, 1);
 
-					skillButton.BD:Show();
-					skillButton.Gradient:Show();
-					skillButton.Minus:Show();
-					if isExpanded then
-						skillButton.Plus:Hide();
+					SkillButton.BD:Show();
+					SkillButton.Gradient:Show();
+					SkillButton.Minus:Show();
+					
+					if ( IsExpanded ) then
+						SkillButton.Plus:Hide();
 					else
-						skillButton.Plus:Show();
+						SkillButton.Plus:Show();
 					end
 				else
-					skillButton.BD:Hide();
-					skillButton.Gradient:Hide();
-					skillButton.Minus:Hide();
-					skillButton.Plus:Hide();
+					SkillButton.BD:Hide();
+					SkillButton.Gradient:Hide();
+					SkillButton.Minus:Hide();
+					SkillButton.Plus:Hide();
 				end
 			end
 		end
 		
-		if ClassTrainerCollapseAllButton.collapsed == 1 then
+		if ( ClassTrainerCollapseAllButton.collapsed == 1 ) then
 			ClassTrainerCollapseAllButton.Plus:Show();
 		else
 			ClassTrainerCollapseAllButton.Plus:Hide();
 		end
-	end)
-	
-	F.StripTextures(ClassTrainerListScrollFrame);
-	F.ReskinScroll(ClassTrainerListScrollFrameScrollBar);
-	
-	F.StripTextures(ClassTrainerSkillIcon);
+	end);
 	
 	hooksecurefunc('ClassTrainer_SetSelection', function()
-		local Icon = ClassTrainerSkillIcon:GetNormalTexture();
+		local SkillIcon = ClassTrainerSkillIcon:GetNormalTexture();
 		
-		if Icon then
-			Icon:SetPoint("TOPLEFT", 1, -1);
-			Icon:SetPoint("BOTTOMRIGHT", -1, 1);
-			Icon:SetTexCoord(unpack(TexCoords));
+		if ( SkillIcon ) then
 			F.CreateBD(ClassTrainerSkillIcon);
+			
+			SkillIcon:SetPoint('TOPLEFT', 1, -1);
+			SkillIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			SkillIcon:SetTexCoord(unpack(TexCoords));
 		else
 			ClassTrainerSkillIcon:SetBackdrop(nil);
 		end
-	end)
-	
-	F.Reskin(ClassTrainerTrainButton);
-	F.Reskin(ClassTrainerCancelButton);
+	end);
 end

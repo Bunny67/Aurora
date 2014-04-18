@@ -6,16 +6,60 @@ local unpack = unpack;
 local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
 
+local ColourExpandOrCollapse = F.ColourExpandOrCollapse;
+local ClearExpandOrCollapse = F.ClearExpandOrCollapse;
+
+local function StyleSkillButton(self)
+	self:SetNormalTexture('');
+	self.SetNormalTexture = Hoop;
+	self:SetPushedTexture('');
+	
+	self.BD = CreateFrame('Frame', nil, self);
+	self.BD:SetSize(13, 13);
+	self.BD:SetPoint('LEFT', 4, 1);
+	self.BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F.CreateBD(self.BD, 0);
+	
+	self.Gradient = F.CreateGradient(self);
+	self.Gradient:SetPoint('TOPLEFT', self.BD, 1, -1);
+	self.Gradient:SetPoint('BOTTOMRIGHT', self.BD, -1, 1);
+	
+	self.Minus = self:CreateTexture(nil, 'OVERLAY');
+	self.Minus:SetSize(7, 1);
+	self.Minus:SetPoint('CENTER', self.BD);
+	self.Minus:SetTexture(C.Media.Backdrop);
+	self.Minus:SetVertexColor(1, 1, 1);
+	
+	self.Plus = self:CreateTexture(nil, 'OVERLAY');
+	self.Plus:SetSize(1, 7);
+	self.Plus:SetPoint('CENTER', self.BD);
+	self.Plus:SetTexture(C.Media.Backdrop);
+	self.Plus:SetVertexColor(1, 1, 1);
+	
+	self:HookScript('OnEnter', ColourExpandOrCollapse);
+	self:HookScript('OnLeave', ClearExpandOrCollapse);
+end
+
 C.Modules['Blizzard_TradeSkillUI'] = function()
-	F.StripTextures(TradeSkillFrame, true);
-	F.SetBD(TradeSkillFrame, 10, -12, -31, 74);
+	F.SetBD(TradeSkillFrame, 11, -12, -34, 74);
+	TradeSkillFramePortrait:Hide();
 	
-	F.ReskinClose(TradeSkillFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -35, -16);
+	select(3, TradeSkillFrame:GetRegions()):Hide();
+	select(4, TradeSkillFrame:GetRegions()):Hide();
 	
-	F.StripTextures(TradeSkillRankFrame, true);
+	TradeSkillFrameBottomLeftTexture:Hide();
+	TradeSkillFrameBottomRightTexture:Hide();
+	
+	TradeSkillFrame:DisableDrawLayer('ARTWORK');
+	
+	F.ReskinCheck(TradeSkillFrameAvailableFilterCheckButton);
+	
 	TradeSkillRankFrame:SetStatusBarTexture(C.Media.Backdrop);
 	TradeSkillRankFrame.SetStatusBarColor = Hoop;
 	TradeSkillRankFrame:GetStatusBarTexture():SetGradient('VERTICAL', .1, .3, .9, .2, .4, 1);
+	
+	TradeSkillRankFrameBorder:Hide();
+	TradeSkillRankFrameBackground:Hide();
 	
 	local BD = CreateFrame('Frame', nil, TradeSkillRankFrame);
 	BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel() - 1);
@@ -23,149 +67,115 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 	BD:SetPoint('BOTTOMRIGHT', 1, -1);
 	F.CreateBD(BD, .25);
 	
-	F.ReskinCheck(TradeSkillFrameAvailableFilterCheckButton);
-	
 	F.ReskinInput(TradeSkillFrameEditBox);
 	
-	F.ReskinDropDown(TradeSkillSubClassDropDown);
+	TradeSkillExpandButtonFrame:DisableDrawLayer('BACKGROUND');
+	
+	F.ReskinExpandOrCollapse(TradeSkillCollapseAllButton);
+	
 	F.ReskinDropDown(TradeSkillInvSlotDropDown);
+	F.ReskinDropDown(TradeSkillSubClassDropDown);
 	
-	F.StripTextures(TradeSkillExpandButtonFrame);
+	TradeSkillListScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(TradeSkillListScrollFrameScrollBar);
 	
-	local ColourExpandOrCollapse = F.ColourExpandOrCollapse
-	local ClearExpandOrCollapse = F.ClearExpandOrCollapse
+	TradeSkillDetailScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(TradeSkillDetailScrollFrameScrollBar);
 	
-	local function StyleSkillButton(SkillButton)
-		SkillButton:SetNormalTexture('');
-		SkillButton.SetNormalTexture = Hoop;
-		SkillButton:SetPushedTexture('');
-
-		SkillButton.BD = CreateFrame('Frame', nil, SkillButton);
-		SkillButton.BD:SetSize(13, 13);
-		SkillButton.BD:SetPoint("LEFT", 4, 1);
-		SkillButton.BD:SetFrameLevel(SkillButton:GetFrameLevel()-1);
-		F.CreateBD(SkillButton.BD, 0);
-
-		SkillButton.Gradient = F.CreateGradient(SkillButton);
-		SkillButton.Gradient:SetPoint('TOPLEFT', SkillButton.BD, 1, -1);
-		SkillButton.Gradient:SetPoint('BOTTOMRIGHT', SkillButton.BD, -1, 1);
-
-		SkillButton.Minus = SkillButton:CreateTexture(nil, 'OVERLAY');
-		SkillButton.Minus:SetSize(7, 1);
-		SkillButton.Minus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Minus:SetTexture(C.Media.Backdrop);
-		SkillButton.Minus:SetVertexColor(1, 1, 1);
-
-		SkillButton.Plus = SkillButton:CreateTexture(nil, 'OVERLAY');
-		SkillButton.Plus:SetSize(1, 7);
-		SkillButton.Plus:SetPoint('CENTER', SkillButton.BD);
-		SkillButton.Plus:SetTexture(C.Media.Backdrop);
-		SkillButton.Plus:SetVertexColor(1, 1, 1);
-
-		SkillButton:HookScript('OnEnter', ColourExpandOrCollapse);
-		SkillButton:HookScript('OnLeave', ClearExpandOrCollapse);
+	TradeSkillDetailHeaderLeft:Hide();
+	
+	for i = 1, MAX_TRADE_SKILL_REAGENTS do
+		local ButtonReagent = _G['TradeSkillReagent'..i];
+		local ButtonIcon = _G['TradeSkillReagent'..i..'IconTexture'];
+		
+		local BD = CreateFrame('Frame', nil, ButtonReagent);
+		BD:SetPoint('TOPLEFT', 39, -1);
+		BD:SetPoint('BOTTOMRIGHT', 0, 1);
+		BD:SetFrameLevel(0);
+		F.CreateBD(BD, .25);
+		
+		ButtonIcon:SetTexCoord(unpack(TexCoords));
+		ButtonIcon:SetDrawLayer('ARTWORK');
+		F.CreateBG(ButtonIcon);
+		
+		_G['TradeSkillReagent'..i..'NameFrame']:SetAlpha(0);
+		
+		_G['TradeSkillReagent'..i..'Name']:SetParent(BD);
 	end
-
-	StyleSkillButton(TradeSkillCollapseAllButton);
-	TradeSkillCollapseAllButton:SetDisabledTexture('');
-	TradeSkillCollapseAllButton:SetHighlightTexture('');
+	
+	F.Reskin(TradeSkillCreateButton);
+	F.Reskin(TradeSkillCancelButton);
+	F.Reskin(TradeSkillCreateAllButton);
+	
+	F.ReskinArrow(TradeSkillDecrementButton, 'Left');
+	
+	TradeSkillInputBox:SetPoint('LEFT', TradeSkillDecrementButton, 'RIGHT', 8, 0);
+	F.ReskinInput(TradeSkillInputBox);
+	
+	F.ReskinArrow(TradeSkillIncrementButton, 'Right');
+	
+	F.ReskinClose(TradeSkillFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -38, -16);
 	
 	hooksecurefunc('TradeSkillFrame_Update', function()
-		local numTradeSkills = GetNumTradeSkills()
-		local skillOffset = FauxScrollFrame_GetOffset(TradeSkillListScrollFrame)
-		local buttonIndex = 0
-
+		local NumTradeSkills = GetNumTradeSkills();
+		local SkillOffset = FauxScrollFrame_GetOffset(TradeSkillListScrollFrame);
+		local ButtonIndex = 0;
+		
 		for i = 1, TRADE_SKILLS_DISPLAYED do
-			local skillIndex = i + skillOffset
-			_, skillType, _, isExpanded = GetTradeSkillInfo(skillIndex)
-			buttonIndex = i
+			local SkillIndex = i + SkillOffset;
+			_, SkillType, _, IsExpanded = GetTradeSkillInfo(SkillIndex);
+			ButtonIndex = i;
+			
+			local SkillButton = _G['TradeSkillSkill'..ButtonIndex];
+			
+			if ( SkillButton and not SkillButton.BD ) then
+				local ButtonHighlight = _G['TradeSkillSkill'..ButtonIndex..'Highlight'];
+				ButtonHighlight:SetTexture('');
+				ButtonHighlight.SetTexture = Hoop;
 
-			local skillButton = _G['TradeSkillSkill'..buttonIndex]
-
-			if not skillButton.styled then
-				skillButton.styled = true
-
-				local buttonHighlight = _G['TradeSkillSkill'..buttonIndex..'Highlight']
-				buttonHighlight:SetTexture('')
-				buttonHighlight.SetTexture = Hoop
-
-				StyleSkillButton(skillButton)
+				StyleSkillButton(SkillButton);
 			end
-
-			if skillIndex <= numTradeSkills then
-				if skillType == 'header' then
-					skillButton.BD:SetPoint('LEFT', 4, 1);
-
-					skillButton.BD:Show();
-					skillButton.Gradient:Show();
-					skillButton.Minus:Show();
-					if isExpanded then
-						skillButton.Plus:Hide();
+			
+			if ( SkillIndex <= NumTradeSkills ) then
+				if (SkillType == 'header' ) then
+					SkillButton.BD:SetPoint('LEFT', 4, 1);
+					
+					SkillButton.BD:Show();
+					SkillButton.Gradient:Show();
+					SkillButton.Minus:Show();
+					
+					if ( IsExpanded ) then
+						SkillButton.Plus:Hide();
 					else
-						skillButton.Plus:Show();
+						SkillButton.Plus:Show();
 					end
 				else
-					skillButton.BD:Hide();
-					skillButton.Gradient:Hide();
-					skillButton.Minus:Hide();
-					skillButton.Plus:Hide();
+					SkillButton.BD:Hide();
+					SkillButton.Gradient:Hide();
+					SkillButton.Minus:Hide();
+					SkillButton.Plus:Hide();
 				end
 			end
 		end
 		
-		if TradeSkillCollapseAllButton.collapsed == 1 then
+		if ( TradeSkillCollapseAllButton.collapsed == 1 ) then
 			TradeSkillCollapseAllButton.Plus:Show();
 		else
 			TradeSkillCollapseAllButton.Plus:Hide();
 		end
-	end)
-	
-	F.StripTextures(TradeSkillListScrollFrame);
-	F.ReskinScroll(TradeSkillListScrollFrameScrollBar);
-	
-	F.StripTextures(TradeSkillDetailScrollChildFrame);
+	end);
 	
 	hooksecurefunc('TradeSkillFrame_SetSelection', function()
-		local Icon = TradeSkillSkillIcon:GetNormalTexture();
+		local SkillIcon = TradeSkillSkillIcon:GetNormalTexture();
 		
-		if Icon then
-			Icon:SetPoint("TOPLEFT", 1, -1);
-			Icon:SetPoint("BOTTOMRIGHT", -1, 1);
-			Icon:SetTexCoord(unpack(TexCoords));
+		if ( SkillIcon ) then
 			F.CreateBD(TradeSkillSkillIcon);
+			
+			SkillIcon:SetPoint('TOPLEFT', 1, -1);
+			SkillIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			SkillIcon:SetTexCoord(unpack(TexCoords));
 		else
 			TradeSkillSkillIcon:SetBackdrop(nil);
 		end
-	end)
-	
-	for i = 1, MAX_TRADE_SKILL_REAGENTS do
-		local bu = _G["TradeSkillReagent"..i]
-		local ic = _G["TradeSkillReagent"..i.."IconTexture"]
-
-		_G["TradeSkillReagent"..i.."NameFrame"]:SetAlpha(0)
-
-		ic:SetTexCoord(unpack(TexCoords))
-		ic:SetDrawLayer("ARTWORK")
-		F.CreateBG(ic)
-
-		local bd = CreateFrame("Frame", nil, bu)
-		bd:SetPoint("TOPLEFT", 39, -1)
-		bd:SetPoint("BOTTOMRIGHT", 0, 1)
-		bd:SetFrameLevel(0)
-		F.CreateBD(bd, .25)
-
-		_G["TradeSkillReagent"..i.."Name"]:SetParent(bd)
-	end
-	
-	F.StripTextures(TradeSkillDetailScrollFrame);
-	F.ReskinScroll(TradeSkillDetailScrollFrameScrollBar);
-	
-	F.Reskin(TradeSkillCreateAllButton);
-	
-	F.ReskinArrow(TradeSkillDecrementButton, 'Left');
-	F.ReskinInput(TradeSkillInputBox);
-	F.ReskinArrow(TradeSkillIncrementButton, 'Right');
-	
-	F.Reskin(TradeSkillCreateButton);
-	F.Reskin(TradeSkillCancelButton);
+	end);
 end
