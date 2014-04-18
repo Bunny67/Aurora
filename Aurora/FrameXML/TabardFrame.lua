@@ -1,11 +1,19 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(TabardFrame, 11, -12, -34, 74);
-	
 	TabardFramePortrait:Hide();
+	
+	TabardFrame:DisableDrawLayer('BORDER');
+	
+	TabardFrameBackground:Hide();
+	
+	for i = 7, 20 do
+		select(i, TabardFrame:GetRegions()):Hide();
+	end
 	
 	F.ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TabardFrame, 'TOPRIGHT', -38, -16);
 	
@@ -33,4 +41,4 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(TabardFrameAcceptButton);
 	F.Reskin(TabardFrameCancelButton);
-end)
+end);

@@ -185,4 +185,4 @@ tinsert(C.Modules['Aurora'], function()
 		hooksecurefunc('WorldMapFrame_SetFullMapView', SetLargeWorldMap);
 		hooksecurefunc('WorldMapFrame_SetQuestMapView', SetQuestWorldMap);
 	end
-end)
+end);

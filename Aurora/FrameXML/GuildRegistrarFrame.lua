@@ -7,6 +7,10 @@ tinsert(C.Modules['Aurora'], function()
 	F.SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
 	GuildRegistrarFramePortrait:Hide();
 	
+	for i = 2, 5 do
+		select(i, GuildRegistrarFrame:GetRegions()):Hide();
+	end
+	
 	F.ReskinClose(GuildRegistrarFrameCloseButton, 'TOPRIGHT', GuildRegistrarFrame, 'TOPRIGHT', -34, -23);
 	
 	for i = 1, 2 do

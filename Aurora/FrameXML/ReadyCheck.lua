@@ -13,4 +13,4 @@ tinsert(C.Modules['Aurora'], function()
 	F.Reskin(ReadyCheckFrameNoButton);
 	
 	ReadyCheckFrame:HookScript('OnShow', function(self) if UnitIsUnit('player', self.initiator) then self:Hide(); end end);
-end)
+end);

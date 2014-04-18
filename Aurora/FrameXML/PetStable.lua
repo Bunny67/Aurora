@@ -9,6 +9,10 @@ tinsert(C.Modules['Aurora'], function()
 	F.SetBD(PetStableFrame, 11, -11, -34, 76);
 	PetStableFramePortrait:Hide();
 	
+	for i = 2, 5 do
+		select(i, PetStableFrame:GetRegions()):Hide();
+	end
+	
 	F.ReskinArrow(PetStableModelRotateLeftButton, 'Left');
 	PetStableModelRotateRightButton:SetPoint('TOPLEFT', PetStableModelRotateLeftButton, 'TOPRIGHT', -1, 0);
 	F.ReskinArrow(PetStableModelRotateRightButton, 'Right');

@@ -3,6 +3,10 @@ local F, C = unpack(select(2, ...));
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ItemTextFrame, 13, -13, -32, 74);
 	
+	ItemTextFrame:DisableDrawLayer('BACKGROUND');
+	ItemTextFrame:DisableDrawLayer('BORDER');
+	ItemTextFrame:DisableDrawLayer('ARTWORK');
+	
 	ItemTextScrollFrameMiddle:SetAlpha(0);
 	ItemTextScrollFrameTop:SetAlpha(0);
 	ItemTextScrollFrameBottom:SetAlpha(0);

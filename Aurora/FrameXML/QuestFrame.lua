@@ -9,19 +9,21 @@ local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
 
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(QuestFrame, true);
 	F.SetBD(QuestFrame, 14, -18, -30, 67);
+	QuestFramePortrait:Hide();
 	
 	F.ReskinClose(QuestFrameCloseButton, 'TOPRIGHT', QuestFrame, 'TOPRIGHT', -34, -22);
 	-- QuestFrameRewardPanel
-	F.StripTextures(QuestFrameRewardPanel);
+	QuestFrameRewardPanel:DisableDrawLayer('BACKGROUND');
+	QuestFrameRewardPanel:DisableDrawLayer('BORDER');
 	
 	F.Reskin(QuestFrameCancelButton);
 	F.Reskin(QuestFrameCompleteQuestButton);
 	
 	F.ReskinScroll(QuestRewardScrollFrameScrollBar);
 	-- QuestFrameProgressPanel
-	F.StripTextures(QuestFrameProgressPanel);
+	QuestFrameProgressPanel:DisableDrawLayer('BACKGROUND');
+	QuestFrameProgressPanel:DisableDrawLayer('BORDER');
 	
 	F.Reskin(QuestFrameGoodbyeButton);
 	F.Reskin(QuestFrameCompleteButton);
@@ -53,14 +55,17 @@ tinsert(C.Modules['Aurora'], function()
 		ItemCount:SetDrawLayer('OVERLAY');
 	end
 	-- QuestFrameDetailPanel
-	F.StripTextures(QuestFrameDetailPanel);
+	QuestFrameDetailPanel:DisableDrawLayer('BACKGROUND');
+	QuestFrameDetailPanel:DisableDrawLayer('BORDER');
 	
 	F.Reskin(QuestFrameDeclineButton);
 	F.Reskin(QuestFrameAcceptButton);
 	
 	F.ReskinScroll(QuestDetailScrollFrameScrollBar);
 	-- QuestFrameGreetingPanel
-	F.StripTextures(QuestFrameGreetingPanel);
+	QuestFrameGreetingPanel:DisableDrawLayer('BACKGROUND');
+	QuestFrameGreetingPanel:DisableDrawLayer('BORDER');
+	QuestFrameGreetingPanel:DisableDrawLayer('ARTWORK');
 	
 	F.Reskin(QuestFrameGreetingGoodbyeButton);
 	
@@ -72,7 +77,8 @@ tinsert(C.Modules['Aurora'], function()
 	CurrentQuestsText.SetTextColor = Hoop;
 	CurrentQuestsText:SetShadowColor(0, 0, 0);
 	
-	F.Kill(QuestGreetingFrameHorizontalBreak);
+	QuestGreetingFrameHorizontalBreak:Hide();
+	QuestGreetingFrameHorizontalBreak.Show = Hoop;
 	
 	AvailableQuestsText:SetTextColor(1, 1, 1);
 	AvailableQuestsText.SetTextColor = Hoop;

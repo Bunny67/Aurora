@@ -7,13 +7,19 @@ local select = select;
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(SpellBookFrame, true);
-	F.SetBD(SpellBookFrame, 10, -12, -31, 76);
+	F.SetBD(SpellBookFrame, 13, -13, -31, 73);
+	SpellBookFrameIcon:Hide();
+	
+	for i = 2, 5 do
+		select(i, SpellBookFrame:GetRegions()):Hide();
+	end
 	
 	for i = 1, 3 do
 		local Tab = _G['SpellBookFrameTabButton'..i];
 		
-		F.StripTextures(Tab);
+		Tab:SetNormalTexture('');
+		Tab:SetDisabledTexture('');
+		
 		F.ReskinTab(Tab);
 		Tab:SetHeight(32);
 	end
@@ -21,7 +27,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinArrow(SpellBookPrevPageButton, 'Left');
 	F.ReskinArrow(SpellBookNextPageButton, 'Right');
 	
-	F.ReskinClose(SpellBookCloseButton, 'TOPRIGHT', SpellBookFrame, 'TOPRIGHT', -35, -16);
+	F.ReskinClose(SpellBookCloseButton, 'TOPRIGHT', SpellBookFrame, 'TOPRIGHT', -35, -17);
 	
 	F.ReskinCheck(ShowAllSpellRanksCheckBox);
 
@@ -29,40 +35,22 @@ tinsert(C.Modules['Aurora'], function()
 		local Button = _G['SpellButton'..i];
 		local IconTexture = _G['SpellButton'..i..'IconTexture'];
 		
-		for i = 1, Button:GetNumRegions() do
-			local Region = select(i, Button:GetRegions());
-			if Region:GetObjectType() == 'Texture' then
-				if Region:GetTexture() ~= 'Interface\\Buttons\\ActionBarFlyoutButton' then
-					Region:SetTexture(nil);
-				end
-			end
-		end
+		Button:SetNormalTexture('');
+		
+		_G['SpellButton'..i..'Background']:Hide();
 		
 		if IconTexture then
-			F.CreateBD(Button, .25);
+			Button.BG = F.CreateBG(Button);
 			
-			IconTexture:SetPoint('TOPLEFT', 1, -1);
-			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
 			IconTexture:SetTexCoord(unpack(TexCoords));
 		end
 	end
 	
-	hooksecurefunc('SpellButton_UpdateButton', function(self)
-		local Name = self:GetName();
-		local SubSpellName = _G[Name..'SubSpellName'];
-		local IconTexture = _G[Name..'IconTexture'];
-		local Highlight = _G[Name..'Highlight'];
-		
-		SubSpellName:SetTextColor(1, 1, 1);
-		
-		Highlight:SetTexture(1, 1, 1, .25);
-		Highlight:SetAllPoints(IconTexture);
-	end)
-	
 	for i = 1, MAX_SKILLLINE_TABS do
 		local Tab = _G['SpellBookSkillLineTab'..i];
 		
-		F.StripTextures(Tab);
+		select(1, Tab:GetRegions()):Hide();
+		
 		F.StyleButton(Tab, nil, true);
 		F.CreateBD(Tab);
 		
@@ -70,4 +58,36 @@ tinsert(C.Modules['Aurora'], function()
 		Tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
 		Tab:GetNormalTexture():SetTexCoord(unpack(TexCoords));
 	end
-end)
+	
+	hooksecurefunc('SpellButton_UpdateButton', function(self)
+		if ( not SpellBookFrame.selectedSkillLine ) then
+			SpellBookFrame.selectedSkillLine = 1;
+		end
+		
+		local Temp, Texture, Offset, NumSpells = SpellBook_GetTabInfo(SpellBookFrame.selectedSkillLine);
+		SpellBookFrame.selectedSkillLineOffset = Offset;
+		
+		local ID, DisplayID = SpellBook_GetSpellID(self:GetID());
+		local Name = self:GetName();
+		local SubSpellName = _G[Name..'SubSpellName'];
+		local Highlight = _G[Name..'Highlight'];
+		
+		self:GetPushedTexture():SetTexture(.9, .8, .1, .25);
+		self:GetCheckedTexture():SetTexture(1, 1, 1, .25);
+		
+		SubSpellName:SetTextColor(1, 1, 1);
+		
+		Highlight:SetTexture(C.r, C.g, C.b, .25);
+		
+		if ( (SpellBookFrame.bookType ~= BOOKTYPE_PET) and (not DisplayID or DisplayID > (Offset + NumSpells)) ) then
+			self:Disable();
+			self.BG:Hide();
+			
+			return;
+		else
+			self:Enable();
+		end
+		
+		self.BG:Show();
+	end);
+end);

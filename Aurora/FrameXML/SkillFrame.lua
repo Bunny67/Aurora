@@ -3,10 +3,19 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(SkillFrame, true);
+	SkillFrame:DisableDrawLayer('BACKGROUND');
+	SkillFrame:DisableDrawLayer('ARTWORK');
 	
-	F.StripTextures(SkillFrameExpandButtonFrame);
+	SkillFrameExpandButtonFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinExpandOrCollapse(SkillFrameCollapseAllButton);
+	
+	F.Reskin(SkillFrameCancelButton);
+	
+	SkillListScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(SkillListScrollFrameScrollBar);
+	
+	SkillDetailScrollFrame:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(SkillDetailScrollFrameScrollBar);
 	
 	hooksecurefunc('SkillFrame_SetStatusBar', function(statusBarID, skillIndex, numSkills, adjustedSkillPoints)
 		local _, header, isExpanded, _, _, _, _, _, _, _, _, _ = GetSkillLineInfo(skillIndex);
@@ -17,9 +26,9 @@ tinsert(C.Modules['Aurora'], function()
 		
 		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
 
-		F.CreateBD(StatusBar, .25)
+		F.CreateBD(StatusBar, .25);
 		
-		F.StripTextures(StatusBarBorder);
+		StatusBarBorder:Hide();
 		StatusBarBackground:SetTexture(nil);
 		
 		local Label = _G['SkillTypeLabel'..statusBarID];
@@ -39,7 +48,7 @@ tinsert(C.Modules['Aurora'], function()
 		else
 			Label.Plus:Hide();
 		end
-	end)
+	end);
 	
 	hooksecurefunc('SkillDetailFrame_SetStatusBar', function()
 		local StatusBar = _G["SkillDetailStatusBar"];
@@ -51,7 +60,7 @@ tinsert(C.Modules['Aurora'], function()
 		
 		StatusBarBorder:SetTexture(nil);
 		StatusBarBackground:SetTexture(nil);
-	end)
+	end);
 	
 	hooksecurefunc('SkillFrame_UpdateSkills', function()
 		local NumSkills = GetNumSkillLines();
@@ -69,13 +78,5 @@ tinsert(C.Modules['Aurora'], function()
 				end
 			end
 		end
-	end)
-	
-	F.StripTextures(SkillListScrollFrame);
-	F.ReskinScroll(SkillListScrollFrameScrollBar);
-	
-	F.StripTextures(SkillDetailScrollFrame);
-	F.ReskinScroll(SkillDetailScrollFrameScrollBar);
-	
-	F.Reskin(SkillFrameCancelButton);
+	end);
 end);

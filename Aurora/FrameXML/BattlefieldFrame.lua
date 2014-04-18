@@ -2,6 +2,13 @@ local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(BattlefieldFrame, 12, -12, -34, 74);
+	BattlefieldFramePortrait:Hide();
+	
+	for i = 2, 5 do
+		select(i, BattlefieldFrame:GetRegions()):Hide();
+	end
+	
+	select(8, BattlefieldFrame:GetRegions()):Hide();
 	
 	BattlefieldFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);
 	BattlefieldFrameInfoScrollFrameChildFrameRewardsInfoDescription:SetTextColor(1, 1, 1);

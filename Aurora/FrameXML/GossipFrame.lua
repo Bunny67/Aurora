@@ -11,7 +11,9 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.ReskinClose(GossipFrameCloseButton, 'TOPRIGHT', GossipFrame, 'TOPRIGHT', -34, -22);
 	
-	F.StripTextures(GossipFrameGreetingPanel);
+	GossipFrameGreetingPanel:DisableDrawLayer('BACKGROUND');
+	GossipFrameGreetingPanel:DisableDrawLayer('BORDER');
+	GossipFrameGreetingPanel:DisableDrawLayer('ARTWORK');
 	
 	F.Reskin(GossipFrameGreetingGoodbyeButton);
 	

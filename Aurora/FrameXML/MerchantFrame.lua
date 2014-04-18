@@ -4,10 +4,18 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
+local TexCoords = F.TexCoords;
+
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(MerchantFrame, 10, -12, -34, 60);
-	
 	MerchantFramePortrait:Hide();
+	
+	for i = 2, 5 do
+		select(i, MerchantFrame:GetRegions()):Hide();
+	end
+	
+	MerchantFrame:DisableDrawLayer('ARTWORK');
+	MerchantFrame:DisableDrawLayer('OVERLAY');
 	
 	for i = 1, BUYBACK_ITEMS_PER_PAGE do
 		local itemButton = _G['MerchantItem'..i..'ItemButton'];
@@ -27,7 +35,7 @@ tinsert(C.Modules['Aurora'], function()
 		itemButtonIconTexture:ClearAllPoints();
 		itemButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 		itemButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		itemButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
+		itemButtonIconTexture:SetTexCoord(unpack(TexCoords));
 		
 		_G['MerchantItem'..i..'SlotTexture']:Hide();
 		_G['MerchantItem'..i..'NameFrame']:Hide();
@@ -43,7 +51,7 @@ tinsert(C.Modules['Aurora'], function()
 		for j = 1, 3 do
 			local merchantAltCurrencyTexture = _G['MerchantItem'..i..'AltCurrencyFrameItem'..j..'Texture'];
 			
-			merchantAltCurrencyTexture:SetTexCoord(unpack(F.TexCoords));
+			merchantAltCurrencyTexture:SetTexCoord(unpack(TexCoords));
 		end
 	end
 	
@@ -58,7 +66,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(MerchantRepairItemButton);
 	local ItemButton = MerchantRepairItemButton:GetRegions();
 	ItemButton:SetTexture('Interface\\Icons\\INV_Hammer_20');
-	ItemButton:SetTexCoord(unpack(F.TexCoords));
+	ItemButton:SetTexCoord(unpack(TexCoords));
 
 	F.StyleButton(MerchantGuildBankRepairButton); -- MerchantGuildBankRepairButton;
 	F.CreateBD(MerchantGuildBankRepairButton);
@@ -67,7 +75,6 @@ tinsert(C.Modules['Aurora'], function()
 	MerchantGuildBankRepairButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
 	MerchantGuildBankRepairButtonIcon:SetTexCoord(0.595, 0.8075, 0.05, 0.52);
 	
-	F.StripTextures(MerchantBuyBackItem); -- MerchantBuyBackItem;
 	F.CreateBD(MerchantBuyBackItem, .25);
 	MerchantBuyBackItemSlotTexture:Hide();
 	MerchantBuyBackItemNameFrame:Hide()
@@ -77,7 +84,7 @@ tinsert(C.Modules['Aurora'], function()
 	MerchantBuyBackItemItemButtonIconTexture:ClearAllPoints();
 	MerchantBuyBackItemItemButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 	MerchantBuyBackItemItemButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-	MerchantBuyBackItemItemButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
+	MerchantBuyBackItemItemButtonIconTexture:SetTexCoord(unpack(TexCoords));
 	
 	select(2, MerchantPrevPageButton:GetRegions()):Hide();
 	F.ReskinArrow(MerchantPrevPageButton, 'Left');

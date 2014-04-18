@@ -6,12 +6,15 @@ local select = select;
 tinsert(C.Modules['Aurora'], function()
 	-- ArenaRegistrarFrame;
 	F.SetBD(ArenaRegistrarFrame, 14, -18, -30, 67);
-	
 	ArenaRegistrarFramePortrait:Hide();
 	
-	F.ReskinClose(ArenaRegistrarFrameCloseButton, 'TOPRIGHT', ArenaRegistrarFrame, 'TOPRIGHT', -34, -22);
+	for i = 2, 5 do
+		select(i, ArenaRegistrarFrame:GetRegions()):Hide();
+	end
 	
-	F.StripTextures(ArenaRegistrarGreetingFrame); -- ArenaRegistrarGreetingFrame;
+	F.ReskinClose(ArenaRegistrarFrameCloseButton, 'TOPRIGHT', ArenaRegistrarFrame, 'TOPRIGHT', -34, -22);
+	-- ArenaRegistrarGreetingFrame;
+	select(3, ArenaRegistrarGreetingFrame:GetRegions()):Hide();
 	
 	select(1, ArenaRegistrarGreetingFrame:GetRegions()):SetTextColor(1, 1, 1)
 	RegistrationText:SetTextColor(1, 1, 1);
@@ -29,30 +32,32 @@ tinsert(C.Modules['Aurora'], function()
 	F.Reskin(ArenaRegistrarFrameCancelButton);
 	F.Reskin(ArenaRegistrarFramePurchaseButton);
 	
-	for i = 1, ArenaRegistrarFrameEditBox:GetNumRegions() do
-		local Region = select(i, ArenaRegistrarFrameEditBox:GetRegions());
-		
-		if ( Region and Region:GetObjectType() == 'Texture' ) then
-			if ( Region:GetTexture() == 'Interface\\ChatFrame\\UI-ChatInputBorder-Left' ) or ( Region:GetTexture() == 'Interface\\ChatFrame\\UI-ChatInputBorder-Right' ) then
-				F.Kill(Region);
-			end
-		end
-	end
-	
+	select(6, ArenaRegistrarFrameEditBox:GetRegions()):Hide();
+	select(7, ArenaRegistrarFrameEditBox:GetRegions()):Hide();
 	F.ReskinInput(ArenaRegistrarFrameEditBox, 18);
 	-- PVPBannerFrame;
 	F.SetBD(PVPBannerFrame, 10, -12, -33, 73);
-	
 	PVPBannerFramePortrait:Hide();
+	
+	PVPBannerFrame:DisableDrawLayer('BORDER');
+	
+	PVPBannerFrameBackground:Hide();
+	
+	for i = 7, 20 do
+		select(i, PVPBannerFrame:GetRegions()):Hide();
+	end
 	-- PVPBannerFrameCustomizationFrame;
-	F.StripTextures(PVPBannerFrameCustomizationFrame);
+	PVPBannerFrameCustomizationFrame:DisableDrawLayer('BACKGROUND');
 	
 	for i = 1, 2 do
 		local Customization = _G['PVPBannerFrameCustomization'..i];
 		local CustomizationLeft = _G['PVPBannerFrameCustomization'..i..'LeftButton'];
 		local CustomizationRight = _G['PVPBannerFrameCustomization'..i..'RightButton'];
 		
-		F.StripTextures(Customization);
+		for j = 1, 3 do
+			select(j, Customization:GetRegions()):SetAlpha(0);
+		end
+		
 		F.ReskinArrow(CustomizationLeft, 'Left');
 		F.ReskinArrow(CustomizationRight, 'Right');
 	end

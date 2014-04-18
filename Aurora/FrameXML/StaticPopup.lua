@@ -49,7 +49,7 @@ tinsert(C.Modules['Aurora'], function()
 		
 		ItemName:Hide();
 
-		F.ReskinClose(Close)
+		F.ReskinClose(Close);
 
 		Close.Minimize = Close:CreateTexture(nil, 'OVERLAY');
 		Close.Minimize:SetSize(9, 1);
@@ -124,5 +124,5 @@ tinsert(C.Modules['Aurora'], function()
 				CloseButton.Minimize.Hide();
 			end
 		end
-	end)
-end)
+	end);
+end);

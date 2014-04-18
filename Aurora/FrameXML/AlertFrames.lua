@@ -26,8 +26,8 @@ tinsert(C.Modules['Aurora'], function()
 				frameBackground:Hide();
 				frameUnlocked:SetTextColor(1, 1, 1);
 				
-				F.Kill(frame.glow);
-				F.Kill(frame.shine);
+				frame.glow:Hide();
+				frame.shine:Hide();
 				
 				frameIcon:DisableDrawLayer('BACKGROUND');
 				frameIcon:DisableDrawLayer('BORDER');
@@ -73,8 +73,8 @@ tinsert(C.Modules['Aurora'], function()
 					frameDungeonTexture.BG:SetPoint('BOTTOMRIGHT', frameDungeonTexture, 1, -1);
 				end
 				
-				F.Kill(frameGlowFrame);
-				F.Kill(frameGlowFrame.glow);
+				frameGlowFrame:Hide();
+				frameGlowFrame.glow:Hide();
 			end
 		end
 	end);

@@ -4,6 +4,12 @@ tinsert(C.Modules['Aurora'], function()
 	-- HelpFrame;
 	F.SetBD(HelpFrame, 6, -6, -45, 14);
 	
+	for i = 1, 9 do
+		select(i, HelpFrame:GetRegions()):Hide();
+	end
+	
+	HelpFrameHeader:SetTexture('');
+	
 	local Header = F.CreateBG(HelpFrameHeader);
 	Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8);
 	Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32);

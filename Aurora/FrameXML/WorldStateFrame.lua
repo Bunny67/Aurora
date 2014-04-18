@@ -17,16 +17,4 @@ tinsert(C.Modules['Aurora'], function()
 	F.Reskin(WorldStateScoreFrameLeaveButton);
 	
 	F.ReskinClose(WorldStateScoreFrameCloseButton, 'TOPRIGHT', WorldStateScoreFrame, 'TOPRIGHT', -117, -19);
-	
-	--[[hooksecurefunc('TokenFrame_Update', function()
-		local scoreButtonLeft;
-		local scoreButtonRight;
-		
-		for i = 1, MAX_WORLDSTATE_SCORE_BUTTONS do
-			scoreButtonLeft = _G['WorldStateScoreButton'..i..'FactionLeft'];
-			scoreButtonRight = _G['WorldStateScoreButton'..i..'FactionRight'];
-			scoreButtonLeft:SetTexture(C.Media.Backdrop);
-			scoreButtonRight:SetTexture(C.Media.Backdrop);
-		end
-	end);]]
 end);

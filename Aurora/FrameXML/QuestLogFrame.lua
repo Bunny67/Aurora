@@ -6,31 +6,45 @@ tinsert(C.Modules['Aurora'], function()
 	-- QuestLogControlPanel
 	F.Reskin(QuestLogFrameAbandonButton);
 	F.Reskin(QuestLogFrameTrackButton);
+	QuestLogFramePushQuestButton:SetPoint('LEFT', QuestLogFrameAbandonButton, 'RIGHT', 1, 0);
+	QuestLogFramePushQuestButton:SetPoint('RIGHT', QuestLogFrameTrackButton, 'LEFT', -1, 0);
 	F.Reskin(QuestLogFramePushQuestButton);
 	-- QuestLogDetailFrame
-	F.StripTextures(QuestLogDetailFrame);
 	F.SetBD(QuestLogDetailFrame, 10, -12, 0, 4);
+	
+	QuestLogDetailFrame:DisableDrawLayer('BACKGROUND');
+	QuestLogDetailFrame:DisableDrawLayer('BORDER');
+	QuestLogDetailFrame:DisableDrawLayer('ARTWORK');
+	
+	QuestLogDetailTitleText:SetDrawLayer("OVERLAY")
 	
 	F.ReskinClose(QuestLogDetailFrameCloseButton, 'TOPRIGHT', QuestLogDetailFrame, 'TOPRIGHT', -4, -16);
 	
-	F.StripTextures(QuestLogDetailScrollFrame);
+	QuestLogDetailScrollFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinScroll(QuestLogDetailScrollFrameScrollBar);
 	-- QuestLogFrame
-	F.StripTextures(QuestLogFrame);
 	F.SetBD(QuestLogFrame, 13, -12, -2, 9);
+	
+	QuestLogFrame:DisableDrawLayer('BACKGROUND');
+	QuestLogFrame:DisableDrawLayer('BORDER');
 	
 	F.ReskinClose(QuestLogFrameCloseButton, 'TOPRIGHT', QuestLogFrame, 'TOPRIGHT', -6, -16);
 	
 	F.Reskin(QuestLogFrameCancelButton);
 	
-	F.StripTextures(QuestLogFrameShowMapButton);
+	--F.StripTextures(QuestLogFrameShowMapButton);
 	QuestLogFrameShowMapButton:SetSize(QuestLogFrameShowMapButton.text:GetStringWidth() + 14, 22);
+	QuestLogFrameShowMapButton.texture:Hide();
 	QuestLogFrameShowMapButton.text:ClearAllPoints();
 	QuestLogFrameShowMapButton.text:SetPoint('CENTER');
+	QuestLogFrameShowMapButtonHighlight:SetTexture('');
 	F.Reskin(QuestLogFrameShowMapButton);
 	
-	F.StripTextures(QuestLogCount);
 	F.CreateBD(QuestLogCount, .25);
+	
+	for i = 1, 9 do
+		select(i, QuestLogCount:GetRegions()):Hide();
+	end
 	
 	F.ReskinScroll(QuestLogScrollFrameScrollBar);
 	

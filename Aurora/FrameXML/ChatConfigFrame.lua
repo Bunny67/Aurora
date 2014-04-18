@@ -5,6 +5,9 @@ local ipairs = ipairs;
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ChatConfigFrame);
+	ChatConfigFrame:SetBackdrop(nil);
+	
+	ChatConfigFrameHeader:SetTexture('');
 	
 	ChatConfigCategoryFrame:SetBackdrop(nil);
 	ChatConfigBackgroundFrame:SetBackdrop(nil);

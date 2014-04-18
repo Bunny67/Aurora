@@ -13,13 +13,11 @@ tinsert(C.Modules['Aurora'], function()
 	-- PVPFrame;
 	PVPFramePortrait:Hide();
 	
-	for i = 1, PVPFrame:GetNumRegions() do
-		local Region = select(i, PVPFrame:GetRegions());
-		
-		if ( Region and Region:GetObjectType() == 'Texture' ) then
-			Region:Hide();
-		end
+	for i = 3, 6 do
+		select(i, PVPFrame:GetRegions()):Hide();
 	end
+	
+	PVPFrameBackground:Hide();
 	
 	for i = 1, MAX_ARENA_TEAMS do
 		local Team = _G['PVPTeam'..i];

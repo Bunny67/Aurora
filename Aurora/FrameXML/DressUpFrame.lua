@@ -4,6 +4,15 @@ tinsert(C.Modules['Aurora'], function()
 	F.SetBD(DressUpFrame, 11, -12, -34, 73);
 	DressUpFramePortrait:Hide();
 	
+	for i = 2, 5 do
+		select(i, DressUpFrame:GetRegions()):Hide();
+	end
+	
+	DressUpBackgroundTopLeft:Hide();
+	DressUpBackgroundTopRight:Hide();
+	DressUpBackgroundBotLeft:Hide();
+	DressUpBackgroundBotRight:Hide();
+	
 	F.ReskinClose(DressUpFrameCloseButton, 'TOPRIGHT', DressUpFrame, 'TOPRIGHT', -38, -16);
 	
 	F.ReskinArrow(DressUpModelRotateLeftButton, 'Left');
