@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
-C.modules['Blizzard_GuildBankUI'] = function()
+C.Modules['Blizzard_GuildBankUI'] = function()
 	-- GuildBankFrame;
 	F.SetBD(GuildBankFrame, 11, -12, 0, 6);
 	
@@ -105,27 +105,29 @@ C.modules['Blizzard_GuildBankUI'] = function()
 	F.Reskin(GuildBankPopupCancelButton);
 	F.Reskin(GuildBankPopupOkayButton);
 	
-	hooksecurefunc('GuildBankFrame_Update', function()
-		if ( GuildBankFrame.mode == 'bank' ) then
-			local tab = GetCurrentGuildBankTab();
-			
-			local button, index, column;
-			local itemLink;
-			
-			for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
-				index = mod(i, NUM_SLOTS_PER_GUILDBANK_GROUP);
+	if ( AuroraConfig.QualityColour ) then
+		hooksecurefunc('GuildBankFrame_Update', function()
+			if ( GuildBankFrame.mode == 'bank' ) then
+				local tab = GetCurrentGuildBankTab();
 				
-				if ( index == 0 ) then
-					index = NUM_SLOTS_PER_GUILDBANK_GROUP;
-				end
+				local button, index, column;
+				local itemLink;
 				
-				column = ceil((i-0.5)/NUM_SLOTS_PER_GUILDBANK_GROUP);
-				button = _G['GuildBankColumn'..column..'Button'..index];
+				for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
+					index = mod(i, NUM_SLOTS_PER_GUILDBANK_GROUP);
+					
+					if ( index == 0 ) then
+						index = NUM_SLOTS_PER_GUILDBANK_GROUP;
+					end
+					
+					column = ceil((i-0.5)/NUM_SLOTS_PER_GUILDBANK_GROUP);
+					button = _G['GuildBankColumn'..column..'Button'..index];
 
-				itemLink = GetGuildBankItemLink(tab, i);
-				
-				F.ColourQuality(button, itemLink);
+					itemLink = GetGuildBankItemLink(tab, i);
+					
+					F.ColourQuality(button, itemLink);
+				end
 			end
-		end
-	end);
+		end);
+	end
 end

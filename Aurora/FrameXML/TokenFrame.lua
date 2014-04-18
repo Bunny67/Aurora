@@ -3,7 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(TokenFrame, true);
 	
 	hooksecurefunc('TokenFrame_Update', function()
@@ -32,18 +34,18 @@ tinsert(C.modules['Aurora'], function()
 					button.bg:Show();
 					
 					if ( extraCurrencyType == 1 ) then
-						button.icon:SetTexCoord(unpack(F.TexCoords));
+						button.icon:SetTexCoord(unpack(TexCoords));
 					elseif ( extraCurrencyType == 2 ) then
 						local factionGroup = UnitFactionGroup('player');
 						if ( factionGroup ) then
 							button.icon:SetTexture("Interface\\TargetingFrame\\UI-PVP-"..factionGroup);
-							button.icon:SetTexCoord( 0.03125, 0.59375, 0.03125, 0.59375 );
+							button.icon:SetTexCoord(0.03125, 0.59375, 0.03125, 0.59375);
 						else
-							button.icon:SetTexCoord(unpack(F.TexCoords));
+							button.icon:SetTexCoord(unpack(TexCoords));
 						end
 					else
 						button.icon:SetTexture(icon);
-						button.icon:SetTexCoord(unpack(F.TexCoords));
+						button.icon:SetTexCoord(unpack(TexCoords));
 					end
 				else
 					button.bg:Hide();

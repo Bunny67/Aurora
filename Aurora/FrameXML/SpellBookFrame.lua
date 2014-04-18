@@ -4,8 +4,9 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
+local TexCoords = F.TexCoords;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(SpellBookFrame, true);
 	F.SetBD(SpellBookFrame, 10, -12, -31, 76);
 	
@@ -42,7 +43,7 @@ tinsert(C.modules['Aurora'], function()
 			
 			IconTexture:SetPoint('TOPLEFT', 1, -1);
 			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			IconTexture:SetTexCoord(unpack(F.TexCoords));
+			IconTexture:SetTexCoord(unpack(TexCoords));
 		end
 	end
 	
@@ -67,6 +68,6 @@ tinsert(C.modules['Aurora'], function()
 		
 		Tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
 		Tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
-		Tab:GetNormalTexture():SetTexCoord(unpack(F.TexCoords));
+		Tab:GetNormalTexture():SetTexCoord(unpack(TexCoords));
 	end
 end)

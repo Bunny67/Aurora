@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...))
 
 local _G = getfenv(0);
 
-C.modules['Blizzard_BattlefieldMinimap'] = function()
+C.Modules['Blizzard_BattlefieldMinimap'] = function()
 	-- BattlefieldMinimapTab
 	F.Kill(BattlefieldMinimapTab);
 	F.Kill(BattlefieldMinimapTabLeft);

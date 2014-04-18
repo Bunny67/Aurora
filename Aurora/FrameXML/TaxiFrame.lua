@@ -1,8 +1,7 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(TaxiFrame, 11, -12, -34, 75);
-	
 	TaxiPortrait:Hide();
 	
 	F.ReskinClose(TaxiCloseButton, 'TOPRIGHT', TaxiFrame, 'TOPRIGHT', -38, -16);

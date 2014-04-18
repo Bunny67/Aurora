@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	-- HelpFrame;
 	F.SetBD(HelpFrame, 6, -6, -45, 14);
 	

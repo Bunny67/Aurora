@@ -56,7 +56,7 @@ C.Defaults = {
 		["customColour"] = {r = 1, g = 1, b = 1},
 		
 	['enableFont'] = true,
-	['qualityColour'] = true,
+	['QualityColour'] = true,
 	
 	['Font'] = true,																-- Шрифт
 	['Bags'] = true,																-- Сумки
@@ -687,8 +687,8 @@ end
 
 -- [[ Module handling ]]
 
-C.modules = {}
-C.modules['Aurora'] = {}
+C.Modules = {}
+C.Modules['Aurora'] = {}
 
 local Skin = CreateFrame('Frame', nil, UIParent)
 Skin:RegisterEvent('ADDON_LOADED')
@@ -733,14 +733,14 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 		C.r, C.g, C.b = r, g, b
 	end
 
-	for module, moduleFunc in pairs(C.modules) do
+	for module, moduleFunc in pairs(C.Modules) do
 		if type(moduleFunc) == "function" then
 			if module == addon then
 				moduleFunc()
 			end
 		elseif type(moduleFunc) == "table" then
 			if module == addon then
-				for _, moduleFunc in pairs(C.modules[module]) do
+				for _, moduleFunc in pairs(C.Modules[module]) do
 					moduleFunc()
 				end
 			end
@@ -856,17 +856,19 @@ Delay:SetScript('OnEvent', function()
 			end
 		end
 		
-		hooksecurefunc('ContainerFrame_Update', function(self)
-			local ID = self:GetID();
-			local Name = self:GetName();
+		if ( AuroraConfig.QualityColour ) then
+			hooksecurefunc('ContainerFrame_Update', function(self)
+				local ID = self:GetID();
+				local Name = self:GetName();
 
-			for i = 1, self.size, 1 do
-				local Button = _G[Name..'Item'..i];
-				local ItemID = GetContainerItemID(ID, Button:GetID());
-				
-				F.ColourQuality(Button, ItemID);
-			end
-		end);
+				for i = 1, self.size, 1 do
+					local Button = _G[Name..'Item'..i];
+					local ItemID = GetContainerItemID(ID, Button:GetID());
+					
+					F.ColourQuality(Button, ItemID);
+				end
+			end);
+		end
 		
 		F.StripTextures(BankFrame, true);
 		F.SetBD(BankFrame, 10, -11, -25, 91);
@@ -904,9 +906,11 @@ Delay:SetScript('OnEvent', function()
 			BankFrameBagIconTexture:SetTexCoord(unpack(F.TexCoords));
 		end
 		
-		hooksecurefunc('BankFrameItemButton_Update', function(self)
-			F.ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
-		end);
+		if ( AuroraConfig.QualityColour ) then
+			hooksecurefunc('BankFrameItemButton_Update', function(self)
+				F.ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
+			end);
+		end
 	end
 	-- Сообщения в облачках
 	if AuroraConfig.ChatBubbles then

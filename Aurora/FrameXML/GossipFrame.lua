@@ -5,7 +5,7 @@ local select = select;
 local find = string.find;
 local gsub = string.gsub;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(GossipFrame, 14, -18, -30, 67);
 	GossipFramePortrait:Hide();
 	
@@ -27,6 +27,7 @@ tinsert(C.modules['Aurora'], function()
 	
 	hooksecurefunc('GossipFrameUpdate', function()
 		GossipFrame.buttonIndex = 1;
+		
 		for i = GossipFrame.buttonIndex, NUMGOSSIPBUTTONS do
 			local Button = _G['GossipTitleButton' .. i];
 			

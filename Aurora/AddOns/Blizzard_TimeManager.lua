@@ -5,7 +5,7 @@ local unpack = unpack;
 local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
 
-C.modules['Blizzard_TimeManager'] = function()
+C.Modules['Blizzard_TimeManager'] = function()
 	-- TimeManagerFrame;
 	F.SetBD(TimeManagerFrame, 14, -11, -49, 9);
 	

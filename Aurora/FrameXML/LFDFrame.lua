@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local unpack = unpack;
 local pairs = pairs;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	local function ColourMinimize(Frame)
 		if Frame:IsEnabled() then
 			Frame.Minimize:SetVertexColor(r, g, b);

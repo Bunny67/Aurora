@@ -3,7 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	F.ReskinExpandOrCollapse(WatchFrameCollapseExpandButton);
 	
 	local function SkinWatchFrameItems()
@@ -14,7 +16,7 @@ tinsert(C.modules['Aurora'], function()
 			F.StyleButton(itemButton);
 			
 			_G['WatchFrameItem'..i..'NormalTexture']:SetAlpha(0);
-			_G['WatchFrameItem'..i..'IconTexture']:SetTexCoord(unpack(F.TexCoords));
+			_G['WatchFrameItem'..i..'IconTexture']:SetTexCoord(unpack(TexCoords));
 		end	
 	end
 	

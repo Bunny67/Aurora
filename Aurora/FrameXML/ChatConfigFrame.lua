@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...))
 local _G = getfenv(0);
 local ipairs = ipairs;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ChatConfigFrame);
 	
 	ChatConfigCategoryFrame:SetBackdrop(nil);

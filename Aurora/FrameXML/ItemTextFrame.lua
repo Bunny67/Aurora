@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ItemTextFrame, 13, -13, -32, 74);
 	
 	ItemTextScrollFrameMiddle:SetAlpha(0);

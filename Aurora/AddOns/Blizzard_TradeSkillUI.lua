@@ -3,7 +3,10 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-C.modules['Blizzard_TradeSkillUI'] = function()
+local TexCoords = F.TexCoords;
+local Hoop = F.dummy;
+
+C.Modules['Blizzard_TradeSkillUI'] = function()
 	F.StripTextures(TradeSkillFrame, true);
 	F.SetBD(TradeSkillFrame, 10, -12, -31, 74);
 	
@@ -11,7 +14,7 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 	
 	F.StripTextures(TradeSkillRankFrame, true);
 	TradeSkillRankFrame:SetStatusBarTexture(C.Media.Backdrop);
-	TradeSkillRankFrame.SetStatusBarColor = F.dummy;
+	TradeSkillRankFrame.SetStatusBarColor = Hoop;
 	TradeSkillRankFrame:GetStatusBarTexture():SetGradient('VERTICAL', .1, .3, .9, .2, .4, 1);
 	
 	local BD = CreateFrame('Frame', nil, TradeSkillRankFrame);
@@ -34,7 +37,7 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 	
 	local function StyleSkillButton(SkillButton)
 		SkillButton:SetNormalTexture('');
-		SkillButton.SetNormalTexture = F.dummy;
+		SkillButton.SetNormalTexture = Hoop;
 		SkillButton:SetPushedTexture('');
 
 		SkillButton.BD = CreateFrame('Frame', nil, SkillButton);
@@ -84,7 +87,7 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 
 				local buttonHighlight = _G['TradeSkillSkill'..buttonIndex..'Highlight']
 				buttonHighlight:SetTexture('')
-				buttonHighlight.SetTexture = F.dummy
+				buttonHighlight.SetTexture = Hoop
 
 				StyleSkillButton(skillButton)
 			end
@@ -128,7 +131,7 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 		if Icon then
 			Icon:SetPoint("TOPLEFT", 1, -1);
 			Icon:SetPoint("BOTTOMRIGHT", -1, 1);
-			Icon:SetTexCoord(unpack(F.TexCoords));
+			Icon:SetTexCoord(unpack(TexCoords));
 			F.CreateBD(TradeSkillSkillIcon);
 		else
 			TradeSkillSkillIcon:SetBackdrop(nil);
@@ -141,7 +144,7 @@ C.modules['Blizzard_TradeSkillUI'] = function()
 
 		_G["TradeSkillReagent"..i.."NameFrame"]:SetAlpha(0)
 
-		ic:SetTexCoord(.08, .92, .08, .92)
+		ic:SetTexCoord(unpack(TexCoords))
 		ic:SetDrawLayer("ARTWORK")
 		F.CreateBG(ic)
 

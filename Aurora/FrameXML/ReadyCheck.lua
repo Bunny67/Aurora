@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(ReadyCheckFrame);
 	
 	ReadyCheckPortrait:Hide();

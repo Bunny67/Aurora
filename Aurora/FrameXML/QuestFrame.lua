@@ -5,7 +5,10 @@ local unpack = unpack;
 local find = string.find;
 local gsub = string.gsub;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+local Hoop = F.dummy;
+
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(QuestFrame, true);
 	F.SetBD(QuestFrame, 14, -18, -30, 67);
 	
@@ -26,9 +29,9 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinScroll(QuestProgressScrollFrameScrollBar);
 	
 	QuestProgressTitleText:SetTextColor(1, 1, 1);
-	QuestProgressTitleText.SetTextColor = F.dummy;
+	QuestProgressTitleText.SetTextColor = Hoop;
 	QuestProgressText:SetTextColor(1, 1, 1);
-	QuestProgressText.SetTextColor = F.dummy;
+	QuestProgressText.SetTextColor = Hoop;
 	QuestProgressRequiredItemsText:SetTextColor(1, 1, 1);
 	QuestProgressRequiredItemsText:SetShadowColor(0, 0, 0);
 	
@@ -42,7 +45,7 @@ tinsert(C.modules['Aurora'], function()
 		F.CreateBD(Item, .25);
 		
 		ItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 		ItemIconTexture:SetDrawLayer('OVERLAY');
 
 		ItemNameFrame:Hide();
@@ -64,15 +67,15 @@ tinsert(C.modules['Aurora'], function()
 	F.ReskinScroll(QuestGreetingScrollFrameScrollBar);
 	
 	GreetingText:SetTextColor(1, 1, 1);
-	GreetingText.SetTextColor = F.dummy;
+	GreetingText.SetTextColor = Hoop;
 	CurrentQuestsText:SetTextColor(1, 1, 1);
-	CurrentQuestsText.SetTextColor = F.dummy;
+	CurrentQuestsText.SetTextColor = Hoop;
 	CurrentQuestsText:SetShadowColor(0, 0, 0);
 	
 	F.Kill(QuestGreetingFrameHorizontalBreak);
 	
 	AvailableQuestsText:SetTextColor(1, 1, 1);
-	AvailableQuestsText.SetTextColor = F.dummy;
+	AvailableQuestsText.SetTextColor = Hoop;
 	AvailableQuestsText:SetShadowColor(0, 0, 0);
 	
 	QuestFrameGreetingPanel:HookScript('OnShow', function()

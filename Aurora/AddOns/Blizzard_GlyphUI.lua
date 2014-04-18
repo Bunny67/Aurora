@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local unpack = unpack;
 
-C.modules['Blizzard_GlyphUI'] = function()
+C.Modules['Blizzard_GlyphUI'] = function()
 	local r, g, b = C.r, C.g, C.b;
 	
 	F.StripTextures(GlyphFrame, true);

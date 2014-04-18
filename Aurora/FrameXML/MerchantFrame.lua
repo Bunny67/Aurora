@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(MerchantFrame, 10, -12, -34, 60);
 	
 	MerchantFramePortrait:Hide();
@@ -115,7 +115,7 @@ tinsert(C.modules['Aurora'], function()
 					merchantAltCurrency:SetPoint('BOTTOMLEFT', 'MerchantItem'..i..'NameFrame', 'BOTTOMLEFT', 0, 35);
 				end
 				
-				if ( AuroraConfig.qualityColour ) then
+				if ( AuroraConfig.QualityColour ) then
 					if ( itemButton.link ) then
 						local _, _, quality = GetItemInfo(itemButton.link);
 						local r, g, b = GetItemQualityColor(quality);
@@ -129,7 +129,7 @@ tinsert(C.modules['Aurora'], function()
 				merchantButton.BD:SetPoint('TOPLEFT', -2, 0);
 			end
 			
-			if ( AuroraConfig.qualityColour ) then
+			if ( AuroraConfig.QualityColour ) then
 				local buybackName = GetBuybackItemInfo(GetNumBuybackItems());
 				
 				if ( buybackName ) then
@@ -145,23 +145,24 @@ tinsert(C.modules['Aurora'], function()
 	hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function()
 		local numBuybackItems = GetNumBuybackItems();
 		
-		local buybackName;
 		for i = 1, BUYBACK_ITEMS_PER_PAGE do
 			local itemName = _G['MerchantItem'..i..'Name'];
 			local merchantButton = _G['MerchantItem'..i];
 			
 			if ( i <= numBuybackItems ) then
-				buybackName = GetBuybackItemInfo(i);
-				
 				merchantButton.BD:SetPoint('TOPLEFT', 39, 0);
 				
-				if ( buybackName ) then
-					local _, _, quality = GetItemInfo(buybackName);
-					local r, g, b = GetItemQualityColor(quality);
+				if ( AuroraConfig.QualityColour ) then
+					local buybackName = GetBuybackItemInfo(i);
 					
-					itemName:SetTextColor(r, g, b);
-				else
-					itemName:SetTextColor(1, 1, 1);
+					if ( buybackName ) then
+						local _, _, quality = GetItemInfo(buybackName);
+						local r, g, b = GetItemQualityColor(quality);
+						
+						itemName:SetTextColor(r, g, b);
+					else
+						itemName:SetTextColor(1, 1, 1);
+					end
 				end
 			else
 				merchantButton.BD:SetPoint('TOPLEFT', -2, 0);

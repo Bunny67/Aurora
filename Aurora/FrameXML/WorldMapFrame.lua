@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local pairs = pairs;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	if AuroraConfig.Maps == true then
 		local r, g, b = C.r, C.g, C.b
 		

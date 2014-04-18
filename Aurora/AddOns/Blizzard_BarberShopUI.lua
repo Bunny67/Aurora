@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
-C.modules['Blizzard_BarbershopUI'] = function()
+C.Modules['Blizzard_BarbershopUI'] = function()
 	F.SetBD(BarberShopFrame, 44, -75, -40, 44);
 	BarberShopFrameBackground:Hide();
 	

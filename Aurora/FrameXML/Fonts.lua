@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules["Aurora"], function()
+tinsert(C.Modules["Aurora"], function()
 	if AuroraConfig.Font then
 		local Font = C.Media.Font;
 

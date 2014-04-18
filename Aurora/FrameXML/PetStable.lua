@@ -5,7 +5,7 @@ local unpack = unpack;
 
 local TexCoords = F.TexCoords;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(PetStableFrame, 11, -11, -34, 76);
 	PetStableFramePortrait:Hide();
 	

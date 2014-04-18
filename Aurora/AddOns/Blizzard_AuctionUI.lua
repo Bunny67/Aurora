@@ -4,7 +4,9 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
-C.modules['Blizzard_AuctionUI'] = function()
+local TexCoords = F.TexCoords;
+
+C.Modules['Blizzard_AuctionUI'] = function()
 	local function AuctionSortButton(Frame)
 		Frame:DisableDrawLayer('BACKGROUND');
 
@@ -85,7 +87,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		Item.Hover:SetAllPoints();
 		Item.Pushed:SetAllPoints();
 		
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 	end
 	
 	F.ReskinInput(BrowseName);
@@ -177,7 +179,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		Item.Hover:SetAllPoints();
 		Item.Pushed:SetAllPoints();
 		
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 	end
 	
 	F.ReskinInput(BidBidPriceGold);
@@ -227,7 +229,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 		Item.Hover:SetAllPoints();
 		Item.Pushed:SetAllPoints();
 		
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 	end
 	
 	select(2, AuctionsItemButton:GetRegions()):Hide();
@@ -237,7 +239,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 	
 	AuctionsItemButton:HookScript('OnEvent', function(self, event)
 		if ( event == 'NEW_AUCTION_UPDATE' and self:GetNormalTexture() ) then
-			self:GetNormalTexture():SetTexCoord(unpack(F.TexCoords));
+			self:GetNormalTexture():SetTexCoord(unpack(TexCoords));
 			self:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
 			self:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
 		end
@@ -277,7 +279,7 @@ C.modules['Blizzard_AuctionUI'] = function()
 	F.CreateBD(AuctionProgressBar, .25);
 	AuctionProgressBar:SetStatusBarTexture(C.Media.Backdrop);
 	
-	AuctionProgressBarIcon:SetTexCoord(unpack(F.TexCoords))
+	AuctionProgressBarIcon:SetTexCoord(unpack(TexCoords))
 	F.CreateBG(AuctionProgressBarIcon);
 	--AuctionDressUpFrame
 	AuctionDressUpFrameTop:Hide()

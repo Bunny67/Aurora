@@ -4,7 +4,9 @@ local _G = getfenv(0);
 local unpack = unpack;
 local pairs = pairs;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	local r, g, b = C.r, C.g, C.b
 
 	local function ColourMinimize(Frame)
@@ -43,7 +45,7 @@ tinsert(C.modules['Aurora'], function()
 		Item.Hover:SetAllPoints();
 		Item.Pushed:SetAllPoints();
 		
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 		
 		ItemName:Hide();
 

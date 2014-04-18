@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(BattlefieldFrame, 12, -12, -34, 74);
 	
 	BattlefieldFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);

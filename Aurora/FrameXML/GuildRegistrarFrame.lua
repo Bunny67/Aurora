@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
 	GuildRegistrarFramePortrait:Hide();
 	

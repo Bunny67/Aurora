@@ -6,9 +6,10 @@ local pairs = pairs;
 local select = select;
 local band = bit.band;
 
-local TexCoords = F['TexCoords'];
+local TexCoords = F.TexCoords;
+local Noop = F.dummy;
 
-C.modules['Blizzard_AchievementUI'] = function()
+C.Modules['Blizzard_AchievementUI'] = function()
 	-- AchievementFrame
 	F.SetBD(AchievementFrame);
 	
@@ -52,9 +53,9 @@ C.modules['Blizzard_AchievementUI'] = function()
 		Button:DisableDrawLayer('ARTWORK');
 		
 		_G['AchievementFrameAchievementsContainerButton'..i..'Description']:SetTextColor(.9, .9, .9);
-		_G['AchievementFrameAchievementsContainerButton'..i..'Description'].SetTextColor = F.dummy;
+		_G['AchievementFrameAchievementsContainerButton'..i..'Description'].SetTextColor = Noop;
 		_G['AchievementFrameAchievementsContainerButton'..i..'Description']:SetShadowOffset(1, -1);
-		_G['AchievementFrameAchievementsContainerButton'..i..'Description'].SetShadowOffset = F.dummy;
+		_G['AchievementFrameAchievementsContainerButton'..i..'Description'].SetShadowOffset = Noop;
 		
 		_G['AchievementFrameAchievementsContainerButton'..i..'PlusMinus']:SetAlpha(0);
 		_G['AchievementFrameAchievementsContainerButton'..i..'Highlight']:SetAlpha(0);
@@ -64,7 +65,7 @@ C.modules['Blizzard_AchievementUI'] = function()
 		ButtonIconTexture:SetTexCoord(unpack(TexCoords));
 		
 		ButtonIconOverlay:Hide();
-		ButtonIconOverlay.Show = F.dummy;
+		ButtonIconOverlay.Show = Noop;
 		
 		ButtonTracked:SetNormalTexture('');
 		ButtonTracked:SetPushedTexture('');
@@ -201,9 +202,9 @@ C.modules['Blizzard_AchievementUI'] = function()
 
 		local PlayerDescription = _G['AchievementFrameComparisonContainerButton'..i..'PlayerDescription'];
 		PlayerDescription:SetTextColor(.9, .9, .9);
-		PlayerDescription.SetTextColor = F.dummy;
+		PlayerDescription.SetTextColor = Noop;
 		PlayerDescription:SetShadowOffset(1, -1);
-		PlayerDescription.SetShadowOffset = F.dummy;
+		PlayerDescription.SetShadowOffset = Noop;
 
 		_G['AchievementFrameComparisonContainerButton'..i..'PlayerTitleBackground']:Hide();
 		_G['AchievementFrameComparisonContainerButton'..i..'PlayerGlow']:Hide();
@@ -298,9 +299,9 @@ C.modules['Blizzard_AchievementUI'] = function()
 				_G['AchievementFrameSummaryAchievement'..i..'IconOverlay']:Hide();
 				
 				Button.description:SetTextColor(.9, .9, .9);
-				Button.description.SetTextColor = F.dummy;
+				Button.description.SetTextColor = Noop;
 				Button.description:SetShadowOffset(1, -1);
-				Button.description.SetShadowOffset = F.dummy;
+				Button.description.SetShadowOffset = Noop;
 				
 				Button.icon.texture:SetTexCoord(unpack(TexCoords));
 				F.CreateBG(Button.icon.texture);

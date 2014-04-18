@@ -2,7 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(TabardFrame, 11, -12, -34, 74);
 	
 	TabardFramePortrait:Hide();

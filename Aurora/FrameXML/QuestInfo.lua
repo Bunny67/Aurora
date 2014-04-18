@@ -3,7 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	hooksecurefunc('QuestInfo_Display', function()								
 		-- Headers
 		QuestInfoTitleHeader:SetTextColor(1, 1, 1);
@@ -55,7 +57,7 @@ tinsert(C.modules['Aurora'], function()
 		F.CreateBD(Item, .25);
 		
 		ItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-		ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
+		ItemIconTexture:SetTexCoord(unpack(TexCoords));
 		ItemIconTexture:SetDrawLayer('OVERLAY');
 
 		ItemNameFrame:Hide();

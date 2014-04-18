@@ -3,7 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(TradeFrame, true);
 	F.SetBD(TradeFrame, 10, -11, -28, 48);
 	
@@ -30,7 +32,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		PlayerButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 		PlayerButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		PlayerButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
+		PlayerButtonIconTexture:SetTexCoord(unpack(TexCoords));
 		
 		F.StripTextures(RecipientButton);
 		F.StyleButton(RecipientButton);
@@ -38,7 +40,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		RecipientButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 		RecipientButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		RecipientButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
+		RecipientButtonIconTexture:SetTexCoord(unpack(TexCoords));
 	end
 	
 	TradeHighlightPlayerTop:SetTexture(0, 1, 0, 0.2);

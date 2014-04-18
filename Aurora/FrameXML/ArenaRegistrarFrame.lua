@@ -3,7 +3,7 @@
 local _G = getfenv(0);
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	-- ArenaRegistrarFrame;
 	F.SetBD(ArenaRegistrarFrame, 14, -18, -30, 67);
 	

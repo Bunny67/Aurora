@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local select = select;
 
-C.modules['Blizzard_DebugTools'] = function()
+C.Modules['Blizzard_DebugTools'] = function()
 	local Texures = { 'TopLeft', 'TopRight', 'Top', 'BottomLeft', 'BottomRight', 'Bottom', 'Left', 'Right', 'TitleBG', 'DialogBG' };
 	for i = 1, #Texures do
 		_G['ScriptErrorsFrame'..Texures[i]]:SetTexture(nil);

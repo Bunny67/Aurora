@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local ipairs = ipairs;
 local select = select;
 
-C.modules["Blizzard_Calendar"] = function()
+C.Modules["Blizzard_Calendar"] = function()
 	local r, g, b = C.r, C.g, C.b
 
 	CalendarFrame:DisableDrawLayer("BORDER")

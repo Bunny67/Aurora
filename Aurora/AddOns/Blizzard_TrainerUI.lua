@@ -3,7 +3,10 @@ local F, C = unpack(select(2, ...))
 local _G = getfenv(0);
 local unpack = unpack;
 
-C.modules['Blizzard_TrainerUI'] = function()
+local TexCoords = F.TexCoords;
+local Hoop = F.dummy;
+
+C.Modules['Blizzard_TrainerUI'] = function()
 	F.StripTextures(ClassTrainerFrame, true);
 	F.SetBD(ClassTrainerFrame, 10, -12, -31, 76);
 	
@@ -14,7 +17,7 @@ C.modules['Blizzard_TrainerUI'] = function()
 	
 	local function StyleSkillButton(SkillButton)
 		SkillButton:SetNormalTexture('');
-		SkillButton.SetNormalTexture = F.dummy;
+		SkillButton.SetNormalTexture = Hoop;
 		SkillButton:SetPushedTexture('');
 
 		SkillButton.BD = CreateFrame('Frame', nil, SkillButton);
@@ -69,7 +72,7 @@ C.modules['Blizzard_TrainerUI'] = function()
 
 				local buttonHighlight = _G['ClassTrainerSkill'..buttonIndex..'Highlight']
 				buttonHighlight:SetTexture('')
-				buttonHighlight.SetTexture = F.dummy
+				buttonHighlight.SetTexture = Hoop
 
 				StyleSkillButton(skillButton)
 			end
@@ -115,7 +118,7 @@ C.modules['Blizzard_TrainerUI'] = function()
 		if Icon then
 			Icon:SetPoint("TOPLEFT", 1, -1);
 			Icon:SetPoint("BOTTOMRIGHT", -1, 1);
-			Icon:SetTexCoord(unpack(F.TexCoords));
+			Icon:SetTexCoord(unpack(TexCoords));
 			F.CreateBD(ClassTrainerSkillIcon);
 		else
 			ClassTrainerSkillIcon:SetBackdrop(nil);

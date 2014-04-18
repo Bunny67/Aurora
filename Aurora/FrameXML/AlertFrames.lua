@@ -1,8 +1,11 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local unpack = unpack;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	hooksecurefunc('AchievementAlertFrame_FixAnchors', function()
 		local frame, frameBackground, frameUnlocked, frameIcon, frameIconTexture;
 		
@@ -30,7 +33,7 @@ tinsert(C.modules['Aurora'], function()
 				frameIcon:DisableDrawLayer('BORDER');
 				frameIcon:DisableDrawLayer('OVERLAY');
 				
-				frameIconTexture:SetTexCoord(unpack(F.TexCoords));
+				frameIconTexture:SetTexCoord(unpack(TexCoords));
 				
 				if ( not frameIconTexture.BG ) then
 					frameIconTexture.BG = CreateFrame('Frame', nil, frame);
@@ -60,7 +63,7 @@ tinsert(C.modules['Aurora'], function()
 				frame:DisableDrawLayer('OVERLAY');
 				frame:DisableDrawLayer('BORDER');
 				
-				frameDungeonTexture:SetTexCoord(unpack(F.TexCoords));
+				frameDungeonTexture:SetTexCoord(unpack(TexCoords));
 				
 				if ( not frameDungeonTexture.BG ) then
 					frameDungeonTexture.BG = CreateFrame('Frame', nil, frame);

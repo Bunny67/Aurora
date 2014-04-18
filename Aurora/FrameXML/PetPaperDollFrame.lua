@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(PetPaperDollFrame, true);
 	
 	F.StripTextures(PetPaperDollFrameExpBar);

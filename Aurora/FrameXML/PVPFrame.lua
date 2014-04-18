@@ -5,7 +5,7 @@ local select = select;
 
 local Hoop = F.dummy;
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	-- PVPParentFrame;
 	F.SetBD(PVPParentFrame, 13, -13, -32, 76);
 	

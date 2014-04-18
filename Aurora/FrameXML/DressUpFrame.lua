@@ -1,6 +1,6 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.modules['Aurora'], function()
+tinsert(C.Modules['Aurora'], function()
 	F.SetBD(DressUpFrame, 11, -12, -34, 73);
 	DressUpFramePortrait:Hide();
 	

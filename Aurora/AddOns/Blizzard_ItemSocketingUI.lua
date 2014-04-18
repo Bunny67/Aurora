@@ -2,7 +2,9 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 
-C.modules['Blizzard_ItemSocketingUI'] = function()
+local TexCoords = F.TexCoords;
+
+C.Modules['Blizzard_ItemSocketingUI'] = function()
 	F.SetBD(ItemSocketingFrame, 10, -13, -5, 29);
 	
 	ItemSocketingFramePortrait:Hide();
@@ -29,7 +31,7 @@ C.modules['Blizzard_ItemSocketingUI'] = function()
 		
 		F.StyleButton(socket);
 		
-		socketTexture:SetTexCoord(unpack(F.TexCoords));
+		socketTexture:SetTexCoord(unpack(TexCoords));
 		
 		_G['ItemSocketingSocket'..i..'BracketFrame']:Hide();
 	end

@@ -4,7 +4,9 @@ local _G = getfenv(0);
 local unpack = unpack;
 local pairs = pairs;
 
-C.modules['Blizzard_InspectUI'] = function()
+local TexCoords = F.TexCoords;
+
+C.Modules['Blizzard_InspectUI'] = function()
 	F.StripTextures(InspectFrame, true);
 	F.SetBD(InspectFrame, 10, -12, -31, 75);
 	
@@ -25,57 +27,59 @@ C.modules['Blizzard_InspectUI'] = function()
 		
 		IconTexture:SetPoint('TOPLEFT', 1, -1);
 		IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		IconTexture:SetTexCoord(unpack(F.TexCoords));
+		IconTexture:SetTexCoord(unpack(TexCoords));
 		
 		F.StripTextures(Slot);
 		F.CreateBD(Slot);
 		F.StyleButton(Slot);
 	end
 	
-	local CheckItemBorderColor = CreateFrame('Frame');
-	
-	local function ScanSlots()
-		local notFound;
+	if ( AuroraConfig.QualityColour ) then
+		local CheckItemBorderColor = CreateFrame('Frame');
 		
-		for _, slot in pairs(slots) do
-			local Target = _G['Inspect'..slot];
-			local SlotId, _, _ = GetInventorySlotInfo(slot);
-			local ItemId = GetInventoryItemID('target', SlotId);
+		local function ScanSlots()
+			local notFound;
+			
+			for _, slot in pairs(slots) do
+				local Target = _G['Inspect'..slot];
+				local SlotId, _, _ = GetInventorySlotInfo(slot);
+				local ItemId = GetInventoryItemID('target', SlotId);
 
-			if ItemId then
-				local _, _, rarity, _, _, _, _, _, _, _, _ = GetItemInfo(ItemId);
-				if not rarity then notFound = true; end
-				
-				if rarity and rarity > 1 then
-					Target:SetBackdropBorderColor(GetItemQualityColor(rarity));
+				if ItemId then
+					local _, _, rarity, _, _, _, _, _, _, _, _ = GetItemInfo(ItemId);
+					if not rarity then notFound = true; end
+					
+					if rarity and rarity > 1 then
+						Target:SetBackdropBorderColor(GetItemQualityColor(rarity));
+					else
+						Target:SetBackdropBorderColor(0, 0, 0);
+					end
 				else
 					Target:SetBackdropBorderColor(0, 0, 0);
 				end
+			end	
+			
+			if notFound == true then
+				return false;
 			else
-				Target:SetBackdropBorderColor(0, 0, 0);
-			end
-		end	
+				CheckItemBorderColor:SetScript('OnUpdate', nil);
+				return true;
+			end		
+		end
 		
-		if notFound == true then
-			return false;
-		else
-			CheckItemBorderColor:SetScript('OnUpdate', nil);
-			return true;
-		end		
-	end
-	
-	local function ColorItemBorder(self)
-		if self and not ScanSlots() then
-			self:SetScript('OnUpdate', ScanSlots);
-		end 
-	end
+		local function ColorItemBorder(self)
+			if self and not ScanSlots() then
+				self:SetScript('OnUpdate', ScanSlots);
+			end 
+		end
 
-	CheckItemBorderColor:RegisterEvent('PLAYER_TARGET_CHANGED');
-	CheckItemBorderColor:RegisterEvent('UNIT_PORTRAIT_UPDATE');
-	CheckItemBorderColor:RegisterEvent('PARTY_MEMBERS_CHANGED');
-	CheckItemBorderColor:SetScript('OnEvent', ColorItemBorder);
-	InspectFrame:HookScript('OnShow', ColorItemBorder);
-	ColorItemBorder(CheckItemBorderColor);
+		CheckItemBorderColor:RegisterEvent('PLAYER_TARGET_CHANGED');
+		CheckItemBorderColor:RegisterEvent('UNIT_PORTRAIT_UPDATE');
+		CheckItemBorderColor:RegisterEvent('PARTY_MEMBERS_CHANGED');
+		CheckItemBorderColor:SetScript('OnEvent', ColorItemBorder);
+		InspectFrame:HookScript('OnShow', ColorItemBorder);
+		ColorItemBorder(CheckItemBorderColor);
+	end
 	
 	F.ReskinArrow(InspectModelRotateLeftButton, 'Left');
 	F.ReskinArrow(InspectModelRotateRightButton, 'Right');
@@ -109,7 +113,7 @@ C.modules['Blizzard_InspectUI'] = function()
 			
 			IconTexture:SetPoint('TOPLEFT', 1, -1);
 			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			IconTexture:SetTexCoord(unpack(F.TexCoords));
+			IconTexture:SetTexCoord(unpack(TexCoords));
 		end
 	end
 	

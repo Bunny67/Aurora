@@ -3,7 +3,9 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local unpack = unpack;
 
-C.modules['Blizzard_MacroUI'] = function()
+local TexCoords = F.TexCoords;
+
+C.Modules['Blizzard_MacroUI'] = function()
 	F.SetBD(_G['MacroFrame'], 10, -11, -32, 71);
 	
 	F.ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -15);
@@ -29,7 +31,7 @@ C.modules['Blizzard_MacroUI'] = function()
 		if Icon then
 			Icon:SetPoint('TOPLEFT', 1, -1);
 			Icon:SetPoint('BOTTOMRIGHT', -1, 1);
-			Icon:SetTexCoord(unpack(F.TexCoords));
+			Icon:SetTexCoord(unpack(TexCoords));
 		end
 	end
 	
@@ -43,7 +45,7 @@ C.modules['Blizzard_MacroUI'] = function()
 	
 	SelectedButtonIcon:SetPoint("TOPLEFT", 1, -1);
 	SelectedButtonIcon:SetPoint("BOTTOMRIGHT", -1, 1);
-	SelectedButtonIcon:SetTexCoord(unpack(F.TexCoords));
+	SelectedButtonIcon:SetTexCoord(unpack(TexCoords));
 	
 	F.Reskin(MacroEditButton);
 	

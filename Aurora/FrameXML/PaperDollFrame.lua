@@ -5,7 +5,9 @@ local unpack = unpack;
 local pairs = pairs;
 local select = select;
 
-tinsert(C.modules['Aurora'], function()
+local TexCoords = F.TexCoords;
+
+tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(PaperDollFrame, true);
 	
 	F.StripTextures(PlayerTitleFrame);
@@ -66,13 +68,13 @@ tinsert(C.modules['Aurora'], function()
 		local IconTexture = _G['Character'..slot..'IconTexture']
 		local PopoutButton = _G['Character'..slot..'PopoutButton'];
 		
-		F.StripTextures(Slot);
+		Slot:SetNormalTexture('');
 		F.StyleButton(Slot);
 		F.CreateBD(Slot);
 		
 		IconTexture:SetPoint('TOPLEFT', 1, -1);
 		IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		IconTexture:SetTexCoord(unpack(F.TexCoords));
+		IconTexture:SetTexCoord(unpack(TexCoords));
 
 		F.StripTextures(PopoutButton);
 
@@ -89,38 +91,42 @@ tinsert(C.modules['Aurora'], function()
 		end
 	end
 	
-	hooksecurefunc('PaperDollItemSlotButton_Update', function(self)
-		for _, slot in pairs(Slots) do
-			local Slot = _G['Character'..slot];
-			local SlotPopoutButton = _G['Character'..slot..'PopoutButton'];
-			local SlotInfo, _, _ = GetInventorySlotInfo(slot);
-			local ItemId = GetInventoryItemID('player', SlotInfo);
+	if ( AuroraConfig.QualityColour ) then
+		hooksecurefunc('PaperDollItemSlotButton_Update', function(self)
+			for _, slot in pairs(Slots) do
+				local Slot = _G['Character'..slot];
+				local SlotPopoutButton = _G['Character'..slot..'PopoutButton'];
+				local SlotInfo, _, _ = GetInventorySlotInfo(slot);
+				local ItemId = GetInventoryItemID('player', SlotInfo);
 
-			if ItemId then
-				local _, _, Rarity, _, _, _, _, _, _, _, _ = GetItemInfo(ItemId);
-				
-				if Rarity and Rarity > 1 then
-					Slot:SetBackdropBorderColor(GetItemQualityColor(Rarity));
-					SlotPopoutButton.Arrow:SetVertexColor(GetItemQualityColor(Rarity));
+				if ItemId then
+					local _, _, Rarity, _, _, _, _, _, _, _, _ = GetItemInfo(ItemId);
+					
+					if Rarity and Rarity > 1 then
+						Slot:SetBackdropBorderColor(GetItemQualityColor(Rarity));
+						SlotPopoutButton.Arrow:SetVertexColor(GetItemQualityColor(Rarity));
+					else
+						Slot:SetBackdropBorderColor(0, 0, 0);
+						SlotPopoutButton.Arrow:SetVertexColor(C.r, C.g, C.b);
+					end
 				else
 					Slot:SetBackdropBorderColor(0, 0, 0);
 					SlotPopoutButton.Arrow:SetVertexColor(C.r, C.g, C.b);
 				end
-			else
-				Slot:SetBackdropBorderColor(0, 0, 0);
-				SlotPopoutButton.Arrow:SetVertexColor(C.r, C.g, C.b);
 			end
-		end
-	end)
-
+		end);
+	end
 	
-	F.StripTextures(CharacterAmmoSlot);
+	CharacterAmmoSlot:SetNormalTexture('');
 	F.StyleButton(CharacterAmmoSlot);
 	F.CreateBD(CharacterAmmoSlot);
 	
+	select(1, CharacterAmmoSlot:GetRegions()):Hide();
+	select(5, CharacterAmmoSlot:GetRegions()):Hide();
+	
 	CharacterAmmoSlotIconTexture:SetPoint('TOPLEFT', 1, -1);
 	CharacterAmmoSlotIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-	CharacterAmmoSlotIconTexture:SetTexCoord(unpack(F.TexCoords));
+	CharacterAmmoSlotIconTexture:SetTexCoord(unpack(TexCoords));
 	
 	GearManagerToggleButton:SetSize(24, 30);
 	F.CreateBDFrame(GearManagerToggleButton);
@@ -142,20 +148,22 @@ tinsert(C.modules['Aurora'], function()
 			
 			button.icon:SetPoint('TOPLEFT', 1, -1);
 			button.icon:SetPoint('BOTTOMRIGHT', -1, 1);
-			button.icon:SetTexCoord(unpack(F.TexCoords));
+			button.icon:SetTexCoord(unpack(TexCoords));
 			
 			button.Styled = true
 		end
 		
-		local location = button.location
-		if not location then return end
-		if location >= PDFITEMFLYOUT_FIRST_SPECIAL_LOCATION then return end
+		if ( AuroraConfig.QualityColour ) then
+			local location = button.location;
+			if not location then return; end
+			if location >= PDFITEMFLYOUT_FIRST_SPECIAL_LOCATION then return; end
 
-		local id = EquipmentManager_GetItemInfoByLocation(location)
-		local _, _, quality = GetItemInfo(id)
-		local r, g, b = GetItemQualityColor(quality)
+			local id = EquipmentManager_GetItemInfoByLocation(location);
+			local _, _, quality = GetItemInfo(id);
+			local r, g, b = GetItemQualityColor(quality);
 
-		button:SetBackdropBorderColor(r, g, b)
+			button:SetBackdropBorderColor(r, g, b);
+		end
 	end
 	
 	hooksecurefunc('PaperDollFrameItemFlyout_DisplayButton', SkinItemFlyouts)
@@ -191,7 +199,7 @@ tinsert(C.modules['Aurora'], function()
 		
 		Icon:SetPoint('TOPLEFT', 1, -1);
 		Icon:SetPoint('BOTTOMRIGHT', -1, 1);
-		Icon:SetTexCoord(unpack(F.TexCoords));
+		Icon:SetTexCoord(unpack(TexCoords));
 	end
 	
 	for i=1, NUM_GEARSET_ICONS_SHOWN do
@@ -202,7 +210,7 @@ tinsert(C.modules['Aurora'], function()
 			F.StripTextures(Button);
 			F.StyleButton(Button, nil, true);
 			
-			Icon:SetTexCoord(unpack(F.TexCoords))
+			Icon:SetTexCoord(unpack(TexCoords))
 			_G["GearManagerDialogPopupButton"..i.."Icon"]:SetTexture(nil)
 
 			Icon:SetPoint('TOPLEFT', 1, -1);
