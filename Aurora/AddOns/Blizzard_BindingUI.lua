@@ -5,6 +5,10 @@ local _G = getfenv(0);
 C.Modules['Blizzard_BindingUI'] = function()
 	F.SetBD(KeyBindingFrame, 2, 0, -42, 12);
 	
+	KeyBindingFrame:DisableDrawLayer('BACKGROUND');
+	KeyBindingFrameOutputText:SetDrawLayer('OVERLAY');
+	KeyBindingFrameHeader:SetTexture('');
+	
 	F.ReskinCheck(KeyBindingFrameCharacterButton);
 	
 	for i = 1, KEY_BINDINGS_DISPLAYED do

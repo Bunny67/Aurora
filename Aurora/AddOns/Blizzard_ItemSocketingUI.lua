@@ -6,8 +6,9 @@ local TexCoords = F.TexCoords;
 
 C.Modules['Blizzard_ItemSocketingUI'] = function()
 	F.SetBD(ItemSocketingFrame, 10, -13, -5, 29);
-	
 	ItemSocketingFramePortrait:Hide();
+	
+	select(2, ItemSocketingFrame:GetRegions()):Hide();
 	
 	ItemSocketingScrollFrame:DisableDrawLayer('ARTWORK');
 	F.ReskinScroll(ItemSocketingScrollFrameScrollBar);

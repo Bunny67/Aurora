@@ -579,7 +579,11 @@ F.SetBD = function(Frame, x1, y1, x2, y2)
 	local xOfs2 = x2 or 0;
 	local yOfs2 = y2 or 0;
 	
-	F.StripTextures(Frame);
+	local PTR = true;
+	
+	if not PTR then
+		F.StripTextures(Frame);
+	end
 	
 	local BD = CreateFrame('Frame', nil, Frame);
 	BD:ClearAllPoints();

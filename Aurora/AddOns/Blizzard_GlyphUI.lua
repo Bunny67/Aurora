@@ -2,10 +2,10 @@ local F, C = unpack(select(2, ...));
 
 local unpack = unpack;
 
+local r, g, b = C.r, C.g, C.b;
+
 C.Modules['Blizzard_GlyphUI'] = function()
-	local r, g, b = C.r, C.g, C.b;
-	
-	F.StripTextures(GlyphFrame, true);
+	GlyphFrameBackground:Hide();
 	
 	hooksecurefunc('GlyphFrameGlyph_UpdateSlot', function(self)
 		self.glyph:SetTexCoord(unpack(F.TexCoords));
@@ -23,7 +23,7 @@ C.Modules['Blizzard_GlyphUI'] = function()
 			F.CreateBD(self.bg, .25);
 		end
 	end);
-	--[[
+	
 	hooksecurefunc('GlyphFrameGlyph_OnUpdate', function(self)
 		local id = self:GetID();
 		
@@ -32,5 +32,5 @@ C.Modules['Blizzard_GlyphUI'] = function()
 		else
 			self.bg:SetBackdropBorderColor(0, 0, 0);
 		end
-	end);]]
+	end);
 end

@@ -8,6 +8,16 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 	-- GuildBankFrame;
 	F.SetBD(GuildBankFrame, 11, -12, 0, 6);
 	
+	GuildBankTabTitleBackground:SetAlpha(0);
+	GuildBankTabTitleBackgroundLeft:SetAlpha(0);
+	GuildBankTabTitleBackgroundRight:SetAlpha(0);
+	GuildBankTabLimitBackground:SetAlpha(0);
+	GuildBankTabLimitBackgroundLeft:SetAlpha(0);
+	GuildBankTabLimitBackgroundRight:SetAlpha(0);
+	
+	GuildBankFrameLeft:Hide();
+	GuildBankFrameRight:Hide();
+	
 	GuildBankEmblemFrame:DisableDrawLayer('ARTWORK');
 	GuildBankEmblemFrame:DisableDrawLayer('BACKGROUND');
 	GuildBankEmblemFrame:DisableDrawLayer('BORDER');
@@ -52,6 +62,10 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 		local Tab = _G['GuildBankFrameTab'..i];
 		
 		F.ReskinTab(Tab);
+		
+		if ( i ~= 1 ) then
+			Tab:SetPoint('LEFT', _G['GuildBankFrameTab'..i-1], 'RIGHT', -15, 0);
+		end
 	end
 	
 	for i = 1, 6 do
@@ -81,6 +95,10 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 	F.ReskinScroll(GuildBankInfoScrollFrameScrollBar);
 	-- GuildBankPopupFrame;
 	F.SetBD(GuildBankPopupFrame, 3, -15, -25, 26);
+	
+	for i = 1, 4 do
+		select(i, GuildBankPopupFrame:GetRegions()):Hide();
+	end
 	
 	GuildBankPopupEditBox:DisableDrawLayer('BACKGROUND');
 	F.ReskinInput(GuildBankPopupEditBox);

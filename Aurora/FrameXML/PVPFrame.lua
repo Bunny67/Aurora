@@ -27,6 +27,10 @@ tinsert(C.Modules['Aurora'], function()
 		
 		F.SetBD(Team, 9, -4, -24, 3);
 		
+		for j = 1, 5 do
+			select(j, Team:GetRegions()):Hide();
+		end
+		
 		TeamHighlight:Hide();
 		TeamHighlight.Show = Hoop;
 	end

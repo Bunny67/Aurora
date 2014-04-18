@@ -8,6 +8,11 @@ local Hoop = F.dummy;
 C.Modules['Blizzard_TimeManager'] = function()
 	-- TimeManagerFrame;
 	F.SetBD(TimeManagerFrame, 14, -11, -49, 9);
+	TimeManagerGlobe:Hide();
+	
+	for i = 2, 5 do
+		select(i, TimeManagerFrame:GetRegions()):Hide();
+	end
 	
 	F.ReskinClose(TimeManagerCloseButton, 'TOPRIGHT', TimeManagerFrame, 'TOPRIGHT', -53, -15);
 	
@@ -41,6 +46,8 @@ C.Modules['Blizzard_TimeManager'] = function()
 	-- nil;
 	-- StopwatchFrame;
 	F.SetBD(StopwatchFrame, 0, -16, 0, 2);
+	
+	StopwatchFrame:DisableDrawLayer('BACKGROUND');
 	
 	StopwatchTabFrameLeft:Hide();
 	StopwatchTabFrameMiddle:Hide();

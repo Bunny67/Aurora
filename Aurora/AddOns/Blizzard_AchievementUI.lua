@@ -13,6 +13,10 @@ C.Modules['Blizzard_AchievementUI'] = function()
 	-- AchievementFrame
 	F.SetBD(AchievementFrame);
 	
+	for i = 1, 8 do
+		select(i, AchievementFrame:GetRegions()):Hide();
+	end
+	
 	AchievementFrame:DisableDrawLayer('BACKGROUND');
 	AchievementFrame:DisableDrawLayer('ARTWORK');
 	AchievementFrame:DisableDrawLayer('OVERLAY');

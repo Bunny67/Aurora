@@ -3,21 +3,25 @@ local F, C = unpack(select(2, ...));
 local _G = getfenv(0);
 local pairs = pairs;
 
-C.Modules["Blizzard_RaidUI"] = function()
+C.Modules['Blizzard_RaidUI'] = function()
 	F.Reskin(RaidFrameRaidBrowserButton);
 	F.Reskin(RaidFrameReadyCheckButton);
-	F.Reskin(RaidFrameRaidInfoButton);
 	
 	for i = 1, MAX_RAID_GROUPS do
 		local Group = _G['RaidGroup'..i];
 		
-		F.StripTextures(Group);
+		Group:GetRegions():Hide();
+		
+		for j = 1, 5 do
+			local GroupSlot = _G['RaidGroup'..i..'Slot'..j];
+			
+			GroupSlot:SetHighlightTexture('');
+		end
 	end
 	
 	for i = 1, MAX_RAID_GROUPS * 5 do
 		local GroupButton = _G['RaidGroupButton'..i];
 		
-		F.StripTextures(GroupButton);
 		F.StyleButton(GroupButton);
 		F.Reskin(GroupButton);
 		
@@ -28,12 +32,6 @@ C.Modules["Blizzard_RaidUI"] = function()
 		GroupButton.Gradient:SetVertexColor(.2, .2, .2, 1)
 	end
 	
-	for i = 1, 8 do
-		for j = 1, 5 do
-			F.StripTextures(_G['RaidGroup'..i..'Slot'..j]);
-		end
-	end
-	
 	hooksecurefunc('RaidClassButton_Update', function()
 		local Button, Icon, Count;
 		for index, value in pairs(RAID_CLASS_BUTTONS) do
@@ -41,7 +39,7 @@ C.Modules["Blizzard_RaidUI"] = function()
 			Count = _G['RaidClassButton'..value.button..'Count'];
 			Icon = _G['RaidClassButton'..value.button..'IconTexture'];
 			
-			F.StripTextures(Button);
+			select(1, Button:GetRegions()):Hide();
 			
 			if ( Button:GetID() ==  value.button ) then
 				Button.class = index;
@@ -58,5 +56,5 @@ C.Modules["Blizzard_RaidUI"] = function()
 				Icon:SetTexCoord(value.coords[1] + 0.015, value.coords[2] - 0.02, value.coords[3] + 0.018, value.coords[4] - 0.02);
 			end
 		end
-	end)
+	end);
 end

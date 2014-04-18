@@ -6,23 +6,24 @@ local select = select;
 
 local TexCoords = F.TexCoords;
 
-C.Modules['Blizzard_AuctionUI'] = function()
-	local function AuctionSortButton(Frame)
-		Frame:DisableDrawLayer('BACKGROUND');
+local function AuctionSortButton(Frame)
+	Frame:DisableDrawLayer('BACKGROUND');
+	
+	local BG = CreateFrame('Frame', nil, Frame);
+	BG:SetPoint('TOPLEFT', 2, 0);
+	BG:SetPoint('BOTTOMRIGHT', -1, 0);
+	BG:SetFrameLevel(Frame:GetFrameLevel() -1 );
+	F.CreateBD(BG, 0);
+	F.CreateGradient(BG);
+	
+	Frame:SetHighlightTexture(C.Media.Backdrop);
+	Frame:GetHighlightTexture():ClearAllPoints();
+	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 3, -1);
+	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -2, 1);
+	Frame:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
+end
 
-		local BG = CreateFrame('Frame', nil, Frame);
-		BG:SetPoint('TOPLEFT', 2, 0);
-		BG:SetPoint('BOTTOMRIGHT', -1, 0);
-		BG:SetFrameLevel(Frame:GetFrameLevel() -1 );
-		F.CreateBD(BG, 0);
-		F.CreateGradient(BG);
-		
-		Frame:SetHighlightTexture(C.Media.Backdrop);
-		Frame:GetHighlightTexture():ClearAllPoints();
-		Frame:GetHighlightTexture():SetPoint('TOPLEFT', 3, -1);
-		Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -2, 1);
-		Frame:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .25);
-	end
+C.Modules['Blizzard_AuctionUI'] = function()
 	-- AuctionFrame;
 	AuctionFrame:DisableDrawLayer('BACKGROUND');
 	AuctionFrame:DisableDrawLayer('ARTWORK');

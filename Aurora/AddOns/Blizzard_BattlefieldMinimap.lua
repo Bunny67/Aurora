@@ -4,10 +4,10 @@ local _G = getfenv(0);
 
 C.Modules['Blizzard_BattlefieldMinimap'] = function()
 	-- BattlefieldMinimapTab
-	F.Kill(BattlefieldMinimapTab);
-	F.Kill(BattlefieldMinimapTabLeft);
-	F.Kill(BattlefieldMinimapTabMiddle);
-	F.Kill(BattlefieldMinimapTabRight);
+	BattlefieldMinimapTab:Hide();
+	BattlefieldMinimapTabLeft:Hide();
+	BattlefieldMinimapTabMiddle:Hide();
+	BattlefieldMinimapTabRight:Hide();
 	-- BattlefieldMinimap
 	BattlefieldMinimap:EnableMouse(true);
 	BattlefieldMinimap:SetMovable(true);
@@ -19,8 +19,8 @@ C.Modules['Blizzard_BattlefieldMinimap'] = function()
 	BattlefieldMinimap.BG:SetFrameLevel(0)
 	F.CreateBD(BattlefieldMinimap.BG, 1);
 	
-	F.Kill(BattlefieldMinimapCorner);
-	F.Kill(BattlefieldMinimapBackground);
+	BattlefieldMinimapCorner:Hide();
+	BattlefieldMinimapBackground:Hide();
 	
 	F.ReskinClose(BattlefieldMinimapCloseButton, 'TOPRIGHT', BattlefieldMinimap, 'TOPRIGHT', -7, -1);
 	
