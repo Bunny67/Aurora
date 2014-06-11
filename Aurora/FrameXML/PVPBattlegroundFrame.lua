@@ -14,6 +14,11 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(PVPBattlegroundFrameCancelButton);
 	
+	PVPBattlegroundFrameInfoScrollFrame.scrollBarBackground:Hide();
+	
+	PVPBattlegroundFrameInfoScrollFrameScrollBar:DisableDrawLayer('ARTWORK');
+	F.ReskinScroll(PVPBattlegroundFrameInfoScrollFrameScrollBar);
+	
 	PVPBattlegroundFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);
 	PVPBattlegroundFrameInfoScrollFrameChildFrameRewardsInfo.description:SetTextColor(1, 1, 1);
 	
