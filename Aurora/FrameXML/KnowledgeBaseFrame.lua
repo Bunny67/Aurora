@@ -17,6 +17,12 @@ tinsert(C.Modules['Aurora'], function()
 	
 	KnowledgeBaseFrameDivider2:Hide();
 	
+	F.ReskinArrow(KnowledgeBaseArticleListFrameNextButton, 'Right');
+	F.ReskinArrow(KnowledgeBaseArticleListFramePreviousButton, 'Left');
+	
+	F.ReskinScroll(KnowledgeBaseArticleScrollFrameScrollBar);
+	F.Reskin(KnowledgeBaseArticleScrollChildFrameBackButton);
+	
 	F.Reskin(KnowledgeBaseFrameReportIssue);
 	KnowledgeBaseFrameGMTalk:SetPoint('BOTTOM', KnowledgeBaseFrameReportIssue, 'TOP', 0, 1);
 	F.Reskin(KnowledgeBaseFrameGMTalk);
