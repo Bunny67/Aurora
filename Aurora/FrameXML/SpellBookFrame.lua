@@ -60,12 +60,7 @@ tinsert(C.Modules['Aurora'], function()
 	end
 	
 	hooksecurefunc('SpellButton_UpdateButton', function(self)
-		if ( not SpellBookFrame.selectedSkillLine ) then
-			SpellBookFrame.selectedSkillLine = 1;
-		end
-		
 		local Temp, Texture, Offset, NumSpells = SpellBook_GetTabInfo(SpellBookFrame.selectedSkillLine);
-		SpellBookFrame.selectedSkillLineOffset = Offset;
 		
 		local ID, DisplayID = SpellBook_GetSpellID(self:GetID());
 		local Name = self:GetName();
@@ -80,12 +75,9 @@ tinsert(C.Modules['Aurora'], function()
 		Highlight:SetTexture(C.r, C.g, C.b, .25);
 		
 		if ( (SpellBookFrame.bookType ~= BOOKTYPE_PET) and (not DisplayID or DisplayID > (Offset + NumSpells)) ) then
-			self:Disable();
 			self.BG:Hide();
 			
 			return;
-		else
-			self:Enable();
 		end
 		
 		self.BG:Show();
