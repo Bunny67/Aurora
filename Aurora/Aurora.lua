@@ -750,68 +750,6 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 			end
 		end
 	end
-
-	if addon == 'Aurora' then
-		local AllUIStripTextures = {'GameMenuFrame', 'VideoOptionsFrame', 'VideoOptionsFrameCategoryFrame', 'VideoOptionsEffectsPanelQuality', 'VideoOptionsEffectsPanelShaders', 'VideoOptionsFramePanelContainer', 'VideoOptionsResolutionPanelBrightness', 'AudioOptionsFrame', 'AudioOptionsFrameCategoryFrame', 'AudioOptionsSoundPanelPlayback', 'AudioOptionsSoundPanelHardware', 'AudioOptionsSoundPanelVolume', 'AudioOptionsFramePanelContainer', 'InterfaceOptionsFrame', 'InterfaceOptionsFrameCategories', 'InterfaceOptionsFramePanelContainer', 'InterfaceOptionsFrameAddOns'}
-		for i = 1, #AllUIStripTextures do
-			F.StripTextures(_G[AllUIStripTextures[i]], true)
-		end
-		
-		local AllUIDropDowns = {'VideoOptionsResolutionPanelResolutionDropDown', 'VideoOptionsResolutionPanelMultiSampleDropDown', 'VideoOptionsResolutionPanelRefreshDropDown', 'AudioOptionsSoundPanelHardwareDropDown', 'InterfaceOptionsControlsPanelAutoLootKeyDropDown', 'InterfaceOptionsCombatPanelTOTDropDown', 'InterfaceOptionsCombatPanelSelfCastKeyDropDown', 'InterfaceOptionsCombatPanelFocusCastKeyDropDown', 'InterfaceOptionsDisplayPanelWorldPVPObjectiveDisplay', 'InterfaceOptionsDisplayPanelAggroWarningDisplay', 'InterfaceOptionsSocialPanelChatStyle', 'InterfaceOptionsSocialPanelTimestamps', 'InterfaceOptionsCombatTextPanelFCTDropDown', 'InterfaceOptionsCameraPanelStyleDropDown', 'InterfaceOptionsMousePanelClickMoveStyleDropDown'}
-		for i = 1, #AllUIDropDowns do
-			F.ReskinDropDown(_G[AllUIDropDowns[i]])
-		end
-		
-		local AllUISlider = {'VideoOptionsResolutionPanelUIScaleSlider', 'VideoOptionsEffectsPanelQualitySlider', 'VideoOptionsEffectsPanelViewDistance', 'VideoOptionsEffectsPanelEnvironmentDetail', 'VideoOptionsEffectsPanelTextureResolution', 'VideoOptionsEffectsPanelTerrainDetail', 'VideoOptionsEffectsPanelClutterDensity', 'VideoOptionsEffectsPanelTextureFiltering', 'VideoOptionsEffectsPanelParticleDensity', 'VideoOptionsEffectsPanelShadowQuality', 'VideoOptionsEffectsPanelClutterRadius', 'VideoOptionsEffectsPanelWeatherIntensity', 'VideoOptionsEffectsPanelPlayerTexture', 'VideoOptionsResolutionPanelGammaSlider', 'AudioOptionsSoundPanelSoundQuality', 'AudioOptionsSoundPanelSoundChannels', 'AudioOptionsSoundPanelMasterVolume', 'AudioOptionsSoundPanelSoundVolume', 'AudioOptionsSoundPanelMusicVolume', 'AudioOptionsSoundPanelAmbienceVolume', 'InterfaceOptionsCameraPanelMaxDistanceSlider', 'InterfaceOptionsCameraPanelFollowSpeedSlider', 'InterfaceOptionsMousePanelMouseLookSpeedSlider','InterfaceOptionsMousePanelMouseSensitivitySlider'}
-		for i = 1, #AllUISlider do
-			F.ReskinSlider(_G[AllUISlider[i]])
-		end
-		
-		local AllUICheckBoxes = {'VideoOptionsResolutionPanelVSync', 'VideoOptionsResolutionPanelTripleBuffer', 'VideoOptionsResolutionPanelHardwareCursor', 'VideoOptionsResolutionPanelFixInputLag', 'VideoOptionsResolutionPanelUseUIScale', 'VideoOptionsResolutionPanelWindowed', 'VideoOptionsResolutionPanelMaximized', 'VideoOptionsResolutionPanelDisableResize', 'VideoOptionsResolutionPanelDesktopGamma', 'VideoOptionsEffectsPanelSpecularLighting', 'VideoOptionsEffectsPanelFullScreenGlow', 'VideoOptionsEffectsPanelDeathEffect', 'VideoOptionsEffectsPanelProjectedTextures', 'AudioOptionsSoundPanelEnableSound', 'AudioOptionsSoundPanelSoundEffects', 'AudioOptionsSoundPanelErrorSpeech', 'AudioOptionsSoundPanelEmoteSounds', 'AudioOptionsSoundPanelPetSounds', 'AudioOptionsSoundPanelMusic', 'AudioOptionsSoundPanelLoopMusic', 'AudioOptionsSoundPanelAmbientSounds', 'AudioOptionsSoundPanelSoundInBG', 'AudioOptionsSoundPanelReverb', 'AudioOptionsSoundPanelHRTF', 'AudioOptionsSoundPanelEnableDSPs', 'AudioOptionsSoundPanelUseHardware', 'InterfaceOptionsControlsPanelStickyTargeting', 'InterfaceOptionsControlsPanelAutoDismount', 'InterfaceOptionsControlsPanelAutoClearAFK', 'InterfaceOptionsControlsPanelBlockTrades', 'InterfaceOptionsControlsPanelLootAtMouse', 'InterfaceOptionsControlsPanelAutoLootCorpse', 'InterfaceOptionsCombatPanelAttackOnAssist', 'InterfaceOptionsCombatPanelAutoRange', 'InterfaceOptionsCombatPanelStopAutoAttack', 'InterfaceOptionsCombatPanelNameplateClassColors', 'InterfaceOptionsCombatPanelAutoSelfCast', 'InterfaceOptionsCombatPanelTargetOfTarget', 'InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait', 'InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates', 'InterfaceOptionsDisplayPanelShowCloak', 'InterfaceOptionsDisplayPanelShowHelm', 'InterfaceOptionsDisplayPanelShowAggroPercentage', 'InterfaceOptionsDisplayPanelPlayAggroSounds', 'InterfaceOptionsDisplayPanelDetailedLootInfo', 'InterfaceOptionsDisplayPanelShowFreeBagSpace', 'InterfaceOptionsDisplayPanelCinematicSubtitles', 'InterfaceOptionsDisplayPanelRotateMinimap', 'InterfaceOptionsDisplayPanelScreenEdgeFlash', 'InterfaceOptionsDisplayPanelShowClock', 'InterfaceOptionsDisplayPanelColorblindMode', 'InterfaceOptionsDisplayPanelShowItemLevel', 'InterfaceOptionsObjectivesPanelInstantQuestText', 'InterfaceOptionsObjectivesPanelAutoQuestTracking', 'InterfaceOptionsObjectivesPanelAutoQuestProgress', 'InterfaceOptionsObjectivesPanelMapQuestDifficulty', 'InterfaceOptionsObjectivesPanelAdvancedWorldMap', 'InterfaceOptionsObjectivesPanelWatchFrameWidth', 'InterfaceOptionsSocialPanelProfanityFilter', 'InterfaceOptionsSocialPanelSpamFilter', 'InterfaceOptionsSocialPanelChatBubbles', 'InterfaceOptionsSocialPanelPartyChat', 'InterfaceOptionsSocialPanelChatHoverDelay', 'InterfaceOptionsSocialPanelGuildMemberAlert', 'InterfaceOptionsSocialPanelGuildRecruitment', 'InterfaceOptionsSocialPanelChatMouseScroll', 'InterfaceOptionsSocialPanelWholeChatWindowClickable', 'InterfaceOptionsActionBarsPanelLockActionBars', 'InterfaceOptionsActionBarsPanelSecureAbilityToggle', 'InterfaceOptionsActionBarsPanelAlwaysShowActionBars', 'InterfaceOptionsActionBarsPanelBottomLeft', 'InterfaceOptionsActionBarsPanelBottomRight', 'InterfaceOptionsActionBarsPanelRight', 'InterfaceOptionsActionBarsPanelRightTwo', 'InterfaceOptionsNamesPanelMyName', 'InterfaceOptionsNamesPanelFriendlyPlayerNames', 'InterfaceOptionsNamesPanelFriendlyPets', 'InterfaceOptionsNamesPanelFriendlyGuardians', 'InterfaceOptionsNamesPanelFriendlyTotems', 'InterfaceOptionsNamesPanelUnitNameplatesFriends', 'InterfaceOptionsNamesPanelUnitNameplatesFriendlyGuardians', 'InterfaceOptionsNamesPanelUnitNameplatesFriendlyPets', 'InterfaceOptionsNamesPanelUnitNameplatesFriendlyTotems', 'InterfaceOptionsNamesPanelGuilds', 'InterfaceOptionsNamesPanelNPCNames', 'InterfaceOptionsNamesPanelUnitNameplatesAllowOverlap', 'InterfaceOptionsNamesPanelTitles', 'InterfaceOptionsNamesPanelNonCombatCreature', 'InterfaceOptionsNamesPanelEnemyPlayerNames', 'InterfaceOptionsNamesPanelEnemyPets', 'InterfaceOptionsNamesPanelEnemyGuardians', 'InterfaceOptionsNamesPanelEnemyTotems', 'InterfaceOptionsNamesPanelUnitNameplatesEnemyPets', 'InterfaceOptionsNamesPanelUnitNameplatesEnemies', 'InterfaceOptionsNamesPanelUnitNameplatesEnemyGuardians', 'InterfaceOptionsNamesPanelUnitNameplatesEnemyTotems', 'InterfaceOptionsCombatTextPanelTargetDamage', 'InterfaceOptionsCombatTextPanelPeriodicDamage', 'InterfaceOptionsCombatTextPanelPetDamage', 'InterfaceOptionsCombatTextPanelHealing', 'InterfaceOptionsCombatTextPanelTargetEffects', 'InterfaceOptionsCombatTextPanelOtherTargetEffects', 'InterfaceOptionsCombatTextPanelEnableFCT', 'InterfaceOptionsCombatTextPanelDodgeParryMiss', 'InterfaceOptionsCombatTextPanelDamageReduction', 'InterfaceOptionsCombatTextPanelRepChanges', 'InterfaceOptionsCombatTextPanelReactiveAbilities', 'InterfaceOptionsCombatTextPanelFriendlyHealerNames', 'InterfaceOptionsCombatTextPanelCombatState', 'InterfaceOptionsCombatTextPanelComboPoints', 'InterfaceOptionsCombatTextPanelLowManaHealth', 'InterfaceOptionsCombatTextPanelEnergyGains', 'InterfaceOptionsCombatTextPanelPeriodicEnergyGains', 'InterfaceOptionsCombatTextPanelHonorGains', 'InterfaceOptionsCombatTextPanelAuras', 'InterfaceOptionsBuffsPanelBuffDurations', 'InterfaceOptionsBuffsPanelDispellableDebuffs', 'InterfaceOptionsBuffsPanelCastableBuffs', 'InterfaceOptionsBuffsPanelConsolidateBuffs', 'InterfaceOptionsBuffsPanelShowCastableDebuffs', 'InterfaceOptionsCameraPanelFollowTerrain', 'InterfaceOptionsCameraPanelHeadBob', 'InterfaceOptionsCameraPanelWaterCollision', 'InterfaceOptionsCameraPanelSmartPivot', 'InterfaceOptionsMousePanelInvertMouse', 'InterfaceOptionsMousePanelClickToMove', 'InterfaceOptionsMousePanelWoWMouse', 'InterfaceOptionsHelpPanelShowTutorials', 'InterfaceOptionsHelpPanelLoadingScreenTips', 'InterfaceOptionsHelpPanelEnhancedTooltips', 'InterfaceOptionsHelpPanelBeginnerTooltips', 'InterfaceOptionsHelpPanelShowLuaErrors', 'InterfaceOptionsStatusTextPanelPlayer', 'InterfaceOptionsStatusTextPanelPet', 'InterfaceOptionsStatusTextPanelParty', 'InterfaceOptionsStatusTextPanelTarget', 'InterfaceOptionsStatusTextPanelPercentages', 'InterfaceOptionsStatusTextPanelXP', 'InterfaceOptionsUnitFramePanelPartyBackground', 'InterfaceOptionsUnitFramePanelPartyPets', 'InterfaceOptionsUnitFramePanelArenaEnemyFrames', 'InterfaceOptionsUnitFramePanelArenaEnemyCastBar', 'InterfaceOptionsUnitFramePanelArenaEnemyPets', 'InterfaceOptionsUnitFramePanelPartyInRaid', 'InterfaceOptionsUnitFramePanelRaidRange', 'InterfaceOptionsUnitFramePanelFullSizeFocusFrame', 'InterfaceOptionsFeaturesPanelPreviewTalentChanges', 'InterfaceOptionsFeaturesPanelEquipmentManager'}
-		for i = 1, #AllUICheckBoxes do
-		local AllUICheckBoxe = _G[AllUICheckBoxes[i]]
-			if AllUICheckBoxe then
-				F.ReskinCheck(AllUICheckBoxe)
-			else
-				print('Ошибка Aurora: '..AllUICheckBoxes[i]..' не был найден.')
-			end
-		end
-		
-		for i = 1, 2 do
-			F.StripTextures(_G['InterfaceOptionsFrameTab'..i])
-		end
-		
-		local AllUIButtons = {'GameMenuButtonOptions', 'GameMenuButtonSoundOptions', 'GameMenuButtonUIOptions', 'GameMenuButtonKeybindings', 'GameMenuButtonMacros', 'GameMenuButtonLogout', 'GameMenuButtonQuit', 'GameMenuButtonContinue', 'VideoOptionsFrameDefaults', 'VideoOptionsFrameOkay', 'VideoOptionsFrameCancel', 'VideoOptionsFrameApply', 'AudioOptionsFrameDefaults', 'AudioOptionsFrameOkay', 'AudioOptionsFrameCancel', 'InterfaceOptionsFrameDefaults', 'InterfaceOptionsFrameOkay', 'InterfaceOptionsFrameCancel', 'InterfaceOptionsHelpPanelResetTutorials'}
-		for i = 1, #AllUIButtons do
-			F.Reskin(_G[AllUIButtons[i]])
-		end
-		
-		hooksecurefunc('InterfaceOptions_AddCategory', function()
-			local num = #INTERFACEOPTIONS_ADDONCATEGORIES
-			for i = 1, num do
-				local bu = _G['InterfaceOptionsFrameAddOnsButton'..i..'Toggle']
-				if bu and not bu.reskinned then
-					F.ReskinExpandOrCollapse(bu)
-					bu:SetPushedTexture('')
-					bu.SetPushedTexture = F.dummy
-					bu.reskinned = true
-				end
-			end
-		end)
-
-		hooksecurefunc('OptionsListButtonToggle_OnClick', function(self)
-			if self:GetParent().element.collapsed then
-				self.Plus:Show()
-			else
-				self.Plus:Hide()
-			end
-		end)
-		
-		local AllUISetBD = {'GameMenuFrame', 'VideoOptionsFrame', 'AudioOptionsFrame', 'InterfaceOptionsFrame'}
-		for i = 1, #AllUISetBD do
-			F.SetBD(_G[AllUISetBD[i]])
-		end
-	end
 end)
 
 local f = CreateFrame('Frame');
