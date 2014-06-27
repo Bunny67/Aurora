@@ -1,7 +1,9 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 local unpack = unpack;
+local tinsert = table.insert;
 
 local TexCoords = F.TexCoords;
 
@@ -11,23 +13,27 @@ tinsert(C.Modules['Aurora'], function()
 	MailFrame:DisableDrawLayer('BACKGROUND');
 	MailFrame:DisableDrawLayer('BORDER');
 	-- InboxFrame
-	for i = 1, INBOXITEMS_TO_DISPLAY do
-		local Item = _G['MailItem'..i];
-		local ItemButton = _G['MailItem'..i..'Button'];
-		local ItemButtonIcon = _G['MailItem'..i..'ButtonIcon'];
+	do
+		local Item, ItemButton, ItemButtonIcon;
 		
-		for i = 1, 3 do
-			select(i, Item:GetRegions()):Hide();
+		for i = 1, INBOXITEMS_TO_DISPLAY do
+			Item = _G['MailItem'..i];
+			ItemButton = _G['MailItem'..i..'Button'];
+			ItemButtonIcon = _G['MailItem'..i..'ButtonIcon'];
+			
+			for i = 1, 3 do
+				select(i, Item:GetRegions()):Hide();
+			end
+			
+			F.StyleButton(ItemButton);
+			F.CreateBD(ItemButton);
+			
+			_G['MailItem'..i..'ButtonSlot']:Hide();
+			
+			ItemButtonIcon:SetPoint('TOPLEFT', 1, -1);
+			ItemButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			ItemButtonIcon:SetTexCoord(unpack(F.TexCoords));
 		end
-		
-		F.StyleButton(ItemButton);
-		F.CreateBD(ItemButton);
-		
-		_G['MailItem'..i..'ButtonSlot']:Hide();
-		
-		ItemButtonIcon:SetPoint('TOPLEFT', 1, -1);
-		ItemButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
-		ItemButtonIcon:SetTexCoord(unpack(F.TexCoords));
 	end
 	
 	F.ReskinArrow(InboxPrevPageButton, 'Left');
@@ -53,7 +59,7 @@ tinsert(C.Modules['Aurora'], function()
 			local Button = _G['SendMailAttachment'..i]
 			local ButtonTexture = Button:GetNormalTexture();
 			
-			if ( not Button.Style ) then
+			if (not Button.Style) then
 				select(1, Button:GetRegions()):Hide();
 				
 				F.StyleButton(Button, nil, true);
@@ -62,7 +68,7 @@ tinsert(C.Modules['Aurora'], function()
 				Button.Style = true;
 			end
 			
-			if ( ButtonTexture ) then
+			if (ButtonTexture) then
 				ButtonTexture:SetPoint('TOPLEFT', 1, -1);
 				ButtonTexture:SetPoint('BOTTOMRIGHT', -1, 1);
 				ButtonTexture:SetTexCoord(unpack(TexCoords));
@@ -83,10 +89,14 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.ReskinClose(InboxCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -17);
 	
-	for i = 1, 2 do
-		local Tab = _G['MailFrameTab'..i];
+	do
+		local Tab;
 		
-		F.ReskinTab(Tab);
+		for i = 1, 2 do
+			Tab = _G['MailFrameTab'..i];
+			
+			F.ReskinTab(Tab);
+		end
 	end
 	-- OpenMailFrame
 	F.SetBD(OpenMailFrame, 12, -12, -34, 74);
@@ -103,7 +113,11 @@ tinsert(C.Modules['Aurora'], function()
 	OpenMailScrollFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinScroll(OpenMailScrollFrameScrollBar);
 	
-	OpenMailLetterButton:SetNormalTexture('');
+	OpenMailArithmeticLine:Hide();
+	
+	InvoiceTextFontNormal:SetTextColor(1, 1, 1);
+	
+	OpenMailLetterButton:SetNormalTexture(nil);
 	F.StyleButton(OpenMailLetterButton);
 	F.CreateBD(OpenMailLetterButton);
 	OpenMailLetterButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
@@ -114,7 +128,7 @@ tinsert(C.Modules['Aurora'], function()
 		local Button = _G['OpenMailAttachmentButton'..i];
 		local ButtonIconTexture = _G['OpenMailAttachmentButton'..i..'IconTexture'];
 		
-		Button:SetNormalTexture('');
+		Button:SetNormalTexture(nil);
 		F.StyleButton(Button);
 		F.CreateBD(Button);
 		
@@ -123,7 +137,7 @@ tinsert(C.Modules['Aurora'], function()
 		ButtonIconTexture:SetTexCoord(unpack(TexCoords));
 	end
 	
-	OpenMailMoneyButton:SetNormalTexture('');
+	OpenMailMoneyButton:SetNormalTexture(nil);
 	F.StyleButton(OpenMailMoneyButton);
 	F.CreateBD(OpenMailMoneyButton);
 	OpenMailMoneyButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
@@ -137,4 +151,4 @@ tinsert(C.Modules['Aurora'], function()
 	F.Reskin(OpenMailReplyButton);
 	
 	F.ReskinClose(OpenMailCloseButton, 'TOPRIGHT', OpenMailFrame, 'TOPRIGHT', -38, -16);
-end)
+end);
