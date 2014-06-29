@@ -6,15 +6,19 @@ C.Modules['Blizzard_BarbershopUI'] = function()
 	F.SetBD(BarberShopFrame, 44, -75, -40, 44);
 	BarberShopFrameBackground:Hide();
 	
-	for i = 1, 4 do
-		local Prev = _G['BarberShopFrameSelector'..i..'Prev'];
-		local Next = _G['BarberShopFrameSelector'..i..'Next'];
+	do
+		local Prev, Next;
 		
-		F.ReskinArrow(Prev, 'Left');
-		F.ReskinArrow(Next, 'Right');
+		for i = 1, 4 do
+			Prev = _G['BarberShopFrameSelector'..i..'Prev'];
+			Next = _G['BarberShopFrameSelector'..i..'Next'];
+			
+			F.ReskinArrow(Prev, 'Left');
+			F.ReskinArrow(Next, 'Right');
+		end
 	end
 	
-	BarberShopFrameMoneyFrame:GetRegions():Hide();
+	BarberShopFrameMoneyFrame:GetRegions():SetTexture(nil);
 	
 	F.Reskin(BarberShopFrameOkayButton);
 	F.Reskin(BarberShopFrameCancelButton);

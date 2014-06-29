@@ -8,33 +8,42 @@ C.Modules['Blizzard_RaidUI'] = function()
 	F.Reskin(RaidFrameRaidBrowserButton);
 	F.Reskin(RaidFrameReadyCheckButton);
 	
-	for i = 1, MAX_RAID_GROUPS do
-		local Group = _G['RaidGroup'..i];
+	do
+		local Group, GroupSlot;
 		
-		Group:GetRegions():Hide();
-		
-		for j = 1, 5 do
-			local GroupSlot = _G['RaidGroup'..i..'Slot'..j];
+		for i = 1, MAX_RAID_GROUPS do
+			Group = _G['RaidGroup'..i];
 			
-			GroupSlot:SetHighlightTexture('');
+			Group:GetRegions():Hide();
+			
+			for j = 1, 5 do
+				GroupSlot = _G['RaidGroup'..i..'Slot'..j];
+				
+				GroupSlot:SetHighlightTexture('');
+			end
 		end
 	end
 	
-	for i = 1, MAX_RAID_GROUPS * 5 do
-		local GroupButton = _G['RaidGroupButton'..i];
+	do 
+		local GroupButton;
 		
-		F.StyleButton(GroupButton);
-		F.Reskin(GroupButton);
-		
-		GroupButton.Gradient = GroupButton:CreateTexture(nil, 'BORDER');
-		GroupButton.Gradient:SetPoint('TOPLEFT', 1, -1);
-		GroupButton.Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
-		GroupButton.Gradient:SetTexture(C.Media.Backdrop)
-		GroupButton.Gradient:SetVertexColor(.2, .2, .2, 1)
+		for i = 1, MAX_RAID_GROUPS * 5 do
+			GroupButton = _G['RaidGroupButton'..i];
+			
+			F.StyleButton(GroupButton);
+			F.Reskin(GroupButton);
+			
+			GroupButton.Gradient = GroupButton:CreateTexture(nil, 'BORDER');
+			GroupButton.Gradient:SetPoint('TOPLEFT', 1, -1);
+			GroupButton.Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
+			GroupButton.Gradient:SetTexture(C.Media.Backdrop)
+			GroupButton.Gradient:SetVertexColor(.2, .2, .2, 1)
+		end
 	end
 	
 	hooksecurefunc('RaidClassButton_Update', function()
 		local Button, Icon, Count;
+		
 		for index, value in pairs(RAID_CLASS_BUTTONS) do
 			Button  = _G['RaidClassButton'..value.button];
 			Count = _G['RaidClassButton'..value.button..'Count'];
