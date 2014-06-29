@@ -1,14 +1,17 @@
 local F, C = unpack(select(2, ...));
 
+local select = select;
+local tinsert = table.insert;
+
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(BattlefieldFrame, 12, -12, -34, 74);
 	BattlefieldFramePortrait:Hide();
 	
 	for i = 2, 5 do
-		select(i, BattlefieldFrame:GetRegions()):Hide();
+		select(i, BattlefieldFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	select(8, BattlefieldFrame:GetRegions()):Hide();
+	select(8, BattlefieldFrame:GetRegions()):SetTexture(nil);
 	
 	BattlefieldFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);
 	BattlefieldFrameInfoScrollFrameChildFrameRewardsInfoDescription:SetTextColor(1, 1, 1);

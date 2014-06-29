@@ -2,6 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local unpack = unpack;
+local tinsert = table.insert;
 
 local TexCoords = F.TexCoords;
 
@@ -34,12 +35,13 @@ tinsert(C.Modules['Aurora'], function()
 		local Objective;
 		local Type, Finished;
 		local NumVisibleObjectives = 0;
+		
 		for i = 1, NumObjectives do
 			_, Type, Finished = GetQuestLogLeaderBoard(i);
 			NumVisibleObjectives = NumVisibleObjectives + 1;
 			Objective = _G['QuestInfoObjective'..NumVisibleObjectives];
 			
-			if ( Finished ) then
+			if (Finished) then
 				Objective:SetTextColor(1, 1, 0);
 			else
 				Objective:SetTextColor(0.6, 0.6, 0.6);
@@ -47,21 +49,25 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end);
 	
-	for i = 1, MAX_NUM_ITEMS do
-		local Item = _G['QuestInfoItem'..i];
-		local ItemIconTexture = _G['QuestInfoItem'..i..'IconTexture'];
-		local ItemNameFrame = _G['QuestInfoItem'..i..'NameFrame'];
-		local ItemCount = _G['QuestInfoItem'..i..'Count'];
+	do
+		local Item, ItemIcon, ItemName, ItemCount;
 		
-		F.StyleButton(Item);
-		F.CreateBD(Item, .25);
-		
-		ItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-		ItemIconTexture:SetTexCoord(unpack(TexCoords));
-		ItemIconTexture:SetDrawLayer('OVERLAY');
+		for i = 1, MAX_NUM_ITEMS do
+			Item = _G['QuestInfoItem'..i];
+			ItemIcon = _G['QuestInfoItem'..i..'IconTexture'];
+			ItemName = _G['QuestInfoItem'..i..'NameFrame'];
+			ItemCount = _G['QuestInfoItem'..i..'Count'];
+			
+			F.StyleButton(Item);
+			F.CreateBD(Item, .25);
+			
+			ItemIcon:SetPoint('TOPLEFT', 1, -1);
+			ItemIcon:SetTexCoord(unpack(TexCoords));
+			ItemIcon:SetDrawLayer('OVERLAY');
 
-		ItemNameFrame:Hide();
-		
-		ItemCount:SetDrawLayer('OVERLAY');
+			ItemName:Hide();
+			
+			ItemCount:SetDrawLayer('OVERLAY');
+		end
 	end
 end);

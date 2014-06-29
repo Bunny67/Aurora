@@ -1,8 +1,9 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
-local unpack = unpack;
 local select = select;
+local unpack = unpack;
+local tinsert = table.insert;
 
 local TexCoords = F.TexCoords;
 
@@ -17,41 +18,47 @@ tinsert(C.Modules['Aurora'], function()
 	MerchantFrame:DisableDrawLayer('ARTWORK');
 	MerchantFrame:DisableDrawLayer('OVERLAY');
 	
-	for i = 1, BUYBACK_ITEMS_PER_PAGE do
-		local itemButton = _G['MerchantItem'..i..'ItemButton'];
-		local itemButtonIconTexture = _G['MerchantItem'..i..'ItemButtonIconTexture'];
-		local merchantButton = _G['MerchantItem'..i];
-		local merchantMoney = _G['MerchantItem'..i..'MoneyFrame'];
+	do
+		local ItemButton, MerchantButton;
+		local ItemButtonIcon;
+		local MerchantMoney;
 		
-		itemButton:SetNormalTexture('');
-		
-		F.StyleButton(itemButton);
-		F.CreateBD(itemButton, 0);
-		
-		local arg1, arg2, arg3 = itemButton:GetPoint();
-		itemButton:SetPoint(arg1, arg2, arg3, -2, -2);
-		itemButton:SetSize(40, 40);
-		
-		itemButtonIconTexture:ClearAllPoints();
-		itemButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
-		itemButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		itemButtonIconTexture:SetTexCoord(unpack(TexCoords));
-		
-		_G['MerchantItem'..i..'SlotTexture']:Hide();
-		_G['MerchantItem'..i..'NameFrame']:Hide();
-		
-		merchantButton.BD = CreateFrame('Frame', nil, merchantButton);
-		merchantButton.BD:SetPoint('BOTTOMRIGHT');
-		merchantButton.BD:SetFrameLevel(merchantButton:GetFrameLevel() - 1);
-		F.CreateBD(merchantButton.BD, .25);
-		
-		local arg4, arg5, arg6, arg7, arg8 = merchantMoney:GetPoint();
-		merchantMoney:SetPoint(arg4, arg5, arg6, arg7, arg8 + 2);
-		
-		for j = 1, 3 do
-			local merchantAltCurrencyTexture = _G['MerchantItem'..i..'AltCurrencyFrameItem'..j..'Texture'];
+		for i = 1, BUYBACK_ITEMS_PER_PAGE do
+			ItemButton = _G['MerchantItem'..i..'ItemButton'];
+			ItemButtonIcon = _G['MerchantItem'..i..'ItemButtonIconTexture'];
+			MerchantButton = _G['MerchantItem'..i];
+			MerchantMoney = _G['MerchantItem'..i..'MoneyFrame'];
 			
-			merchantAltCurrencyTexture:SetTexCoord(unpack(TexCoords));
+			ItemButton:SetNormalTexture('');
+			
+			F.StyleButton(ItemButton);
+			F.CreateBD(ItemButton, 0);
+			
+			local arg1, arg2, arg3 = ItemButton:GetPoint();
+			ItemButton:SetPoint(arg1, arg2, arg3, -2, -2);
+			ItemButton:SetSize(40, 40);
+			
+			ItemButtonIcon:ClearAllPoints();
+			ItemButtonIcon:SetPoint('TOPLEFT', 1, -1);
+			ItemButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			ItemButtonIcon:SetTexCoord(unpack(TexCoords));
+			
+			_G['MerchantItem'..i..'SlotTexture']:Hide();
+			_G['MerchantItem'..i..'NameFrame']:Hide();
+			
+			MerchantButton.BD = CreateFrame('Frame', nil, MerchantButton);
+			MerchantButton.BD:SetPoint('BOTTOMRIGHT');
+			MerchantButton.BD:SetFrameLevel(MerchantButton:GetFrameLevel() - 1);
+			F.CreateBD(MerchantButton.BD, .25);
+			
+			local arg4, arg5, arg6, arg7, arg8 = MerchantMoney:GetPoint();
+			MerchantMoney:SetPoint(arg4, arg5, arg6, arg7, arg8 + 2);
+			
+			for j = 1, 3 do
+				local merchantAltCurrencyTexture = _G['MerchantItem'..i..'AltCurrencyFrameItem'..j..'Texture'];
+				
+				merchantAltCurrencyTexture:SetTexCoord(unpack(TexCoords));
+			end
 		end
 	end
 	
@@ -78,7 +85,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(MerchantBuyBackItem, .25);
 	MerchantBuyBackItemSlotTexture:Hide();
 	MerchantBuyBackItemNameFrame:Hide()
-	MerchantBuyBackItemItemButton:SetNormalTexture('');
+	MerchantBuyBackItemItemButton:SetNormalTexture(nil);
 	F.StyleButton(MerchantBuyBackItemItemButton);
 	F.CreateBD(MerchantBuyBackItemItemButton, 0);
 	MerchantBuyBackItemItemButtonIconTexture:ClearAllPoints();
@@ -94,10 +101,14 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.ReskinClose(MerchantFrameCloseButton, 'TOPRIGHT', MerchantFrame, 'TOPRIGHT', -38, -16);
 	
-	for i = 1, MerchantFrame.numTabs do
-		local Tab = _G['MerchantFrameTab'..i];
+	do
+		local Tab;
 		
-		F.ReskinTab(Tab);
+		for i = 1, MerchantFrame.numTabs do
+			Tab = _G['MerchantFrameTab'..i];
+			
+			F.ReskinTab(Tab);
+		end
 	end
 	
 	MerchantFrameTab2:SetPoint('LEFT', MerchantFrameTab1, 'RIGHT', -15, 0);

@@ -1,6 +1,10 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
+local tinsert = table.insert;
+
+local Noop = F.dummy;
 
 tinsert(C.Modules['Aurora'], function()
 	-- QuestLogControlPanel
@@ -32,12 +36,11 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(QuestLogFrameCancelButton);
 	
-	--F.StripTextures(QuestLogFrameShowMapButton);
 	QuestLogFrameShowMapButton:SetSize(QuestLogFrameShowMapButton.text:GetStringWidth() + 14, 22);
 	QuestLogFrameShowMapButton.texture:Hide();
 	QuestLogFrameShowMapButton.text:ClearAllPoints();
 	QuestLogFrameShowMapButton.text:SetPoint('CENTER');
-	QuestLogFrameShowMapButtonHighlight:SetTexture('');
+	QuestLogFrameShowMapButtonHighlight:SetTexture(nil);
 	F.Reskin(QuestLogFrameShowMapButton);
 	
 	F.CreateBD(QuestLogCount, .25);
@@ -62,11 +65,11 @@ tinsert(C.Modules['Aurora'], function()
 			QuestIndex = i + ScrollOffset;
 			
 			if not QuestLogTitle.Skins then
-				QuestLogTitle:SetNormalTexture('');
-				QuestLogTitle.SetNormalTexture = F.dummy;
-				QuestLogTitle:SetPushedTexture('');
-				QuestLogTitle:SetHighlightTexture('');
-				QuestLogTitle.SetHighlightTexture = F.dummy;
+				QuestLogTitle:SetNormalTexture(nil);
+				QuestLogTitle.SetNormalTexture = Noop;
+				QuestLogTitle:SetPushedTexture(nil);
+				QuestLogTitle:SetHighlightTexture(nil);
+				QuestLogTitle.SetHighlightTexture = Noop;
 
 				QuestLogTitle.BG = CreateFrame('Frame', nil, QuestLogTitle);
 				QuestLogTitle.BG:SetSize(13, 13);
@@ -92,15 +95,15 @@ tinsert(C.Modules['Aurora'], function()
 				QuestLogTitle.Skins = true;
 			end
 			
-			if ( QuestIndex <= NumEntries ) then
+			if (QuestIndex <= NumEntries) then
 				_, _, _, _, isHeader, isCollapsed = GetQuestLogTitle(QuestIndex);
 				
-				if ( isHeader ) then
+				if (isHeader) then
 					QuestLogTitle.BG:Show();
 					QuestLogTitle.Gradient:Show();
 					QuestLogTitle.Minus:Show();
 					
-					if ( isCollapsed ) then
+					if (isCollapsed) then
 						QuestLogTitle.Plus:Show();
 					else
 						QuestLogTitle.Plus:Hide();

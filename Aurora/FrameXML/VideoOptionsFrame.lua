@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local select = select;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(VideoOptionsFrame);
@@ -9,7 +10,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(VideoOptionsFrameCategoryFrame, .25);
 	
 	for i = 1, 8 do
-		select(i, VideoOptionsFrameCategoryFrame:GetRegions()):Hide();
+		select(i, VideoOptionsFrameCategoryFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	F.CreateBD(VideoOptionsFramePanelContainer, .25);

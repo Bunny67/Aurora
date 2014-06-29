@@ -1,190 +1,222 @@
 local F, C = unpack(select(2, ...));
 
-tinsert(C.Modules['Aurora'], function()
+local _G = getfenv(0);
+local tinsert = table.insert;
+
+local INTERFACE_OPTOINS_CHECK = {
 	-- InterfaceOptionsControlsPanel;
-	F.ReskinCheck(InterfaceOptionsControlsPanelStickyTargeting);
-	F.ReskinCheck(InterfaceOptionsControlsPanelAutoDismount);
-	F.ReskinCheck(InterfaceOptionsControlsPanelAutoClearAFK);
-	F.ReskinCheck(InterfaceOptionsControlsPanelBlockTrades);
-	F.ReskinCheck(InterfaceOptionsControlsPanelLootAtMouse);
-	F.ReskinCheck(InterfaceOptionsControlsPanelAutoLootCorpse);
-	
-	F.ReskinDropDown(InterfaceOptionsControlsPanelAutoLootKeyDropDown);
+	'InterfaceOptionsControlsPanelStickyTargeting',
+	'InterfaceOptionsControlsPanelAutoDismount',
+	'InterfaceOptionsControlsPanelAutoClearAFK',
+	'InterfaceOptionsControlsPanelBlockTrades',
+	'InterfaceOptionsControlsPanelLootAtMouse',
+	'InterfaceOptionsControlsPanelAutoLootCorpse',
 	-- InterfaceOptionsCombatPanel;
-	F.ReskinCheck(InterfaceOptionsCombatPanelAttackOnAssist);
-	F.ReskinCheck(InterfaceOptionsCombatPanelAutoRange);
-	F.ReskinCheck(InterfaceOptionsCombatPanelStopAutoAttack);
-	F.ReskinCheck(InterfaceOptionsCombatPanelNameplateClassColors);
-	F.ReskinCheck(InterfaceOptionsCombatPanelAutoSelfCast);
-	
-	F.ReskinDropDown(InterfaceOptionsCombatPanelSelfCastKeyDropDown);
-	
-	F.ReskinCheck(InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait);
-	F.ReskinCheck(InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates);
-	F.ReskinCheck(InterfaceOptionsCombatPanelTargetOfTarget);
-	
-	F.ReskinDropDown(InterfaceOptionsCombatPanelTOTDropDown);
-	F.ReskinDropDown(InterfaceOptionsCombatPanelFocusCastKeyDropDown);
+	'InterfaceOptionsCombatPanelAttackOnAssist',
+	'InterfaceOptionsCombatPanelAutoRange',
+	'InterfaceOptionsCombatPanelStopAutoAttack',
+	'InterfaceOptionsCombatPanelNameplateClassColors',
+	'InterfaceOptionsCombatPanelAutoSelfCast',
+	'InterfaceOptionsCombatPanelEnemyCastBarsOnPortrait',
+	'InterfaceOptionsCombatPanelEnemyCastBarsOnNameplates',
+	'InterfaceOptionsCombatPanelTargetOfTarget',
 	-- InterfaceOptionsDisplayPanel;
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowCloak);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowHelm);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelRotateMinimap);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelScreenEdgeFlash);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelDetailedLootInfo);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowFreeBagSpace);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowClock);
-	
-	F.ReskinDropDown(InterfaceOptionsDisplayPanelAggroWarningDisplay);
-	
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowAggroPercentage);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelPlayAggroSounds);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelColorblindMode);
-	F.ReskinCheck(InterfaceOptionsDisplayPanelShowItemLevel);
-	
-	F.ReskinDropDown(InterfaceOptionsDisplayPanelWorldPVPObjectiveDisplay);
-	
-	F.ReskinCheck(InterfaceOptionsDisplayPanelCinematicSubtitles);
+	'InterfaceOptionsDisplayPanelShowCloak',
+	'InterfaceOptionsDisplayPanelShowHelm',
+	'InterfaceOptionsDisplayPanelRotateMinimap',
+	'InterfaceOptionsDisplayPanelScreenEdgeFlash',
+	'InterfaceOptionsDisplayPanelDetailedLootInfo',
+	'InterfaceOptionsDisplayPanelShowFreeBagSpace',
+	'InterfaceOptionsDisplayPanelShowClock',
+	'InterfaceOptionsDisplayPanelShowAggroPercentage',
+	'InterfaceOptionsDisplayPanelPlayAggroSounds',
+	'InterfaceOptionsDisplayPanelColorblindMode',
+	'InterfaceOptionsDisplayPanelShowItemLevel',
+	'InterfaceOptionsDisplayPanelCinematicSubtitles',
 	-- InterfaceOptionsObjectivesPanel;
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelInstantQuestText);
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelAutoQuestTracking);
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelAutoQuestProgress);
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelMapQuestDifficulty);
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelAdvancedWorldMap);
-	F.ReskinCheck(InterfaceOptionsObjectivesPanelWatchFrameWidth);
+	'InterfaceOptionsObjectivesPanelInstantQuestText',
+	'InterfaceOptionsObjectivesPanelAutoQuestTracking',
+	'InterfaceOptionsObjectivesPanelAutoQuestProgress',
+	'InterfaceOptionsObjectivesPanelMapQuestDifficulty',
+	'InterfaceOptionsObjectivesPanelAdvancedWorldMap',
+	'InterfaceOptionsObjectivesPanelWatchFrameWidth',
 	-- InterfaceOptionsSocialPanel;
-	F.ReskinCheck(InterfaceOptionsSocialPanelProfanityFilter);
-	F.ReskinCheck(InterfaceOptionsSocialPanelChatBubbles);
-	F.ReskinCheck(InterfaceOptionsSocialPanelPartyChat);
-	F.ReskinCheck(InterfaceOptionsSocialPanelSpamFilter);
-	F.ReskinCheck(InterfaceOptionsSocialPanelChatHoverDelay);
-	F.ReskinCheck(InterfaceOptionsSocialPanelGuildMemberAlert);
-	F.ReskinCheck(InterfaceOptionsSocialPanelGuildRecruitment);
-	F.ReskinCheck(InterfaceOptionsSocialPanelChatMouseScroll);
-	
-	F.ReskinDropDown(InterfaceOptionsSocialPanelChatStyle);
-	
-	F.ReskinCheck(InterfaceOptionsSocialPanelWholeChatWindowClickable);
-	
-	F.ReskinDropDown(InterfaceOptionsSocialPanelConversationMode);
-	F.ReskinDropDown(InterfaceOptionsSocialPanelTimestamps);
+	'InterfaceOptionsSocialPanelProfanityFilter',
+	'InterfaceOptionsSocialPanelChatBubbles',
+	'InterfaceOptionsSocialPanelPartyChat',
+	'InterfaceOptionsSocialPanelSpamFilter',
+	'InterfaceOptionsSocialPanelChatHoverDelay',
+	'InterfaceOptionsSocialPanelGuildMemberAlert',
+	'InterfaceOptionsSocialPanelGuildRecruitment',
+	'InterfaceOptionsSocialPanelChatMouseScroll',
+	'InterfaceOptionsSocialPanelWholeChatWindowClickable',
 	-- InterfaceOptionsActionBarsPanel;
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelBottomLeft);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelBottomRight);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelRight);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelRightTwo);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelLockActionBars);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelAlwaysShowActionBars);
-	F.ReskinCheck(InterfaceOptionsActionBarsPanelSecureAbilityToggle);
+	'InterfaceOptionsActionBarsPanelBottomLeft',
+	'InterfaceOptionsActionBarsPanelBottomRight',
+	'InterfaceOptionsActionBarsPanelRight',
+	'InterfaceOptionsActionBarsPanelRightTwo',
+	'InterfaceOptionsActionBarsPanelLockActionBars',
+	'InterfaceOptionsActionBarsPanelAlwaysShowActionBars',
+	'InterfaceOptionsActionBarsPanelSecureAbilityToggle',
 	-- InterfaceOptionsNamesPanel;
-	F.ReskinCheck(InterfaceOptionsNamesPanelMyName);
-	F.ReskinCheck(InterfaceOptionsNamesPanelNPCNames);
-	F.ReskinCheck(InterfaceOptionsNamesPanelNonCombatCreature);
-	F.ReskinCheck(InterfaceOptionsNamesPanelGuilds);
-	F.ReskinCheck(InterfaceOptionsNamesPanelTitles);
-	F.ReskinCheck(InterfaceOptionsNamesPanelFriendlyPlayerNames);
-	F.ReskinCheck(InterfaceOptionsNamesPanelFriendlyPets);
-	F.ReskinCheck(InterfaceOptionsNamesPanelFriendlyGuardians);
-	F.ReskinCheck(InterfaceOptionsNamesPanelFriendlyTotems);
-	F.ReskinCheck(InterfaceOptionsNamesPanelEnemyPlayerNames);
-	F.ReskinCheck(InterfaceOptionsNamesPanelEnemyPets);
-	F.ReskinCheck(InterfaceOptionsNamesPanelEnemyGuardians);
-	F.ReskinCheck(InterfaceOptionsNamesPanelEnemyTotems);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesAllowOverlap);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesFriends);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesFriendlyPets);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesFriendlyGuardians);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesFriendlyTotems);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesEnemies);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesEnemyPets);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesEnemyGuardians);
-	F.ReskinCheck(InterfaceOptionsNamesPanelUnitNameplatesEnemyTotems);
+	'InterfaceOptionsNamesPanelMyName',
+	'InterfaceOptionsNamesPanelNPCNames',
+	'InterfaceOptionsNamesPanelNonCombatCreature',
+	'InterfaceOptionsNamesPanelGuilds',
+	'InterfaceOptionsNamesPanelTitles',
+	'InterfaceOptionsNamesPanelFriendlyPlayerNames',
+	'InterfaceOptionsNamesPanelFriendlyPets',
+	'InterfaceOptionsNamesPanelFriendlyGuardians',
+	'InterfaceOptionsNamesPanelFriendlyTotems',
+	'InterfaceOptionsNamesPanelEnemyPlayerNames',
+	'InterfaceOptionsNamesPanelEnemyPets',
+	'InterfaceOptionsNamesPanelEnemyGuardians',
+	'InterfaceOptionsNamesPanelEnemyTotems',
+	'InterfaceOptionsNamesPanelUnitNameplatesAllowOverlap',
+	'InterfaceOptionsNamesPanelUnitNameplatesFriends',
+	'InterfaceOptionsNamesPanelUnitNameplatesFriendlyPets',
+	'InterfaceOptionsNamesPanelUnitNameplatesFriendlyGuardians',
+	'InterfaceOptionsNamesPanelUnitNameplatesFriendlyTotems',
+	'InterfaceOptionsNamesPanelUnitNameplatesEnemies',
+	'InterfaceOptionsNamesPanelUnitNameplatesEnemyPets',
+	'InterfaceOptionsNamesPanelUnitNameplatesEnemyGuardians',
+	'InterfaceOptionsNamesPanelUnitNameplatesEnemyTotems',
 	-- InterfaceOptionsCombatTextPanel;
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelTargetDamage);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelPeriodicDamage);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelPetDamage);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelHealing);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelTargetEffects);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelOtherTargetEffects);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelEnableFCT);
-	
-	F.ReskinDropDown(InterfaceOptionsCombatTextPanelFCTDropDown);
-	
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelDodgeParryMiss);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelDamageReduction);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelRepChanges);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelReactiveAbilities);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelFriendlyHealerNames);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelCombatState);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelComboPoints);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelLowManaHealth);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelEnergyGains);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelPeriodicEnergyGains);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelHonorGains);
-	F.ReskinCheck(InterfaceOptionsCombatTextPanelAuras);
+	'InterfaceOptionsCombatTextPanelTargetDamage',
+	'InterfaceOptionsCombatTextPanelPeriodicDamage',
+	'InterfaceOptionsCombatTextPanelPetDamage',
+	'InterfaceOptionsCombatTextPanelHealing',
+	'InterfaceOptionsCombatTextPanelTargetEffects',
+	'InterfaceOptionsCombatTextPanelOtherTargetEffects',
+	'InterfaceOptionsCombatTextPanelEnableFCT',
+	'InterfaceOptionsCombatTextPanelDodgeParryMiss',
+	'InterfaceOptionsCombatTextPanelDamageReduction',
+	'InterfaceOptionsCombatTextPanelRepChanges',
+	'InterfaceOptionsCombatTextPanelReactiveAbilities',
+	'InterfaceOptionsCombatTextPanelFriendlyHealerNames',
+	'InterfaceOptionsCombatTextPanelCombatState',
+	'InterfaceOptionsCombatTextPanelComboPoints',
+	'InterfaceOptionsCombatTextPanelLowManaHealth',
+	'InterfaceOptionsCombatTextPanelEnergyGains',
+	'InterfaceOptionsCombatTextPanelPeriodicEnergyGains',
+	'InterfaceOptionsCombatTextPanelHonorGains',
+	'InterfaceOptionsCombatTextPanelAuras',
 	-- InterfaceOptionsStatusTextPanel;
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelPlayer);
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelPet);
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelParty);
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelTarget);
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelPercentages);
-	F.ReskinCheck(InterfaceOptionsStatusTextPanelXP);
+	'InterfaceOptionsStatusTextPanelPlayer',
+	'InterfaceOptionsStatusTextPanelPet',
+	'InterfaceOptionsStatusTextPanelParty',
+	'InterfaceOptionsStatusTextPanelTarget',
+	'InterfaceOptionsStatusTextPanelPercentages',
+	'InterfaceOptionsStatusTextPanelXP',
 	-- InterfaceOptionsUnitFramePanel;
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelPartyBackground);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelPartyInRaid);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelPartyPets);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelRaidRange);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelArenaEnemyFrames);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelArenaEnemyCastBar);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelArenaEnemyPets);
-	F.ReskinCheck(InterfaceOptionsUnitFramePanelFullSizeFocusFrame);
+	'InterfaceOptionsUnitFramePanelPartyBackground',
+	'InterfaceOptionsUnitFramePanelPartyInRaid',
+	'InterfaceOptionsUnitFramePanelPartyPets',
+	'InterfaceOptionsUnitFramePanelRaidRange',
+	'InterfaceOptionsUnitFramePanelArenaEnemyFrames',
+	'InterfaceOptionsUnitFramePanelArenaEnemyCastBar',
+	'InterfaceOptionsUnitFramePanelArenaEnemyPets',
+	'InterfaceOptionsUnitFramePanelFullSizeFocusFrame',
 	-- InterfaceOptionsBuffsPanel;
-	F.ReskinCheck(InterfaceOptionsBuffsPanelBuffDurations);
-	F.ReskinCheck(InterfaceOptionsBuffsPanelDispellableDebuffs);
-	F.ReskinCheck(InterfaceOptionsBuffsPanelCastableBuffs);
-	F.ReskinCheck(InterfaceOptionsBuffsPanelConsolidateBuffs);
-	F.ReskinCheck(InterfaceOptionsBuffsPanelShowCastableDebuffs);
+	'InterfaceOptionsBuffsPanelBuffDurations',
+	'InterfaceOptionsBuffsPanelDispellableDebuffs',
+	'InterfaceOptionsBuffsPanelCastableBuffs',
+	'InterfaceOptionsBuffsPanelConsolidateBuffs',
+	'InterfaceOptionsBuffsPanelShowCastableDebuffs',
 	-- InterfaceOptionsBattlenetPanel;
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelOnlineFriends);
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelOfflineFriends);
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelBroadcasts);
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelFriendRequests);
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelConversations);
-	F.ReskinCheck(InterfaceOptionsBattlenetPanelShowToastWindow);
-	
-	F.ReskinSlider(InterfaceOptionsBattlenetPanelToastDurationSlider);
+	'InterfaceOptionsBattlenetPanelOnlineFriends',
+	'InterfaceOptionsBattlenetPanelOfflineFriends',
+	'InterfaceOptionsBattlenetPanelBroadcasts',
+	'InterfaceOptionsBattlenetPanelFriendRequests',
+	'InterfaceOptionsBattlenetPanelConversations',
+	'InterfaceOptionsBattlenetPanelShowToastWindow',
 	-- InterfaceOptionsCameraPanel;
-	F.ReskinDropDown(InterfaceOptionsCameraPanelStyleDropDown);
-	
-	F.ReskinSlider(InterfaceOptionsCameraPanelFollowSpeedSlider);
-	F.ReskinSlider(InterfaceOptionsCameraPanelMaxDistanceSlider);
-	
-	F.ReskinCheck(InterfaceOptionsCameraPanelFollowTerrain);
-	F.ReskinCheck(InterfaceOptionsCameraPanelHeadBob);
-	F.ReskinCheck(InterfaceOptionsCameraPanelWaterCollision);
-	F.ReskinCheck(InterfaceOptionsCameraPanelSmartPivot);
+	'InterfaceOptionsCameraPanelFollowTerrain',
+	'InterfaceOptionsCameraPanelHeadBob',
+	'InterfaceOptionsCameraPanelWaterCollision',
+	'InterfaceOptionsCameraPanelSmartPivot',
 	-- InterfaceOptionsMousePanel;
-	F.ReskinCheck(InterfaceOptionsMousePanelInvertMouse);
-	F.ReskinCheck(InterfaceOptionsMousePanelClickToMove);
-	
-	F.ReskinSlider(InterfaceOptionsMousePanelMouseSensitivitySlider);
-	F.ReskinSlider(InterfaceOptionsMousePanelMouseLookSpeedSlider);
-	
-	F.ReskinCheck(InterfaceOptionsMousePanelWoWMouse);
-	
-	F.ReskinDropDown(InterfaceOptionsMousePanelClickMoveStyleDropDown);
+	'InterfaceOptionsMousePanelInvertMouse',
+	'InterfaceOptionsMousePanelClickToMove',
+	'InterfaceOptionsMousePanelWoWMouse',
 	-- InterfaceOptionsFeaturesPanel;
-	F.ReskinCheck(InterfaceOptionsFeaturesPanelEquipmentManager);
-	F.ReskinCheck(InterfaceOptionsFeaturesPanelPreviewTalentChanges);
+	'InterfaceOptionsFeaturesPanelEquipmentManager',
+	'InterfaceOptionsFeaturesPanelPreviewTalentChanges',
 	-- InterfaceOptionsHelpPanel;
-	F.ReskinCheck(InterfaceOptionsHelpPanelShowTutorials);
-	F.ReskinCheck(InterfaceOptionsHelpPanelLoadingScreenTips);
-	F.ReskinCheck(InterfaceOptionsHelpPanelEnhancedTooltips);
-	F.ReskinCheck(InterfaceOptionsHelpPanelBeginnerTooltips);
-	F.ReskinCheck(InterfaceOptionsHelpPanelShowLuaErrors);
-	
-	F.Reskin(InterfaceOptionsHelpPanelResetTutorials);
+	'InterfaceOptionsHelpPanelShowTutorials',
+	'InterfaceOptionsHelpPanelLoadingScreenTips',
+	'InterfaceOptionsHelpPanelEnhancedTooltips',
+	'InterfaceOptionsHelpPanelBeginnerTooltips',
+	'InterfaceOptionsHelpPanelShowLuaErrors',
 	-- InterfaceOptionsLanguagesPanel;
-	F.ReskinDropDown(InterfaceOptionsLanguagesPanelLocaleDropDown);
+	'InterfaceOptionsLanguagesPanelUseEnglishAudio',
+};
+
+local INTERFACE_OPTIONS_DROPDOWN = {
+	-- InterfaceOptionsControlsPanel;
+	'InterfaceOptionsControlsPanelAutoLootKeyDropDown',
+	-- InterfaceOptionsCombatPanel;
+	'InterfaceOptionsCombatPanelSelfCastKeyDropDown',
+	'InterfaceOptionsCombatPanelTOTDropDown',
+	'InterfaceOptionsCombatPanelFocusCastKeyDropDown',
+	-- InterfaceOptionsDisplayPanel;
+	'InterfaceOptionsDisplayPanelAggroWarningDisplay',
+	'InterfaceOptionsDisplayPanelWorldPVPObjectiveDisplay',
+	-- InterfaceOptionsSocialPanel;
+	'InterfaceOptionsSocialPanelChatStyle',
+	'InterfaceOptionsSocialPanelConversationMode',
+	'InterfaceOptionsSocialPanelTimestamps',
+	-- InterfaceOptionsCombatTextPanel;
+	'InterfaceOptionsCombatTextPanelFCTDropDown',
+	-- InterfaceOptionsCameraPanel;
+	'InterfaceOptionsCameraPanelStyleDropDown',
+	-- InterfaceOptionsMousePanel;
+	'InterfaceOptionsMousePanelClickMoveStyleDropDown',
+	-- InterfaceOptionsLanguagesPanel;
+	'InterfaceOptionsLanguagesPanelLocaleDropDown'
+};
+
+local INTERFACE_OPRIONS_SLIDER = {
+	-- InterfaceOptionsBattlenetPanel;
+	'InterfaceOptionsBattlenetPanelToastDurationSlider',
+	-- InterfaceOptionsCameraPanel;
+	'InterfaceOptionsCameraPanelFollowSpeedSlider',
+	'InterfaceOptionsCameraPanelMaxDistanceSlider',
+	-- InterfaceOptionsMousePanel;
+	'InterfaceOptionsMousePanelMouseSensitivitySlider',
+	'InterfaceOptionsMousePanelMouseLookSpeedSlider'
+};
+
+tinsert(C.Modules['Aurora'], function()
+	do
+		local Check;
 	
-	F.ReskinCheck(InterfaceOptionsLanguagesPanelUseEnglishAudio);
+		for i = 1, #INTERFACE_OPTOINS_CHECK do
+			Check = _G[INTERFACE_OPTOINS_CHECK[i]];
+			
+			F.ReskinCheck(Check);
+		end
+	end
+	
+	do
+		local DropDown;
+	
+		for i = 1, #INTERFACE_OPTIONS_DROPDOWN do
+			DropDown = _G[INTERFACE_OPTIONS_DROPDOWN[i]];
+			
+			F.ReskinDropDown(DropDown);
+		end
+	end
+	
+	do
+		local Slider;
+	
+		for i = 1, #INTERFACE_OPRIONS_SLIDER do
+			Slider = _G[INTERFACE_OPRIONS_SLIDER[i]];
+			
+			F.ReskinSlider(Slider);
+		end
+	end
+	-- InterfaceOptionsHelpPanel;
+	F.Reskin(InterfaceOptionsHelpPanelResetTutorials);
 end);

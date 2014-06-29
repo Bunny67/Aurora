@@ -1,5 +1,6 @@
 local F, C = unpack(select(2, ...));
 
+local select = select;
 local unpack = unpack;
 
 local TexCoords = F.TexCoords;
@@ -34,9 +35,9 @@ C.Modules['Blizzard_TimeManager'] = function()
 	
 	F.ReskinInput(TimeManagerAlarmMessageEditBox);
 	
-	TimeManagerAlarmEnabledButton:SetNormalTexture('');
+	TimeManagerAlarmEnabledButton:SetNormalTexture(nil);
 	TimeManagerAlarmEnabledButton.SetNormalTexture = Hoop;
-	TimeManagerAlarmEnabledButton:SetPushedTexture('');
+	TimeManagerAlarmEnabledButton:SetPushedTexture(nil);
 	TimeManagerAlarmEnabledButton.SetPushedTexture = Hoop;
 	F.Reskin(TimeManagerAlarmEnabledButton);
 	

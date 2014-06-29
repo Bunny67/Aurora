@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	-- ReputationFrame;

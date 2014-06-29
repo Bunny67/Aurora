@@ -1,13 +1,14 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(PetitionFrame, 15, -19, -30, 68);
 	PetitionFramePortrait:Hide();
 	
 	for i = 2, 5 do
-		select(i, PetitionFrame:GetRegions()):Hide();
+		select(i, PetitionFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	PetitionFrameCharterTitle:SetTextColor(1, 1, 1);
@@ -19,10 +20,14 @@ tinsert(C.Modules['Aurora'], function()
 	PetitionFrameMemberTitle:SetTextColor(1, 1, 1);
 	PetitionFrameMemberTitle:SetShadowColor(0, 0, 0);
 	
-	for i = 1, 9 do
-		local Name = _G['PetitionFrameMemberName'..i];
+	do
+		local Name;
 		
-		Name:SetTextColor(1, 1, 1);
+		for i = 1, 9 do
+			Name = _G['PetitionFrameMemberName'..i];
+			
+			Name:SetTextColor(1, 1, 1);
+		end
 	end
 	
 	PetitionFrameInstructions:SetTextColor(1, 1, 1);

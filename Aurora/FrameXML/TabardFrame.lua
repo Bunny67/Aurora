@@ -2,6 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local select = select;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(TabardFrame, 11, -12, -34, 74);
@@ -9,29 +10,33 @@ tinsert(C.Modules['Aurora'], function()
 	
 	TabardFrame:DisableDrawLayer('BORDER');
 	
-	TabardFrameBackground:Hide();
+	TabardFrameBackground:SetTexture(nil);
 	
 	for i = 7, 20 do
-		select(i, TabardFrame:GetRegions()):Hide();
+		select(i, TabardFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	F.ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TabardFrame, 'TOPRIGHT', -38, -16);
 	
 	F.CreateBD(TabardFrameCostFrame, .25);
 	
-	TabardFrameCustomizationBorder:Hide();
+	TabardFrameCustomizationBorder:SetTexture(nil);
 	
-	for i = 1, 5 do
-		local Button = _G['TabardFrameCustomization'..i];
-		local LeftButton = _G['TabardFrameCustomization'..i..'LeftButton'];
-		local RightButton = _G['TabardFrameCustomization'..i..'RightButton'];
+	do
+		local Button, LeftButton, RightButton;
 		
-		_G['TabardFrameCustomization'..i..'Left']:Hide();
-		_G['TabardFrameCustomization'..i..'Middle']:Hide();
-		_G['TabardFrameCustomization'..i..'Right']:Hide();
-		
-		F.ReskinArrow(LeftButton, 'Left');
-		F.ReskinArrow(RightButton, 'Right');
+		for i = 1, 5 do
+			Button = _G['TabardFrameCustomization'..i];
+			LeftButton = _G['TabardFrameCustomization'..i..'LeftButton'];
+			RightButton = _G['TabardFrameCustomization'..i..'RightButton'];
+			
+			_G['TabardFrameCustomization'..i..'Left']:SetTexture(nil);
+			_G['TabardFrameCustomization'..i..'Middle']:SetTexture(nil);
+			_G['TabardFrameCustomization'..i..'Right']:SetTexture(nil);
+			
+			F.ReskinArrow(LeftButton, 'Left');
+			F.ReskinArrow(RightButton, 'Right');
+		end
 	end
 	
 	F.ReskinArrow(TabardCharacterModelRotateLeftButton, 'Left');

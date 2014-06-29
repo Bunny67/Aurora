@@ -1,7 +1,9 @@
 local F, C = unpack(select(2, ...));
 
+local tinsert = table.insert;
+
 tinsert(C.Modules['Aurora'], function()
-	KnowledgeBaseFrameHeader:Hide();
+	KnowledgeBaseFrameHeader:SetTexture(nil);
 	
 	F.Reskin(KnowledgeBaseFrameTopIssuesButton);
 	F.Reskin(GMChatOpenLog);

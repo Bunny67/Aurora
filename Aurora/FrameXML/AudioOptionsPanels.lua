@@ -1,37 +1,59 @@
 local F, C = unpack(select(2, ...));
 
+local _G = getfenv(0);
+local tinsert = table.insert;
+
+local AUDIO_OPTIONS_CHECK = {
+	'AudioOptionsSoundPanelEnableSound',
+	'AudioOptionsSoundPanelSoundEffects',
+	'AudioOptionsSoundPanelErrorSpeech',
+	'AudioOptionsSoundPanelEmoteSounds',
+	'AudioOptionsSoundPanelPetSounds',
+	'AudioOptionsSoundPanelMusic',
+	'AudioOptionsSoundPanelLoopMusic',
+	'AudioOptionsSoundPanelAmbientSounds',
+	'AudioOptionsSoundPanelSoundInBG',
+	'AudioOptionsSoundPanelReverb',
+	'AudioOptionsSoundPanelHRTF',
+	'AudioOptionsSoundPanelEnableDSPs',
+	'AudioOptionsSoundPanelUseHardware'
+};
+
+local AUDIO_OPTIONS_SLIDER = {
+	'AudioOptionsSoundPanelSoundQuality',
+	'AudioOptionsSoundPanelSoundChannels',
+	'AudioOptionsSoundPanelMasterVolume',
+	'AudioOptionsSoundPanelSoundVolume',
+	'AudioOptionsSoundPanelMusicVolume',
+	'AudioOptionsSoundPanelAmbienceVolume'
+};
+
 tinsert(C.Modules['Aurora'], function()
-	-- AudioOptionsSoundPanel;
-	F.ReskinCheck(AudioOptionsSoundPanelEnableSound);
+	do
+		local Check;
+	
+		for i = 1, #AUDIO_OPTIONS_CHECK do
+			Check = _G[AUDIO_OPTIONS_CHECK[i]];
+			
+			F.ReskinCheck(Check);
+		end
+	end
 	
 	F.CreateBD(AudioOptionsSoundPanelPlayback, .25);
 	
-	F.ReskinCheck(AudioOptionsSoundPanelSoundEffects);
-	F.ReskinCheck(AudioOptionsSoundPanelErrorSpeech);
-	F.ReskinCheck(AudioOptionsSoundPanelEmoteSounds);
-	F.ReskinCheck(AudioOptionsSoundPanelPetSounds);
-	F.ReskinCheck(AudioOptionsSoundPanelMusic);
-	F.ReskinCheck(AudioOptionsSoundPanelLoopMusic);
-	F.ReskinCheck(AudioOptionsSoundPanelAmbientSounds);
-	F.ReskinCheck(AudioOptionsSoundPanelSoundInBG);
-	F.ReskinCheck(AudioOptionsSoundPanelReverb);
-	F.ReskinCheck(AudioOptionsSoundPanelHRTF);
-	F.ReskinCheck(AudioOptionsSoundPanelEnableDSPs);
+	do
+		local Slider;
 	
-	F.ReskinSlider(AudioOptionsSoundPanelSoundQuality);
+		for i = 1, #AUDIO_OPTIONS_SLIDER do
+			Slider = _G[AUDIO_OPTIONS_SLIDER[i]];
+			
+			F.ReskinSlider(Slider);
+		end
+	end
 	
 	F.CreateBD(AudioOptionsSoundPanelHardware, .25);
 	
 	F.ReskinDropDown(AudioOptionsSoundPanelHardwareDropDown);
 	
-	F.ReskinSlider(AudioOptionsSoundPanelSoundChannels);
-	
-	F.ReskinCheck(AudioOptionsSoundPanelUseHardware);
-	
 	F.CreateBD(AudioOptionsSoundPanelVolume, .25);
-	
-	F.ReskinSlider(AudioOptionsSoundPanelMasterVolume);
-	F.ReskinSlider(AudioOptionsSoundPanelSoundVolume);
-	F.ReskinSlider(AudioOptionsSoundPanelMusicVolume);
-	F.ReskinSlider(AudioOptionsSoundPanelAmbienceVolume);
 end);

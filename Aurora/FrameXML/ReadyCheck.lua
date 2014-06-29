@@ -1,10 +1,10 @@
 local F, C = unpack(select(2, ...));
 
 local select = select;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(ReadyCheckFrame);
-	
 	ReadyCheckPortrait:Hide();
 	
 	select(2, ReadyCheckListenerFrame:GetRegions()):Hide();

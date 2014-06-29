@@ -1,5 +1,7 @@
 local F, C = unpack(select(2, ...));
 
+local tinsert = table.insert;
+
 tinsert(C.Modules['Aurora'], function()
 	-- VideoOptionsResolutionPanel;
 	F.ReskinDropDown(VideoOptionsResolutionPanelResolutionDropDown);

@@ -1,9 +1,10 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local select = select;
 local find = string.find;
 local gsub = string.gsub;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(GossipFrame, 14, -18, -30, 67);
@@ -21,10 +22,14 @@ tinsert(C.Modules['Aurora'], function()
 	
 	GossipGreetingText:SetTextColor(1, 1, 1);
 	
-	for i = 1, NUMGOSSIPBUTTONS do
-		local Button = select(3, _G['GossipTitleButton'..i]:GetRegions());
+	do
+		local Button;
 		
-		Button:SetTextColor(1, 1, 1);
+		for i = 1, NUMGOSSIPBUTTONS do
+			Button = select(3, _G['GossipTitleButton'..i]:GetRegions());
+			
+			Button:SetTextColor(1, 1, 1);
+		end
 	end
 	
 	hooksecurefunc('GossipFrameUpdate', function()
@@ -39,5 +44,5 @@ tinsert(C.Modules['Aurora'], function()
 				end
 			end
 		end
-	end)
-end)
+	end);
+end);

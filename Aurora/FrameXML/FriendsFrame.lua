@@ -2,6 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local pairs = pairs;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.StripTextures(FriendsFrame, true);

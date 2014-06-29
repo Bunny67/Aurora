@@ -1,17 +1,32 @@
 local F, C = unpack(select(2, ...));
 
+local _G = getfenv(0);
+local tinsert = table.insert;
+
+local GAME_MENU_BUTTONS = {
+	'GameMenuButtonOptions',
+	'GameMenuButtonSoundOptions',
+	'GameMenuButtonUIOptions',
+	'GameMenuButtonMacOptions',
+	'GameMenuButtonKeybindings',
+	'GameMenuButtonMacros',
+	'GameMenuButtonRatings',
+	'GameMenuButtonLogout',
+	'GameMenuButtonQuit',
+	'GameMenuButtonContinue'
+};
+
 tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(GameMenuFrame);
 	GameMenuFrameHeader:SetTexture(nil);
 	
-	F.Reskin(GameMenuButtonOptions);
-	F.Reskin(GameMenuButtonSoundOptions);
-	F.Reskin(GameMenuButtonUIOptions);
-	F.Reskin(GameMenuButtonMacOptions);
-	F.Reskin(GameMenuButtonKeybindings);
-	F.Reskin(GameMenuButtonMacros);
-	F.Reskin(GameMenuButtonRatings);
-	F.Reskin(GameMenuButtonLogout);
-	F.Reskin(GameMenuButtonQuit);
-	F.Reskin(GameMenuButtonContinue);
+	do
+		local Button;
+	
+		for i = 1, #GAME_MENU_BUTTONS do
+			Button = _G[GAME_MENU_BUTTONS[i]];
+			
+			F.Reskin(Button);
+		end
+	end
 end);

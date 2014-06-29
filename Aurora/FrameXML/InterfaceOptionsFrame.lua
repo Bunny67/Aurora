@@ -2,6 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local select = select;
+local tinsert = table.insert;
 
 local Noop = F.dummy;
 
@@ -17,7 +18,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(InterfaceOptionsFrameCategories, .25);
 	
 	for i = 1, 8 do
-		select(i, InterfaceOptionsFrameCategories:GetRegions()):Hide();
+		select(i, InterfaceOptionsFrameCategories:GetRegions()):SetTexture(nil);
 	end
 	
 	F.ReskinScroll(InterfaceOptionsFrameCategoriesListScrollBar);
@@ -25,18 +26,24 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(InterfaceOptionsFrameAddOns, .25);
 	
 	for i = 1, 8 do
-		select(i, InterfaceOptionsFrameAddOns:GetRegions()):Hide();
+		select(i, InterfaceOptionsFrameAddOns:GetRegions()):SetTexture(nil);
 	end
 	
 	F.ReskinScroll(InterfaceOptionsFrameAddOnsListScrollBar);
 	
 	F.CreateBD(InterfaceOptionsFramePanelContainer, .25);
 	
-	for i = 1, 2 do
-		local Tab = _G['InterfaceOptionsFrameTab'..i];
+	do
+		local Tab;
 		
-		Tab:DisableDrawLayer('BACKGROUND');
-		Tab:DisableDrawLayer('BORDER');
+		for i = 1, 2 do
+			Tab = _G['InterfaceOptionsFrameTab'..i];
+			
+			Tab:DisableDrawLayer('BACKGROUND');
+			Tab:DisableDrawLayer('BORDER');
+			
+			Tab:SetHighlightTexture('');
+		end
 	end
 	
 	hooksecurefunc('InterfaceOptions_AddCategory', function()
@@ -47,8 +54,10 @@ tinsert(C.Modules['Aurora'], function()
 			
 			if Button and not Button.Skinned then
 				F.ReskinExpandOrCollapse(Button);
-				Button:SetPushedTexture('');
+				
+				Button:SetPushedTexture(nil);
 				Button.SetPushedTexture = Noop;
+				
 				Button.Skinned = true;
 			end
 		end

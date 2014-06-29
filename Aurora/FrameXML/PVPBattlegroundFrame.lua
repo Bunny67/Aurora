@@ -1,10 +1,13 @@
 local F, C = unpack(select(2, ...));
 
+local select = select;
+local tinsert = table.insert;
+
 tinsert(C.Modules['Aurora'], function()
 	PVPBattlegroundFramePortrait:Hide();
 	
 	for i = 2, 5 do
-		select(i, PVPBattlegroundFrame:GetRegions()):Hide();
+		select(i, PVPBattlegroundFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	PVPBattlegroundFrameBGTex:Hide();
@@ -14,7 +17,7 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(PVPBattlegroundFrameCancelButton);
 	
-	PVPBattlegroundFrameInfoScrollFrame.scrollBarBackground:Hide();
+	PVPBattlegroundFrameInfoScrollFrame.scrollBarBackground:SetTexture(nil);
 	
 	PVPBattlegroundFrameInfoScrollFrameScrollBar:DisableDrawLayer('ARTWORK');
 	F.ReskinScroll(PVPBattlegroundFrameInfoScrollFrameScrollBar);

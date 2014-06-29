@@ -1,5 +1,9 @@
 local F, C = unpack(select(2, ...));
 
+local tinsert = table.insert;
+
+local Noop = F.dummy;
+
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ItemTextFrame, 13, -13, -32, 74);
 	
@@ -14,7 +18,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinScroll(ItemTextScrollFrameScrollBar);
 	
 	ItemTextPageText:SetTextColor(1, 1, 1);
-	ItemTextPageText.SetTextColor = F.dummy;
+	ItemTextPageText.SetTextColor = Noop;
 	
 	F.ReskinArrow(ItemTextPrevPageButton, 'Left');
 	F.ReskinArrow(ItemTextNextPageButton, 'Right');

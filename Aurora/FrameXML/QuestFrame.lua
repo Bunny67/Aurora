@@ -4,6 +4,7 @@ local _G = getfenv(0);
 local unpack = unpack;
 local find = string.find;
 local gsub = string.gsub;
+local tinsert = table.insert;
 
 local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
@@ -37,22 +38,26 @@ tinsert(C.Modules['Aurora'], function()
 	QuestProgressRequiredItemsText:SetTextColor(1, 1, 1);
 	QuestProgressRequiredItemsText:SetShadowColor(0, 0, 0);
 	
-	for i = 1, MAX_REQUIRED_ITEMS do
-		local Item = _G['QuestProgressItem'..i]
-		local ItemIconTexture = _G['QuestProgressItem'..i..'IconTexture'];
-		local ItemNameFrame = _G['QuestProgressItem'..i..'NameFrame'];
-		local ItemCount = _G['QuestProgressItem'..i..'Count'];
+	do
+		local Item, ItemIcon, ItemName, ItemCount;
 		
-		F.StyleButton(Item);
-		F.CreateBD(Item, .25);
-		
-		ItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-		ItemIconTexture:SetTexCoord(unpack(TexCoords));
-		ItemIconTexture:SetDrawLayer('OVERLAY');
+		for i = 1, MAX_REQUIRED_ITEMS do
+			Item = _G['QuestProgressItem'..i]
+			ItemIcon = _G['QuestProgressItem'..i..'IconTexture'];
+			ItemName = _G['QuestProgressItem'..i..'NameFrame'];
+			ItemCount = _G['QuestProgressItem'..i..'Count'];
+			
+			F.StyleButton(Item);
+			F.CreateBD(Item, .25);
+			
+			ItemIcon:SetPoint('TOPLEFT', 1, -1);
+			ItemIcon:SetTexCoord(unpack(TexCoords));
+			ItemIcon:SetDrawLayer('OVERLAY');
 
-		ItemNameFrame:Hide();
-		
-		ItemCount:SetDrawLayer('OVERLAY');
+			ItemName:Hide();
+			
+			ItemCount:SetDrawLayer('OVERLAY');
+		end
 	end
 	-- QuestFrameDetailPanel
 	QuestFrameDetailPanel:DisableDrawLayer('BACKGROUND');
@@ -85,8 +90,10 @@ tinsert(C.Modules['Aurora'], function()
 	AvailableQuestsText:SetShadowColor(0, 0, 0);
 	
 	QuestFrameGreetingPanel:HookScript('OnShow', function()
-		for i=1, MAX_NUM_QUESTS do
-			local Button = _G['QuestTitleButton'..i];
+		local Button;
+		
+		for i = 1, MAX_NUM_QUESTS do
+			Button = _G['QuestTitleButton'..i];
 			
 			if Button:GetFontString() then
 				if Button:GetFontString():GetText() and Button:GetFontString():GetText():find('|cff000000') then

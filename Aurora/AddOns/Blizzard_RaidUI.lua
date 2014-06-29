@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 local pairs = pairs;
 
 C.Modules['Blizzard_RaidUI'] = function()

@@ -2,26 +2,56 @@ local F, C = unpack(select(2, ...))
 
 local _G = getfenv(0);
 local ipairs = ipairs;
+local tinsert = table.insert;
+
+local COMBAT_CONFIG_CHECK = {
+	-- ConfigColors;
+	'CombatConfigColorsHighlightingLine',
+	'CombatConfigColorsHighlightingAbility',
+	'CombatConfigColorsHighlightingDamage',
+	'CombatConfigColorsHighlightingSchool',
+	'CombatConfigColorsColorizeUnitNameCheck',
+	'CombatConfigColorsColorizeSpellNamesCheck',
+	'CombatConfigColorsColorizeSpellNamesSchoolColoring',
+	'CombatConfigColorsColorizeDamageNumberCheck',
+	'CombatConfigColorsColorizeDamageNumberSchoolColoring',
+	'CombatConfigColorsColorizeDamageSchoolCheck',
+	'CombatConfigColorsColorizeEntireLineCheck',
+	-- ConfigFormatting;
+	'CombatConfigFormattingShowTimeStamp',
+	'CombatConfigFormattingShowBraces',
+	'CombatConfigFormattingUnitNames',
+	'CombatConfigFormattingSpellNames',
+	'CombatConfigFormattingItemNames',
+	'CombatConfigFormattingFullText',
+	-- ConfigSettings;
+	'CombatConfigSettingsShowQuickButton',
+	'CombatConfigSettingsSolo',
+	'CombatConfigSettingsParty',
+	'CombatConfigSettingsRaid'
+};
 
 tinsert(C.Modules['Aurora'], function()
 	F.SetBD(ChatConfigFrame);
 	ChatConfigFrame:SetBackdrop(nil);
 	
-	ChatConfigFrameHeader:SetTexture('');
+	ChatConfigFrameHeader:SetTexture(nil);
 	
 	ChatConfigCategoryFrame:SetBackdrop(nil);
 	ChatConfigBackgroundFrame:SetBackdrop(nil);
 	
 	F.CreateBD(ChatConfigChatSettingsClassColorLegend, .25);
 	F.CreateBD(ChatConfigChannelSettingsClassColorLegend, .25);
+	-- ChatConfigCombatSettingsFilters;
+	ChatConfigCombatSettingsFilters:SetBackdrop(nil);
 	
-	ChatConfigCombatSettingsFilters:SetBackdrop(nil); -- ChatConfigCombatSettingsFilters;
-	
-	local BG = CreateFrame('Frame', nil, ChatConfigCombatSettingsFilters);
-	BG:SetPoint('TOPLEFT', 3, -3);
-	BG:SetPoint('BOTTOMRIGHT', 0, 1);
-	BG:SetFrameLevel(ChatConfigCombatSettingsFilters:GetFrameLevel() - 1);
-	F.CreateBD(BG, .25);
+	do
+		local BG = CreateFrame('Frame', nil, ChatConfigCombatSettingsFilters);
+		BG:SetPoint('TOPLEFT', 3, -3);
+		BG:SetPoint('BOTTOMRIGHT', 0, 1);
+		BG:SetFrameLevel(ChatConfigCombatSettingsFilters:GetFrameLevel() - 1);
+		F.CreateBD(BG, .25);
+	end
 	
 	F.ReskinScroll(ChatConfigCombatSettingsFiltersScrollFrameScrollBar);
 	ChatConfigCombatSettingsFiltersScrollFrameScrollBarBorder:Hide();
@@ -38,8 +68,8 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinArrow(ChatConfigMoveFilterDownButton, 'Down');
 	ChatConfigMoveFilterDownButton:SetSize(28, 28);
 	ChatConfigMoveFilterDownButton:SetPoint('LEFT', ChatConfigMoveFilterUpButton, 'RIGHT', 1, 0);
-	
-	CombatConfigColorsHighlighting:SetBackdrop(nil); -- CombatConfigColors;
+	-- CombatConfigColors;
+	CombatConfigColorsHighlighting:SetBackdrop(nil);
 	CombatConfigColorsColorizeUnitName:SetBackdrop(nil);
 	CombatConfigColorsColorizeSpellNames:SetBackdrop(nil);
 	
@@ -54,49 +84,45 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.ReskinRadio(CombatConfigColorsColorizeEntireLineBySource);
 	F.ReskinRadio(CombatConfigColorsColorizeEntireLineByTarget);
-	
-	F.ReskinInput(CombatConfigSettingsNameEditBox); -- CombatConfigSettings;
+	-- CombatConfigSettings;
+	F.ReskinInput(CombatConfigSettingsNameEditBox);
 	
 	F.Reskin(CombatConfigSettingsSaveButton);
 	
-	local combatBoxes = {
-		-- ConfigColors;
-		CombatConfigColorsHighlightingLine, CombatConfigColorsHighlightingAbility, CombatConfigColorsHighlightingDamage, CombatConfigColorsHighlightingSchool,
-		CombatConfigColorsColorizeUnitNameCheck,
-		CombatConfigColorsColorizeSpellNamesCheck, CombatConfigColorsColorizeSpellNamesSchoolColoring,
-		CombatConfigColorsColorizeDamageNumberCheck, CombatConfigColorsColorizeDamageNumberSchoolColoring,
-		CombatConfigColorsColorizeDamageSchoolCheck,
-		CombatConfigColorsColorizeEntireLineCheck,
-		-- ConfigFormatting;
-		CombatConfigFormattingShowTimeStamp, CombatConfigFormattingShowBraces, CombatConfigFormattingUnitNames, CombatConfigFormattingSpellNames, CombatConfigFormattingItemNames, CombatConfigFormattingFullText,
-		-- ConfigSettings;
-		CombatConfigSettingsShowQuickButton, CombatConfigSettingsSolo, CombatConfigSettingsParty, CombatConfigSettingsRaid
-	};
-
-	for _, box in next, combatBoxes do
-		F.ReskinCheck(box);
+	do
+		local Check;
+	
+		for i = 1, #COMBAT_CONFIG_CHECK do
+			Check = _G[COMBAT_CONFIG_CHECK[i]];
+			
+			F.ReskinCheck(Check);
+		end
 	end
 	
-	for i = 1, 5 do
-		local Tab = _G['CombatConfigTab'..i];
+	do
+		local Tab;
 		
-		_G['CombatConfigTab'..i..'Left']:Hide();
-		_G['CombatConfigTab'..i..'Middle']:Hide();
-		_G['CombatConfigTab'..i..'Right']:Hide();
-		
-		Tab:SetHighlightTexture(C.Media.Backdrop);
-		local Highlight = Tab:GetHighlightTexture();
-		Highlight:ClearAllPoints();
-		Highlight:SetPoint('TOPLEFT', 2, -11);
-		Highlight:SetPoint('BOTTOMRIGHT', -2, 1);
-		Highlight:SetVertexColor(C.r, C.g, C.b, .25);
-		
-		local TabBG = CreateFrame('Frame', nil, Tab);
-		TabBG:SetPoint('TOPLEFT', 1, -10);
-		TabBG:SetPoint('BOTTOMRIGHT', -1, 0);
-		TabBG:SetFrameLevel(Tab:GetFrameLevel() - 1);
-		F.CreateBD(TabBG, 0);
-		F.CreateGradient(TabBG);
+		for i = 1, 5 do
+			Tab = _G['CombatConfigTab'..i];
+			
+			_G['CombatConfigTab'..i..'Left']:Hide();
+			_G['CombatConfigTab'..i..'Middle']:Hide();
+			_G['CombatConfigTab'..i..'Right']:Hide();
+			
+			Tab:SetHighlightTexture(C.Media.Backdrop);
+			local Highlight = Tab:GetHighlightTexture();
+			Highlight:ClearAllPoints();
+			Highlight:SetPoint('TOPLEFT', 2, -11);
+			Highlight:SetPoint('BOTTOMRIGHT', -2, 1);
+			Highlight:SetVertexColor(C.r, C.g, C.b, .25);
+			
+			local TabBG = CreateFrame('Frame', nil, Tab);
+			TabBG:SetPoint('TOPLEFT', 1, -10);
+			TabBG:SetPoint('BOTTOMRIGHT', -1, 0);
+			TabBG:SetFrameLevel(Tab:GetFrameLevel() - 1);
+			F.CreateBD(TabBG, 0);
+			F.CreateGradient(TabBG);
+		end
 	end
 	
 	F.Reskin(ChatConfigFrameDefaultButton);
@@ -197,4 +223,4 @@ tinsert(C.Modules['Aurora'], function()
 			end
 		end
 	end);
-end)
+end);

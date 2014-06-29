@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local select = select;
+local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(AudioOptionsFrame);
@@ -9,7 +10,7 @@ tinsert(C.Modules['Aurora'], function()
 	F.CreateBD(AudioOptionsFrameCategoryFrame, .25);
 	
 	for i = 1, 8 do
-		select(i, AudioOptionsFrameCategoryFrame:GetRegions()):Hide();
+		select(i, AudioOptionsFrameCategoryFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	F.CreateBD(AudioOptionsFramePanelContainer, .25);

@@ -2,6 +2,7 @@ local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
 local unpack = unpack;
+local tinsert = table.insert;
 
 local TexCoords = F.TexCoords;
 
@@ -9,11 +10,13 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinExpandOrCollapse(WatchFrameCollapseExpandButton);
 	
 	local function SkinWatchFrameItems()
+		local ItemButton;
+		
 		for i = 1, WATCHFRAME_NUM_ITEMS do
-			local itemButton = _G['WatchFrameItem'..i];
+			ItemButton = _G['WatchFrameItem'..i];
 			
-			F.CreateBD(itemButton);
-			F.StyleButton(itemButton);
+			F.CreateBD(ItemButton);
+			F.StyleButton(ItemButton);
 			
 			_G['WatchFrameItem'..i..'NormalTexture']:SetAlpha(0);
 			_G['WatchFrameItem'..i..'IconTexture']:SetTexCoord(unpack(TexCoords));
