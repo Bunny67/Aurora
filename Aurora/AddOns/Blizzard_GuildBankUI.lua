@@ -22,28 +22,34 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 	GuildBankEmblemFrame:DisableDrawLayer('BACKGROUND');
 	GuildBankEmblemFrame:DisableDrawLayer('BORDER');
 	
-	for i = 1, NUM_GUILDBANK_COLUMNS do
-		local Column = _G['GuildBankColumn'..i];
+	do
+		local Column;
 		
-		Column:DisableDrawLayer('BACKGROUND');
-		
-		for x = 1, NUM_SLOTS_PER_GUILDBANK_GROUP do
-			local Button = _G['GuildBankColumn'..i..'Button'..x];
-			local IconTexture = _G['GuildBankColumn'..i..'Button'..x..'IconTexture'];
-			local NormalTexture = _G['GuildBankColumn'..i..'Button'..x..'NormalTexture'];
-			local Count = _G['GuildBankColumn'..i..'Button'..x..'Count'];
+		for i = 1, NUM_GUILDBANK_COLUMNS do
+			Column = _G['GuildBankColumn'..i];
 			
-			F.StyleButton(Button);
-			F.CreateBD(Button, .25);
+			Column:DisableDrawLayer('BACKGROUND');
 			
-			if NormalTexture then NormalTexture:SetTexture(nil); end
+			local Button, ButtonIcon, ButtonNormal, ButtonCount;
 			
-			IconTexture:SetPoint('TOPLEFT', 1, -1);
-			IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			IconTexture:SetTexCoord(unpack(F.TexCoords));
-			IconTexture:SetDrawLayer('OVERLAY');
-			
-			Count:SetDrawLayer('OVERLAY');
+			for x = 1, NUM_SLOTS_PER_GUILDBANK_GROUP do
+				Button = _G['GuildBankColumn'..i..'Button'..x];
+				ButtonIcon = _G['GuildBankColumn'..i..'Button'..x..'IconTexture'];
+				ButtonNormal = _G['GuildBankColumn'..i..'Button'..x..'NormalTexture'];
+				ButtonCount = _G['GuildBankColumn'..i..'Button'..x..'Count'];
+				
+				F.StyleButton(Button);
+				F.CreateBD(Button, .25);
+				
+				if ButtonNormal then ButtonNormal:SetTexture(nil); end
+				
+				ButtonIcon:SetPoint('TOPLEFT', 1, -1);
+				ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+				ButtonIcon:SetTexCoord(unpack(F.TexCoords));
+				ButtonIcon:SetDrawLayer('OVERLAY');
+				
+				ButtonCount:SetDrawLayer('OVERLAY');
+			end
 		end
 	end
 	
@@ -51,38 +57,51 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 	F.Reskin(GuildBankFrameWithdrawButton, nil, true);
 	GuildBankFrameWithdrawButton:SetPoint('RIGHT', GuildBankFrameDepositButton, 'LEFT', -2, 0);
 	
-	for i = 1, _G['GuildBankFrame']:GetNumChildren() do
-		local Child = select(i, _G['GuildBankFrame']:GetChildren());
-		if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
-			F.ReskinClose(Child, 'TOPRIGHT', GuildBankFrame, 'TOPRIGHT', -4, -16);
+	do
+		local Child;
+		
+		for i = 1, _G['GuildBankFrame']:GetNumChildren() do
+			Child = select(i, _G['GuildBankFrame']:GetChildren());
+			
+			if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
+				F.ReskinClose(Child, 'TOPRIGHT', GuildBankFrame, 'TOPRIGHT', -4, -16);
+			end
 		end
 	end
 	
-	for i = 1, 4 do
-		local Tab = _G['GuildBankFrameTab'..i];
+	do
+		local Tab;
 		
-		F.ReskinTab(Tab);
-		
-		if ( i ~= 1 ) then
-			Tab:SetPoint('LEFT', _G['GuildBankFrameTab'..i-1], 'RIGHT', -15, 0);
+		for i = 1, 4 do
+			Tab = _G['GuildBankFrameTab'..i];
+			
+			F.ReskinTab(Tab);
+			
+			if ( i ~= 1 ) then
+				Tab:SetPoint('LEFT', _G['GuildBankFrameTab'..i-1], 'RIGHT', -15, 0);
+			end
 		end
 	end
 	
-	for i = 1, 6 do
-		local Tab = _G['GuildBankTab'..i];
-		local Button = _G['GuildBankTab'..i..'Button'];
-		local IconTexture = _G['GuildBankTab'..i..'ButtonIconTexture'];
+	do
+		local Tab, Button, ButtonIcon;
 		
-		Tab:DisableDrawLayer('BACKGROUND');
-		
-		Button:GetNormalTexture():SetTexture(nil);
-		Button:GetPushedTexture():SetTexture(nil);
-		F.StyleButton(Button, nil, true);
-		F.CreateBD(Button);
+		for i = 1, 6 do
+			Tab = _G['GuildBankTab'..i];
+			Button = _G['GuildBankTab'..i..'Button'];
+			ButtonIcon = _G['GuildBankTab'..i..'ButtonIconTexture'];
+			
+			Tab:DisableDrawLayer('BACKGROUND');
+			
+			Button:GetNormalTexture():SetTexture(nil);
+			Button:GetPushedTexture():SetTexture(nil);
+			F.StyleButton(Button, nil, true);
+			F.CreateBD(Button);
 
-		IconTexture:SetPoint('TOPLEFT', 1, -1);
-		IconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		IconTexture:SetTexCoord(unpack(F.TexCoords));
+			ButtonIcon:SetPoint('TOPLEFT', 1, -1);
+			ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			ButtonIcon:SetTexCoord(unpack(F.TexCoords));
+		end
 	end
 	
 	F.Reskin(GuildBankFramePurchaseButton, nil, true);
@@ -107,17 +126,21 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 	select(2, GuildBankPopupScrollFrame:GetRegions()):Hide()
 	F.ReskinScroll(GuildBankPopupScrollFrameScrollBar);
 	
-	for i = 1, 16 do
-		local Button = _G['GuildBankPopupButton'..i];
-		local Icon = _G[Button:GetName()..'Icon'];
+	do
+		local Button, ButtonIcon;
 		
-		Button:DisableDrawLayer('BACKGROUND');
-		F.CreateBD(Button);
-		F.StyleButton(Button, nil, true);
-		
-		Icon:SetPoint('TOPLEFT', 1, -1);
-		Icon:SetPoint('BOTTOMRIGHT', -1, 1);
-		Icon:SetTexCoord(unpack(F.TexCoords));
+		for i = 1, 16 do
+			Button = _G['GuildBankPopupButton'..i];
+			ButtonIcon = _G[Button:GetName()..'Icon'];
+			
+			Button:DisableDrawLayer('BACKGROUND');
+			F.CreateBD(Button);
+			F.StyleButton(Button, nil, true);
+			
+			ButtonIcon:SetPoint('TOPLEFT', 1, -1);
+			ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			ButtonIcon:SetTexCoord(unpack(F.TexCoords));
+		end
 	end
 	
 	F.Reskin(GuildBankPopupCancelButton);

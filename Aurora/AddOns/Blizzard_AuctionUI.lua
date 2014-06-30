@@ -30,21 +30,29 @@ C.Modules['Blizzard_AuctionUI'] = function()
 	
 	F.SetBD(AuctionFrame, 11, -12, -1, 10);
 	
-	for i = 1, 3 do
-		local Tab = _G['AuctionFrameTab'..i];
+	do
+		local Tab;
 		
-		F.ReskinTab(Tab);
+		for i = 1, 3 do
+			Tab = _G['AuctionFrameTab'..i];
+			
+			F.ReskinTab(Tab);
+		end
 	end
 	
 	F.ReskinClose(AuctionFrameCloseButton, 'TOPRIGHT', AuctionFrame, 'TOPRIGHT', -5, -16);
 	-- AuctionFrameBrowse;
-	for i = 1, NUM_FILTERS_TO_DISPLAY do
-		local Button = _G['AuctionFilterButton'..i];
+	do
+		local Button;
 		
-		Button:DisableDrawLayer('BACKGROUND');
-		Button:GetNormalTexture():SetTexture(nil);
-		
-		F.StyleButton(Button);
+		for i = 1, NUM_FILTERS_TO_DISPLAY do
+			Button = _G['AuctionFilterButton'..i];
+			
+			Button:DisableDrawLayer('BACKGROUND');
+			Button:GetNormalTexture():SetTexture(nil);
+			
+			F.StyleButton(Button);
+		end
 	end
 	
 	BrowseFilterScrollFrame:DisableDrawLayer('ARTWORK');

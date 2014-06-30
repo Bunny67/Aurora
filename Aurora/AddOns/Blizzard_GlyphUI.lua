@@ -2,13 +2,13 @@ local F, C = unpack(select(2, ...));
 
 local unpack = unpack;
 
-local r, g, b = C.r, C.g, C.b;
+local TexCoords = F.TexCoords;
 
 C.Modules['Blizzard_GlyphUI'] = function()
 	GlyphFrameBackground:Hide();
 	
 	hooksecurefunc('GlyphFrameGlyph_UpdateSlot', function(self)
-		self.glyph:SetTexCoord(unpack(F.TexCoords));
+		self.glyph:SetTexCoord(unpack(TexCoords));
 		self.setting:Hide();
 		self.highlight:SetTexture('');
 		self.background:Hide();
@@ -27,8 +27,8 @@ C.Modules['Blizzard_GlyphUI'] = function()
 	hooksecurefunc('GlyphFrameGlyph_OnUpdate', function(self)
 		local id = self:GetID();
 		
-		if GlyphMatchesSocket(id) then
-			self.bg:SetBackdropBorderColor(r, g, b);
+		if ( GlyphMatchesSocket(id) ) then
+			self.bg:SetBackdropBorderColor(C.r, C.g, C.b);
 		else
 			self.bg:SetBackdropBorderColor(0, 0, 0);
 		end

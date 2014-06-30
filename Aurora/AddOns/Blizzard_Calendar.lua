@@ -107,20 +107,28 @@ C.Modules['Blizzard_Calendar'] = function()
 		end
 	end
 	
-	for i = 1, 6 do
-		local VLine = CreateFrame('Frame', nil, _G['CalendarDayButton'..i]);
-		VLine:SetSize(1, 546);
-		VLine:SetPoint('TOP', _G['CalendarDayButton'..i], 'TOPRIGHT');
+	do
+		local VLine;
 		
-		F.CreateBD(VLine);
+		for i = 1, 6 do
+			VLine = CreateFrame('Frame', nil, _G['CalendarDayButton'..i]);
+			VLine:SetSize(1, 546);
+			VLine:SetPoint('TOP', _G['CalendarDayButton'..i], 'TOPRIGHT');
+			
+			F.CreateBD(VLine);
+		end
 	end
 	
-	for i = 1, 36, 7 do
-		local HLine = CreateFrame('Frame', nil, _G['CalendarDayButton'..i]);
-		HLine:SetSize(637, 1);
-		HLine:SetPoint('LEFT', _G['CalendarDayButton'..i], 'TOPLEFT');
+	do
+		local HLine;
 		
-		F.CreateBD(HLine);
+		for i = 1, 36, 7 do
+			HLine = CreateFrame('Frame', nil, _G['CalendarDayButton'..i]);
+			HLine:SetSize(637, 1);
+			HLine:SetPoint('LEFT', _G['CalendarDayButton'..i], 'TOPLEFT');
+			
+			F.CreateBD(HLine);
+		end
 	end
 	-- CalendarViewHolidayFrame;
 	F.CreateBD(CalendarViewHolidayFrame);

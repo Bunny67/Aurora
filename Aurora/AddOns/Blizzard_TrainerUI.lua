@@ -1,6 +1,7 @@
-local F, C = unpack(select(2, ...))
+local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 local unpack = unpack;
 
 local TexCoords = F.TexCoords;
@@ -10,9 +11,9 @@ local ColourExpandOrCollapse = F.ColourExpandOrCollapse;
 local ClearExpandOrCollapse = F.ClearExpandOrCollapse;
 
 local function StyleSkillButton(self)
-	self:SetNormalTexture('');
+	self:SetNormalTexture(nil);
 	self.SetNormalTexture = Hoop;
-	self:SetPushedTexture('');
+	self:SetPushedTexture(nil);
 	
 	self.BD = CreateFrame('Frame', nil, self);
 	self.BD:SetSize(13, 13);
@@ -44,11 +45,11 @@ C.Modules['Blizzard_TrainerUI'] = function()
 	F.SetBD(ClassTrainerFrame, 10, -12, -34, 74);
 	ClassTrainerFramePortrait:Hide();
 	
-	select(2, ClassTrainerFrame:GetRegions()):Hide();
-	select(3, ClassTrainerFrame:GetRegions()):Hide();
+	select(2, ClassTrainerFrame:GetRegions()):SetTexture(nil);
+	select(3, ClassTrainerFrame:GetRegions()):SetTexture(nil);
 	
-	ClassTrainerFrameBottomLeft:Hide();
-	ClassTrainerFrameBottomRight:Hide();
+	ClassTrainerFrameBottomLeft:SetTexture(nil);
+	ClassTrainerFrameBottomRight:SetTexture(nil);
 	
 	ClassTrainerFrame:DisableDrawLayer('ARTWORK');
 	
@@ -64,7 +65,7 @@ C.Modules['Blizzard_TrainerUI'] = function()
 	ClassTrainerDetailScrollFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinScroll(ClassTrainerDetailScrollFrameScrollBar);
 	
-	ClassTrainerSkillIcon:GetRegions():Hide();
+	ClassTrainerSkillIcon:GetRegions():SetTexture(nil);
 	
 	F.Reskin(ClassTrainerTrainButton);
 	F.Reskin(ClassTrainerCancelButton);
@@ -86,7 +87,7 @@ C.Modules['Blizzard_TrainerUI'] = function()
 
 			if ( SkillButton and not SkillButton.BD ) then
 				local ButtonHighlight = _G['ClassTrainerSkill'..ButtonIndex..'Highlight'];
-				ButtonHighlight:SetTexture('');
+				ButtonHighlight:SetTexture(nil);
 				ButtonHighlight.SetTexture = Hoop;
 
 				StyleSkillButton(SkillButton);

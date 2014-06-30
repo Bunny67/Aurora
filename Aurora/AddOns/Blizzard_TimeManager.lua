@@ -12,12 +12,12 @@ C.Modules['Blizzard_TimeManager'] = function()
 	TimeManagerGlobe:Hide();
 	
 	for i = 2, 5 do
-		select(i, TimeManagerFrame:GetRegions()):Hide();
+		select(i, TimeManagerFrame:GetRegions()):SetTexture(nil);
 	end
 	
 	F.ReskinClose(TimeManagerCloseButton, 'TOPRIGHT', TimeManagerFrame, 'TOPRIGHT', -53, -15);
 	
-	TimeManagerStopwatchFrameBackground:Hide();
+	TimeManagerStopwatchFrameBackground:SetTexture(nil);
 	
 	F.CreateBD(TimeManagerStopwatchCheck);
 	F.StyleButton(TimeManagerStopwatchCheck, nil, true);
@@ -50,9 +50,9 @@ C.Modules['Blizzard_TimeManager'] = function()
 	
 	StopwatchFrame:DisableDrawLayer('BACKGROUND');
 	
-	StopwatchTabFrameLeft:Hide();
-	StopwatchTabFrameMiddle:Hide();
-	StopwatchTabFrameRight:Hide();
+	StopwatchTabFrameLeft:SetTexture(nil);
+	StopwatchTabFrameMiddle:SetTexture(nil);
+	StopwatchTabFrameRight:SetTexture(nil);
 	
 	F.ReskinClose(StopwatchCloseButton, 'TOPRIGHT', StopwatchFrame, 'TOPRIGHT', 0, 4);
 end

@@ -1,6 +1,7 @@
 local F, C = unpack(select(2, ...));
 
 local _G = getfenv(0);
+local select = select;
 local unpack = unpack;
 
 local TexCoords = F.TexCoords;
@@ -10,9 +11,9 @@ local ColourExpandOrCollapse = F.ColourExpandOrCollapse;
 local ClearExpandOrCollapse = F.ClearExpandOrCollapse;
 
 local function StyleSkillButton(self)
-	self:SetNormalTexture('');
+	self:SetNormalTexture(nil);
 	self.SetNormalTexture = Hoop;
-	self:SetPushedTexture('');
+	self:SetPushedTexture(nil);
 	
 	self.BD = CreateFrame('Frame', nil, self);
 	self.BD:SetSize(13, 13);
@@ -44,8 +45,8 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 	F.SetBD(TradeSkillFrame, 11, -12, -34, 74);
 	TradeSkillFramePortrait:Hide();
 	
-	select(3, TradeSkillFrame:GetRegions()):Hide();
-	select(4, TradeSkillFrame:GetRegions()):Hide();
+	select(3, TradeSkillFrame:GetRegions()):SetTexture(nil);
+	select(4, TradeSkillFrame:GetRegions()):SetTexture(nil);
 	
 	TradeSkillFrameBottomLeftTexture:Hide();
 	TradeSkillFrameBottomRightTexture:Hide();
@@ -53,21 +54,25 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 	TradeSkillFrame:DisableDrawLayer('ARTWORK');
 	
 	F.ReskinCheck(TradeSkillFrameAvailableFilterCheckButton);
+	TradeSkillFrameAvailableFilterCheckButton:SetPoint('TOPLEFT', 70, -49);
 	
 	TradeSkillRankFrame:SetStatusBarTexture(C.Media.Backdrop);
 	TradeSkillRankFrame.SetStatusBarColor = Hoop;
 	TradeSkillRankFrame:GetStatusBarTexture():SetGradient('VERTICAL', .1, .3, .9, .2, .4, 1);
 	
-	TradeSkillRankFrameBorder:Hide();
-	TradeSkillRankFrameBackground:Hide();
+	TradeSkillRankFrameBorder:SetTexture(nil);
+	TradeSkillRankFrameBackground:SetTexture(nil);
 	
-	local BD = CreateFrame('Frame', nil, TradeSkillRankFrame);
-	BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel() - 1);
-	BD:SetPoint('TOPLEFT', -1, 1);
-	BD:SetPoint('BOTTOMRIGHT', 1, -1);
-	F.CreateBD(BD, .25);
+	do
+		local BD = CreateFrame('Frame', nil, TradeSkillRankFrame);
+		BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel() - 1);
+		BD:SetPoint('TOPLEFT', -1, 1);
+		BD:SetPoint('BOTTOMRIGHT', 1, -1);
+		F.CreateBD(BD, .25);
+	end
 	
-	F.ReskinInput(TradeSkillFrameEditBox);
+	F.ReskinInput(TradeSkillFrameEditBox, 16);
+	TradeSkillFrameEditBox:SetPoint('TOPRIGHT', TradeSkillRankFrame, 'BOTTOMRIGHT', 1, -3);
 	
 	TradeSkillExpandButtonFrame:DisableDrawLayer('BACKGROUND');
 	
@@ -84,23 +89,27 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 	
 	TradeSkillDetailHeaderLeft:Hide();
 	
-	for i = 1, MAX_TRADE_SKILL_REAGENTS do
-		local ButtonReagent = _G['TradeSkillReagent'..i];
-		local ButtonIcon = _G['TradeSkillReagent'..i..'IconTexture'];
+	do
+		local Button, ButtonIcon;
 		
-		local BD = CreateFrame('Frame', nil, ButtonReagent);
-		BD:SetPoint('TOPLEFT', 39, -1);
-		BD:SetPoint('BOTTOMRIGHT', 0, 1);
-		BD:SetFrameLevel(0);
-		F.CreateBD(BD, .25);
-		
-		ButtonIcon:SetTexCoord(unpack(TexCoords));
-		ButtonIcon:SetDrawLayer('ARTWORK');
-		F.CreateBG(ButtonIcon);
-		
-		_G['TradeSkillReagent'..i..'NameFrame']:SetAlpha(0);
-		
-		_G['TradeSkillReagent'..i..'Name']:SetParent(BD);
+		for i = 1, MAX_TRADE_SKILL_REAGENTS do
+			local Button = _G['TradeSkillReagent'..i];
+			local ButtonIcon = _G['TradeSkillReagent'..i..'IconTexture'];
+			
+			local BD = CreateFrame('Frame', nil, Button);
+			BD:SetPoint('TOPLEFT', 39, -1);
+			BD:SetPoint('BOTTOMRIGHT', 0, 1);
+			BD:SetFrameLevel(0);
+			F.CreateBD(BD, .25);
+			
+			ButtonIcon:SetTexCoord(unpack(TexCoords));
+			ButtonIcon:SetDrawLayer('ARTWORK');
+			F.CreateBG(ButtonIcon);
+			
+			_G['TradeSkillReagent'..i..'NameFrame']:SetTexture(nil);
+			
+			_G['TradeSkillReagent'..i..'Name']:SetParent(BD);
+		end
 	end
 	
 	F.Reskin(TradeSkillCreateButton);
@@ -130,7 +139,7 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 			
 			if ( SkillButton and not SkillButton.BD ) then
 				local ButtonHighlight = _G['TradeSkillSkill'..ButtonIndex..'Highlight'];
-				ButtonHighlight:SetTexture('');
+				ButtonHighlight:SetTexture(nil);
 				ButtonHighlight.SetTexture = Hoop;
 
 				StyleSkillButton(SkillButton);
