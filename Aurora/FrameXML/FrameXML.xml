@@ -5,6 +5,7 @@
 	<Script file="AudioOptionsFrame.lua"/>
 	<Script file="AudioOptionsPanels.lua"/>
 	<Script file="BattlefieldFrame.lua"/>
+	<Script file="ChannelFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
 	<Script file="ChatConfigFrame.lua"/>
 	<Script file="DressUpFrame.lua"/>
@@ -30,6 +31,7 @@
 	<Script file="QuestFrame.lua"/>
 	<Script file="QuestInfo.lua"/>
 	<Script file="QuestLogFrame.lua"/>
+	<Script file="RaidFrame.lua"/>
 	<Script file="ReadyCheck.lua"/>
 	<Script file="ReputationFrame.lua"/>
 	<Script file="SkillFrame.lua"/>
