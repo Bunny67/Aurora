@@ -23,6 +23,8 @@ tinsert(C.Modules['Aurora'], function()
 			Button:SetNormalTexture('');
 			
 			F.StyleButton(Button);
+			
+			_G['ChannelButton'..i..'Collapsed']:SetTextColor(1, 1, 1);
 		end
 	end
 	
