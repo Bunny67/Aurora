@@ -5,59 +5,78 @@ local pairs = pairs;
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(FriendsFrame, true);
-	F.SetBD(FriendsFrame, 10, -12, -31, 76);
-
-	F.ReskinClose(FriendsFrameCloseButton, 'TOPRIGHT', FriendsFrame, 'TOPRIGHT', -35, -16)
+	-- FriendsFrame;
+	F.SetBD(FriendsFrame, 11, -12, -34, 74);
+	
+	FriendsFrame:DisableDrawLayer('BACKGROUND');
+	FriendsFrame:DisableDrawLayer('ARTWORK');
+	
+	F.ReskinClose(FriendsFrameCloseButton, 'TOPRIGHT', FriendsFrame, 'TOPRIGHT', -38, -16)
 	
 	FriendsFrameStatusDropDown:ClearAllPoints();
 	FriendsFrameStatusDropDown:SetPoint('TOPLEFT', FriendsFrame, 'TOPLEFT', 10, -28);
 	F.ReskinDropDown(FriendsFrameStatusDropDown);
 	
-	for i = 1, 5 do
-		local Tab = _G['FriendsFrameTab'..i];
-		
-		F.ReskinTab(Tab);
-	end
+	F.ReskinInput(FriendsFrameBroadcastInput);
 	
-	for i = 1, 2 do -- Друзья
-		local Tab = _G['FriendsTabHeaderTab'..i];
+	do
+		local Tab;
 		
-		F.StripTextures(Tab);
+		for i = 1, 3 do
+			Tab = _G['FriendsTabHeaderTab'..i];
+			
+			Tab:DisableDrawLayer('BACKGROUND');
+			
+			Tab:SetHighlightTexture(nil);
+		end
 	end
-	
-	for i = 1, FRIENDS_TO_DISPLAY do
-		local Button = _G['FriendsFrameFriendsScrollFrameButton'..i];
-		
-		Button.background:Hide();
-
-		F.StyleButton(Button);
-	end
-	
-	F.ReskinScroll(FriendsFrameFriendsScrollFrameScrollBar);
 	
 	F.Reskin(FriendsFrameAddFriendButton, nil, true);
 	F.Reskin(FriendsFrameSendMessageButton, nil, true);
 	
-	F.Reskin(FriendsFrameIgnorePlayerButton, nil, true); -- Черный список
-	F.Reskin(FriendsFrameUnsquelchButton, nil, true);
-	-- Кто
-	for i = 1, 4 do
-		local Header = _G['WhoFrameColumnHeader'..i];
+	F.ReskinScroll(FriendsFrameFriendsScrollFrameScrollBar);
+	
+	do
+		local Button;
 		
-		F.StripTextures(Header);
-		F.StyleButton(Header);
+		for i = 1, FRIENDS_TO_DISPLAY do
+			Button = _G['FriendsFrameFriendsScrollFrameButton'..i];
+			
+			Button.background:Hide();
+
+			F.StyleButton(Button);
+		end
+	end
+	
+	F.Reskin(FriendsFrameIgnorePlayerButton, nil, true);
+	F.Reskin(FriendsFrameUnsquelchButton, nil, true);
+	F.Reskin(FriendsFrameMutePlayerButton, nil, true);
+	
+	F.ReskinScroll(FriendsFrameIgnoreScrollFrameScrollBar);
+	-- WhoFrame;
+	do
+		local Header;
+		
+		for i = 1, 4 do
+			Header = _G['WhoFrameColumnHeader'..i];
+			
+			Header:DisableDrawLayer('BACKGROUND');
+			
+			F.StyleButton(Header);
+		end
 	end
 	
 	F.ReskinDropDown(WhoFrameDropDown);
 	
-	F.StripTextures(WhoListScrollFrame);
-	F.ReskinScroll(WhoListScrollFrameScrollBar);
-	
-	F.Reskin(WhoFrameWhoButton);
-	F.Reskin(WhoFrameAddFriendButton);
 	F.Reskin(WhoFrameGroupInviteButton);
-	-- Гильдия
+	F.Reskin(WhoFrameAddFriendButton);
+	WhoFrameAddFriendButton:SetPoint('RIGHT', WhoFrameGroupInviteButton, 'LEFT', -1, 0);
+	F.Reskin(WhoFrameWhoButton);
+	WhoFrameWhoButton:SetPoint('RIGHT', WhoFrameAddFriendButton, 'LEFT', -1, 0);
+	
+	WhoListScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(WhoListScrollFrameScrollBar);
+	-- GuildFrame;
 	F.StripTextures(GuildFrameLFGFrame);
 	F.CreateBD(GuildFrameLFGFrame, .25);
 	F.ReskinCheck(GuildFrameLFGButton);
@@ -167,51 +186,14 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(GuildControlPopupAcceptButton);
 	F.Reskin(GuildControlPopupFrameCancelButton);
-	-- Каналы
-	for i = 1, MAX_DISPLAY_CHANNEL_BUTTONS do
-		local Button = _G['ChannelButton'..i];
+	
+	do
+		local Tab;
 		
-		F.StripTextures(Button);
-		F.StyleButton(Button);
+		for i = 1, 5 do
+			Tab = _G['FriendsFrameTab'..i];
+			
+			F.ReskinTab(Tab);
+		end
 	end
-	
-	F.Kill(ChannelFrameVerticalBar);
-	
-	F.StripTextures(ChannelRosterScrollFrame);
-	F.ReskinScroll(ChannelRosterScrollFrameScrollBar);
-	
-	F.Reskin(ChannelFrameNewButton);
-	
-	F.StripTextures(ChannelFrameDaughterFrame); -- Новый канал
-	F.CreateBD(ChannelFrameDaughterFrame);
-	
-	F.ReskinInput(ChannelFrameDaughterFrameChannelName);
-	F.ReskinInput(ChannelFrameDaughterFrameChannelPassword);
-	
-	F.ReskinClose(ChannelFrameDaughterFrameDetailCloseButton);
-	
-	F.Reskin(ChannelFrameDaughterFrameOkayButton);
-	F.Reskin(ChannelFrameDaughterFrameCancelButton);
-	-- Рейд
-	F.Reskin(RaidFrameConvertToRaidButton);
-	F.Reskin(RaidFrameRaidInfoButton);
-	F.Reskin(RaidFrameNotInRaidRaidBrowserButton, nil, true);
-	
-	F.StripTextures(RaidInfoFrame, true); -- Информация
-	F.CreateBD(RaidInfoFrame);
-	
-	F.ReskinClose(RaidInfoCloseButton);
-	
-	F.StripTextures(RaidInfoInstanceLabel);
-	F.StripTextures(RaidInfoIDLabel);
-	local RaidInfo = { 'RaidInfoInstanceLabel', 'RaidInfoIDLabel'};
-	for _, RaidInfoL in pairs(RaidInfo) do
-		local RaidInfoLBG = CreateFrame('Frame', nil, _G[RaidInfoL]);
-		RaidInfoLBG:SetPoint('TOPLEFT', 2, 0);
-		RaidInfoLBG:SetPoint('BOTTOMRIGHT', -1, 0);
-		RaidInfoLBG:SetFrameLevel(_G[RaidInfoL]:GetFrameLevel() - 1);
-		F.CreateBD(RaidInfoLBG, .25);
-	end
-	F.Reskin(RaidInfoExtendButton, nil, true);
-	F.Reskin(RaidInfoCancelButton, nil, true);
-end)
+end);
