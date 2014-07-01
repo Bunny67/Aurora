@@ -19,18 +19,15 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinScroll(SkillDetailScrollFrameScrollBar);
 	
 	hooksecurefunc('SkillFrame_SetStatusBar', function(statusBarID, skillIndex, numSkills, adjustedSkillPoints)
-		local _, header, isExpanded, _, _, _, _, _, _, _, _, _ = GetSkillLineInfo(skillIndex);
+		local _, Header, IsExpanded, _, _, _, _, _, _, _, _, _ = GetSkillLineInfo(skillIndex);
 		
 		local StatusBar = _G['SkillRankFrame'..statusBarID];
-		local StatusBarBorder = _G['SkillRankFrame'..statusBarID..'Border'];
-		local StatusBarBackground = _G['SkillRankFrame'..statusBarID..'Background'];
 		
 		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
-
 		F.CreateBD(StatusBar, .25);
 		
-		StatusBarBorder:Hide();
-		StatusBarBackground:SetTexture(nil);
+		_G['SkillRankFrame'..statusBarID..'Border']:SetAlpha(0);
+		_G['SkillRankFrame'..statusBarID..'Background']:SetTexture(nil);
 		
 		local Label = _G['SkillTypeLabel'..statusBarID];
 		
@@ -40,8 +37,8 @@ tinsert(C.Modules['Aurora'], function()
 			Label.Style = true;
 		end
 		
-		if ( header ) then
-			if ( isExpanded ) then
+		if ( Header ) then
+			if ( IsExpanded ) then
 				Label.Plus:Hide();
 			else
 				Label.Plus:Show();
@@ -52,15 +49,13 @@ tinsert(C.Modules['Aurora'], function()
 	end);
 	
 	hooksecurefunc('SkillDetailFrame_SetStatusBar', function()
-		local StatusBar = _G["SkillDetailStatusBar"];
-		local StatusBarBorder = _G['SkillDetailStatusBarBorder'];
-		local StatusBarBackground = _G['SkillDetailStatusBarBackground'];
+		local StatusBar = _G['SkillDetailStatusBar'];
 		
 		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
 		F.CreateBD(StatusBar, .25);
 		
-		StatusBarBorder:SetTexture(nil);
-		StatusBarBackground:SetTexture(nil);
+		_G['SkillDetailStatusBarBorder']:SetAlpha(0);
+		_G['SkillDetailStatusBarBackground']:SetTexture(nil);
 	end);
 	
 	hooksecurefunc('SkillFrame_UpdateSkills', function()
@@ -68,13 +63,16 @@ tinsert(C.Modules['Aurora'], function()
 		
 		SkillFrameCollapseAllButton.isExpanded = 1;
 		SkillFrameCollapseAllButton.Minus:Show();
-		SkillFrameCollapseAllButton.Plus:Hide()
-		for i=1, NumSkills do
+		SkillFrameCollapseAllButton.Plus:Hide();
+		
+		for i = 1, NumSkills do
 			local temp, header, isExpanded = GetSkillLineInfo(i);
+			
 			if ( header ) then
 				if ( not isExpanded ) then
 					SkillFrameCollapseAllButton.isExpanded = nil;
-					SkillFrameCollapseAllButton.Plus:Show()
+					SkillFrameCollapseAllButton.Plus:Show();
+					
 					break;
 				end
 			end
