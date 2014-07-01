@@ -77,42 +77,32 @@ tinsert(C.Modules['Aurora'], function()
 	WhoListScrollFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinScroll(WhoListScrollFrameScrollBar);
 	-- GuildFrame;
-	F.StripTextures(GuildFrameLFGFrame);
+	GuildFrameLFGFrame:DisableDrawLayer('BACKGROUND');
 	F.CreateBD(GuildFrameLFGFrame, .25);
+	
 	F.ReskinCheck(GuildFrameLFGButton);
 	
-	for i = 1, 4 do
-		local Header1 = _G['GuildFrameColumnHeader'..i];
-		local Header2 = _G['GuildFrameGuildStatusColumnHeader'..i];
+	do
+		local Header;
 		
-		local Headers = { Header1, Header2 };
-		for _, Header in pairs(Headers) do
-			F.StripTextures(Header);
+		for i = 1, 4 do
+			Header = _G['GuildFrameColumnHeader'..i];
+			Header = _G['GuildFrameGuildStatusColumnHeader'..i];
 			
-			Header:SetHighlightTexture(C.Media.Backdrop);
-			local Highlight = Header:GetHighlightTexture();
-			Highlight:ClearAllPoints();
-			Highlight:SetPoint('TOPLEFT', 3, -4);
-			Highlight:SetPoint('BOTTOMRIGHT', -2, 4);
-			Highlight:SetVertexColor(C.r, C.g, C.b, .25);
-			
-			local HeaderBG = CreateFrame('Frame', nil, Header);
-			HeaderBG:SetPoint('TOPLEFT', 2, -3);
-			HeaderBG:SetPoint('BOTTOMRIGHT', -1, 3);
-			HeaderBG:SetFrameLevel(Header:GetFrameLevel() - 1);
-			F.CreateBD(HeaderBG, 0);
-			F.CreateGradient(HeaderBG);
+			F.ReskinHeader(Header);
 		end
 	end
 	
-	F.StripTextures(GuildListScrollFrame);
+	GuildListScrollFrame:DisableDrawLayer('BACKGROUND');
 	F.ReskinScroll(GuildListScrollFrameScrollBar);
 	
 	F.ReskinArrow(GuildFrameGuildListToggleButton, 'Right');
 	
-	F.Reskin(GuildFrameGuildInformationButton);
-	F.Reskin(GuildFrameAddMemberButton);
 	F.Reskin(GuildFrameControlButton);
+	F.Reskin(GuildFrameAddMemberButton);
+	F.Reskin(GuildFrameGuildInformationButton);
+	-- GuildControlPopupFrame;
+	
 	
 	F.StripTextures(GuildMemberDetailFrame); -- Иформация о персонаже
 	F.CreateBD(GuildMemberDetailFrame);

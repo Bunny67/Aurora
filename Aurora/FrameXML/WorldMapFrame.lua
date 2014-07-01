@@ -93,6 +93,9 @@ tinsert(C.Modules['Aurora'], function()
 		F.ReskinScroll(WorldMapQuestDetailScrollFrameScrollBar);
 		F.ReskinScroll(WorldMapQuestRewardScrollFrameScrollBar);
 		
+		WorldMapQuestDetailScrollFrameTrack:Hide();
+		WorldMapQuestDetailScrollFrameTrack.Show = function() end;
+		
 		local function SetLargeWorldMap()
 			if InCombatLockdown() then return; end
 			
