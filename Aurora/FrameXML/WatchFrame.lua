@@ -10,16 +10,20 @@ tinsert(C.Modules['Aurora'], function()
 	F.ReskinExpandOrCollapse(WatchFrameCollapseExpandButton);
 	
 	local function SkinWatchFrameItems()
-		local ItemButton;
+		local ItemButton, ItemButtonIcon;
 		
 		for i = 1, WATCHFRAME_NUM_ITEMS do
 			ItemButton = _G['WatchFrameItem'..i];
+			ItemButtonIcon = _G['WatchFrameItem'..i..'IconTexture'];
 			
 			F.CreateBD(ItemButton);
 			F.StyleButton(ItemButton);
 			
 			_G['WatchFrameItem'..i..'NormalTexture']:SetAlpha(0);
-			_G['WatchFrameItem'..i..'IconTexture']:SetTexCoord(unpack(TexCoords));
+			
+			ItemButtonIcon:SetPoint('TOPLEFT', 1, -1);
+			ItemButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
+			ItemButtonIcon:SetTexCoord(unpack(TexCoords));
 		end	
 	end
 	
