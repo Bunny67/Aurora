@@ -59,13 +59,19 @@ tinsert(C.Modules['Aurora'], function()
 			ItemCount = _G['QuestInfoItem'..i..'Count'];
 			
 			F.StyleButton(Item);
-			F.CreateBD(Item, .25);
 			
+			F.CreateBG(ItemIcon);
 			ItemIcon:SetPoint('TOPLEFT', 1, -1);
 			ItemIcon:SetTexCoord(unpack(TexCoords));
 			ItemIcon:SetDrawLayer('OVERLAY');
 
-			ItemName:Hide();
+			ItemName:SetTexture(0, 0, 0, .25);
+			ItemName:SetSize(117, 39);
+			
+			Item.BG = CreateFrame('Frame', nil, Item);
+			Item.BG:SetPoint('TOPLEFT', ItemName, 'TOPLEFT', 10, 0);
+			Item.BG:SetPoint('BOTTOMRIGHT', ItemName, 'BOTTOMRIGHT');
+			F.CreateBD(Item.BG, 0);
 			
 			ItemCount:SetDrawLayer('OVERLAY');
 		end
