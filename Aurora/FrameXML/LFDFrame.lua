@@ -5,10 +5,12 @@ local unpack = unpack;
 local pairs = pairs;
 local tinsert = table.insert;
 
+local TexCoords = F.TexCoords;
+
 tinsert(C.Modules['Aurora'], function()
 	local function ColourMinimize(Frame)
 		if Frame:IsEnabled() then
-			Frame.Minimize:SetVertexColor(r, g, b);
+			Frame.Minimize:SetVertexColor(C.r, C.g, C.b);
 		end
 	end
 
@@ -155,8 +157,46 @@ tinsert(C.Modules['Aurora'], function()
 	
 	F.Reskin(LFDRoleCheckPopupAcceptButton);
 	F.Reskin(LFDRoleCheckPopupDeclineButton);
-	-- LFDSearchStatus
+	-- LFDSearchStatus;
 	F.CreateBD(LFDSearchStatus);
+	
+	do
+		local RoleButton = { 'Tank1', 'Healer1', 'Damage1', 'Damage2', 'Damage3' };
+		local Button;
+		
+		for i = 1, #RoleButton do
+			Button = _G['LFDSearchStatus'..RoleButton[i]];
+			Button.texture:SetTexture(C.Media.RoleIcons);
+			
+			local Left = Button:CreateTexture(nil, 'OVERLAY');
+			Left:SetWidth(1);
+			Left:SetTexture(C.Media.Backdrop);
+			Left:SetVertexColor(0, 0, 0);
+			Left:SetPoint('TOPLEFT', 7, -6);
+			Left:SetPoint('BOTTOMLEFT', 7, 8);
+
+			local Right = Button:CreateTexture(nil, 'OVERLAY');
+			Right:SetWidth(1);
+			Right:SetTexture(C.Media.Backdrop);
+			Right:SetVertexColor(0, 0, 0);
+			Right:SetPoint('TOPRIGHT', -7, -6);
+			Right:SetPoint('BOTTOMRIGHT', -7, 8);
+
+			local Top = Button:CreateTexture(nil, 'OVERLAY');
+			Top:SetHeight(1);
+			Top:SetTexture(C.Media.Backdrop);
+			Top:SetVertexColor(0, 0, 0);
+			Top:SetPoint('TOPLEFT', 7, -5);
+			Top:SetPoint('TOPRIGHT', -7, -6);
+
+			local Bottom = Button:CreateTexture(nil, 'OVERLAY');
+			Bottom:SetHeight(1);
+			Bottom:SetTexture(C.Media.Backdrop);
+			Bottom:SetVertexColor(0, 0, 0);
+			Bottom:SetPoint('BOTTOMLEFT', 7, 8);
+			Bottom:SetPoint('BOTTOMRIGHT', -7, 8);
+		end
+	end
 	
 	hooksecurefunc('LFDSearchStatusPlayer_SetFound', function(button, isFound)
 		if ( isFound ) then
@@ -190,142 +230,115 @@ tinsert(C.Modules['Aurora'], function()
 			CurrentIcon = CurrentIcon + 1;
 		end
 	end);
+	-- LFDParentFrame;
+	F.SetBD(LFDParentFrame, 15, -12, -1, 3);
 	
-	for _, RoleButton in pairs({ LFDSearchStatusTank1, LFDSearchStatusHealer1, LFDSearchStatusDamage1, LFDSearchStatusDamage2, LFDSearchStatusDamage3 }) do
-		RoleButton.texture:SetTexture(C.Media.RoleIcons);
+	do
+		local Child;
 		
-		local Left = RoleButton:CreateTexture(nil, 'OVERLAY');
-		Left:SetWidth(1);
-		Left:SetTexture(C.Media.Backdrop);
-		Left:SetVertexColor(0, 0, 0);
-		Left:SetPoint('TOPLEFT', 7, -6);
-		Left:SetPoint('BOTTOMLEFT', 7, 8);
-
-		local Right = RoleButton:CreateTexture(nil, 'OVERLAY');
-		Right:SetWidth(1);
-		Right:SetTexture(C.Media.Backdrop);
-		Right:SetVertexColor(0, 0, 0);
-		Right:SetPoint('TOPRIGHT', -7, -6);
-		Right:SetPoint('BOTTOMRIGHT', -7, 8);
-
-		local Top = RoleButton:CreateTexture(nil, 'OVERLAY');
-		Top:SetHeight(1);
-		Top:SetTexture(C.Media.Backdrop);
-		Top:SetVertexColor(0, 0, 0);
-		Top:SetPoint('TOPLEFT', 7, -5);
-		Top:SetPoint('TOPRIGHT', -7, -6);
-
-		local Bottom = RoleButton:CreateTexture(nil, 'OVERLAY');
-		Bottom:SetHeight(1);
-		Bottom:SetTexture(C.Media.Backdrop);
-		Bottom:SetVertexColor(0, 0, 0);
-		Bottom:SetPoint('BOTTOMLEFT', 7, 8);
-		Bottom:SetPoint('BOTTOMRIGHT', -7, 8);
-	end
-
-	-- LFDParentFrame
-	F.StripTextures(LFDQueueFrame, true);
-	F.SetBD(LFDQueueFrame, 10, -12, -2, 1);
-	
-	for i = 1, _G['LFDParentFrame']:GetNumChildren() do
-		local Child = select(i, _G['LFDParentFrame']:GetChildren());
-		
-		if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
-			F.ReskinClose(Child, 'TOPRIGHT', LFDParentFrame, 'TOPRIGHT', -6, -16);
+		for i = 1, LFDParentFrame:GetNumChildren() do
+			Child = select(i, LFDParentFrame:GetChildren());
+			
+			if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
+				F.ReskinClose(Child, 'TOPRIGHT', LFDParentFrame, 'TOPRIGHT', -5, -16);
+			end
 		end
 	end
 	
-	for _, RoleButton in pairs({LFDQueueFrameRoleButtonTank, LFDQueueFrameRoleButtonHealer, LFDQueueFrameRoleButtonDPS, LFDQueueFrameRoleButtonLeader}) do
-		if RoleButton.background then
-			RoleButton.background:SetTexture('');
-		end
-
-		RoleButton.cover:SetTexture(C.Media.RoleIcons);
-		RoleButton:SetNormalTexture(C.Media.RoleIcons);
-
-		RoleButton.checkButton:SetFrameLevel(RoleButton:GetFrameLevel() + 2);
-
-		for i = 1, 2 do
-			local Left = RoleButton:CreateTexture();
-			Left:SetDrawLayer('OVERLAY', i);
+	LFDQueueFrameBackground:Hide();
+	LFDQueueFrameLayout:SetTexture(nil);
+	
+	do
+		local RoleButton = { 'Tank', 'Healer', 'DPS', 'Leader' };
+		local Button;
+		
+		for i = 1, #RoleButton do
+			Button = _G['LFDQueueFrameRoleButton'..RoleButton[i]];
+			
+			Button:SetNormalTexture(C.Media.RoleIcons);
+			Button.cover:SetTexture(C.Media.RoleIcons);
+			
+			if ( Button.background ) then
+				Button.background:SetTexture(nil);
+			end
+			
+			local Left = Button:CreateTexture(nil, 'OVERLAY');
 			Left:SetWidth(1);
 			Left:SetTexture(C.Media.Backdrop);
 			Left:SetVertexColor(0, 0, 0);
-			Left:SetPoint('TOPLEFT', RoleButton, 6, -5);
-			Left:SetPoint('BOTTOMLEFT', RoleButton, 6, 7);
-			RoleButton['LeftLine'..i] = Left;
+			Left:SetPoint('TOPLEFT', 6, -5);
+			Left:SetPoint('BOTTOMLEFT', 6, 7);
 
-			local Right = RoleButton:CreateTexture();
-			Right:SetDrawLayer('OVERLAY', i);
+			local Right = Button:CreateTexture(nil, 'OVERLAY');
 			Right:SetWidth(1);
 			Right:SetTexture(C.Media.Backdrop);
 			Right:SetVertexColor(0, 0, 0);
-			Right:SetPoint('TOPRIGHT', RoleButton, -6, -5);
-			Right:SetPoint('BOTTOMRIGHT', RoleButton, -6, 7);
-			RoleButton['RightLine'..i] = Right;
+			Right:SetPoint('TOPRIGHT', -5, -5);
+			Right:SetPoint('BOTTOMRIGHT', -5, 7);
 
-			local Top = RoleButton:CreateTexture();
-			Top:SetDrawLayer('OVERLAY', i);
+			local Top = Button:CreateTexture(nil, 'OVERLAY');
 			Top:SetHeight(1);
 			Top:SetTexture(C.Media.Backdrop);
 			Top:SetVertexColor(0, 0, 0);
-			Top:SetPoint('TOPLEFT', RoleButton, 6, -5);
-			Top:SetPoint('TOPRIGHT', RoleButton, -6, -5);
-			RoleButton['TopLine'..i] = Top;
+			Top:SetPoint('TOPLEFT', 6, -4);
+			Top:SetPoint('TOPRIGHT', -5, -4);
 
-			local Bottom = RoleButton:CreateTexture();
-			Bottom:SetDrawLayer('OVERLAY', i);
+			local Bottom = Button:CreateTexture(nil, 'OVERLAY');
 			Bottom:SetHeight(1);
 			Bottom:SetTexture(C.Media.Backdrop);
 			Bottom:SetVertexColor(0, 0, 0);
-			Bottom:SetPoint('BOTTOMLEFT', RoleButton, 6, 7);
-			Bottom:SetPoint('BOTTOMRIGHT', RoleButton, -6, 7);
-			RoleButton['BottomLine'..i] = Bottom;
+			Bottom:SetPoint('BOTTOMLEFT', 6, 7);
+			Bottom:SetPoint('BOTTOMRIGHT', -5, 7);
+			
+			Button.checkButton:SetFrameLevel(Button:GetFrameLevel() + 2);
+			F.ReskinCheck(Button.checkButton);
 		end
-
-		RoleButton.LeftLine2:Hide();
-		RoleButton.RightLine2:Hide();
-		RoleButton.TopLine2:Hide();
-		RoleButton.BottomLine2:Hide();
-
-		local shortageBorder = RoleButton.shortageBorder;
-		if shortageBorder then
-			local icon = RoleButton.incentiveIcon;
-
-			shortageBorder:SetTexture('')
-
-			icon.border:SetTexture(0, 0, 0);
-			icon.border:SetDrawLayer('BACKGROUND');
-			icon.border:SetPoint('TOPLEFT', icon.texture, -1, 1);
-			icon.border:SetPoint('BOTTOMRIGHT', icon.texture, 1, -1);
-
-			icon:SetPoint('BOTTOMRIGHT', 3, -3);
-			icon:SetSize(14, 14);
-			icon.texture:SetSize(14, 14);
-			icon.texture:SetTexCoord(unpack(F.TexCoords));
-		end
-
-		F.ReskinCheck(RoleButton.checkButton)
 	end
 	
 	F.ReskinDropDown(LFDQueueFrameTypeDropDown);
 	
-	for i=1, LFD_MAX_REWARDS do
-		local Item = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i];
-		local ItemIconTexture = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'IconTexture'];
-		local ItemCount = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'Count'];
+	do
+		local Item, ItemIcon, ItemCount, ItemName
 		
-		if ( Item ) then
-			F.StripTextures(Item);
-			F.CreateBD(Item, .25);
+		for i = 1, LFD_MAX_REWARDS do
+			Item = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i];
+			ItemIcon = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'IconTexture'];
+			ItemCount = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'Count'];
+			ItemName = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'NameFrame'];
 			
-			ItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-			ItemIconTexture:SetTexCoord(unpack(F.TexCoords));
-			ItemIconTexture:SetDrawLayer('OVERLAY');
-			
-			ItemCount:SetDrawLayer('OVERLAY');
+			if ( Item ) then
+				F.CreateBG(ItemIcon)
+				ItemIcon:SetTexCoord(unpack(TexCoords));
+				ItemIcon:SetDrawLayer('OVERLAY');
+				
+				ItemCount:SetDrawLayer('OVERLAY');
+				
+				ItemName:SetTexture(0, 0, 0, .25);
+				ItemName:SetSize(118, 39);
+				
+				Item.bg2 = CreateFrame('Frame', nil, Item);
+				Item.bg2:SetPoint('TOPLEFT', ItemName, 'TOPLEFT', 10, 0);
+				Item.bg2:SetPoint('BOTTOMRIGHT', ItemName, 'BOTTOMRIGHT');
+				F.CreateBD(Item.bg2, 0);
+			end
 		end
 	end
+	
+	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil);
+	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil);
+	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil);
+	F.ReskinScroll(LFDQueueFrameRandomScrollFrameScrollBar);
+	
+	LFDQueueFrameSpecificListScrollFrame:DisableDrawLayer('BACKGROUND');
+	F.ReskinScroll(LFDQueueFrameSpecificListScrollFrameScrollBar);
+	
+	F.Reskin(LFDQueueFrameFindGroupButton, nil, true);
+	F.Reskin(LFDQueueFrameCancelButton, nil, true);
+	
+	F.Reskin(LFDQueueFramePartyBackfillBackfillButton);
+	F.Reskin(LFDQueueFramePartyBackfillNoBackfillButton);
+	
+	F.Reskin(LFDQueueFrameNoLFDWhileLFRLeaveQueueButton);
 	
 	hooksecurefunc('LFDQueueFrameSpecificListButton_SetDungeon', function(button, dungeonID)
 		if ( not button.expandOrCollapseButton.Plus ) then
@@ -338,18 +351,7 @@ tinsert(C.Modules['Aurora'], function()
 		else
 			button.expandOrCollapseButton.Plus:Hide();
 		end
-
-		button.enableButton:GetCheckedTexture():SetDesaturated(true);
 	end);
-	
-	F.StripTextures(LFDQueueFrameSpecificListScrollFrame);
-	F.ReskinScroll(LFDQueueFrameSpecificListScrollFrameScrollBar);
-	
-	F.Reskin(LFDQueueFrameFindGroupButton, nil, true);
-	F.Reskin(LFDQueueFrameCancelButton, nil, true);
-	
-	F.Reskin(LFDQueueFramePartyBackfillBackfillButton);
-	F.Reskin(LFDQueueFramePartyBackfillNoBackfillButton);
-	-- LFDParentFramePortrait
-	F.Kill(LFDParentFramePortrait);
+	-- LFDParentFramePortrait;
+	LFDParentFramePortrait:Hide();
 end);
