@@ -20,6 +20,7 @@
 	<Script file="KnowledgeBaseFrame.lua"/>
 	<Script file="LFDFrame.lua"/>
 	<Script file="LFGFrame.lua"/>
+	<Script file="LFRFrame.lua"/>
 	<Script file="MailFrame.lua"/>
 	<Script file="MerchantFrame.lua"/>
 	<Script file="PaperDollFrame.lua"/>
