@@ -3,8 +3,8 @@ local F, C = unpack(select(2, ...));
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	StackSplitFrame:GetRegions():Hide();
 	F.CreateBD(StackSplitFrame);
+	StackSplitFrame:GetRegions():SetTexture(nil);
 	
 	F.Reskin(StackSplitOkayButton);
 	F.Reskin(StackSplitCancelButton);
