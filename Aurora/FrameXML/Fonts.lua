@@ -3,7 +3,7 @@ local F, C = unpack(select(2, ...));
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	if ( AuroraConfig.Font ) then
+	if (not AuroraConfig.Font ) then
 		return;
 	end
 	
