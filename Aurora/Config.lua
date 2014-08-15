@@ -39,7 +39,7 @@ end
 
 local function UpdateFrames()
 	for i = 1, #C.Frames do
-		F.CreateBD(C.Frames[i], AuroraConfig.alpha);
+		F:CreateBD(C.Frames[i], AuroraConfig.alpha);
 	end
 end
 
@@ -206,22 +206,22 @@ Config:SetScript('OnEvent', function(self, _, addon)
 	
 	Config.Refresh();
 	
-	F.CreateBD(Config);
+	F:CreateBD(Config);
 	
-	F.CreateBD(Config.Header);
-	F.StyleButton(Config.Header);
+	F:CreateBD(Config.Header);
+	F:StyleButton(Config.Header);
 	
-	F.ReskinClose(Config.Close, 'TOPRIGHT', Config, 'TOPRIGHT', -4, -4);
+	F:ReskinClose(Config.Close, 'TOPRIGHT', Config, 'TOPRIGHT', -4, -4);
 	
-	F.ReskinScroll(AuroraConfigScrollFrameScrollBar);
+	F:ReskinScroll(AuroraConfigScrollFrameScrollBar);
 	
-	F.ReskinSlider(Config.Alpha);
+	F:ReskinSlider(Config.Alpha);
 	
-	F.Reskin(Config.ColourButton);
-	F.Reskin(Config.Reload);
+	F:Reskin(Config.ColourButton);
+	F:Reskin(Config.Reload);
 	
 	for i = 1, #CheckBoxes do
-		F.ReskinCheck(CheckBoxes[i]);
+		F:ReskinCheck(CheckBoxes[i]);
 	end
 	
 	self:UnregisterEvent('ADDON_LOADED');

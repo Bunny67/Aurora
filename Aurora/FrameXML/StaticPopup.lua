@@ -33,15 +33,15 @@ tinsert(C.Modules['Aurora'], function()
 		local Silver = _G['StaticPopup'..i..'MoneyInputFrameSilver'];
 		local Copper = _G['StaticPopup'..i..'MoneyInputFrameCopper'];
 		
-		F.CreateBD(Frame);
+		F:CreateBD(Frame);
 
 		for j = 1, 3 do
-			F.Reskin(Frame['button'..j]);
+			F:Reskin(Frame['button'..j]);
 		end
 		
 		Item:SetNormalTexture('');
-		F.StyleButton(Item);
-		F.CreateBG(Item);
+		F:StyleButton(Item);
+		F:CreateBG(Item);
 		
 		Item.Hover:SetAllPoints();
 		Item.Pushed:SetAllPoints();
@@ -50,7 +50,7 @@ tinsert(C.Modules['Aurora'], function()
 		
 		ItemName:Hide();
 
-		F.ReskinClose(Close);
+		F:ReskinClose(Close);
 
 		Close.Minimize = Close:CreateTexture(nil, 'OVERLAY');
 		Close.Minimize:SetSize(9, 1);
@@ -62,14 +62,14 @@ tinsert(C.Modules['Aurora'], function()
 		
 		select(6, EditBox:GetRegions()):Hide();
 		select(7, EditBox:GetRegions()):Hide();
-		F.ReskinInput(EditBox, 22);
+		F:ReskinInput(EditBox, 22);
 		
 		select(8, WideEditBox:GetRegions()):Hide();
-		F.ReskinInput(WideEditBox, 22);
+		F:ReskinInput(WideEditBox, 22);
 		
-		F.ReskinInput(Gold);
-		F.ReskinInput(Silver);
-		F.ReskinInput(Copper);
+		F:ReskinInput(Gold);
+		F:ReskinInput(Silver);
+		F:ReskinInput(Copper);
 	end
 
 	hooksecurefunc('StaticPopup_Show', function(which, text_arg1, text_arg2, data)

@@ -21,7 +21,7 @@ tinsert(C.Modules['Aurora'], function()
 				frame.BG:SetPoint('TOPLEFT', 2, -6);
 				frame.BG:SetPoint('BOTTOMRIGHT', -2, 6);
 				frame.BG:SetFrameLevel(frame:GetFrameLevel() - 1);
-				F.CreateBD(frame.BG);
+				F:CreateBD(frame.BG);
 				
 				frameBackground:Hide();
 				frameUnlocked:SetTextColor(1, 1, 1);
@@ -39,7 +39,7 @@ tinsert(C.Modules['Aurora'], function()
 					frameIconTexture.BG = CreateFrame('Frame', nil, frame);
 					frameIconTexture.BG:SetPoint('TOPLEFT', frameIconTexture, -1, 1);
 					frameIconTexture.BG:SetPoint('BOTTOMRIGHT', frameIconTexture, 1, -1);
-					F.CreateBD(frameIconTexture.BG);
+					F:CreateBD(frameIconTexture.BG);
 				end
 			end
 		end	
@@ -58,7 +58,7 @@ tinsert(C.Modules['Aurora'], function()
 				frame.BG:SetPoint('TOPLEFT', 0, -6);
 				frame.BG:SetPoint('BOTTOMRIGHT', 0, -3);
 				frame.BG:SetFrameLevel(frame:GetFrameLevel() - 1);
-				F.CreateBD(frame.BG);
+				F:CreateBD(frame.BG);
 				
 				frame:DisableDrawLayer('OVERLAY');
 				frame:DisableDrawLayer('BORDER');
@@ -68,7 +68,7 @@ tinsert(C.Modules['Aurora'], function()
 				if ( not frameDungeonTexture.BG ) then
 					frameDungeonTexture.BG = CreateFrame('Frame', nil, frame);
 					frameDungeonTexture.BG:SetFrameLevel(0);
-					F.CreateBD(frameDungeonTexture.BG);
+					F:CreateBD(frameDungeonTexture.BG);
 					frameDungeonTexture.BG:SetPoint('TOPLEFT', frameDungeonTexture, -1, 1);
 					frameDungeonTexture.BG:SetPoint('BOTTOMRIGHT', frameDungeonTexture, 1, -1);
 				end

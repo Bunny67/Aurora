@@ -32,7 +32,7 @@ local COMBAT_CONFIG_CHECK = {
 };
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(ChatConfigFrame);
+	F:SetBD(ChatConfigFrame);
 	ChatConfigFrame:SetBackdrop(nil);
 	
 	ChatConfigFrameHeader:SetTexture(nil);
@@ -40,8 +40,8 @@ tinsert(C.Modules['Aurora'], function()
 	ChatConfigCategoryFrame:SetBackdrop(nil);
 	ChatConfigBackgroundFrame:SetBackdrop(nil);
 	
-	F.CreateBD(ChatConfigChatSettingsClassColorLegend, .25);
-	F.CreateBD(ChatConfigChannelSettingsClassColorLegend, .25);
+	F:CreateBD(ChatConfigChatSettingsClassColorLegend, .25);
+	F:CreateBD(ChatConfigChannelSettingsClassColorLegend, .25);
 	-- ChatConfigCombatSettingsFilters;
 	ChatConfigCombatSettingsFilters:SetBackdrop(nil);
 	
@@ -50,22 +50,22 @@ tinsert(C.Modules['Aurora'], function()
 		BG:SetPoint('TOPLEFT', 3, -3);
 		BG:SetPoint('BOTTOMRIGHT', 0, 1);
 		BG:SetFrameLevel(ChatConfigCombatSettingsFilters:GetFrameLevel() - 1);
-		F.CreateBD(BG, .25);
+		F:CreateBD(BG, .25);
 	end
 	
-	F.ReskinScroll(ChatConfigCombatSettingsFiltersScrollFrameScrollBar);
+	F:ReskinScroll(ChatConfigCombatSettingsFiltersScrollFrameScrollBar);
 	ChatConfigCombatSettingsFiltersScrollFrameScrollBarBorder:Hide();
 	
-	F.Reskin(ChatConfigCombatSettingsFiltersDeleteButton);
-	F.Reskin(ChatConfigCombatSettingsFiltersAddFilterButton);
+	F:Reskin(ChatConfigCombatSettingsFiltersDeleteButton);
+	F:Reskin(ChatConfigCombatSettingsFiltersAddFilterButton);
 	ChatConfigCombatSettingsFiltersAddFilterButton:SetPoint('RIGHT', ChatConfigCombatSettingsFiltersDeleteButton, 'LEFT', -1, 0);
-	F.Reskin(ChatConfigCombatSettingsFiltersCopyFilterButton);
+	F:Reskin(ChatConfigCombatSettingsFiltersCopyFilterButton);
 	ChatConfigCombatSettingsFiltersCopyFilterButton:SetPoint('RIGHT', ChatConfigCombatSettingsFiltersAddFilterButton, 'LEFT', -1, 0);
 	
-	F.ReskinArrow(ChatConfigMoveFilterUpButton, 'Up');
+	F:ReskinArrow(ChatConfigMoveFilterUpButton, 'Up');
 	ChatConfigMoveFilterUpButton:SetSize(28, 28);
 	ChatConfigMoveFilterUpButton:SetPoint('TOPLEFT', ChatConfigCombatSettingsFilters, 'BOTTOMLEFT', 3, 0);
-	F.ReskinArrow(ChatConfigMoveFilterDownButton, 'Down');
+	F:ReskinArrow(ChatConfigMoveFilterDownButton, 'Down');
 	ChatConfigMoveFilterDownButton:SetSize(28, 28);
 	ChatConfigMoveFilterDownButton:SetPoint('LEFT', ChatConfigMoveFilterUpButton, 'RIGHT', 1, 0);
 	-- CombatConfigColors;
@@ -73,21 +73,21 @@ tinsert(C.Modules['Aurora'], function()
 	CombatConfigColorsColorizeUnitName:SetBackdrop(nil);
 	CombatConfigColorsColorizeSpellNames:SetBackdrop(nil);
 	
-	F.ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch);
+	F:ReskinColourSwatch(CombatConfigColorsColorizeSpellNamesColorSwatch);
 	
 	CombatConfigColorsColorizeDamageNumber:SetBackdrop(nil);
 	
-	F.ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch);
+	F:ReskinColourSwatch(CombatConfigColorsColorizeDamageNumberColorSwatch);
 	
 	CombatConfigColorsColorizeDamageSchool:SetBackdrop(nil);
 	CombatConfigColorsColorizeEntireLine:SetBackdrop(nil);
 	
-	F.ReskinRadio(CombatConfigColorsColorizeEntireLineBySource);
-	F.ReskinRadio(CombatConfigColorsColorizeEntireLineByTarget);
+	F:ReskinRadio(CombatConfigColorsColorizeEntireLineBySource);
+	F:ReskinRadio(CombatConfigColorsColorizeEntireLineByTarget);
 	-- CombatConfigSettings;
-	F.ReskinInput(CombatConfigSettingsNameEditBox);
+	F:ReskinInput(CombatConfigSettingsNameEditBox);
 	
-	F.Reskin(CombatConfigSettingsSaveButton);
+	F:Reskin(CombatConfigSettingsSaveButton);
 	
 	do
 		local Check;
@@ -95,7 +95,7 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, #COMBAT_CONFIG_CHECK do
 			Check = _G[COMBAT_CONFIG_CHECK[i]];
 			
-			F.ReskinCheck(Check);
+			F:ReskinCheck(Check);
 		end
 	end
 	
@@ -120,15 +120,15 @@ tinsert(C.Modules['Aurora'], function()
 			TabBG:SetPoint('TOPLEFT', 1, -10);
 			TabBG:SetPoint('BOTTOMRIGHT', -1, 0);
 			TabBG:SetFrameLevel(Tab:GetFrameLevel() - 1);
-			F.CreateBD(TabBG, 0);
-			F.CreateGradient(TabBG);
+			F:CreateBD(TabBG, 0);
+			F:CreateGradient(TabBG);
 		end
 	end
 	
-	F.Reskin(ChatConfigFrameDefaultButton);
-	F.Reskin(CombatLogDefaultButton);
-	F.Reskin(ChatConfigFrameCancelButton); -- Hide();
-	F.Reskin(ChatConfigFrameOkayButton);
+	F:Reskin(ChatConfigFrameDefaultButton);
+	F:Reskin(CombatLogDefaultButton);
+	F:Reskin(ChatConfigFrameCancelButton); -- Hide();
+	F:Reskin(ChatConfigFrameOkayButton);
 	
 	hooksecurefunc('ChatConfig_CreateCheckboxes', function(frame, checkBoxTable, checkBoxTemplate)
 		frame:SetBackdrop(nil);
@@ -147,9 +147,9 @@ tinsert(C.Modules['Aurora'], function()
 					checkbox.BG:SetPoint('TOPLEFT');
 					checkbox.BG:SetPoint('BOTTOMRIGHT', 0, 1);
 					checkbox.BG:SetFrameLevel(checkbox:GetFrameLevel() - 1);
-					F.CreateBD(checkbox.BG, .25);
+					F:CreateBD(checkbox.BG, .25);
 
-					F.ReskinCheck(_G[checkBoxName..'Check']);
+					F:ReskinCheck(_G[checkBoxName..'Check']);
 				end
 			end
 		elseif ( checkBoxTemplate == 'ChatConfigCheckBoxWithSwatchTemplate' ) or ( checkBoxTemplate == 'ChatConfigCheckBoxWithSwatchAndClassColorTemplate' ) then
@@ -164,14 +164,14 @@ tinsert(C.Modules['Aurora'], function()
 					checkbox.BG:SetPoint('TOPLEFT');
 					checkbox.BG:SetPoint('BOTTOMRIGHT', 0, 1);
 					checkbox.BG:SetFrameLevel(checkbox:GetFrameLevel() - 1);
-					F.CreateBD(checkbox.BG, .25);
+					F:CreateBD(checkbox.BG, .25);
 
-					F.ReskinColourSwatch(_G[checkBoxName..'ColorSwatch']);
+					F:ReskinColourSwatch(_G[checkBoxName..'ColorSwatch']);
 
-					F.ReskinCheck(_G[checkBoxName..'Check']);
+					F:ReskinCheck(_G[checkBoxName..'Check']);
 					
 					if ( checkBoxTemplate == 'ChatConfigCheckBoxWithSwatchAndClassColorTemplate' ) then
-						F.ReskinCheck(_G[checkBoxName..'ColorClasses']);
+						F:ReskinCheck(_G[checkBoxName..'ColorClasses']);
 					end
 				end
 			end
@@ -185,7 +185,7 @@ tinsert(C.Modules['Aurora'], function()
 			local checkBoxName = checkBoxNameString..index;
 			
 			if ( _G[checkBoxName] ) then
-				F.ReskinCheck(_G[checkBoxName]);
+				F:ReskinCheck(_G[checkBoxName]);
 
 				if value.subTypes then
 					local subCheckBoxNameString = checkBoxName.."_";
@@ -193,7 +193,7 @@ tinsert(C.Modules['Aurora'], function()
 					for k, v in ipairs(value.subTypes) do
 						local subCheckBoxName = subCheckBoxNameString..k;
 						if ( _G[subCheckBoxName] ) then
-							F.ReskinCheck(_G[subCheckBoxNameString..k]);
+							F:ReskinCheck(_G[subCheckBoxNameString..k]);
 						end
 					end
 				end
@@ -217,9 +217,9 @@ tinsert(C.Modules['Aurora'], function()
 				swatch.BG:SetPoint('TOPLEFT');
 				swatch.BG:SetPoint('BOTTOMRIGHT', 0, 1);
 				swatch.BG:SetFrameLevel(swatch:GetFrameLevel() - 1);
-				F.CreateBD(swatch.BG, .25);
+				F:CreateBD(swatch.BG, .25);
 
-				F.ReskinColourSwatch(_G[swatchName..'ColorSwatch']);
+				F:ReskinColourSwatch(_G[swatchName..'ColorSwatch']);
 			end
 		end
 	end);

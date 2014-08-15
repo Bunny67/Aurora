@@ -16,7 +16,7 @@ tinsert(C.Modules['Aurora'], function()
 			ReputationBar:SetStatusBarTexture(C.Media.Backdrop);
 
 			if not ReputationBar.Skins then
-				F.CreateBD(ReputationBar, .25);
+				F:CreateBD(ReputationBar, .25);
 				
 				ReputationBar.Skins = true;
 			end
@@ -34,23 +34,23 @@ tinsert(C.Modules['Aurora'], function()
 	for i = 1, NUM_FACTIONS_DISPLAYED do
 		local Button = _G['ReputationBar'..i..'ExpandOrCollapseButton'];
 		
-		F.ReskinExpandOrCollapse(Button);
+		F:ReskinExpandOrCollapse(Button);
 	end
 	
 	ReputationListScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(ReputationListScrollFrameScrollBar);
+	F:ReskinScroll(ReputationListScrollFrameScrollBar);
 	-- ReputationDetailFrame;
-	F.CreateBD(ReputationDetailFrame);
+	F:CreateBD(ReputationDetailFrame);
 	
 	select(3, ReputationDetailFrame:GetRegions()):Hide();
 	
 	ReputationDetailFrame:DisableDrawLayer('OVERLAY');
 	
-	F.ReskinClose(ReputationDetailCloseButton);
+	F:ReskinClose(ReputationDetailCloseButton);
 	
-	F.ReskinCheck(ReputationDetailAtWarCheckBox);
-	F.ReskinCheck(ReputationDetailInactiveCheckBox);
-	F.ReskinCheck(ReputationDetailMainScreenCheckBox);
+	F:ReskinCheck(ReputationDetailAtWarCheckBox);
+	F:ReskinCheck(ReputationDetailInactiveCheckBox);
+	F:ReskinCheck(ReputationDetailMainScreenCheckBox);
 	
 	hooksecurefunc('ReputationFrame_Update', function()
 		local numFactions = GetNumFactions();

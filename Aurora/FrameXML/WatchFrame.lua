@@ -7,7 +7,7 @@ local tinsert = table.insert;
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	F.ReskinExpandOrCollapse(WatchFrameCollapseExpandButton);
+	F:ReskinExpandOrCollapse(WatchFrameCollapseExpandButton);
 	
 	local function SkinWatchFrameItems()
 		local ItemButton, ItemButtonIcon;
@@ -16,8 +16,8 @@ tinsert(C.Modules['Aurora'], function()
 			ItemButton = _G['WatchFrameItem'..i];
 			ItemButtonIcon = _G['WatchFrameItem'..i..'IconTexture'];
 			
-			F.CreateBD(ItemButton);
-			F.StyleButton(ItemButton);
+			F:CreateBD(ItemButton);
+			F:StyleButton(ItemButton);
 			
 			_G['WatchFrameItem'..i..'NormalTexture']:SetAlpha(0);
 			

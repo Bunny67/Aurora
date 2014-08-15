@@ -19,9 +19,9 @@ local function StyleSkillButton(self)
 	self.BD:SetSize(13, 13);
 	self.BD:SetPoint('LEFT', 4, 1);
 	self.BD:SetFrameLevel(self:GetFrameLevel() - 1);
-	F.CreateBD(self.BD, 0);
+	F:CreateBD(self.BD, 0);
 	
-	self.Gradient = F.CreateGradient(self);
+	self.Gradient = F:CreateGradient(self);
 	self.Gradient:SetPoint('TOPLEFT', self.BD, 1, -1);
 	self.Gradient:SetPoint('BOTTOMRIGHT', self.BD, -1, 1);
 	
@@ -42,7 +42,7 @@ local function StyleSkillButton(self)
 end
 
 C.Modules['Blizzard_TradeSkillUI'] = function()
-	F.SetBD(TradeSkillFrame, 11, -12, -34, 74);
+	F:SetBD(TradeSkillFrame, 11, -12, -34, 74);
 	TradeSkillFramePortrait:Hide();
 	
 	select(3, TradeSkillFrame:GetRegions()):SetTexture(nil);
@@ -53,7 +53,7 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 	
 	TradeSkillFrame:DisableDrawLayer('ARTWORK');
 	
-	F.ReskinCheck(TradeSkillFrameAvailableFilterCheckButton);
+	F:ReskinCheck(TradeSkillFrameAvailableFilterCheckButton);
 	TradeSkillFrameAvailableFilterCheckButton:SetPoint('TOPLEFT', 70, -49);
 	
 	TradeSkillRankFrame:SetStatusBarTexture(C.Media.Backdrop);
@@ -68,24 +68,24 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 		BD:SetFrameLevel(TradeSkillRankFrame:GetFrameLevel() - 1);
 		BD:SetPoint('TOPLEFT', -1, 1);
 		BD:SetPoint('BOTTOMRIGHT', 1, -1);
-		F.CreateBD(BD, .25);
+		F:CreateBD(BD, .25);
 	end
 	
-	F.ReskinInput(TradeSkillFrameEditBox, 16);
+	F:ReskinInput(TradeSkillFrameEditBox, 16);
 	TradeSkillFrameEditBox:SetPoint('TOPRIGHT', TradeSkillRankFrame, 'BOTTOMRIGHT', 1, -3);
 	
 	TradeSkillExpandButtonFrame:DisableDrawLayer('BACKGROUND');
 	
-	F.ReskinExpandOrCollapse(TradeSkillCollapseAllButton);
+	F:ReskinExpandOrCollapse(TradeSkillCollapseAllButton);
 	
-	F.ReskinDropDown(TradeSkillInvSlotDropDown);
-	F.ReskinDropDown(TradeSkillSubClassDropDown);
+	F:ReskinDropDown(TradeSkillInvSlotDropDown);
+	F:ReskinDropDown(TradeSkillSubClassDropDown);
 	
 	TradeSkillListScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(TradeSkillListScrollFrameScrollBar);
+	F:ReskinScroll(TradeSkillListScrollFrameScrollBar);
 	
 	TradeSkillDetailScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(TradeSkillDetailScrollFrameScrollBar);
+	F:ReskinScroll(TradeSkillDetailScrollFrameScrollBar);
 	
 	TradeSkillDetailHeaderLeft:Hide();
 	
@@ -100,11 +100,11 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 			BD:SetPoint('TOPLEFT', 39, -1);
 			BD:SetPoint('BOTTOMRIGHT', 0, 1);
 			BD:SetFrameLevel(0);
-			F.CreateBD(BD, .25);
+			F:CreateBD(BD, .25);
 			
 			ButtonIcon:SetTexCoord(unpack(TexCoords));
 			ButtonIcon:SetDrawLayer('ARTWORK');
-			F.CreateBG(ButtonIcon);
+			F:CreateBG(ButtonIcon);
 			
 			_G['TradeSkillReagent'..i..'NameFrame']:SetTexture(nil);
 			
@@ -112,18 +112,18 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 		end
 	end
 	
-	F.Reskin(TradeSkillCreateButton);
-	F.Reskin(TradeSkillCancelButton);
-	F.Reskin(TradeSkillCreateAllButton);
+	F:Reskin(TradeSkillCreateButton);
+	F:Reskin(TradeSkillCancelButton);
+	F:Reskin(TradeSkillCreateAllButton);
 	
-	F.ReskinArrow(TradeSkillDecrementButton, 'Left');
+	F:ReskinArrow(TradeSkillDecrementButton, 'Left');
 	
 	TradeSkillInputBox:SetPoint('LEFT', TradeSkillDecrementButton, 'RIGHT', 8, 0);
-	F.ReskinInput(TradeSkillInputBox);
+	F:ReskinInput(TradeSkillInputBox);
 	
-	F.ReskinArrow(TradeSkillIncrementButton, 'Right');
+	F:ReskinArrow(TradeSkillIncrementButton, 'Right');
 	
-	F.ReskinClose(TradeSkillFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(TradeSkillFrameCloseButton, 'TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -38, -16);
 	
 	hooksecurefunc('TradeSkillFrame_Update', function()
 		local NumTradeSkills = GetNumTradeSkills();
@@ -178,7 +178,7 @@ C.Modules['Blizzard_TradeSkillUI'] = function()
 		local SkillIcon = TradeSkillSkillIcon:GetNormalTexture();
 		
 		if ( SkillIcon ) then
-			F.CreateBD(TradeSkillSkillIcon);
+			F:CreateBD(TradeSkillSkillIcon);
 			
 			SkillIcon:SetPoint('TOPLEFT', 1, -1);
 			SkillIcon:SetPoint('BOTTOMRIGHT', -1, 1);

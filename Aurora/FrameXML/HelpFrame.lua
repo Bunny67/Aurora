@@ -4,42 +4,42 @@ local _G = getfenv(0);
 local select = select;
 local tinsert = table.insert;
 
-local HELP_FRAME_BUTTONS = {
+local BUTTONS = {
 	-- HelpFrameGMTalk;
-	'HelpFrameGMTalkOpenTicket',
-	'HelpFrameGMTalkCancel',
+	'GMTalkOpenTicket',
+	'GMTalkCancel',
 	-- HelpFrameReportIssue;
-	'HelpFrameReportIssueOpenTicket',
-	'HelpFrameReportIssueCancel',
+	'ReportIssueOpenTicket',
+	'ReportIssueCancel',
 	-- HelpFrameLag;
-	'HelpFrameLagLoot',
-	'HelpFrameLagAuctionHouse',
-	'HelpFrameLagMail',
-	'HelpFrameLagChat',
-	'HelpFrameLagMovement',
-	'HelpFrameLagSpell',
-	'HelpFrameLagCancel',
+	'LagLoot',
+	'LagAuctionHouse',
+	'LagMail',
+	'LagChat',
+	'LagMovement',
+	'LagSpell',
+	'LagCancel',
 	-- HelpFrameStuck;
-	'HelpFrameStuckStuck',
-	'HelpFrameStuckOpenTicket',
-	'HelpFrameStuckCancel',
+	'StuckStuck',
+	'StuckOpenTicket',
+	'StuckCancel',
 	-- HelpFrameOpenTicket;
-	'HelpFrameOpenTicketCancel',
-	'HelpFrameOpenTicketSubmit',
+	'OpenTicketCancel',
+	'OpenTicketSubmit',
 	-- HelpFrameViewResponse;
-	'HelpFrameViewResponseCancel',
-	'HelpFrameViewResponseMoreHelp',
-	'HelpFrameViewResponseIssueResolved',
+	'ViewResponseCancel',
+	'ViewResponseMoreHelp',
+	'ViewResponseIssueResolved',
 	-- HelpFrameWelcome;
-	'HelpFrameWelcomeGMTalk',
-	'HelpFrameWelcomeReportIssue',
-	'HelpFrameWelcomeStuck',
-	'HelpFrameWelcomeCancel'
+	'WelcomeGMTalk',
+	'WelcomeReportIssue',
+	'WelcomeStuck',
+	'WelcomeCancel'
 };
 
 tinsert(C.Modules['Aurora'], function()
 	-- HelpFrame;
-	F.SetBD(HelpFrame, 6, -6, -45, 14);
+	F:SetBD(HelpFrame, 6, -6, -45, 14);
 	
 	for i = 1, 9 do
 		select(i, HelpFrame:GetRegions()):SetTexture(nil);
@@ -48,7 +48,7 @@ tinsert(C.Modules['Aurora'], function()
 	HelpFrameHeader:SetTexture(nil);
 	
 	do
-		local Header = F.CreateBG(HelpFrameHeader);
+		local Header = F:CreateBG(HelpFrameHeader);
 		Header:SetPoint('TOPLEFT', HelpFrameHeader, 64, -8);
 		Header:SetPoint('BOTTOMRIGHT', HelpFrameHeader, -64, 32);
 		
@@ -59,15 +59,15 @@ tinsert(C.Modules['Aurora'], function()
 		HelpFrame.Gradient:SetVertexColor(.2, .2, .2, 1);
 	end
 	
-	F.ReskinClose(HelpFrameCloseButton, 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
+	F:ReskinClose(HelpFrameCloseButton, 'TOPRIGHT', HelpFrame, 'TOPRIGHT', -49, -10);
 	
 	do
 		local Button;
 	
-		for i = 1, #HELP_FRAME_BUTTONS do
-			Button = _G[HELP_FRAME_BUTTONS[i]];
+		for i = 1, #BUTTONS do
+			Button = _G['HelpFrame'..BUTTONS[i]];
 			
-			F.Reskin(Button);
+			F:Reskin(Button);
 		end
 	end
 	-- HelpFrameOpenTicket;
@@ -75,15 +75,15 @@ tinsert(C.Modules['Aurora'], function()
 	HelpFrameOpenTicketDividerMiddle:SetTexture(nil);
 	HelpFrameOpenTicketDividerRight:SetTexture(nil);
 	
-	F.ReskinScroll(HelpFrameOpenTicketScrollFrameScrollBar);
+	F:ReskinScroll(HelpFrameOpenTicketScrollFrameScrollBar);
 	
 	HelpFrameOpenTicketSubmit:SetPoint('RIGHT', HelpFrameOpenTicketCancel, 'LEFT', -1, 0);
 	-- HelpFrameViewResponse;
-	F.ReskinScroll(HelpFrameViewResponseIssueScrollFrameScrollBar);
+	F:ReskinScroll(HelpFrameViewResponseIssueScrollFrameScrollBar);
 	
 	HelpFrameViewResponseDivider:Hide();
 	
-	F.ReskinScroll(HelpFrameViewResponseMessageScrollFrameScrollBar);
+	F:ReskinScroll(HelpFrameViewResponseMessageScrollFrameScrollBar);
 	
 	HelpFrameViewResponseIssueResolved:SetPoint('LEFT', HelpFrameViewResponseMoreHelp, 'RIGHT', -1, 0);
 end);

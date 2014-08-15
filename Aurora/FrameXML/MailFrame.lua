@@ -8,7 +8,7 @@ local tinsert = table.insert;
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(MailFrame, 12, -13, -32, 74);
+	F:SetBD(MailFrame, 12, -13, -32, 74);
 	
 	MailFrame:DisableDrawLayer('BACKGROUND');
 	MailFrame:DisableDrawLayer('BORDER');
@@ -25,8 +25,8 @@ tinsert(C.Modules['Aurora'], function()
 				select(i, Item:GetRegions()):Hide();
 			end
 			
-			F.StyleButton(ItemButton);
-			F.CreateBD(ItemButton);
+			F:StyleButton(ItemButton);
+			F:CreateBD(ItemButton);
 			
 			_G['MailItem'..i..'ButtonSlot']:Hide();
 			
@@ -36,8 +36,8 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end
 	
-	F.ReskinArrow(InboxPrevPageButton, 'Left');
-	F.ReskinArrow(InboxNextPageButton, 'Right');
+	F:ReskinArrow(InboxPrevPageButton, 'Left');
+	F:ReskinArrow(InboxNextPageButton, 'Right');
 	-- SendMailFrame
 	for i = 4, 7 do
 		select(i, SendMailFrame:GetRegions()):Hide();
@@ -45,49 +45,40 @@ tinsert(C.Modules['Aurora'], function()
 	
 	SendMailScrollFrame:DisableDrawLayer('BACKGROUND');
 	SendMailScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(SendMailScrollFrameScrollBar);
+	F:ReskinScroll(SendMailScrollFrameScrollBar);
 	
 	MailTextFontNormal:SetTextColor(1, 1, 1);
 	MailTextFontNormal:SetShadowOffset(1, -1);
 	MailTextFontNormal:SetShadowColor(0, 0, 0);
 	
-	F.ReskinInput(SendMailNameEditBox);
-	F.ReskinInput(SendMailSubjectEditBox);
+	F:ReskinInput(SendMailNameEditBox);
+	F:ReskinInput(SendMailSubjectEditBox);
 	
-	hooksecurefunc('SendMailFrame_Update', function()
+	do
+		local Button;
+		
 		for i = 1, ATTACHMENTS_MAX_SEND do				
-			local Button = _G['SendMailAttachment'..i]
-			local ButtonTexture = Button:GetNormalTexture();
+			Button = _G['SendMailAttachment'..i];
 			
-			if (not Button.Style) then
-				select(1, Button:GetRegions()):Hide();
-				
-				F.StyleButton(Button, nil, true);
-				F.CreateBD(Button, .25);
-				
-				Button.Style = true;
-			end
+			select(1, Button:GetRegions()):Hide();
 			
-			if (ButtonTexture) then
-				ButtonTexture:SetPoint('TOPLEFT', 1, -1);
-				ButtonTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-				ButtonTexture:SetTexCoord(unpack(TexCoords));
-			end
+			F:StyleButton(Button, nil, true);
+			F:CreateBD(Button, .25);
 		end
-	end)
+	end
 	
-	F.ReskinInput(SendMailMoneyGold);
-	F.ReskinInput(SendMailMoneySilver);
-	F.ReskinInput(SendMailMoneyCopper);
+	F:ReskinInput(SendMailMoneyGold);
+	F:ReskinInput(SendMailMoneySilver);
+	F:ReskinInput(SendMailMoneyCopper);
 	
-	F.ReskinRadio(SendMailSendMoneyButton);
-	F.ReskinRadio(SendMailCODButton);
+	F:ReskinRadio(SendMailSendMoneyButton);
+	F:ReskinRadio(SendMailCODButton);
 	
-	F.Reskin(SendMailCancelButton);
+	F:Reskin(SendMailCancelButton);
 	SendMailMailButton:SetPoint('RIGHT', SendMailCancelButton, 'LEFT', -1, 0);
-	F.Reskin(SendMailMailButton);
+	F:Reskin(SendMailMailButton);
 	
-	F.ReskinClose(InboxCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -17);
+	F:ReskinClose(InboxCloseButton, 'TOPRIGHT', MailFrame, 'TOPRIGHT', -36, -17);
 	
 	do
 		local Tab;
@@ -95,11 +86,11 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, 2 do
 			Tab = _G['MailFrameTab'..i];
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 		end
 	end
 	-- OpenMailFrame
-	F.SetBD(OpenMailFrame, 12, -12, -34, 74);
+	F:SetBD(OpenMailFrame, 12, -12, -34, 74);
 	OpenMailFrameIcon:Hide();
 	
 	OpenMailFrame:DisableDrawLayer('BORDER');
@@ -107,48 +98,67 @@ tinsert(C.Modules['Aurora'], function()
 	select(12, OpenMailFrame:GetRegions()):Hide();
 	select(13, OpenMailFrame:GetRegions()):Hide();
 	
-	F.Reskin(OpenMailReportSpamButton);
+	F:Reskin(OpenMailReportSpamButton);
 	
 	OpenMailScrollFrame:DisableDrawLayer('OVERLAY');
 	OpenMailScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(OpenMailScrollFrameScrollBar);
+	F:ReskinScroll(OpenMailScrollFrameScrollBar);
 	
 	OpenMailArithmeticLine:Hide();
 	
 	InvoiceTextFontNormal:SetTextColor(1, 1, 1);
 	
 	OpenMailLetterButton:SetNormalTexture(nil);
-	F.StyleButton(OpenMailLetterButton);
-	F.CreateBD(OpenMailLetterButton);
+	F:StyleButton(OpenMailLetterButton);
+	F:CreateBD(OpenMailLetterButton);
 	OpenMailLetterButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 	OpenMailLetterButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
 	OpenMailLetterButtonIconTexture:SetTexCoord(unpack(TexCoords));
 	
-	for i = 1, ATTACHMENTS_MAX_RECEIVE do
-		local Button = _G['OpenMailAttachmentButton'..i];
-		local ButtonIconTexture = _G['OpenMailAttachmentButton'..i..'IconTexture'];
+	do
+		local Button, ButtonTexture;
 		
-		Button:SetNormalTexture(nil);
-		F.StyleButton(Button);
-		F.CreateBD(Button);
-		
-		ButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
-		ButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-		ButtonIconTexture:SetTexCoord(unpack(TexCoords));
+		for i = 1, ATTACHMENTS_MAX_RECEIVE do
+			Button = _G['OpenMailAttachmentButton'..i];
+			ButtonTexture = _G['OpenMailAttachmentButton'..i..'IconTexture'];
+			
+			Button:SetNormalTexture(nil);
+			F:StyleButton(Button);
+			F:CreateBD(Button);
+			
+			ButtonTexture:SetPoint('TOPLEFT', 1, -1);
+			ButtonTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+			ButtonTexture:SetTexCoord(unpack(TexCoords));
+		end
 	end
 	
 	OpenMailMoneyButton:SetNormalTexture(nil);
-	F.StyleButton(OpenMailMoneyButton);
-	F.CreateBD(OpenMailMoneyButton);
+	F:StyleButton(OpenMailMoneyButton);
+	F:CreateBD(OpenMailMoneyButton);
 	OpenMailMoneyButtonIconTexture:SetPoint('TOPLEFT', 1, -1);
 	OpenMailMoneyButtonIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
 	OpenMailMoneyButtonIconTexture:SetTexCoord(unpack(TexCoords));
 	
-	F.Reskin(OpenMailCancelButton);
+	F:Reskin(OpenMailCancelButton);
 	OpenMailDeleteButton:SetPoint('RIGHT', OpenMailCancelButton, 'LEFT', -1, 0);
-	F.Reskin(OpenMailDeleteButton);
+	F:Reskin(OpenMailDeleteButton);
 	OpenMailReplyButton:SetPoint('RIGHT', OpenMailDeleteButton, 'LEFT', -1, 0);
-	F.Reskin(OpenMailReplyButton);
+	F:Reskin(OpenMailReplyButton);
 	
-	F.ReskinClose(OpenMailCloseButton, 'TOPRIGHT', OpenMailFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(OpenMailCloseButton, 'TOPRIGHT', OpenMailFrame, 'TOPRIGHT', -38, -16);
+	
+	hooksecurefunc('SendMailFrame_Update', function()
+		local Button, ButtonTexture;
+		
+		for i = 1, ATTACHMENTS_MAX_SEND do				
+			Button = _G['SendMailAttachment'..i];
+			ButtonTexture = Button:GetNormalTexture();
+			
+			if(ButtonTexture) then
+				ButtonTexture:SetPoint('TOPLEFT', 1, -1);
+				ButtonTexture:SetPoint('BOTTOMRIGHT', -1, 1);
+				ButtonTexture:SetTexCoord(unpack(TexCoords));
+			end
+		end
+	end);
 end);

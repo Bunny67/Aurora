@@ -7,13 +7,13 @@ local select = select;
 local TexCoords = F.TexCoords;
 
 C.Modules['Blizzard_ItemSocketingUI'] = function()
-	F.SetBD(ItemSocketingFrame, 10, -13, -5, 29);
+	F:SetBD(ItemSocketingFrame, 10, -13, -5, 29);
 	ItemSocketingFramePortrait:Hide();
 	
 	select(2, ItemSocketingFrame:GetRegions()):SetTexture(nil);
 	
 	ItemSocketingScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(ItemSocketingScrollFrameScrollBar);
+	F:ReskinScroll(ItemSocketingScrollFrameScrollBar);
 	
 	do
 		local Socket, SocketIcon;
@@ -28,14 +28,14 @@ C.Modules['Blizzard_ItemSocketingUI'] = function()
 			Socket.bg = CreateFrame('Frame', nil, Socket)
 			Socket.bg:SetAllPoints(Socket);
 			Socket.bg:SetFrameLevel(Socket:GetFrameLevel() - 1);
-			F.CreateBD(Socket.bg, .25);
+			F:CreateBD(Socket.bg, .25);
 
 			Socket.glow = CreateFrame('Frame', nil, Socket);
 			Socket.glow:SetBackdrop({ edgeFile = C.Media.Glow, edgeSize = 5 });
 			Socket.glow:SetPoint('TOPLEFT', -5, 5);
 			Socket.glow:SetPoint('BOTTOMRIGHT', 5, -5);
 			
-			F.StyleButton(Socket);
+			F:StyleButton(Socket);
 			
 			SocketIcon:SetTexCoord(unpack(TexCoords));
 			
@@ -43,9 +43,9 @@ C.Modules['Blizzard_ItemSocketingUI'] = function()
 		end
 	end
 	
-	F.Reskin(ItemSocketingSocketButton, nil, true);
+	F:Reskin(ItemSocketingSocketButton);
 	
-	F.ReskinClose(ItemSocketingCloseButton, 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -9, -17);
+	F:ReskinClose(ItemSocketingCloseButton, 'TOPRIGHT', ItemSocketingFrame, 'TOPRIGHT', -9, -17);
 	
 	hooksecurefunc('ItemSocketingFrame_Update', function()
 		local Socet, Color;

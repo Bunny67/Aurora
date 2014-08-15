@@ -19,9 +19,9 @@ local function StyleSkillButton(self)
 	self.BD:SetSize(13, 13);
 	self.BD:SetPoint('LEFT', 4, 1);
 	self.BD:SetFrameLevel(self:GetFrameLevel() - 1);
-	F.CreateBD(self.BD, 0);
+	F:CreateBD(self.BD, 0);
 	
-	self.Gradient = F.CreateGradient(self);
+	self.Gradient = F:CreateGradient(self);
 	self.Gradient:SetPoint('TOPLEFT', self.BD, 1, -1);
 	self.Gradient:SetPoint('BOTTOMRIGHT', self.BD, -1, 1);
 	
@@ -42,7 +42,7 @@ local function StyleSkillButton(self)
 end
 
 C.Modules['Blizzard_TrainerUI'] = function()
-	F.SetBD(ClassTrainerFrame, 10, -12, -34, 74);
+	F:SetBD(ClassTrainerFrame, 10, -12, -34, 74);
 	ClassTrainerFramePortrait:Hide();
 	
 	select(2, ClassTrainerFrame:GetRegions()):SetTexture(nil);
@@ -55,22 +55,22 @@ C.Modules['Blizzard_TrainerUI'] = function()
 	
 	ClassTrainerExpandButtonFrame:DisableDrawLayer('BACKGROUND');
 	
-	F.ReskinExpandOrCollapse(ClassTrainerCollapseAllButton);
+	F:ReskinExpandOrCollapse(ClassTrainerCollapseAllButton);
 	
-	F.ReskinDropDown(ClassTrainerFrameFilterDropDown);
+	F:ReskinDropDown(ClassTrainerFrameFilterDropDown);
 	
 	ClassTrainerListScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(ClassTrainerListScrollFrameScrollBar);
+	F:ReskinScroll(ClassTrainerListScrollFrameScrollBar);
 	
 	ClassTrainerDetailScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(ClassTrainerDetailScrollFrameScrollBar);
+	F:ReskinScroll(ClassTrainerDetailScrollFrameScrollBar);
 	
 	ClassTrainerSkillIcon:GetRegions():SetTexture(nil);
 	
-	F.Reskin(ClassTrainerTrainButton);
-	F.Reskin(ClassTrainerCancelButton);
+	F:Reskin(ClassTrainerTrainButton);
+	F:Reskin(ClassTrainerCancelButton);
 	
-	F.ReskinClose(ClassTrainerFrameCloseButton, 'TOPRIGHT', ClassTrainerFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(ClassTrainerFrameCloseButton, 'TOPRIGHT', ClassTrainerFrame, 'TOPRIGHT', -38, -16);
 	
 	hooksecurefunc('ClassTrainerFrame_Update', function()
 		local NumTrainerServices = GetNumTrainerServices();
@@ -128,7 +128,7 @@ C.Modules['Blizzard_TrainerUI'] = function()
 		local SkillIcon = ClassTrainerSkillIcon:GetNormalTexture();
 		
 		if ( SkillIcon ) then
-			F.CreateBD(ClassTrainerSkillIcon);
+			F:CreateBD(ClassTrainerSkillIcon);
 			
 			SkillIcon:SetPoint('TOPLEFT', 1, -1);
 			SkillIcon:SetPoint('BOTTOMRIGHT', -1, 1);

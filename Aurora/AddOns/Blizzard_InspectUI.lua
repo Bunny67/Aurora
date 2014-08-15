@@ -8,10 +8,10 @@ local TexCoords = F.TexCoords;
 
 C.Modules['Blizzard_InspectUI'] = function()
 	-- InspectFrame;
-	F.SetBD(InspectFrame, 13, -13, -32, 73);
+	F:SetBD(InspectFrame, 13, -13, -32, 73);
 	InspectFramePortrait:Hide();
 	
-	F.ReskinClose(InspectFrameCloseButton, 'TOPRIGHT', InspectFrame, 'TOPRIGHT', -36, -17);
+	F:ReskinClose(InspectFrameCloseButton, 'TOPRIGHT', InspectFrame, 'TOPRIGHT', -36, -17);
 	
 	do
 		local Tab;
@@ -19,7 +19,7 @@ C.Modules['Blizzard_InspectUI'] = function()
 		for i = 1, 3 do
 			Tab = _G['InspectFrameTab'..i];
 			
-			F.ReskinTab(Tab)
+			F:ReskinTab(Tab)
 			
 			if ( i ~= 1 ) then
 				Tab:SetPoint('LEFT', _G['InspectFrameTab'..i-1], 'RIGHT', -15, 0);
@@ -31,9 +31,9 @@ C.Modules['Blizzard_InspectUI'] = function()
 		select(i, InspectPaperDollFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	F.ReskinArrow(InspectModelRotateLeftButton, 'Left');
+	F:ReskinArrow(InspectModelRotateLeftButton, 'Left');
 	InspectModelRotateRightButton:SetPoint('TOPLEFT', InspectModelRotateLeftButton, 'TOPRIGHT', -1, 0);
-	F.ReskinArrow(InspectModelRotateRightButton, 'Right');
+	F:ReskinArrow(InspectModelRotateRightButton, 'Right');
 	
 	do
 		local Slots = { 'HeadSlot', 'NeckSlot', 'ShoulderSlot', 'BackSlot', 'ChestSlot', 'ShirtSlot', 'TabardSlot', 'WristSlot', 'HandsSlot', 'WaistSlot', 'LegsSlot', 'FeetSlot', 'Finger0Slot', 'Finger1Slot', 'Trinket0Slot', 'Trinket1Slot', 'MainHandSlot', 'SecondaryHandSlot', 'RangedSlot' };
@@ -43,8 +43,8 @@ C.Modules['Blizzard_InspectUI'] = function()
 			local InspectIcon = _G['Inspect'..Slots[i]..'IconTexture'];
 			
 			InspectSlot:SetNormalTexture(nil);
-			F.CreateBD(InspectSlot);
-			F.StyleButton(InspectSlot);
+			F:CreateBD(InspectSlot);
+			F:StyleButton(InspectSlot);
 			
 			InspectIcon:SetPoint('TOPLEFT', 1, -1);
 			InspectIcon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -109,7 +109,7 @@ C.Modules['Blizzard_InspectUI'] = function()
 			Team = _G['InspectPVPTeam'..i];
 			TeamStandardBar = _G['InspectPVPTeam'..i..'StandardBar'];
 			
-			F.SetBD(Team, 9, -4, -24, 3);
+			F:SetBD(Team, 9, -4, -24, 3);
 			
 			TeamStandardBar:SetAlpha(0);
 			
@@ -138,13 +138,13 @@ C.Modules['Blizzard_InspectUI'] = function()
 		end
 	end
 	
-	F.ReskinClose(InspectTalentFrameCloseButton, 'TOPRIGHT', InspectTalentFrame, 'TOPRIGHT', -36, -17);
+	F:ReskinClose(InspectTalentFrameCloseButton, 'TOPRIGHT', InspectTalentFrame, 'TOPRIGHT', -36, -17);
 	
 	InspectTalentFramePointsBar:DisableDrawLayer('BACKGROUND');
 	InspectTalentFramePointsBar:DisableDrawLayer('BORDER');
 	
 	InspectTalentFrameScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(InspectTalentFrameScrollFrameScrollBar);
+	F:ReskinScroll(InspectTalentFrameScrollFrameScrollBar);
 	
 	do
 		local Talent, TalentIcon;
@@ -154,8 +154,8 @@ C.Modules['Blizzard_InspectUI'] = function()
 			TalentIcon = _G['InspectTalentFrameTalent'..i..'IconTexture'];
 			
 			Talent:SetNormalTexture(nil);
-			F.CreateBG(Talent);
-			F.StyleButton(Talent);
+			F:CreateBG(Talent);
+			F:StyleButton(Talent);
 			
 			Talent.Hover:SetAllPoints();
 			Talent.Pushed:SetAllPoints();

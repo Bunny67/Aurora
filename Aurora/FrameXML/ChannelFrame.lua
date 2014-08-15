@@ -6,13 +6,13 @@ local tinsert = table.insert;
 tinsert(C.Modules['Aurora'], function()
 	ChannelFrameVerticalBar:DisableDrawLayer('BACKGROUND');
 	
-	F.ReskinCheck(ChannelFrameAutoJoinParty);
-	F.ReskinCheck(ChannelFrameAutoJoinBattleground);
+	F:ReskinCheck(ChannelFrameAutoJoinParty);
+	F:ReskinCheck(ChannelFrameAutoJoinBattleground);
 	
-	F.Reskin(ChannelFrameNewButton);
+	F:Reskin(ChannelFrameNewButton);
 	
 	ChannelListScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(ChannelListScrollFrameScrollBar);
+	F:ReskinScroll(ChannelListScrollFrameScrollBar);
 	
 	do
 		local Button;
@@ -22,25 +22,25 @@ tinsert(C.Modules['Aurora'], function()
 			
 			Button:SetNormalTexture('');
 			
-			F.StyleButton(Button);
+			F:StyleButton(Button);
 			
 			_G['ChannelButton'..i..'Collapsed']:SetTextColor(1, 1, 1);
 		end
 	end
 	
 	ChannelRosterScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(ChannelRosterScrollFrameScrollBar);
+	F:ReskinScroll(ChannelRosterScrollFrameScrollBar);
 	
-	F.CreateBD(ChannelFrameDaughterFrame);
+	F:CreateBD(ChannelFrameDaughterFrame);
 	
 	ChannelFrameDaughterFrameTitlebar:SetTexture(nil);
 	ChannelFrameDaughterFrameCorner:SetTexture(nil);
 	
-	F.ReskinInput(ChannelFrameDaughterFrameChannelName);
-	F.ReskinInput(ChannelFrameDaughterFrameChannelPassword);
+	F:ReskinInput(ChannelFrameDaughterFrameChannelName);
+	F:ReskinInput(ChannelFrameDaughterFrameChannelPassword);
 	
-	F.ReskinClose(ChannelFrameDaughterFrameDetailCloseButton);
+	F:ReskinClose(ChannelFrameDaughterFrameDetailCloseButton);
 	
-	F.Reskin(ChannelFrameDaughterFrameCancelButton);
-	F.Reskin(ChannelFrameDaughterFrameOkayButton);
+	F:Reskin(ChannelFrameDaughterFrameCancelButton);
+	F:Reskin(ChannelFrameDaughterFrameOkayButton);
 end);

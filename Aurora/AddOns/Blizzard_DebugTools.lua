@@ -13,11 +13,11 @@ C.Modules['Blizzard_DebugTools'] = function()
 		end
 	end
 	-- ScriptErrors
-	F.CreateBD(ScriptErrorsFrame);
+	F:CreateBD(ScriptErrorsFrame);
 	
-	F.ReskinClose(ScriptErrorsFrameClose);
+	F:ReskinClose(ScriptErrorsFrameClose);
 	
-	F.ReskinScroll(ScriptErrorsFrameScrollFrameScrollBar);
+	F:ReskinScroll(ScriptErrorsFrameScrollFrameScrollBar);
 	
 	do
 		local Child;
@@ -26,14 +26,14 @@ C.Modules['Blizzard_DebugTools'] = function()
 			Child = select(i, _G['ScriptErrorsFrame']:GetChildren());
 			
 			if Child:GetObjectType() == 'Button' and not Child:GetName() then
-				F.Reskin(Child);
+				F:Reskin(Child);
 			end
 		end
 	end
 	-- EventTrace
-	F.CreateBD(EventTraceFrame);
+	F:CreateBD(EventTraceFrame);
 	
-	F.ReskinClose(EventTraceFrameCloseButton);
+	F:ReskinClose(EventTraceFrameCloseButton);
 	-- FrameStack
-	F.CreateBD(FrameStackTooltip);
+	F:CreateBD(FrameStackTooltip);
 end

@@ -6,7 +6,7 @@ local select = select;
 
 C.Modules['Blizzard_GuildBankUI'] = function()
 	-- GuildBankFrame;
-	F.SetBD(GuildBankFrame, 11, -12, 0, 6);
+	F:SetBD(GuildBankFrame, 11, -12, 0, 6);
 	
 	GuildBankTabTitleBackground:SetAlpha(0);
 	GuildBankTabTitleBackgroundLeft:SetAlpha(0);
@@ -38,8 +38,8 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 				ButtonNormal = _G['GuildBankColumn'..i..'Button'..x..'NormalTexture'];
 				ButtonCount = _G['GuildBankColumn'..i..'Button'..x..'Count'];
 				
-				F.StyleButton(Button);
-				F.CreateBD(Button, .25);
+				F:StyleButton(Button);
+				F:CreateBD(Button, .25);
 				
 				if ButtonNormal then ButtonNormal:SetTexture(nil); end
 				
@@ -53,8 +53,8 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 		end
 	end
 	
-	F.Reskin(GuildBankFrameDepositButton, nil, true);
-	F.Reskin(GuildBankFrameWithdrawButton, nil, true);
+	F:Reskin(GuildBankFrameDepositButton);
+	F:Reskin(GuildBankFrameWithdrawButton);
 	GuildBankFrameWithdrawButton:SetPoint('RIGHT', GuildBankFrameDepositButton, 'LEFT', -2, 0);
 	
 	do
@@ -64,7 +64,7 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 			Child = select(i, _G['GuildBankFrame']:GetChildren());
 			
 			if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
-				F.ReskinClose(Child, 'TOPRIGHT', GuildBankFrame, 'TOPRIGHT', -4, -16);
+				F:ReskinClose(Child, 'TOPRIGHT', GuildBankFrame, 'TOPRIGHT', -4, -16);
 			end
 		end
 	end
@@ -75,7 +75,7 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 		for i = 1, 4 do
 			Tab = _G['GuildBankFrameTab'..i];
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 			
 			if ( i ~= 1 ) then
 				Tab:SetPoint('LEFT', _G['GuildBankFrameTab'..i-1], 'RIGHT', -15, 0);
@@ -95,8 +95,8 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 			
 			Button:GetNormalTexture():SetTexture(nil);
 			Button:GetPushedTexture():SetTexture(nil);
-			F.StyleButton(Button, nil, true);
-			F.CreateBD(Button);
+			F:StyleButton(Button, nil, true);
+			F:CreateBD(Button);
 
 			ButtonIcon:SetPoint('TOPLEFT', 1, -1);
 			ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -104,27 +104,27 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 		end
 	end
 	
-	F.Reskin(GuildBankFramePurchaseButton, nil, true);
+	F:Reskin(GuildBankFramePurchaseButton);
 	
 	GuildBankTransactionsScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(GuildBankTransactionsScrollFrameScrollBar);
+	F:ReskinScroll(GuildBankTransactionsScrollFrameScrollBar);
 	
-	F.Reskin(GuildBankInfoSaveButton, nil, true);
+	F:Reskin(GuildBankInfoSaveButton);
 	
-	F.ReskinScroll(GuildBankInfoScrollFrameScrollBar);
+	F:ReskinScroll(GuildBankInfoScrollFrameScrollBar);
 	-- GuildBankPopupFrame;
-	F.SetBD(GuildBankPopupFrame, 3, -15, -25, 26);
+	F:SetBD(GuildBankPopupFrame, 3, -15, -25, 26);
 	
 	for i = 1, 4 do
 		select(i, GuildBankPopupFrame:GetRegions()):Hide();
 	end
 	
 	GuildBankPopupEditBox:DisableDrawLayer('BACKGROUND');
-	F.ReskinInput(GuildBankPopupEditBox);
+	F:ReskinInput(GuildBankPopupEditBox);
 	
 	GuildBankPopupScrollFrame:GetRegions():Hide()
 	select(2, GuildBankPopupScrollFrame:GetRegions()):Hide()
-	F.ReskinScroll(GuildBankPopupScrollFrameScrollBar);
+	F:ReskinScroll(GuildBankPopupScrollFrameScrollBar);
 	
 	do
 		local Button, ButtonIcon;
@@ -134,8 +134,8 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 			ButtonIcon = _G[Button:GetName()..'Icon'];
 			
 			Button:DisableDrawLayer('BACKGROUND');
-			F.CreateBD(Button);
-			F.StyleButton(Button, nil, true);
+			F:CreateBD(Button);
+			F:StyleButton(Button, nil, true);
 			
 			ButtonIcon:SetPoint('TOPLEFT', 1, -1);
 			ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -143,8 +143,8 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 		end
 	end
 	
-	F.Reskin(GuildBankPopupCancelButton);
-	F.Reskin(GuildBankPopupOkayButton);
+	F:Reskin(GuildBankPopupCancelButton);
+	F:Reskin(GuildBankPopupOkayButton);
 	
 	if ( AuroraConfig.QualityColour ) then
 		hooksecurefunc('GuildBankFrame_Update', function()
@@ -166,7 +166,7 @@ C.Modules['Blizzard_GuildBankUI'] = function()
 
 					itemLink = GetGuildBankItemLink(tab, i);
 					
-					F.ColourQuality(button, itemLink);
+					F:ColourQuality(button, itemLink);
 				end
 			end
 		end);

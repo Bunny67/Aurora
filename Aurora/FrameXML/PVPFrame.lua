@@ -8,9 +8,9 @@ local Hoop = F.dummy;
 
 tinsert(C.Modules['Aurora'], function()
 	-- PVPParentFrame;
-	F.SetBD(PVPParentFrame, 13, -13, -32, 76);
+	F:SetBD(PVPParentFrame, 13, -13, -32, 76);
 	
-	F.ReskinClose(PVPParentFrameCloseButton, 'TOPRIGHT', PVPParentFrame, 'TOPRIGHT', -36, -17);
+	F:ReskinClose(PVPParentFrameCloseButton, 'TOPRIGHT', PVPParentFrame, 'TOPRIGHT', -36, -17);
 	-- PVPFrame;
 	PVPFramePortrait:Hide();
 	
@@ -28,7 +28,7 @@ tinsert(C.Modules['Aurora'], function()
 			Team = _G['PVPTeam'..i];
 			TeamHighlight = _G['PVPTeam'..i..'Highlight'];
 			
-			F.SetBD(Team, 9, -4, -24, 3);
+			F:SetBD(Team, 9, -4, -24, 3);
 			
 			for j = 1, 5 do
 				select(j, Team:GetRegions()):SetTexture(nil);
@@ -39,7 +39,7 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end
 	-- PVPTeamDetails;
-	F.CreateBD(PVPTeamDetails);
+	F:CreateBD(PVPTeamDetails);
 	
 	do
 		local Region;
@@ -53,7 +53,7 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end
 	
-	F.ReskinClose(PVPTeamDetailsCloseButton, 'TOPRIGHT', PVPTeamDetails, 'TOPRIGHT', -4, -4);
+	F:ReskinClose(PVPTeamDetailsCloseButton, 'TOPRIGHT', PVPTeamDetails, 'TOPRIGHT', -4, -4);
 	
 	do
 		local Header;
@@ -61,13 +61,13 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, 5 do
 			Header = _G['PVPTeamDetailsFrameColumnHeader'..i];
 			
-			F.ReskinHeader(Header);
+			F:ReskinHeader(Header);
 		end
 	end
 	
-	F.Reskin(PVPTeamDetailsAddTeamMember);
+	F:Reskin(PVPTeamDetailsAddTeamMember);
 	
-	F.ReskinArrow(PVPTeamDetailsToggleButton, 'Right');
+	F:ReskinArrow(PVPTeamDetailsToggleButton, 'Right');
 	
 	do
 		local Tab;
@@ -75,7 +75,7 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, 2 do
 			Tab = _G['PVPParentFrameTab'..i];
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 		end
 	end
 end);

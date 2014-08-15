@@ -11,7 +11,7 @@ local Noop = F.dummy;
 
 C.Modules['Blizzard_AchievementUI'] = function()
 	-- AchievementFrame
-	F.SetBD(AchievementFrame);
+	F:SetBD(AchievementFrame);
 	
 	for i = 1, 8 do
 		select(i, AchievementFrame:GetRegions()):Hide();
@@ -31,7 +31,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 	-- AchievementFrameCategories;
 	AchievementFrameCategories:SetBackdrop(nil);
 	
-	F.ReskinScroll(AchievementFrameCategoriesContainerScrollBar);
+	F:ReskinScroll(AchievementFrameCategoriesContainerScrollBar);
 	AchievementFrameCategoriesContainerScrollBarBG:SetTexture(nil);
 	-- AchievementFrameAchievements;
 	select(2, AchievementFrameAchievements:GetChildren()):Hide();
@@ -48,7 +48,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		local BG = CreateFrame('Frame', nil, Button);
 		BG:SetPoint('TOPLEFT', 2, -2);
 		BG:SetPoint('BOTTOMRIGHT', -2, 2);
-		F.CreateBD(BG, 0);
+		F:CreateBD(BG, 0);
 		
 		_G['AchievementFrameAchievementsContainerButton'..i..'Background']:SetTexture(C.Media.Backdrop);
 		_G['AchievementFrameAchievementsContainerButton'..i..'Background']:SetVertexColor(0, 0, 0, .25);
@@ -65,7 +65,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		_G['AchievementFrameAchievementsContainerButton'..i..'Highlight']:SetAlpha(0);
 		
 		
-		F.CreateBG(ButtonIconTexture);
+		F:CreateBG(ButtonIconTexture);
 		ButtonIconTexture:SetTexCoord(unpack(TexCoords));
 		
 		ButtonIconOverlay:Hide();
@@ -74,7 +74,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		ButtonTracked:SetNormalTexture('');
 		ButtonTracked:SetPushedTexture('');
 		
-		F.CreateBD(ButtonTracked);
+		F:CreateBD(ButtonTracked);
 		
 		ButtonTracked:SetHighlightTexture(C.Media.Backdrop);
 		ButtonTracked:GetHighlightTexture():SetPoint('TOPLEFT', 1, -1);
@@ -82,7 +82,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		ButtonTracked:GetHighlightTexture():SetVertexColor(C.r, C.g, C.b, .2);
 	end
 	
-	F.ReskinScroll(AchievementFrameAchievementsContainerScrollBar);
+	F:ReskinScroll(AchievementFrameAchievementsContainerScrollBar);
 	-- AchievementFrameStats;
 	select(3, AchievementFrameStats:GetChildren()):Hide();
 	AchievementFrameStatsBG:Hide();
@@ -90,7 +90,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 	for i = 1, 20 do
 		local Button = _G['AchievementFrameStatsContainerButton'..i];
 		
-		F.StyleButton(Button);
+		F:StyleButton(Button);
 		
 		Button.background:SetTexture(nil);
 		Button.left:SetAlpha(0);
@@ -98,7 +98,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		Button.right:SetAlpha(0);
 	end
 	
-	F.ReskinScroll(AchievementFrameStatsContainerScrollBar);
+	F:ReskinScroll(AchievementFrameStatsContainerScrollBar);
 	-- AchievementFrameSummary;
 	AchievementFrameSummary:SetBackdrop(nil);
 	AchievementFrameSummary:GetChildren():Hide();
@@ -122,7 +122,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 	AchievementFrameSummaryCategoriesStatusBar.BG:SetPoint('TOPLEFT', -1, 1);
 	AchievementFrameSummaryCategoriesStatusBar.BG:SetPoint('BOTTOMRIGHT', 1, -1);
 	AchievementFrameSummaryCategoriesStatusBar.BG:SetFrameLevel(AchievementFrameSummaryCategoriesStatusBar:GetFrameLevel() - 1);
-	F.CreateBD(AchievementFrameSummaryCategoriesStatusBar.BG, .25);
+	F:CreateBD(AchievementFrameSummaryCategoriesStatusBar.BG, .25);
 	
 	for i = 1, 8 do
 		local Category = _G['AchievementFrameSummaryCategoriesCategory'..i];
@@ -135,7 +135,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		Category.BG:SetPoint('TOPLEFT', -1, 1);
 		Category.BG:SetPoint('BOTTOMRIGHT', 1, -1);
 		Category.BG:SetFrameLevel(Category:GetFrameLevel() - 1);
-		F.CreateBD(Category.BG, .25);
+		F:CreateBD(Category.BG, .25);
 		
 		CategoryLabel:SetTextColor(1, 1, 1);
 		CategoryLabel:SetPoint('LEFT', Category, 'LEFT', 6, 0);
@@ -164,7 +164,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		Frame.BG:SetPoint('TOPLEFT', 2, -2);
 		Frame.BG:SetPoint('BOTTOMRIGHT', -2, 0);
 		Frame.BG:SetFrameLevel(Frame:GetFrameLevel() - 1);
-		F.CreateBD(Frame.BG, .25);
+		F:CreateBD(Frame.BG, .25);
 		
 		Background:Hide();
 		
@@ -175,7 +175,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		StatusBar.BG:SetPoint('TOPLEFT', -1, 1);
 		StatusBar.BG:SetPoint('BOTTOMRIGHT', 1, -1);
 		StatusBar.BG:SetFrameLevel(StatusBar:GetFrameLevel() - 1);
-		F.CreateBD(StatusBar.BG, .25);
+		F:CreateBD(StatusBar.BG, .25);
 		
 		_G[StatusBar:GetName()..'Title']:SetTextColor(1, 1, 1);
 		_G[StatusBar:GetName()..'Title']:SetPoint('LEFT', StatusBar, 'LEFT', 6, 0);
@@ -195,7 +195,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 			Button.BG = CreateFrame('Frame', nil, Button);
 			Button.BG:SetPoint('TOPLEFT', 2, -3);
 			Button.BG:SetPoint('BOTTOMRIGHT', -2, 3);
-			F.CreateBD(Button.BG, 0);
+			F:CreateBD(Button.BG, 0);
 		end
 		
 		_G['AchievementFrameComparisonContainerButton'..i..'PlayerBackground']:SetTexture(C.Media.Backdrop);
@@ -220,20 +220,20 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		local PlayerIconTexture = _G['AchievementFrameComparisonContainerButton'..i..'PlayerIconTexture'];
 		PlayerIconTexture:SetPoint('TOPLEFT', 3, -4);
 		PlayerIconTexture:SetTexCoord(unpack(TexCoords));
-		F.CreateBG(PlayerIconTexture);
+		F:CreateBG(PlayerIconTexture);
 
 		local FriendIconTexture = _G['AchievementFrameComparisonContainerButton'..i..'FriendIconTexture'];
 		FriendIconTexture:SetPoint('TOPLEFT', 3, -4);
 		FriendIconTexture:SetTexCoord(unpack(TexCoords));
-		F.CreateBG(FriendIconTexture);
+		F:CreateBG(FriendIconTexture);
 	end
 	
-	F.ReskinScroll(AchievementFrameComparisonContainerScrollBar);
+	F:ReskinScroll(AchievementFrameComparisonContainerScrollBar);
 	
 	for i = 1, 20 do
 		local Button = _G['AchievementFrameComparisonStatsContainerButton'..i];
 		
-		F.StyleButton(Button);
+		F:StyleButton(Button);
 		
 		_G['AchievementFrameComparisonStatsContainerButton'..i..'BG']:SetTexture(nil);
 		_G['AchievementFrameComparisonStatsContainerButton'..i..'HeaderLeft']:SetAlpha(0);
@@ -241,34 +241,34 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		_G['AchievementFrameComparisonStatsContainerButton'..i..'HeaderMiddle']:SetAlpha(0);
 	end
 	
-	F.ReskinScroll(AchievementFrameComparisonStatsContainerScrollBar);
+	F:ReskinScroll(AchievementFrameComparisonStatsContainerScrollBar);
 	
 	AchievementFrameComparisonBackground:Hide();
 	AchievementFrameComparisonDark:SetAlpha(0);
 	AchievementFrameComparisonWatermark:SetAlpha(0);
 	
-	F.ReskinClose(AchievementFrameCloseButton);
+	F:ReskinClose(AchievementFrameCloseButton);
 	
 	for i = 1, 2 do
 		local Tab = _G['AchievementFrameTab'..i];
 		
-		F.ReskinTab(Tab);
+		F:ReskinTab(Tab);
 	end
 	
-	F.ReskinDropDown(AchievementFrameFilterDropDown);
+	F:ReskinDropDown(AchievementFrameFilterDropDown);
 	AchievementFrameFilterDropDown:SetPoint('TOPRIGHT', AchievementFrame, 'TOPRIGHT', -98, 1);
 	AchievementFrameFilterDropDownText:ClearAllPoints();
 	AchievementFrameFilterDropDownText:SetPoint('CENTER', -10, 1);
 	-- AchievementFrameCategories;
 	hooksecurefunc('AchievementFrameCategories_DisplayButton', function(button, element)
 		if ( not button.bg ) then
-			F.StyleButton(button);
+			F:StyleButton(button);
 			
 			button.background:SetTexture(0, 0, 0, .25);
 			button.background:SetPoint('TOPLEFT', 0, -1);
 			button.background:SetPoint('BOTTOMRIGHT');
 
-			button.bg = F.CreateBDFrame(button, 0);
+			button.bg = F:CreateBDFrame(button, 0);
 			button.bg:SetPoint('TOPLEFT', 0, -1);
 			button.bg:SetPoint('BOTTOMRIGHT');
 		end
@@ -287,7 +287,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 				local BG = CreateFrame('Frame', nil, Button);
 				BG:SetPoint('TOPLEFT', 2, -2);
 				BG:SetPoint('BOTTOMRIGHT', -2, 2);
-				F.CreateBD(BG, 0);
+				F:CreateBD(BG, 0);
 				
 				Button.BG = BG;
 				
@@ -308,7 +308,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 				Button.description.SetShadowOffset = Noop;
 				
 				Button.icon.texture:SetTexCoord(unpack(TexCoords));
-				F.CreateBG(Button.icon.texture);
+				F:CreateBG(Button.icon.texture);
 			end
 		end
 	end);
@@ -318,7 +318,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 		local FrameIcon = _G['AchievementFrameMiniAchievement'..index..'Icon'];
 		
 		FrameIcon:SetTexCoord(unpack(TexCoords));
-		F.CreateBG(FrameIcon);
+		F:CreateBG(FrameIcon);
 		FrameIcon:SetDrawLayer('BORDER');
 		
 		_G['AchievementFrameMiniAchievement'..index..'Border']:Hide();
@@ -346,7 +346,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 				
 				local _, _, _, Completed, _, _, _, _, _, _ = GetAchievementInfo(AssetID);
 				
-				F.CreateBG(Button.icon);
+				F:CreateBG(Button.icon);
 				Button.icon:SetTexCoord(unpack(TexCoords));
 				Button.icon:SetDrawLayer('OVERLAY');
 				
@@ -366,7 +366,7 @@ C.Modules['Blizzard_AchievementUI'] = function()
 					local BD = CreateFrame('Frame', nil, ProgressBar);
 					BD:SetPoint('TOPLEFT', -1, 1);
 					BD:SetPoint('BOTTOMRIGHT', 1, -1);
-					F.CreateBD(BD, 0);
+					F:CreateBD(BD, 0);
 					
 					ProgressBar.BD = BD;
 				end

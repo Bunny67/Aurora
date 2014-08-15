@@ -5,7 +5,7 @@ local select = select;
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(TabardFrame, 11, -12, -34, 74);
+	F:SetBD(TabardFrame, 11, -12, -34, 74);
 	TabardFramePortrait:Hide();
 	
 	TabardFrame:DisableDrawLayer('BORDER');
@@ -16,9 +16,9 @@ tinsert(C.Modules['Aurora'], function()
 		select(i, TabardFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	F.ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TabardFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(TabardFrameCloseButton, 'TOPRIGHT', TabardFrame, 'TOPRIGHT', -38, -16);
 	
-	F.CreateBD(TabardFrameCostFrame, .25);
+	F:CreateBD(TabardFrameCostFrame, .25);
 	
 	TabardFrameCustomizationBorder:SetTexture(nil);
 	
@@ -34,16 +34,16 @@ tinsert(C.Modules['Aurora'], function()
 			_G['TabardFrameCustomization'..i..'Middle']:SetTexture(nil);
 			_G['TabardFrameCustomization'..i..'Right']:SetTexture(nil);
 			
-			F.ReskinArrow(LeftButton, 'Left');
-			F.ReskinArrow(RightButton, 'Right');
+			F:ReskinArrow(LeftButton, 'Left');
+			F:ReskinArrow(RightButton, 'Right');
 		end
 	end
 	
-	F.ReskinArrow(TabardCharacterModelRotateLeftButton, 'Left');
+	F:ReskinArrow(TabardCharacterModelRotateLeftButton, 'Left');
 	TabardCharacterModelRotateLeftButton:SetPoint('BOTTOMLEFT', 4, 4);
-	F.ReskinArrow(TabardCharacterModelRotateRightButton, 'Right');
+	F:ReskinArrow(TabardCharacterModelRotateRightButton, 'Right');
 	TabardCharacterModelRotateRightButton:SetPoint('TOPLEFT', TabardCharacterModelRotateLeftButton, 'TOPRIGHT', 4, 0);
 	
-	F.Reskin(TabardFrameAcceptButton);
-	F.Reskin(TabardFrameCancelButton);
+	F:Reskin(TabardFrameAcceptButton);
+	F:Reskin(TabardFrameCancelButton);
 end);

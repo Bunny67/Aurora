@@ -13,19 +13,19 @@ tinsert(C.Modules['Aurora'], function()
 	PVPBattlegroundFrameBGTex:Hide();
 	
 	PVPBattlegroundFrameTypeScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(PVPBattlegroundFrameTypeScrollFrameScrollBar);
+	F:ReskinScroll(PVPBattlegroundFrameTypeScrollFrameScrollBar);
 	
-	F.Reskin(PVPBattlegroundFrameCancelButton);
+	F:Reskin(PVPBattlegroundFrameCancelButton);
 	
 	PVPBattlegroundFrameInfoScrollFrame.scrollBarBackground:SetTexture(nil);
 	
 	PVPBattlegroundFrameInfoScrollFrameScrollBar:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(PVPBattlegroundFrameInfoScrollFrameScrollBar);
+	F:ReskinScroll(PVPBattlegroundFrameInfoScrollFrameScrollBar);
 	
 	PVPBattlegroundFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);
 	PVPBattlegroundFrameInfoScrollFrameChildFrameRewardsInfo.description:SetTextColor(1, 1, 1);
 	
-	F.Reskin(PVPBattlegroundFrameJoinButton);
+	F:Reskin(PVPBattlegroundFrameJoinButton);
 	PVPBattlegroundFrameGroupJoinButton:SetPoint('RIGHT', PVPBattlegroundFrameJoinButton, 'LEFT', -1, 0);
-	F.Reskin(PVPBattlegroundFrameGroupJoinButton);
+	F:Reskin(PVPBattlegroundFrameGroupJoinButton);
 end);

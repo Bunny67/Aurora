@@ -4,7 +4,7 @@ local select = select;
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(BattlefieldFrame, 12, -12, -34, 74);
+	F:SetBD(BattlefieldFrame, 12, -12, -34, 74);
 	BattlefieldFramePortrait:Hide();
 	
 	for i = 2, 5 do
@@ -16,10 +16,10 @@ tinsert(C.Modules['Aurora'], function()
 	BattlefieldFrameInfoScrollFrameChildFrameDescription:SetTextColor(1, 1, 1);
 	BattlefieldFrameInfoScrollFrameChildFrameRewardsInfoDescription:SetTextColor(1, 1, 1);
 	
-	F.Reskin(BattlefieldFrameCancelButton);
-	F.Reskin(BattlefieldFrameJoinButton);
+	F:Reskin(BattlefieldFrameCancelButton);
+	F:Reskin(BattlefieldFrameJoinButton);
 	BattlefieldFrameGroupJoinButton:SetPoint('RIGHT', BattlefieldFrameJoinButton, 'LEFT', -1, 0);
-	F.Reskin(BattlefieldFrameGroupJoinButton);
+	F:Reskin(BattlefieldFrameGroupJoinButton);
 	
-	F.ReskinClose(BattlefieldFrameCloseButton, 'TOPRIGHT', BattlefieldFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(BattlefieldFrameCloseButton, 'TOPRIGHT', BattlefieldFrame, 'TOPRIGHT', -38, -16);
 end);

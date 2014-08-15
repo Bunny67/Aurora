@@ -21,11 +21,11 @@ tinsert(C.Modules['Aurora'], function()
 		PTF:SetPoint('TOPLEFT', 20, 5);
 		PTF:SetPoint('BOTTOMRIGHT', -16, 13);
 		PTF:SetFrameLevel(PlayerTitleFrame:GetFrameLevel() - 1);
-		F.CreateBD(PTF, 0);
-		F.CreateGradient(PTF);
+		F:CreateBD(PTF, 0);
+		F:CreateGradient(PTF);
 	end
 	
-	F.Reskin(PlayerTitleFrameButton);
+	F:Reskin(PlayerTitleFrameButton);
 	
 	do
 		local PTFB = PlayerTitleFrameButton:CreateTexture(nil, 'ARTWORK');
@@ -35,12 +35,12 @@ tinsert(C.Modules['Aurora'], function()
 		PTFB:SetVertexColor(1, 1, 1);
 	end
 	
-	F.CreateBD(PlayerTitlePickerFrame);
+	F:CreateBD(PlayerTitlePickerFrame);
 	
-	F.ReskinScroll(PlayerTitlePickerScrollFrameScrollBar);
+	F:ReskinScroll(PlayerTitlePickerScrollFrameScrollBar);
 	
-	F.ReskinArrow(CharacterModelFrameRotateLeftButton, 'Left');
-	F.ReskinArrow(CharacterModelFrameRotateRightButton, 'Right');
+	F:ReskinArrow(CharacterModelFrameRotateLeftButton, 'Left');
+	F:ReskinArrow(CharacterModelFrameRotateRightButton, 'Right');
 	
 	CharacterAttributesFrame:DisableDrawLayer('BACKGROUND');
 	
@@ -48,38 +48,39 @@ tinsert(C.Modules['Aurora'], function()
 		local PlayerStatsLeft = CreateFrame('Frame', nil, CharacterAttributesFrame)
 		PlayerStatsLeft:SetPoint('TOPLEFT', -1, -1);
 		PlayerStatsLeft:SetPoint('BOTTOMRIGHT', -116, -7);
-		F.CreateBD(PlayerStatsLeft, .25);
+		F:CreateBD(PlayerStatsLeft, .25);
 		
 		local PlayerStatsRight = CreateFrame('Frame', nil, CharacterAttributesFrame)
 		PlayerStatsRight:SetPoint('TOPLEFT', 116, -1);
 		PlayerStatsRight:SetPoint('BOTTOMRIGHT', -1, -7);
-		F.CreateBD(PlayerStatsRight, .25);
+		F:CreateBD(PlayerStatsRight, .25);
 	end
 	
-	F.ReskinDropDown(PlayerStatFrameLeftDropDown);
-	F.ReskinDropDown(PlayerStatFrameRightDropDown);
+	F:ReskinDropDown(PlayerStatFrameLeftDropDown);
+	F:ReskinDropDown(PlayerStatFrameRightDropDown);
 	
-	F.CreateBDFrame(CharacterResistanceFrame);
+	F:CreateBDFrame(CharacterResistanceFrame);
 	CharacterResistanceFrame:SetSize(28, 140);
 	
 	do
-		local MagicRes;
+		local MagicRes, MagicResTexture;
 		
 		for i = 1, 5 do
 			MagicRes = _G['MagicResFrame'..i];
+			MagicResTexture = select(1, MagicRes:GetRegions());
 			
 			MagicRes:SetSize(28, 28);
 			
 			if ( i == 1 ) then
-				select(1, MagicRes:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.25, 0.3203125);
+				MagicResTexture:SetTexCoord(0.21875, 0.78125, 0.25, 0.3203125);
 			elseif ( i == 2 ) then
-				select(1, MagicRes:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.0234375, 0.09375);
+				MagicResTexture:SetTexCoord(0.21875, 0.78125, 0.0234375, 0.09375);
 			elseif ( i == 3 ) then
-				select(1, MagicRes:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.13671875, 0.20703125);
+				MagicResTexture:SetTexCoord(0.21875, 0.78125, 0.13671875, 0.20703125);
 			elseif ( i == 4 ) then
-				select(1, MagicRes:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.36328125, 0.43359375);
+				MagicResTexture:SetTexCoord(0.21875, 0.78125, 0.36328125, 0.43359375);
 			else
-				select(1, MagicRes:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.4765625, 0.546875);
+				MagicResTexture:SetTexCoord(0.21875, 0.78125, 0.4765625, 0.546875);
 			end
 		end
 	end
@@ -94,8 +95,8 @@ tinsert(C.Modules['Aurora'], function()
 			SlotPopoup = _G['Character'..Slots[i]..'PopoutButton'];
 			
 			Slot:SetNormalTexture('');
-			F.StyleButton(Slot);
-			F.CreateBD(Slot);
+			F:StyleButton(Slot);
+			F:CreateBD(Slot);
 			
 			SlotIcon:SetPoint('TOPLEFT', 1, -1);
 			SlotIcon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -146,8 +147,8 @@ tinsert(C.Modules['Aurora'], function()
 		end
 		
 		CharacterAmmoSlot:SetNormalTexture('');
-		F.StyleButton(CharacterAmmoSlot);
-		F.CreateBD(CharacterAmmoSlot);
+		F:StyleButton(CharacterAmmoSlot);
+		F:CreateBD(CharacterAmmoSlot);
 		
 		select(1, CharacterAmmoSlot:GetRegions()):Hide();
 		select(5, CharacterAmmoSlot:GetRegions()):Hide();
@@ -158,7 +159,7 @@ tinsert(C.Modules['Aurora'], function()
 	end
 	
 	GearManagerToggleButton:SetSize(24, 30);
-	F.CreateBDFrame(GearManagerToggleButton);
+	F:CreateBDFrame(GearManagerToggleButton);
 	
 	GearManagerToggleButton:GetNormalTexture():SetTexCoord(0.1875, 0.796875, 0.125, 0.890625);
 	GearManagerToggleButton:GetPushedTexture():SetTexCoord(0.1875, 0.796875, 0.125, 0.890625);
@@ -171,8 +172,8 @@ tinsert(C.Modules['Aurora'], function()
 		button.icon = _G[button:GetName()..'IconTexture'];
 		
 		if ( not button.Styled ) then
-			F.StyleButton(button)
-			F.CreateBD(button)
+			F:StyleButton(button)
+			F:CreateBD(button)
 			button:GetNormalTexture():SetTexture(nil)
 			
 			button.icon:SetPoint('TOPLEFT', 1, -1);
@@ -200,24 +201,24 @@ tinsert(C.Modules['Aurora'], function()
 	PaperDollFrameItemFlyoutButtons.bg1:SetAlpha(0);
 	PaperDollFrameItemFlyoutButtons:DisableDrawLayer('ARTWORK');
 	-- GearManagerDialog;
-	F.SetBD(GearManagerDialog, 5, -3, -2, 6);
+	F:SetBD(GearManagerDialog, 5, -3, -2, 6);
 	GearManagerDialog:DisableDrawLayer('OVERLAY');
 	GearManagerDialog:DisableDrawLayer('BACKGROUND');
 	
-	F.Reskin(GearManagerDialogDeleteSet);
-	F.Reskin(GearManagerDialogEquipSet);
-	F.Reskin(GearManagerDialogSaveSet);
+	F:Reskin(GearManagerDialogDeleteSet);
+	F:Reskin(GearManagerDialogEquipSet);
+	F:Reskin(GearManagerDialogSaveSet);
 	
-	F.SetBD(GearManagerDialogPopup, 5, -3, -2, 6);
+	F:SetBD(GearManagerDialogPopup, 5, -3, -2, 6);
 	GearManagerDialogPopup:DisableDrawLayer('BACKGROUND');
 	
 	GearManagerDialogPopupScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(GearManagerDialogPopupScrollFrameScrollBar);
+	F:ReskinScroll(GearManagerDialogPopupScrollFrameScrollBar);
 	
-	F.ReskinInput(GearManagerDialogPopupEditBox);
+	F:ReskinInput(GearManagerDialogPopupEditBox);
 	
-	F.Reskin(GearManagerDialogPopupCancel);
-	F.Reskin(GearManagerDialogPopupOkay);
+	F:Reskin(GearManagerDialogPopupCancel);
+	F:Reskin(GearManagerDialogPopupOkay);
 	
 	do
 		local Button, ButtonIcon;
@@ -226,9 +227,10 @@ tinsert(C.Modules['Aurora'], function()
 			Button = _G['GearSetButton'..i];
 			ButtonIcon = _G['GearSetButton'..i..'Icon'];
 			
-			F.StripTextures(Button);
-			F.StyleButton(Button, nil, true);
-			F.CreateBD(Button, .25);
+			F:StyleButton(Button, nil, true);
+			F:CreateBD(Button, .25);
+			
+			select(2, Button:GetRegions()):SetTexture(nil);
 			
 			ButtonIcon:SetPoint('TOPLEFT', 1, -1);
 			ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -243,9 +245,11 @@ tinsert(C.Modules['Aurora'], function()
 			Button = _G['GearManagerDialogPopupButton'..i];
 			ButtonIcon = Button.icon;
 			
-			if Button then
-				F.StripTextures(Button);
-				F.StyleButton(Button, nil, true);
+			if(Button) then
+				F:StyleButton(Button, nil, true);
+				F:CreateBD(Button);
+				
+				select(2, Button:GetRegions()):SetTexture(nil);
 				
 				ButtonIcon:SetTexCoord(unpack(TexCoords))
 				_G['GearManagerDialogPopupButton'..i..'Icon']:SetTexture(nil);
@@ -253,15 +257,9 @@ tinsert(C.Modules['Aurora'], function()
 				ButtonIcon:SetPoint('TOPLEFT', 1, -1);
 				ButtonIcon:SetPoint('BOTTOMRIGHT', -1, 1);
 				Button:SetFrameLevel(Button:GetFrameLevel() + 2);
-				
-				if ( not Button.Style ) then
-					F.CreateBD(Button);
-					
-					Button.Style = true;
-				end
 			end
 		end
 	end
 	
-	F.ReskinClose(GearManagerDialogClose, 'TOPRIGHT', GearManagerDialog, 'TOPRIGHT', -6, -7);
+	F:ReskinClose(GearManagerDialogClose, 'TOPRIGHT', GearManagerDialog, 'TOPRIGHT', -6, -7);
 end);

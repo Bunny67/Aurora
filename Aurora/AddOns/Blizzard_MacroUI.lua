@@ -9,7 +9,7 @@ local Noop = F.dummy;
 
 C.Modules['Blizzard_MacroUI'] = function()
 	-- MacroFrame;
-	F.SetBD(MacroFrame, 11, -12, -34, 74);
+	F:SetBD(MacroFrame, 11, -12, -34, 74);
 	MacroFramePortrait:Hide();
 	
 	for i = 2, 5 do
@@ -25,8 +25,8 @@ C.Modules['Blizzard_MacroUI'] = function()
 	MacroFrameSelectedMacroButton:SetPoint("TOPLEFT", MacroFrameSelectedMacroBackground, "TOPLEFT", 12, -15);
 	
 	MacroFrameSelectedMacroButton:SetNormalTexture('');
-	F.StyleButton(MacroFrameSelectedMacroButton, nil, true);
-	F.CreateBG(MacroFrameSelectedMacroButton);
+	F:StyleButton(MacroFrameSelectedMacroButton, nil, true);
+	F:CreateBG(MacroFrameSelectedMacroButton);
 	
 	MacroFrameSelectedMacroButton.Hover:SetAllPoints();
 	
@@ -36,7 +36,7 @@ C.Modules['Blizzard_MacroUI'] = function()
 	MacroFrameSelectedMacroButtonIcon:SetTexCoord(unpack(TexCoords));
 	
 	MacroButtonScrollFrame:DisableDrawLayer('ARTWORK');
-	F.ReskinScroll(MacroButtonScrollFrameScrollBar);
+	F:ReskinScroll(MacroButtonScrollFrameScrollBar);
 	
 	do
 		local MacroButton, MacroIcon;
@@ -46,8 +46,8 @@ C.Modules['Blizzard_MacroUI'] = function()
 			MacroIcon = _G['MacroButton'..i..'Icon'];
 			
 			MacroButton:SetNormalTexture('');
-			F.StyleButton(MacroButton, nil, true);
-			F.CreateBD(MacroButton, .25);
+			F:StyleButton(MacroButton, nil, true);
+			F:CreateBD(MacroButton, .25);
 			
 			select(2, MacroButton:GetRegions()):SetTexture(nil);
 			
@@ -57,10 +57,10 @@ C.Modules['Blizzard_MacroUI'] = function()
 		end
 	end
 	
-	F.Reskin(MacroEditButton);
+	F:Reskin(MacroEditButton);
 	
-	F.CreateBD(MacroFrameScrollFrame, .25);
-	F.ReskinScroll(MacroFrameScrollFrameScrollBar);
+	F:CreateBD(MacroFrameScrollFrame, .25);
+	F:ReskinScroll(MacroFrameScrollFrameScrollBar);
 	
 	MacroFrameTextBackground:SetBackdrop(nil);
 	
@@ -79,26 +79,26 @@ C.Modules['Blizzard_MacroUI'] = function()
 		end
 	end
 	
-	F.Reskin(MacroDeleteButton);
-	F.Reskin(MacroNewButton);
-	F.Reskin(MacroExitButton);
+	F:Reskin(MacroDeleteButton);
+	F:Reskin(MacroNewButton);
+	F:Reskin(MacroExitButton);
 	
-	F.ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MacroFrame, 'TOPRIGHT', -38, -16);
+	F:ReskinClose(MacroFrameCloseButton, 'TOPRIGHT', MacroFrame, 'TOPRIGHT', -38, -16);
 	-- MacroPopupFrame;
-	F.SetBD(MacroPopupFrame, 7, -10, -5, 7);
+	F:SetBD(MacroPopupFrame, 7, -10, -5, 7);
 	
 	for i = 1, 4 do
 		select(i, MacroPopupFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	F.ReskinInput(MacroPopupEditBox);
+	F:ReskinInput(MacroPopupEditBox);
 	
 	MacroPopupNameLeft:SetTexture(nil);
 	MacroPopupNameMiddle:SetTexture(nil);
 	MacroPopupNameRight:SetTexture(nil);
 	
 	MacroPopupScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(MacroPopupScrollFrameScrollBar);
+	F:ReskinScroll(MacroPopupScrollFrameScrollBar);
 	
 	do
 		local MacroPopupButton, MacroPopupIcon;
@@ -108,8 +108,8 @@ C.Modules['Blizzard_MacroUI'] = function()
 			MacroPopupIcon = _G['MacroPopupButton'..i..'Icon'];
 			
 			MacroPopupButton:SetNormalTexture('');
-			F.StyleButton(MacroPopupButton, nil, true);
-			F.CreateBD(MacroPopupButton, .25);
+			F:StyleButton(MacroPopupButton, nil, true);
+			F:CreateBD(MacroPopupButton, .25);
 			
 			select(2, MacroPopupButton:GetRegions()):SetTexture(nil);
 			
@@ -119,6 +119,6 @@ C.Modules['Blizzard_MacroUI'] = function()
 		end
 	end
 	
-	F.Reskin(MacroPopupOkayButton);
-	F.Reskin(MacroPopupCancelButton);
+	F:Reskin(MacroPopupOkayButton);
+	F:Reskin(MacroPopupCancelButton);
 end

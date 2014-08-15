@@ -10,26 +10,26 @@ local TexCoords = F.TexCoords;
 local Hoop = F.dummy;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(QuestFrame, 14, -18, -30, 67);
+	F:SetBD(QuestFrame, 14, -18, -30, 67);
 	QuestFramePortrait:Hide();
 	
-	F.ReskinClose(QuestFrameCloseButton, 'TOPRIGHT', QuestFrame, 'TOPRIGHT', -34, -22);
+	F:ReskinClose(QuestFrameCloseButton, 'TOPRIGHT', QuestFrame, 'TOPRIGHT', -34, -22);
 	-- QuestFrameRewardPanel
 	QuestFrameRewardPanel:DisableDrawLayer('BACKGROUND');
 	QuestFrameRewardPanel:DisableDrawLayer('BORDER');
 	
-	F.Reskin(QuestFrameCancelButton);
-	F.Reskin(QuestFrameCompleteQuestButton);
+	F:Reskin(QuestFrameCancelButton);
+	F:Reskin(QuestFrameCompleteQuestButton);
 	
-	F.ReskinScroll(QuestRewardScrollFrameScrollBar);
+	F:ReskinScroll(QuestRewardScrollFrameScrollBar);
 	-- QuestFrameProgressPanel
 	QuestFrameProgressPanel:DisableDrawLayer('BACKGROUND');
 	QuestFrameProgressPanel:DisableDrawLayer('BORDER');
 	
-	F.Reskin(QuestFrameGoodbyeButton);
-	F.Reskin(QuestFrameCompleteButton);
+	F:Reskin(QuestFrameGoodbyeButton);
+	F:Reskin(QuestFrameCompleteButton);
 	
-	F.ReskinScroll(QuestProgressScrollFrameScrollBar);
+	F:ReskinScroll(QuestProgressScrollFrameScrollBar);
 	
 	QuestProgressTitleText:SetTextColor(1, 1, 1);
 	QuestProgressTitleText.SetTextColor = Hoop;
@@ -47,9 +47,9 @@ tinsert(C.Modules['Aurora'], function()
 			ItemName = _G['QuestProgressItem'..i..'NameFrame'];
 			ItemCount = _G['QuestProgressItem'..i..'Count'];
 			
-			F.StyleButton(Item);
+			F:StyleButton(Item);
 			
-			F.CreateBG(ItemIcon);
+			F:CreateBG(ItemIcon);
 			ItemIcon:SetPoint('TOPLEFT', 1, -1);
 			ItemIcon:SetTexCoord(unpack(TexCoords));
 			ItemIcon:SetDrawLayer('OVERLAY');
@@ -60,7 +60,7 @@ tinsert(C.Modules['Aurora'], function()
 			Item.BG = CreateFrame('Frame', nil, Item);
 			Item.BG:SetPoint('TOPLEFT', ItemName, 'TOPLEFT', 10, 0);
 			Item.BG:SetPoint('BOTTOMRIGHT', ItemName, 'BOTTOMRIGHT');
-			F.CreateBD(Item.BG, 0);
+			F:CreateBD(Item.BG, 0);
 			
 			ItemCount:SetDrawLayer('OVERLAY');
 		end
@@ -69,18 +69,18 @@ tinsert(C.Modules['Aurora'], function()
 	QuestFrameDetailPanel:DisableDrawLayer('BACKGROUND');
 	QuestFrameDetailPanel:DisableDrawLayer('BORDER');
 	
-	F.Reskin(QuestFrameDeclineButton);
-	F.Reskin(QuestFrameAcceptButton);
+	F:Reskin(QuestFrameDeclineButton);
+	F:Reskin(QuestFrameAcceptButton);
 	
-	F.ReskinScroll(QuestDetailScrollFrameScrollBar);
+	F:ReskinScroll(QuestDetailScrollFrameScrollBar);
 	-- QuestFrameGreetingPanel
 	QuestFrameGreetingPanel:DisableDrawLayer('BACKGROUND');
 	QuestFrameGreetingPanel:DisableDrawLayer('BORDER');
 	QuestFrameGreetingPanel:DisableDrawLayer('ARTWORK');
 	
-	F.Reskin(QuestFrameGreetingGoodbyeButton);
+	F:Reskin(QuestFrameGreetingGoodbyeButton);
 	
-	F.ReskinScroll(QuestGreetingScrollFrameScrollBar);
+	F:ReskinScroll(QuestGreetingScrollFrameScrollBar);
 	
 	GreetingText:SetTextColor(1, 1, 1);
 	GreetingText.SetTextColor = Hoop;

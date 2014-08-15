@@ -80,7 +80,7 @@ local r, g, b = C.ClassColors[F.Class].r, C.ClassColors[F.Class].g, C.ClassColor
 F.TexCoords = {.08, .92, .08, .92};
 F.dummy = function() end;
 
-F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
+function F:StyleButton(Button, NoHover, NoPushed, NoChecked)
 	if Button.SetHighlightTexture and not Button.Hover and not NoHover then
 		local Hover = Button:CreateTexture('Frame', nil, self);
 		Hover:SetTexture(r, g, b, .25);
@@ -117,199 +117,211 @@ F.StyleButton = function(Button, NoHover, NoPushed, NoChecked)
 	end
 end
 
-F.CreateBD = function(Frame, A)
-	Frame:SetBackdrop({ bgFile = C.Media.Backdrop, edgeFile = C.Media.Backdrop, edgeSize = 1 });
-	Frame:SetBackdropColor(0, 0, 0, A or alpha);
-	Frame:SetBackdropBorderColor(0, 0, 0);
+function F:CreateBD(self, A)
+	self:SetBackdrop({
+		bgFile = C.Media.Backdrop, edgeFile = C.Media.Backdrop, edgeSize = 1
+	});
 	
-	if ( not A ) then tinsert(C.Frames, Frame); end
+	self:SetBackdropColor(0, 0, 0, A or alpha);
+	self:SetBackdropBorderColor(0, 0, 0);
+	
+	if(not A) then
+		tinsert(C.Frames, self);
+	end
 end
 
-F.CreateBG = function(Frame)
-	local f = Frame;
-	if ( Frame:GetObjectType() == 'Texture' ) then f = Frame:GetParent(); end
-
-	local BG = f:CreateTexture(nil, 'BACKGROUND');
-	BG:SetPoint('TOPLEFT', Frame, -1, 1);
-	BG:SetPoint('BOTTOMRIGHT', Frame, 1, -1);
-	BG:SetTexture(C.Media.Backdrop)
+function F:CreateBG(self)
+	local Frame = self;
+	
+	if(self:GetObjectType() == 'Texture') then
+		Frame = self:GetParent();
+	end
+	
+	local BG = Frame:CreateTexture(nil, 'BACKGROUND');
+	BG:SetPoint('TOPLEFT', self, -1, 1);
+	BG:SetPoint('BOTTOMRIGHT', self, 1, -1);
+	BG:SetTexture(C.Media.Backdrop);
 	BG:SetVertexColor(0, 0, 0);
-
-	return BG
+	
+	return BG;
 end
 
--- we assign these after loading variables for caching
--- otherwise we call an extra unpack() every time
-local buttonR, buttonG, buttonB, buttonA
+local ButtonR, ButtonG, ButtonB, ButtonA;
 
-F.CreateGradient = function(Frame)
-	local Gradient = Frame:CreateTexture(nil, 'BORDER');
+function F:CreateGradient(self)
+	local Gradient = self:CreateTexture(nil, 'BORDER');
 	Gradient:SetPoint('TOPLEFT', 1, -1);
 	Gradient:SetPoint('BOTTOMRIGHT', -1, 1);
 	Gradient:SetTexture(useButtonGradientColour and C.Media.Gradient or C.Media.Backdrop);
-	Gradient:SetVertexColor(buttonR, buttonG, buttonB, buttonA);
+	Gradient:SetVertexColor(ButtonR, ButtonG, ButtonB, ButtonA);
 
 	return Gradient;
 end
 
-local function ColourButton(Frame)
-	if ( not Frame:IsEnabled() ) then return; end
-
-	if ( useButtonGradientColour ) then
-		Frame:SetBackdropColor(r, g, b, .3);
-	else
-		Frame.Gradient:SetVertexColor(r / 4, g / 4, b / 4);
+local function ColourButton(self)
+	if(not self:IsEnabled()) then
+		return;
 	end
-
-	Frame:SetBackdropBorderColor(r, g, b);
-end
-
-local function ClearButton(Frame)
-	if ( useButtonGradientColour ) then
-		Frame:SetBackdropColor(0, 0, 0, 0);
-	else
-		Frame.Gradient:SetVertexColor(buttonR, buttonG, buttonB, buttonA);
-	end
-
-	Frame:SetBackdropBorderColor(0, 0, 0);
-end
-
-F.Reskin = function(Frame, NoHighlight, Strip)
-	if ( Frame:GetName() ) then
-		local Left = _G[Frame:GetName()..'Left'];
-		local Middle = _G[Frame:GetName()..'Middle'];
-		local Right = _G[Frame:GetName()..'Right'];
-
-
-		if ( Left ) then Left:SetAlpha(0); end
-		if ( Middle ) then Middle:SetAlpha(0); end
-		if ( Right ) then Right:SetAlpha(0); end
-	end
-
-	if ( Frame.Left ) then Frame.Left:SetAlpha(0); end
-	if ( Frame.Right ) then Frame.Right:SetAlpha(0); end	
-	if ( Frame.Middle ) then Frame.Middle:SetAlpha(0); end
-	if ( Frame.SetNormalTexture ) then Frame:SetNormalTexture(''); end	
-	if ( Frame.SetHighlightTexture ) then Frame:SetHighlightTexture(''); end
-	if ( Frame.SetPushedTexture ) then Frame:SetPushedTexture(''); end	
-	if ( Frame.SetDisabledTexture ) then Frame:SetDisabledTexture(''); end
 	
-	if ( Strip ) then F.StripTextures(Frame, true); end
+	if(useButtonGradientColour) then
+		self:SetBackdropColor(r, g, b, .3);
+	else
+		self.Gradient:SetVertexColor(r / 4, g / 4, b / 4);
+	end
 	
-	F.CreateBD(Frame, 0);
+	self:SetBackdropBorderColor(r, g, b);
+end
 
-	Frame.Gradient = F.CreateGradient(Frame);
+local function ClearButton(self)
+	if(useButtonGradientColour) then
+		self:SetBackdropColor(0, 0, 0, 0);
+	else
+		self.Gradient:SetVertexColor(ButtonR, ButtonG, ButtonB, ButtonA);
+	end
+	
+	self:SetBackdropBorderColor(0, 0, 0);
+end
 
-	if ( not NoHighlight ) then
-		Frame:HookScript('OnEnter', ColourButton);
- 		Frame:HookScript('OnLeave', ClearButton);
+function F:Reskin(self, NoHighlight)
+	local Name = self:GetName();
+	
+	if(Name) then
+		local Left = _G[Name..'Left'];
+		local Middle = _G[Name..'Middle'];
+		local Right = _G[Name..'Right'];
+		
+		if(Left) then Left:SetAlpha(0); end
+		if(Middle) then Middle:SetAlpha(0); end
+		if(Right) then Right:SetAlpha(0); end
+	end
+
+	if(self.Left) then self.Left:SetAlpha(0); end
+	if(self.Right) then self.Right:SetAlpha(0); end	
+	if(self.Middle) then self.Middle:SetAlpha(0); end
+	if(self.SetNormalTexture) then self:SetNormalTexture(''); end	
+	if(self.SetHighlightTexture) then self:SetHighlightTexture(''); end
+	if(self.SetPushedTexture) then self:SetPushedTexture(''); end	
+	if(self.SetDisabledTexture) then self:SetDisabledTexture(''); end
+	
+	F:CreateBD(self, 0);
+
+	self.Gradient = F:CreateGradient(self);
+
+	if(not NoHighlight) then
+		self:HookScript('OnEnter', ColourButton);
+ 		self:HookScript('OnLeave', ClearButton);
 	end
 end
 
-F.ReskinTab = function(Frame)
-	Frame:DisableDrawLayer('BACKGROUND');
+function F:ReskinTab(self)
+	self:DisableDrawLayer('BACKGROUND');
 
-	local BG = CreateFrame('Frame', nil, Frame);
+	local BG = CreateFrame('Frame', nil, self);
 	BG:SetPoint('TOPLEFT', 8, -3);
 	BG:SetPoint('BOTTOMRIGHT', -8, 3);
-	BG:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BG);
+	BG:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BG);
 
-	Frame:SetHighlightTexture(C.Media.Backdrop);
-	Frame:GetHighlightTexture():ClearAllPoints();
-	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 9, -4);
-	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -9, 4);
-	Frame:GetHighlightTexture():SetVertexColor(r, g, b, .25);
+	self:SetHighlightTexture(C.Media.Backdrop);
+	self:GetHighlightTexture():ClearAllPoints();
+	self:GetHighlightTexture():SetPoint('TOPLEFT', 9, -4);
+	self:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -9, 4);
+	self:GetHighlightTexture():SetVertexColor(r, g, b, .25);
 end
 
-local function ColourScroll(Frame)
-	if ( Frame:IsEnabled() ) then
-		Frame.Texture:SetVertexColor(r, g, b)
+local function ColourScroll(self)
+	if(self:IsEnabled()) then
+		self.Texture:SetVertexColor(r, g, b);
 	end
 end
 
-local function ClearScroll(Frame)
-	Frame.Texture:SetVertexColor(1, 1, 1)
+local function ClearScroll(self)
+	self.Texture:SetVertexColor(1, 1, 1);
 end
 
-F.ReskinScroll = function(Frame)
-	local Scroll = Frame:GetName();
+function F:ReskinScroll(self)
+	local Name = self:GetName();
+	local ThumbTexture = _G[Name..'ThumbTexture'];
+	local UpButton = _G[Name..'ScrollUpButton'];
+	local DownButton = _G[Name..'ScrollDownButton'];
 	
-	if ( _G[Scroll..'Track'] ) then _G[Scroll..'Track']:Hide(); end
-	if ( _G[Scroll..'BG'] ) then _G[Scroll..'BG']:Hide(); end
-	if ( _G[Scroll..'Top'] ) then _G[Scroll..'Top']:Hide(); end
-	if ( _G[Scroll..'Middle'] ) then _G[Scroll..'Middle']:Hide(); end
-	if ( _G[Scroll..'Bottom'] ) then _G[Scroll..'Bottom']:Hide(); end
-
-	_G[Scroll..'ThumbTexture']:SetAlpha(0);
-	_G[Scroll..'ThumbTexture']:SetWidth(17);
-
-	_G[Scroll..'ThumbTexture'].DB = CreateFrame('Frame', nil, Frame)
-	_G[Scroll..'ThumbTexture'].DB:SetPoint('TOPLEFT', _G[Scroll..'ThumbTexture'], 0, -2);
-	_G[Scroll..'ThumbTexture'].DB:SetPoint('BOTTOMRIGHT', _G[Scroll..'ThumbTexture'], 0, 4);
-	F.CreateBD(_G[Scroll..'ThumbTexture'].DB, 0);
-
-	local Gradient = F.CreateGradient(Frame)
-	Gradient:SetPoint('TOPLEFT', _G[Scroll..'ThumbTexture'].DB, 1, -1);
-	Gradient:SetPoint('BOTTOMRIGHT', _G[Scroll..'ThumbTexture'].DB, -1, 1);
-
-	_G[Scroll..'ScrollUpButton']:SetWidth(17);
-	_G[Scroll..'ScrollDownButton']:SetWidth(17);
-
-	F.Reskin(_G[Scroll..'ScrollUpButton'], true);
-	F.Reskin(_G[Scroll..'ScrollDownButton'], true);
-
-	_G[Scroll..'ScrollUpButton']:SetDisabledTexture(C.Media.Backdrop);
-	_G[Scroll..'ScrollUpButton']:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
-	_G[Scroll..'ScrollUpButton']:GetDisabledTexture():SetDrawLayer('OVERLAY');
-
-	_G[Scroll..'ScrollDownButton']:SetDisabledTexture(C.Media.Backdrop);
-	_G[Scroll..'ScrollDownButton']:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
-	_G[Scroll..'ScrollDownButton']:GetDisabledTexture():SetDrawLayer('OVERLAY');
-
-	local UpTexture = _G[Scroll..'ScrollUpButton']:CreateTexture(nil, 'ARTWORK');
+	if(_G[Name..'Track']) then _G[Name..'Track']:SetTexture(nil); end
+	if(_G[Name..'BG']) then _G[Name..'BG']:SetTexture(nil); end
+	if(_G[Name..'Top']) then _G[Name..'Top']:SetTexture(nil); end
+	if(_G[Name..'Middle']) then _G[Name..'Middle']:SetTexture(nil); end
+	if(_G[Name..'Bottom']) then _G[Name..'Bottom']:SetTexture(nil); end
+	
+	ThumbTexture:SetTexture(nil);
+	ThumbTexture:SetWidth(17);
+	
+	ThumbTexture.DB = CreateFrame('Frame', nil, self)
+	ThumbTexture.DB:SetPoint('TOPLEFT', ThumbTexture, 0, -2);
+	ThumbTexture.DB:SetPoint('BOTTOMRIGHT', ThumbTexture, 0, 4);
+	F:CreateBD(ThumbTexture.DB, 0);
+	
+	local Gradient = F:CreateGradient(self)
+	Gradient:SetPoint('TOPLEFT', ThumbTexture.DB, 1, -1);
+	Gradient:SetPoint('BOTTOMRIGHT', ThumbTexture.DB, -1, 1);
+	
+	F:Reskin(UpButton, true);
+	UpButton:SetWidth(17);
+	
+	UpButton:SetDisabledTexture(C.Media.Backdrop);
+	UpButton:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
+	UpButton:GetDisabledTexture():SetDrawLayer('OVERLAY');
+	
+	local UpTexture = UpButton:CreateTexture(nil, 'ARTWORK');
 	UpTexture:SetTexture(C.Media.ArrowUp);
 	UpTexture:SetSize(8, 8);
 	UpTexture:SetPoint('CENTER');
 	UpTexture:SetVertexColor(1, 1, 1);
-	_G[Scroll..'ScrollUpButton'].Texture = UpTexture;
-
-	local DownTexture = _G[Scroll..'ScrollDownButton']:CreateTexture(nil, 'ARTWORK');
+	UpButton.Texture = UpTexture;
+	
+	UpButton:HookScript('OnEnter', ColourScroll);
+	UpButton:HookScript('OnLeave', ClearScroll);
+	
+	F:Reskin(DownButton, true);
+	DownButton:SetWidth(17);
+	
+	DownButton:SetDisabledTexture(C.Media.Backdrop);
+	DownButton:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
+	DownButton:GetDisabledTexture():SetDrawLayer('OVERLAY');
+	
+	local DownTexture = DownButton:CreateTexture(nil, 'ARTWORK');
 	DownTexture:SetTexture(C.Media.ArrowDown);
 	DownTexture:SetSize(8, 8);
 	DownTexture:SetPoint('CENTER');
 	DownTexture:SetVertexColor(1, 1, 1);
-	_G[Scroll..'ScrollDownButton'].Texture = DownTexture;
-
-	_G[Scroll..'ScrollUpButton']:HookScript('OnEnter', ColourScroll);
-	_G[Scroll..'ScrollUpButton']:HookScript('OnLeave', ClearScroll);
-	_G[Scroll..'ScrollDownButton']:HookScript('OnEnter', ColourScroll);
-	_G[Scroll..'ScrollDownButton']:HookScript('OnLeave', ClearScroll);
+	DownButton.Texture = DownTexture;
+	
+	DownButton:HookScript('OnEnter', ColourScroll);
+	DownButton:HookScript('OnLeave', ClearScroll);
 end
 
-local function ColourArrow(Frame)
-	if ( Frame:IsEnabled() ) then
-		Frame.Texture:SetVertexColor(r, g, b);
+local function ColourArrow(self)
+	if(self:IsEnabled()) then
+		self.Texture:SetVertexColor(r, g, b);
 	end
 end
 
-local function ClearArrow(Frame)
-	Frame.Texture:SetVertexColor(1, 1, 1);
+local function ClearArrow(self)
+	self.Texture:SetVertexColor(1, 1, 1);
 end
 
 F.ColourArrow = ColourArrow;
 F.ClearArrow = ClearArrow;
 
-F.ReskinDropDown = function(Frame)
-	local Button = _G[Frame:GetName()..'Button'];
+function F:ReskinDropDown(self)
+	local Name = self:GetName();
+	local Button = _G[Name..'Button'];
 	
-	F.StripTextures(Frame);
+	F.StripTextures(self);
 	
 	Button:SetSize(20, 20);
 	Button:ClearAllPoints();
 	Button:SetPoint('RIGHT', -18, 2);
 
-	F.Reskin(Button, true);
+	F:Reskin(Button, true);
 
 	Button:SetDisabledTexture(C.Media.Backdrop);
 	Button:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
@@ -326,340 +338,337 @@ F.ReskinDropDown = function(Frame)
 	Button:HookScript('OnEnter', ColourArrow);
 	Button:HookScript('OnLeave', ClearArrow);
 
-	local BD = CreateFrame('Frame', nil, Frame);
+	local BD = CreateFrame('Frame', nil, self);
 	BD:SetPoint('TOPLEFT', 16, -4);
 	BD:SetPoint('BOTTOMRIGHT', -18, 8);
-	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BD, 0);
+	BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BD, 0);
 
-	local Fradient = F.CreateGradient(Frame);
+	local Fradient = F:CreateGradient(self);
 	Fradient:SetPoint('TOPLEFT', BD, 1, -1);
 	Fradient:SetPoint('BOTTOMRIGHT', BD, -1, 1);
 end
 
-local function ColourClose(Frame)
-	if ( Frame:IsEnabled() ) then
-		for _, Pixel in pairs(Frame.Pixels) do
+local function ColourClose(self)
+	if(self:IsEnabled()) then
+		for _, Pixel in pairs(self.Pixels) do
 			Pixel:SetVertexColor(r, g, b)
 		end
 	end
 end
 
-local function ClearClose(Frame)
-	for _, Pixel in pairs(Frame.Pixels) do
+local function ClearClose(self)
+	for _, Pixel in pairs(self.Pixels) do
 		Pixel:SetVertexColor(1, 1, 1)
 	end
 end
 
-F.ReskinClose = function(Frame, a1, p, a2, x, y)
-	Frame:SetSize(17, 17);
-
-	if ( not a1 ) then Frame:SetPoint('TOPRIGHT', -6, -6); else Frame:ClearAllPoints(); Frame:SetPoint(a1, p, a2, x, y); end
-
-	Frame:SetNormalTexture('');
-	Frame:SetHighlightTexture('');
-	Frame:SetPushedTexture('');
-	Frame:SetDisabledTexture('');
-
-	F.CreateBD(Frame, 0);
-
-	F.CreateGradient(Frame);
-
-	Frame:SetDisabledTexture(C.Media.Backdrop);
-	Frame:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
-	Frame:GetDisabledTexture():SetDrawLayer('OVERLAY');
-	Frame:GetDisabledTexture():SetAllPoints();
-
-	Frame.Pixels = {};
-
+function F:ReskinClose(self, a1, p, a2, x, y)
+	self:SetSize(17, 17);
+	
+	if(not a1) then
+		self:SetPoint('TOPRIGHT', -6, -6);
+	else
+		self:ClearAllPoints();
+		self:SetPoint(a1, p, a2, x, y);
+	end
+	
+	self:SetNormalTexture('');
+	self:SetHighlightTexture('');
+	self:SetPushedTexture('');
+	self:SetDisabledTexture('');
+	
+	F:CreateBD(self, 0);
+	F:CreateGradient(self);
+	
+	self:SetDisabledTexture(C.Media.Backdrop);
+	self:GetDisabledTexture():SetVertexColor(0, 0, 0, .4);
+	self:GetDisabledTexture():SetDrawLayer('OVERLAY');
+	self:GetDisabledTexture():SetAllPoints();
+	
+	self.Pixels = {};
+	
 	for i = 1, 9 do
-		local Texture = Frame:CreateTexture();
+		local Texture = self:CreateTexture();
 		Texture:SetTexture(1, 1, 1);
 		Texture:SetSize(1, 1);
 		Texture:SetPoint('BOTTOMLEFT', 3 + i, 3 + i);
-		tinsert(Frame.Pixels, Texture);
+		tinsert(self.Pixels, Texture);
 	end
-
+	
 	for i = 1, 9 do
-		local Texture = Frame:CreateTexture();
+		local Texture = self:CreateTexture();
 		Texture:SetTexture(1, 1, 1);
 		Texture:SetSize(1, 1);
 		Texture:SetPoint('TOPLEFT', 3 + i, -3 - i);
-		tinsert(Frame.Pixels, Texture);
+		tinsert(self.Pixels, Texture);
 	end
-
-	Frame:HookScript("OnEnter", ColourClose);
- 	Frame:HookScript("OnLeave", ClearClose);
+	
+	self:HookScript('OnEnter', ColourClose);
+ 	self:HookScript('OnLeave', ClearClose);
 end
 
-F.ReskinInput = function(Frame, Height, Width)
-	local Input = Frame:GetName();
+function F:ReskinInput(self, Height, Width)
+	local Name = self:GetName();
 	
-	if ( _G[Input..'Left'] ) then _G[Input..'Left']:Hide(); end
-	if ( _G[Input..'Middle'] ) then _G[Input..'Middle']:Hide(); end
-	if ( _G[Input..'Mid'] ) then _G[Input..'Mid']:Hide(); end
-	if ( _G[Input..'Right'] ) then _G[Input..'Right']:Hide(); end
+	if(_G[Name..'Left']) then _G[Name..'Left']:Hide(); end
+	if(_G[Name..'Middle']) then _G[Name..'Middle']:Hide(); end
+	if(_G[Name..'Mid']) then _G[Name..'Mid']:Hide(); end
+	if(_G[Name..'Right']) then _G[Name..'Right']:Hide(); end
 	
-	local BD = CreateFrame('Frame', nil, Frame);
+	local BD = CreateFrame('Frame', nil, self);
 	BD:SetPoint('TOPLEFT', -2, 0);
 	BD:SetPoint('BOTTOMRIGHT');
-	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BD, 0);
+	BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BD, 0);
 	
-	if Input and Input:find('Silver') or Input:find('Copper') then
+	if(Name and Name:find('Silver') or Name:find('Copper')) then
 		BD:SetPoint('BOTTOMRIGHT', -10, 0);
 	end
 
-	local Gradient = F.CreateGradient(Frame);
+	local Gradient = F:CreateGradient(self);
 	Gradient:SetPoint('TOPLEFT', BD, 1, -1);
 	Gradient:SetPoint('BOTTOMRIGHT', BD, -1, 1);
 
-	if ( Height ) then Frame:SetHeight(Height); end
-	if ( Width ) then Frame:SetWidth(Width); end
+	if(Height) then self:SetHeight(Height); end
+	if(Width) then self:SetWidth(Width); end
 end
 
-F.ReskinArrow = function(Frame, Direction)
-	Frame:SetSize(18, 18);
-	F.Reskin(Frame, true);
+function F:ReskinArrow(self, Direction)
+	self:SetSize(18, 18);
+	F:Reskin(self, true);
 
-	Frame:SetDisabledTexture(C.Media.Backdrop);
-	Frame:GetDisabledTexture():SetVertexColor(0, 0, 0, .3);
-	Frame:GetDisabledTexture():SetDrawLayer('OVERLAY');
+	self:SetDisabledTexture(C.Media.Backdrop);
+	self:GetDisabledTexture():SetVertexColor(0, 0, 0, .3);
+	self:GetDisabledTexture():SetDrawLayer('OVERLAY');
 
-	local Texture = Frame:CreateTexture(nil, 'ARTWORK');
+	local Texture = self:CreateTexture(nil, 'ARTWORK');
 	Texture:SetTexture([[Interface\AddOns\Aurora\Media\Arrow-]]..Direction..[[-Active]]);
 	Texture:SetSize(8, 8);
 	Texture:SetPoint('CENTER');
-	Frame.Texture = Texture;
+	self.Texture = Texture;
 
-	Frame:HookScript('OnEnter', ColourArrow);
-	Frame:HookScript('OnLeave', ClearArrow);
+	self:HookScript('OnEnter', ColourArrow);
+	self:HookScript('OnLeave', ClearArrow);
 end
 
-F.ReskinCheck = function(Frame)
-	Frame:SetNormalTexture('');
-	Frame:SetPushedTexture('');
-	Frame:SetHighlightTexture(C.Media.Backdrop);
+function F:ReskinCheck(self)
+	self:SetNormalTexture('');
+	self:SetPushedTexture('');
+	self:SetHighlightTexture(C.Media.Backdrop);
 	
-	Frame:GetHighlightTexture():SetPoint('TOPLEFT', 5, -5);
-	Frame:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -5, 5);
-	Frame:GetHighlightTexture():SetVertexColor(r, g, b, .2);
+	self:GetHighlightTexture():SetPoint('TOPLEFT', 5, -5);
+	self:GetHighlightTexture():SetPoint('BOTTOMRIGHT', -5, 5);
+	self:GetHighlightTexture():SetVertexColor(r, g, b, .2);
 
-	local BD = CreateFrame('Frame', nil, Frame);
+	local BD = CreateFrame('Frame', nil, self);
 	BD:SetPoint('TOPLEFT', 4, -4);
 	BD:SetPoint('BOTTOMRIGHT', -4, 4);
-	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BD, 0);
+	BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BD, 0);
 
-	local Gradient = F.CreateGradient(Frame);
+	local Gradient = F:CreateGradient(self);
 	Gradient:SetPoint('TOPLEFT', 5, -5);
 	Gradient:SetPoint('BOTTOMRIGHT', -5, 5);
 
-	Frame:GetCheckedTexture():SetVertexColor(r, g, b)
+	self:GetCheckedTexture():SetVertexColor(r, g, b);
 end
 
-local function ColourRadio(Frame)
-	Frame.BD:SetBackdropBorderColor(r, g, b)
+local function ColourRadio(self)
+	self.BD:SetBackdropBorderColor(r, g, b);
 end
 
-local function ClearRadio(Frame)
-	Frame.BD:SetBackdropBorderColor(0, 0, 0)
+local function ClearRadio(self)
+	self.BD:SetBackdropBorderColor(0, 0, 0);
 end
 
-F.ReskinRadio = function(Frame)
-	Frame:SetNormalTexture('');
-	Frame:SetHighlightTexture('');
-	Frame:SetCheckedTexture(C.Media.Backdrop);
+function F:ReskinRadio(self)
+	self:SetNormalTexture('');
+	self:SetHighlightTexture('');
+	self:SetCheckedTexture(C.Media.Backdrop);
 	
-	Frame:GetCheckedTexture():SetPoint('TOPLEFT', 4, -4);
-	Frame:GetCheckedTexture():SetPoint('BOTTOMRIGHT', -4, 4);
-	Frame:GetCheckedTexture():SetVertexColor(r, g, b, .6);
-
-	local BD = CreateFrame('Frame', nil, Frame);
+	self:GetCheckedTexture():SetPoint('TOPLEFT', 4, -4);
+	self:GetCheckedTexture():SetPoint('BOTTOMRIGHT', -4, 4);
+	self:GetCheckedTexture():SetVertexColor(r, g, b, .6);
+	
+	local BD = CreateFrame('Frame', nil, self);
 	BD:SetPoint('TOPLEFT', 3, -3);
 	BD:SetPoint('BOTTOMRIGHT', -3, 3);
-	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BD, 0);
-	Frame.BD = BD;
-
-	local Gradient = F.CreateGradient(Frame);
+	BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BD, 0);
+	self.BD = BD;
+	
+	local Gradient = F:CreateGradient(self);
 	Gradient:SetPoint('TOPLEFT', 4, -4);
 	Gradient:SetPoint('BOTTOMRIGHT', -4, 4);
-
-	Frame:HookScript('OnEnter', ColourRadio);
-	Frame:HookScript('OnLeave', ClearRadio);
+	
+	self:HookScript('OnEnter', ColourRadio);
+	self:HookScript('OnLeave', ClearRadio);
 end
 
-F.ReskinSlider = function(Frame)
-	Frame:SetBackdrop(nil);
-	Frame.SetBackdrop = F.dummy;
-
-	local BD = CreateFrame('Frame', nil, Frame);
+function F:ReskinSlider(self)
+	self:SetBackdrop(nil);
+	self.SetBackdrop = F.dummy;
+	
+	local BD = CreateFrame('Frame', nil, self);
 	BD:SetPoint('TOPLEFT', 14, -2);
 	BD:SetPoint('BOTTOMRIGHT', -15, 3);
-	BD:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(BD, 0);
-
-	F.CreateGradient(BD);
-
-	local Slider = select(4, Frame:GetRegions());
+	BD:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(BD, 0);
+	
+	F:CreateGradient(BD);
+	
+	local Slider = select(4, self:GetRegions());
 	Slider:SetTexture([[Interface\CastingBar\UI-CastingBar-Spark]]);
 	Slider:SetBlendMode('ADD');
 end
 
-F.ReskinHeader = function(Frame)
-	if ( Frame:GetName() ) then
-		local Left = _G[Frame:GetName()..'Left'];
-		local Middle = _G[Frame:GetName()..'Middle'];
-		local Right = _G[Frame:GetName()..'Right'];
-
-
-		if ( Left ) then Left:SetAlpha(0); end
-		if ( Middle ) then Middle:SetAlpha(0); end
-		if ( Right ) then Right:SetAlpha(0); end
+function F:ReskinHeader(self)
+	if(self:GetName()) then
+		local Left = _G[self:GetName()..'Left'];
+		local Middle = _G[self:GetName()..'Middle'];
+		local Right = _G[self:GetName()..'Right'];
+		
+		if(Left) then Left:SetTexture(nil); end
+		if(Middle) then Middle:SetTexture(nil); end
+		if(Right) then Right:SetTexture(nil); end
 	end
 	
-	Frame:SetHighlightTexture(C.Media.Backdrop);
-	local Highlight = Frame:GetHighlightTexture();
+	self:SetHighlightTexture(C.Media.Backdrop);
+	local Highlight = self:GetHighlightTexture();
 	Highlight:ClearAllPoints();
 	Highlight:SetPoint('TOPLEFT', 3, -4);
 	Highlight:SetPoint('BOTTOMRIGHT', -2, 4);
 	Highlight:SetVertexColor(r, g, b, .25);
 	
-	local HeaderBG = CreateFrame('Frame', nil, Frame);
+	local HeaderBG = CreateFrame('Frame', nil, self);
 	HeaderBG:SetPoint('TOPLEFT', 2, -3);
 	HeaderBG:SetPoint('BOTTOMRIGHT', -1, 3);
-	HeaderBG:SetFrameLevel(Frame:GetFrameLevel() - 1);
-	F.CreateBD(HeaderBG, 0);
-	F.CreateGradient(HeaderBG);
+	HeaderBG:SetFrameLevel(self:GetFrameLevel() - 1);
+	F:CreateBD(HeaderBG, 0);
+	F:CreateGradient(HeaderBG);
 	
-	return Frame;
+	return self;
 end
 
-local function ColourExpandOrCollapse(Frame)
-	if ( Frame:IsEnabled() ) then
-		Frame.Plus:SetVertexColor(r, g, b)
-		Frame.Minus:SetVertexColor(r, g, b)
+local function ColourExpandOrCollapse(self)
+	if(self:IsEnabled()) then
+		self.Plus:SetVertexColor(r, g, b);
+		self.Minus:SetVertexColor(r, g, b);
 	end
 end
 
-local function ClearExpandOrCollapse(Frame)
-	Frame.Plus:SetVertexColor(1, 1, 1)
-	Frame.Minus:SetVertexColor(1, 1, 1)
+local function ClearExpandOrCollapse(self)
+	self.Plus:SetVertexColor(1, 1, 1);
+	self.Minus:SetVertexColor(1, 1, 1);
 end
 
-F.ColourExpandOrCollapse = ColourExpandOrCollapse
-F.ClearExpandOrCollapse = ClearExpandOrCollapse
+F.ColourExpandOrCollapse = ColourExpandOrCollapse;
+F.ClearExpandOrCollapse = ClearExpandOrCollapse;
 
-F.ReskinExpandOrCollapse = function(Frame)
-	Frame:SetSize(13, 13);
-
-	F.Reskin(Frame, true);
-	Frame.SetNormalTexture = F.dummy;
-
-	Frame.Minus = Frame:CreateTexture(nil, 'OVERLAY');
-	Frame.Minus:SetSize(7, 1);
-	Frame.Minus:SetPoint('CENTER');
-	Frame.Minus:SetTexture(C.Media.Backdrop);
-	Frame.Minus:SetVertexColor(1, 1, 1);
-
-	Frame.Plus = Frame:CreateTexture(nil, 'OVERLAY');
-	Frame.Plus:SetSize(1, 7);
-	Frame.Plus:SetPoint('CENTER');
-	Frame.Plus:SetTexture(C.Media.Backdrop);
-	Frame.Plus:SetVertexColor(1, 1, 1);
-
-	Frame:HookScript('OnEnter', ColourExpandOrCollapse);
-	Frame:HookScript('OnLeave', ClearExpandOrCollapse);
+function F:ReskinExpandOrCollapse(self)
+	self:SetSize(13, 13);
+	
+	F:Reskin(self, true);
+	self.SetNormalTexture = F.dummy;
+	
+	self.Minus = self:CreateTexture(nil, 'OVERLAY');
+	self.Minus:SetSize(7, 1);
+	self.Minus:SetPoint('CENTER');
+	self.Minus:SetTexture(C.Media.Backdrop);
+	self.Minus:SetVertexColor(1, 1, 1);
+	
+	self.Plus = self:CreateTexture(nil, 'OVERLAY');
+	self.Plus:SetSize(1, 7);
+	self.Plus:SetPoint('CENTER');
+	self.Plus:SetTexture(C.Media.Backdrop);
+	self.Plus:SetVertexColor(1, 1, 1);
+	
+	self:HookScript('OnEnter', ColourExpandOrCollapse);
+	self:HookScript('OnLeave', ClearExpandOrCollapse);
 end
 
-F.SetBD = function(Frame, x1, y1, x2, y2)
+function F:SetBD(self, x1, y1, x2, y2)
 	local xOfs1 = x1 or 0;
 	local yOfs1 = y1 or 0;
 	local xOfs2 = x2 or 0;
 	local yOfs2 = y2 or 0;
 	
-	local PTR = true;
-	
-	if not PTR then
-		F.StripTextures(Frame);
-	end
-	
-	local BD = CreateFrame('Frame', nil, Frame);
+	local BD = CreateFrame('Frame', nil, self);
 	BD:ClearAllPoints();
-	if ( xOfs1 == 0 and yOfs1 == 0 and xOfs2 == 0 and yOfs2 == 0 ) then
-	 	BD:SetAllPoints(Frame);
+	if(xOfs1 == 0 and yOfs1 == 0 and xOfs2 == 0 and yOfs2 == 0) then
+	 	BD:SetAllPoints(self);
 	else
-		BD:SetPoint('TOPLEFT', Frame, 'TOPLEFT', xOfs1, yOfs1);
-		BD:SetPoint('BOTTOMRIGHT', Frame, 'BOTTOMRIGHT', xOfs2, yOfs2);
+		BD:SetPoint('TOPLEFT', self, 'TOPLEFT', xOfs1, yOfs1);
+		BD:SetPoint('BOTTOMRIGHT', self, 'BOTTOMRIGHT', xOfs2, yOfs2);
 	end
 	
-	F.CreateBD(BD);
+	F:CreateBD(BD);
 	
 	local Success, Err = pcall(LowerFrameLevel, BD);
-	if ( not Success ) then RaiseFrameLevel(Frame); end
+	if(not Success) then
+		RaiseFrameLevel(self);
+	end
 	
 	return BD
 end
 
-F.CreateBDFrame = function(f, a)
-	local frame
-	if f:GetObjectType() == "Texture" then
-		frame = f:GetParent()
+function F:CreateBDFrame(self, A)
+	local Frame;
+	
+	if(self:GetObjectType() == 'Texture') then
+		Frame = self:GetParent();
 	else
-		frame = f
+		Frame = self;
 	end
-
-	local lvl = frame:GetFrameLevel()
-
-	local bg = CreateFrame("Frame", nil, frame)
-	bg:SetPoint("TOPLEFT", f, -1, 1)
-	bg:SetPoint("BOTTOMRIGHT", f, 1, -1)
-	bg:SetFrameLevel(lvl == 0 and 1 or lvl - 1)
-
-	F.CreateBD(bg, a or .5)
-
-	return bg
+	
+	local FrameLevel = Frame:GetFrameLevel();
+	
+	local BG = CreateFrame('Frame', nil, Frame);
+	BG:SetPoint('TOPLEFT', self, -1, 1);
+	BG:SetPoint('BOTTOMRIGHT', self, 1, -1);
+	BG:SetFrameLevel(FrameLevel == 0 and 1 or FrameLevel - 1);
+	
+	F:CreateBD(BG, A or .5);
+	
+	return BG
 end
 
-F.ReskinColourSwatch = function(f)
-	local name = f:GetName()
-
-	local bg = _G[name.."SwatchBg"]
-
-	f:SetNormalTexture(C.Media.Backdrop)
-	local nt = f:GetNormalTexture()
-
-	nt:SetPoint("TOPLEFT", 3, -3)
-	nt:SetPoint("BOTTOMRIGHT", -3, 3)
-
-	bg:SetTexture(0, 0, 0)
-	bg:SetPoint("TOPLEFT", 2, -2)
-	bg:SetPoint("BOTTOMRIGHT", -2, 2)
+function F:ReskinColourSwatch(self)
+	local Name = self:GetName();
+	local BG = _G[Name..'SwatchBg'];
+	
+	self:SetNormalTexture(C.Media.Backdrop);
+	self:GetNormalTexture():SetPoint('TOPLEFT', 3, -3);
+	self:GetNormalTexture():SetPoint('BOTTOMRIGHT', -3, 3);
+	
+	BG:SetTexture(0, 0, 0);
+	BG:SetPoint('TOPLEFT', 2, -2);
+	BG:SetPoint('BOTTOMRIGHT', -2, 2);
 end
 
-F.ColourQuality = function(Button, ID)
+function F:ColourQuality(self, ID)
 	local Quality, Texture, _;
-	local Quest = _G[Button:GetName()..'IconQuestTexture'];
-
-	if ( ID ) then
+	local Quest = _G[self:GetName()..'IconQuestTexture'];
+	
+	if(ID) then
 		Quality, _, _, _, _, _, _, Texture = select(3, GetItemInfo(ID));
 	end
-
-	if ( Texture ) then
+	
+	if(Texture) then
 		local r, g, b;
-
-		if ( Quest and Quest:IsShown() ) then
+		
+		if(Quest and Quest:IsShown()) then
 			r, g, b = 1, 0, 0;
 		else
 			r, g, b = GetItemQualityColor(Quality);
 			
-			if ( r == 1 and g == 1 ) then r, g, b = 0, 0, 0; end
+			if(r == 1 and g == 1) then r, g, b = 0, 0, 0; end
 		end
-
-		Button:SetBackdropBorderColor(r, g, b);
+		
+		self:SetBackdropBorderColor(r, g, b);
 	else
-		Button:SetBackdropBorderColor(0, 0, 0);
+		self:SetBackdropBorderColor(0, 0, 0);
 	end
 end
 
@@ -689,72 +698,71 @@ F.StripTextures = function(object, kill)
 	end
 end
 
--- [[ Module handling ]]
-
 C.Modules = {}
 C.Modules['Aurora'] = {}
 
-local Skin = CreateFrame('Frame', nil, UIParent)
-Skin:RegisterEvent('ADDON_LOADED')
+local Skin = CreateFrame('Frame');
+Skin:RegisterEvent('ADDON_LOADED');
+Skin:RegisterEvent('PLAYER_LOGIN');
 Skin:SetScript('OnEvent', function(self, event, addon)
-	if addon == "Aurora" then
-		-- [[ Load Variables ]]
-
-		-- remove deprecated or corrupt variables
+	if(event == 'ADDON_LOADED') then
+		if(not addon == 'Aurora') then
+			return;
+		end
+		
 		for key, value in pairs(AuroraConfig) do
-			if C.Defaults[key] == nil then
-				AuroraConfig[key] = nil
+			if(C.Defaults[key] == nil) then
+				AuroraConfig[key] = nil;
 			end
 		end
-
-		-- load or init variables
+		
 		for key, value in pairs(C.Defaults) do
-			if AuroraConfig[key] == nil then
-				if type(value) == "table" then
-					AuroraConfig[key] = {}
+			if(AuroraConfig[key] == nil) then
+				if(type(value) == 'table') then
+					AuroraConfig[key] = {};
+					
 					for k, v in pairs(value) do
-						AuroraConfig[key][k] = value[k]
+						AuroraConfig[key][k] = value[k];
 					end
 				else
-					AuroraConfig[key] = value
+					AuroraConfig[key] = value;
 				end
 			end
 		end
 
-		alpha = AuroraConfig.alpha
-		useButtonGradientColour = AuroraConfig.useButtonGradientColour
+		alpha = AuroraConfig.alpha;
+		useButtonGradientColour = AuroraConfig.useButtonGradientColour;
 
 		if useButtonGradientColour then
-			buttonR, buttonG, buttonB, buttonA = unpack(AuroraConfig.buttonGradientColour)
+			ButtonR, ButtonG, ButtonB, ButtonA = unpack(AuroraConfig.buttonGradientColour);
 		else
-			buttonR, buttonG, buttonB, buttonA = unpack(AuroraConfig.buttonSolidColour)
+			ButtonR, ButtonG, ButtonB, ButtonA = unpack(AuroraConfig.buttonSolidColour);
 		end
 
 		if AuroraConfig.useCustomColour then
-			r, g, b = AuroraConfig.customColour.r, AuroraConfig.customColour.g, AuroraConfig.customColour.b
+			r, g, b = AuroraConfig.customColour.r, AuroraConfig.customColour.g, AuroraConfig.customColour.b;
 		end
-		-- for modules
-		C.r, C.g, C.b = r, g, b
+		
+		C.r, C.g, C.b = r, g, b;
+	elseif(event == 'PLAYER_LOGIN') then
+		SetCVar('useUiScale', 1);
+		SetCVar('uiScale', 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)'));
 	end
 
 	for module, moduleFunc in pairs(C.Modules) do
-		if type(moduleFunc) == "function" then
-			if module == addon then
-				moduleFunc()
+		if(type(moduleFunc) == 'function') then
+			if(module == addon) then
+				moduleFunc();
 			end
-		elseif type(moduleFunc) == "table" then
-			if module == addon then
+		elseif(type(moduleFunc) == 'table') then
+			if(module == addon) then
 				for _, moduleFunc in pairs(C.Modules[module]) do
-					moduleFunc()
+					moduleFunc();
 				end
 			end
 		end
 	end
-end)
-
-local f = CreateFrame('Frame');
-f:RegisterEvent('PLAYER_LOGIN')
-f:SetScript('OnEvent', function() SetCVar('useUiScale', 1); SetCVar('uiScale', 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)')); end);
+end);
 
 local Delay = CreateFrame('Frame')
 Delay:RegisterEvent('PLAYER_ENTERING_WORLD')
@@ -767,9 +775,9 @@ Delay:SetScript('OnEvent', function()
 			local ContainerCloseButton = _G['ContainerFrame'..i..'CloseButton'];
 			
 			F.StripTextures(Container, true);
-			F.SetBD(Container, 1, -1, -1, 1);
+			F:SetBD(Container, 1, -1, -1, 1);
 			
-			F.ReskinClose(ContainerCloseButton, 'TOPRIGHT', Container, 'TOPRIGHT', -5, -5);
+			F:ReskinClose(ContainerCloseButton, 'TOPRIGHT', Container, 'TOPRIGHT', -5, -5);
 
 			for k = 1, MAX_CONTAINER_ITEMS do
 				local ContainerItem = 'ContainerFrame'..i..'Item'..k;
@@ -779,8 +787,8 @@ Delay:SetScript('OnEvent', function()
 				_G[ContainerItem..'IconQuestTexture']:SetAlpha(0);
 
 				F.StripTextures(ContainerItemButton);
-				F.StyleButton(ContainerItemButton);
-				F.CreateBD(ContainerItemButton, .25);
+				F:StyleButton(ContainerItemButton);
+				F:CreateBD(ContainerItemButton, .25);
 				
 				ContainerItemIconTexture:SetTexCoord(unpack(F.TexCoords));
 				ContainerItemIconTexture:SetPoint('TOPLEFT', 1, -1);
@@ -807,17 +815,17 @@ Delay:SetScript('OnEvent', function()
 					local Button = _G[Name..'Item'..i];
 					local ItemID = GetContainerItemID(ID, Button:GetID());
 					
-					F.ColourQuality(Button, ItemID);
+					F:ColourQuality(Button, ItemID);
 				end
 			end);
 		end
 		
 		F.StripTextures(BankFrame, true);
-		F.SetBD(BankFrame, 10, -11, -25, 91);
+		F:SetBD(BankFrame, 10, -11, -25, 91);
 		
-		F.ReskinClose(BankCloseButton, 'TOPRIGHT', BankFrame, 'TOPRIGHT', -29, -15);
+		F:ReskinClose(BankCloseButton, 'TOPRIGHT', BankFrame, 'TOPRIGHT', -29, -15);
 		
-		F.Reskin(BankFramePurchaseButton);
+		F:Reskin(BankFramePurchaseButton);
 
 		for i = 1, 28 do
 			local BankItem = 'BankFrameItem'..i;
@@ -827,8 +835,8 @@ Delay:SetScript('OnEvent', function()
 			_G[BankItem..'IconQuestTexture']:SetAlpha(0);
 			
 			F.StripTextures(BankItemButton);
-			F.StyleButton(BankItemButton);
-			F.CreateBD(BankItemButton, .25);
+			F:StyleButton(BankItemButton);
+			F:CreateBD(BankItemButton, .25);
 			
 			BankItemIconTexture:SetPoint('TOPLEFT', 1, -1);
 			BankItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -840,8 +848,8 @@ Delay:SetScript('OnEvent', function()
 			local BankFrameBagIconTexture = _G['BankFrameBag'..i..'IconTexture'];
 			
 			F.StripTextures(BankFrameBag);
-			F.StyleButton(BankFrameBag);
-			F.CreateBD(BankFrameBag, .25);
+			F:StyleButton(BankFrameBag);
+			F:CreateBD(BankFrameBag, .25);
 			
 			BankFrameBagIconTexture:SetPoint('TOPLEFT', 1, -1);
 			BankFrameBagIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
@@ -850,7 +858,7 @@ Delay:SetScript('OnEvent', function()
 		
 		if ( AuroraConfig.QualityColour ) then
 			hooksecurefunc('BankFrameItemButton_Update', function(self)
-				F.ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
+				F:ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
 			end);
 		end
 	end
@@ -943,47 +951,6 @@ Delay:SetScript('OnEvent', function()
 		StatusBarTexture:SetTexture(C.Media.Backdrop)
 		StatusBarTexture:SetVertexColor(0, 0, 0)
 
-		F.CreateBD(FriendsTooltip)
-	end
-	
-	if AuroraConfig.Loot == true and not(IsAddOnLoaded('Butsu') or IsAddOnLoaded('LovelyLoot') or IsAddOnLoaded('XLoot')) then
-		F.StripTextures(LootFrame, true);
-		F.SetBD(LootFrame, 12, -14, -68, 5);
-		
-		F.ReskinClose(LootCloseButton, 'TOPRIGHT', LootFrame, 'TOPRIGHT', -72, -18);
-
-		hooksecurefunc('LootFrame_UpdateButton', function(index)
-			local ButtonIconTexture = _G['LootButton'..index..'IconTexture'];
-
-			if not ButtonIconTexture.BG then
-				local Button = _G['LootButton'..index];
-				local ButtonNameFrame = _G['LootButton'..index..'NameFrame'];
-				
-				Button:SetNormalTexture('');
-				Button:SetPushedTexture('');
-				Button:GetHighlightTexture():SetTexture(C.r, C.g, C.b, .25);
-				
-				local BD = CreateFrame("Frame", nil, Button);
-				BD:SetPoint('TOPLEFT');
-				BD:SetPoint('BOTTOMRIGHT', 114, 0);
-				BD:SetFrameLevel(Button:GetFrameLevel() - 1);
-				F.CreateBD(BD, .25);
-				
-				ButtonNameFrame:Hide();
-				
-				ButtonIconTexture:SetTexCoord(unpack(F.TexCoords));
-				ButtonIconTexture.BG = F.CreateBG(ButtonIconTexture);
-			end
-		end);
-		
-		LootFrameDownButton:ClearAllPoints();
-		LootFrameDownButton:SetPoint('BOTTOMRIGHT', -84, 16);
-		LootFramePrev:ClearAllPoints();
-		LootFramePrev:SetPoint('LEFT', LootFrameUpButton, 'RIGHT', 4, 0);
-		LootFrameNext:ClearAllPoints();
-		LootFrameNext:SetPoint('RIGHT', LootFrameDownButton, 'LEFT', -4, 0);
-		
-		F.ReskinArrow(LootFrameUpButton, 'Up');
-		F.ReskinArrow(LootFrameDownButton, 'Down');
+		F:CreateBD(FriendsTooltip)
 	end
 end)

@@ -4,10 +4,10 @@ local _G = getfenv(0);
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(CharacterFrame, 13, -13, -32, 74);
+	F:SetBD(CharacterFrame, 13, -13, -32, 74);
 	CharacterFramePortrait:Hide();
 	
-	F.ReskinClose(CharacterFrameCloseButton, 'TOPRIGHT', CharacterFrame, 'TOPRIGHT', -36, -17);
+	F:ReskinClose(CharacterFrameCloseButton, 'TOPRIGHT', CharacterFrame, 'TOPRIGHT', -36, -17);
 	
 	do
 		local Tab;
@@ -15,7 +15,7 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, #CHARACTERFRAME_SUBFRAMES do
 			Tab = _G['CharacterFrameTab'..i];
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 		end
 	end
 end);

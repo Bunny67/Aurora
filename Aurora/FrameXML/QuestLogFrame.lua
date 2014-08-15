@@ -8,13 +8,13 @@ local Noop = F.dummy;
 
 tinsert(C.Modules['Aurora'], function()
 	-- QuestLogControlPanel
-	F.Reskin(QuestLogFrameAbandonButton);
-	F.Reskin(QuestLogFrameTrackButton);
+	F:Reskin(QuestLogFrameAbandonButton);
+	F:Reskin(QuestLogFrameTrackButton);
 	QuestLogFramePushQuestButton:SetPoint('LEFT', QuestLogFrameAbandonButton, 'RIGHT', 1, 0);
 	QuestLogFramePushQuestButton:SetPoint('RIGHT', QuestLogFrameTrackButton, 'LEFT', -1, 0);
-	F.Reskin(QuestLogFramePushQuestButton);
+	F:Reskin(QuestLogFramePushQuestButton);
 	-- QuestLogDetailFrame
-	F.SetBD(QuestLogDetailFrame, 10, -12, 0, 4);
+	F:SetBD(QuestLogDetailFrame, 10, -12, 0, 4);
 	
 	QuestLogDetailFrame:DisableDrawLayer('BACKGROUND');
 	QuestLogDetailFrame:DisableDrawLayer('BORDER');
@@ -22,34 +22,36 @@ tinsert(C.Modules['Aurora'], function()
 	
 	QuestLogDetailTitleText:SetDrawLayer("OVERLAY")
 	
-	F.ReskinClose(QuestLogDetailFrameCloseButton, 'TOPRIGHT', QuestLogDetailFrame, 'TOPRIGHT', -4, -16);
+	F:ReskinClose(QuestLogDetailFrameCloseButton, 'TOPRIGHT', QuestLogDetailFrame, 'TOPRIGHT', -4, -16);
 	
 	QuestLogDetailScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(QuestLogDetailScrollFrameScrollBar);
+	F:ReskinScroll(QuestLogDetailScrollFrameScrollBar);
 	-- QuestLogFrame
-	F.SetBD(QuestLogFrame, 13, -12, -2, 9);
+	F:SetBD(QuestLogFrame, 13, -12, -2, 9);
 	
 	QuestLogFrame:DisableDrawLayer('BACKGROUND');
 	QuestLogFrame:DisableDrawLayer('BORDER');
 	
-	F.ReskinClose(QuestLogFrameCloseButton, 'TOPRIGHT', QuestLogFrame, 'TOPRIGHT', -6, -16);
+	F:ReskinClose(QuestLogFrameCloseButton, 'TOPRIGHT', QuestLogFrame, 'TOPRIGHT', -6, -16);
 	
-	F.Reskin(QuestLogFrameCancelButton);
+	F:Reskin(QuestLogFrameCancelButton);
 	
 	QuestLogFrameShowMapButton:SetSize(QuestLogFrameShowMapButton.text:GetStringWidth() + 14, 22);
 	QuestLogFrameShowMapButton.texture:Hide();
 	QuestLogFrameShowMapButton.text:ClearAllPoints();
 	QuestLogFrameShowMapButton.text:SetPoint('CENTER');
 	QuestLogFrameShowMapButtonHighlight:SetTexture(nil);
-	F.Reskin(QuestLogFrameShowMapButton);
+	F:Reskin(QuestLogFrameShowMapButton);
 	
-	F.CreateBD(QuestLogCount, .25);
+	EmptyQuestLogFrame:DisableDrawLayer('BACKGROUND');
+	
+	F:CreateBD(QuestLogCount, .25);
 	
 	for i = 1, 9 do
 		select(i, QuestLogCount:GetRegions()):Hide();
 	end
 	
-	F.ReskinScroll(QuestLogScrollFrameScrollBar);
+	F:ReskinScroll(QuestLogScrollFrameScrollBar);
 	
 	local function UpdateQuest()
 		local NumEntries = GetNumQuestLogEntries();
@@ -75,9 +77,9 @@ tinsert(C.Modules['Aurora'], function()
 				QuestLogTitle.BG:SetSize(13, 13);
 				QuestLogTitle.BG:SetPoint('LEFT', 4, 0);
 				QuestLogTitle.BG:SetFrameLevel(QuestLogTitle:GetFrameLevel() - 1);
-				F.CreateBD(QuestLogTitle.BG, 0);
+				F:CreateBD(QuestLogTitle.BG, 0);
 
-				QuestLogTitle.Gradient = F.CreateGradient(QuestLogTitle);
+				QuestLogTitle.Gradient = F:CreateGradient(QuestLogTitle);
 				QuestLogTitle.Gradient:SetAllPoints(QuestLogTitle.BG);
 
 				QuestLogTitle.Minus = QuestLogTitle:CreateTexture(nil, 'OVERLAY');

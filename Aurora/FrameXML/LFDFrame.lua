@@ -19,9 +19,9 @@ tinsert(C.Modules['Aurora'], function()
 	end
 	
 	-- LFDDungeonReadyPopup
-	F.CreateBD(LFDDungeonReadyStatus);
+	F:CreateBD(LFDDungeonReadyStatus);
 	
-	F.ReskinClose(LFDDungeonReadyStatusCloseButton);
+	F:ReskinClose(LFDDungeonReadyStatusCloseButton);
 	LFDDungeonReadyStatusCloseButton.Minimize = LFDDungeonReadyStatusCloseButton:CreateTexture(nil, 'OVERLAY');
 	LFDDungeonReadyStatusCloseButton.Minimize:SetSize(9, 1);
 	LFDDungeonReadyStatusCloseButton.Minimize:SetPoint('CENTER');
@@ -74,13 +74,13 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end
 	
-	F.CreateBD(LFDDungeonReadyDialog);
+	F:CreateBD(LFDDungeonReadyDialog);
 	
 	LFDDungeonReadyDialogBackground:Hide();
 	LFDDungeonReadyDialogFiligree:Hide();
 	LFDDungeonReadyDialogBottomArt:Hide();
 	
-	F.ReskinClose(LFDDungeonReadyDialogCloseButton);
+	F:ReskinClose(LFDDungeonReadyDialogCloseButton);
 	LFDDungeonReadyDialogCloseButton.Minimize = LFDDungeonReadyDialogCloseButton:CreateTexture(nil, 'OVERLAY');
 	LFDDungeonReadyDialogCloseButton.Minimize:SetSize(9, 1);
 	LFDDungeonReadyDialogCloseButton.Minimize:SetPoint('CENTER');
@@ -92,13 +92,13 @@ tinsert(C.Modules['Aurora'], function()
 		Pixel:Hide();
 	end
 	
-	F.Reskin(LFDDungeonReadyDialogEnterDungeonButton);
-	F.Reskin(LFDDungeonReadyDialogLeaveQueueButton);
+	F:Reskin(LFDDungeonReadyDialogEnterDungeonButton);
+	F:Reskin(LFDDungeonReadyDialogLeaveQueueButton);
 	
 	local LFDDungeonReadyDialogRoleIconBG = CreateFrame('Frame', nil, LFDDungeonReadyDialogRoleIcon);
 	LFDDungeonReadyDialogRoleIconBG:SetPoint('TOPLEFT', 8, -7);
 	LFDDungeonReadyDialogRoleIconBG:SetPoint('BOTTOMRIGHT', -9, 10);
-	F.CreateBD(LFDDungeonReadyDialogRoleIconBG, 0);
+	F:CreateBD(LFDDungeonReadyDialogRoleIconBG, 0);
 	
 	LFDDungeonReadyDialogRoleIconTexture:SetTexture(C.Media.RoleIcons);
 	LFDDungeonReadyDialogRoleIconLeaderIcon:SetTexture(C.Media.RoleIcons);
@@ -116,7 +116,7 @@ tinsert(C.Modules['Aurora'], function()
 		RewardBorder:SetPoint("BOTTOMRIGHT", RewardTexture, 1, -1);
 	end
 	-- LFDRoleCheckPopup
-	F.CreateBD(LFDRoleCheckPopup);
+	F:CreateBD(LFDRoleCheckPopup);
 	
 	for _, RoleButton in pairs({ LFDRoleCheckPopupRoleButtonTank, LFDRoleCheckPopupRoleButtonHealer, LFDRoleCheckPopupRoleButtonDPS }) do
 		RoleButton.cover:SetTexture(C.Media.RoleIcons);
@@ -152,13 +152,13 @@ tinsert(C.Modules['Aurora'], function()
 		Bottom:SetPoint('BOTTOMLEFT', RoleButton, 9, 11);
 		Bottom:SetPoint('BOTTOMRIGHT', RoleButton, -9, 11);
 
-		F.ReskinCheck(RoleButton.checkButton);
+		F:ReskinCheck(RoleButton.checkButton);
 	end
 	
-	F.Reskin(LFDRoleCheckPopupAcceptButton);
-	F.Reskin(LFDRoleCheckPopupDeclineButton);
+	F:Reskin(LFDRoleCheckPopupAcceptButton);
+	F:Reskin(LFDRoleCheckPopupDeclineButton);
 	-- LFDSearchStatus;
-	F.CreateBD(LFDSearchStatus);
+	F:CreateBD(LFDSearchStatus);
 	
 	do
 		local RoleButton = { 'Tank1', 'Healer1', 'Damage1', 'Damage2', 'Damage3' };
@@ -231,7 +231,7 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end);
 	-- LFDParentFrame;
-	F.SetBD(LFDParentFrame, 15, -12, -1, 3);
+	F:SetBD(LFDParentFrame, 15, -12, -1, 3);
 	
 	do
 		local Child;
@@ -240,7 +240,7 @@ tinsert(C.Modules['Aurora'], function()
 			Child = select(i, LFDParentFrame:GetChildren());
 			
 			if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
-				F.ReskinClose(Child, 'TOPRIGHT', LFDParentFrame, 'TOPRIGHT', -5, -16);
+				F:ReskinClose(Child, 'TOPRIGHT', LFDParentFrame, 'TOPRIGHT', -5, -16);
 			end
 		end
 	end
@@ -291,11 +291,11 @@ tinsert(C.Modules['Aurora'], function()
 			Bottom:SetPoint('BOTTOMRIGHT', -5, 7);
 			
 			Button.checkButton:SetFrameLevel(Button:GetFrameLevel() + 2);
-			F.ReskinCheck(Button.checkButton);
+			F:ReskinCheck(Button.checkButton);
 		end
 	end
 	
-	F.ReskinDropDown(LFDQueueFrameTypeDropDown);
+	F:ReskinDropDown(LFDQueueFrameTypeDropDown);
 	
 	do
 		local Item, ItemIcon, ItemCount, ItemName
@@ -307,7 +307,7 @@ tinsert(C.Modules['Aurora'], function()
 			ItemName = _G['LFDQueueFrameRandomScrollFrameChildFrameItem'..i..'NameFrame'];
 			
 			if ( Item ) then
-				F.CreateBG(ItemIcon)
+				F:CreateBG(ItemIcon)
 				ItemIcon:SetTexCoord(unpack(TexCoords));
 				ItemIcon:SetDrawLayer('OVERLAY');
 				
@@ -319,7 +319,7 @@ tinsert(C.Modules['Aurora'], function()
 				Item.bg2 = CreateFrame('Frame', nil, Item);
 				Item.bg2:SetPoint('TOPLEFT', ItemName, 'TOPLEFT', 10, 0);
 				Item.bg2:SetPoint('BOTTOMRIGHT', ItemName, 'BOTTOMRIGHT');
-				F.CreateBD(Item.bg2, 0);
+				F:CreateBD(Item.bg2, 0);
 			end
 		end
 	end
@@ -327,23 +327,23 @@ tinsert(C.Modules['Aurora'], function()
 	LFDQueueFrameRandomScrollFrameScrollBackground:SetTexture(nil);
 	LFDQueueFrameRandomScrollFrameScrollBackgroundTopLeft:SetTexture(nil);
 	LFDQueueFrameRandomScrollFrameScrollBackgroundBottomRight:SetTexture(nil);
-	F.ReskinScroll(LFDQueueFrameRandomScrollFrameScrollBar);
+	F:ReskinScroll(LFDQueueFrameRandomScrollFrameScrollBar);
 	
 	LFDQueueFrameSpecificListScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(LFDQueueFrameSpecificListScrollFrameScrollBar);
+	F:ReskinScroll(LFDQueueFrameSpecificListScrollFrameScrollBar);
 	
-	F.Reskin(LFDQueueFrameFindGroupButton, nil, true);
-	F.Reskin(LFDQueueFrameCancelButton, nil, true);
+	F:Reskin(LFDQueueFrameFindGroupButton);
+	F:Reskin(LFDQueueFrameCancelButton);
 	
-	F.Reskin(LFDQueueFramePartyBackfillBackfillButton);
-	F.Reskin(LFDQueueFramePartyBackfillNoBackfillButton);
+	F:Reskin(LFDQueueFramePartyBackfillBackfillButton);
+	F:Reskin(LFDQueueFramePartyBackfillNoBackfillButton);
 	
-	F.Reskin(LFDQueueFrameNoLFDWhileLFRLeaveQueueButton);
+	F:Reskin(LFDQueueFrameNoLFDWhileLFRLeaveQueueButton);
 	
 	hooksecurefunc('LFDQueueFrameSpecificListButton_SetDungeon', function(button, dungeonID)
 		if ( not button.expandOrCollapseButton.Plus ) then
-			F.ReskinCheck(button.enableButton);
-			F.ReskinExpandOrCollapse(button.expandOrCollapseButton);
+			F:ReskinCheck(button.enableButton);
+			F:ReskinExpandOrCollapse(button.expandOrCollapseButton);
 		end
 		
 		if ( LFGCollapseList[dungeonID] ) then

@@ -17,12 +17,12 @@ C.Modules['Blizzard_BattlefieldMinimap'] = function()
 	BattlefieldMinimap.BG:SetPoint('TOPLEFT', -1, 1);
 	BattlefieldMinimap.BG:SetPoint('BOTTOMRIGHT', -5, 3);
 	BattlefieldMinimap.BG:SetFrameLevel(0)
-	F.CreateBD(BattlefieldMinimap.BG, 1);
+	F:CreateBD(BattlefieldMinimap.BG, 1);
 	
 	BattlefieldMinimapCorner:Hide();
 	BattlefieldMinimapBackground:Hide();
 	
-	F.ReskinClose(BattlefieldMinimapCloseButton, 'TOPRIGHT', BattlefieldMinimap, 'TOPRIGHT', -7, -1);
+	F:ReskinClose(BattlefieldMinimapCloseButton, 'TOPRIGHT', BattlefieldMinimap, 'TOPRIGHT', -7, -1);
 	
 	BattlefieldMinimap:SetScript('OnMouseUp', function(self, btn)
 		if ( btn == 'LeftButton' ) then

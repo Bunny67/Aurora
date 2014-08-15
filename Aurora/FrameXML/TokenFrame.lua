@@ -7,7 +7,20 @@ local tinsert = table.insert;
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(TokenFrame, true);
+	-- TokenFrame;
+	TokenFrame:DisableDrawLayer('ARTWORK');
+	
+	F:ReskinScroll(TokenFrameContainerScrollBar);
+	
+	F:Reskin(TokenFrameCancelButton);
+	-- TokenFramePopup;
+	F:CreateBD(TokenFramePopup);
+	TokenFramePopupCorner:SetTexture(nil);
+	
+	F:ReskinCheck(TokenFramePopupInactiveCheckBox);
+	F:ReskinCheck(TokenFramePopupBackpackCheckBox);
+	
+	F:ReskinClose(TokenFramePopupCloseButton);
 	
 	hooksecurefunc('TokenFrame_Update', function()
 		local scrollFrame = TokenFrameContainer;
@@ -22,15 +35,15 @@ tinsert(C.Modules['Aurora'], function()
 			name, isHeader, isExpanded, _, _, _, extraCurrencyType, icon, itemID = GetCurrencyListInfo(index);
 
 			button = buttons[i];
-			if name or name == "" then
+			if(name or name == '') then
 				F.Kill(button.categoryLeft);
 				F.Kill(button.categoryRight);
 				F.Kill(button.highlight);
 				
 				button.expandIcon:SetTexture(nil);
 				
-				if not button.bg then
-					button.bg = F.CreateBG(button.icon);
+				if(not button.bg) then
+					button.bg = F:CreateBG(button.icon);
 					
 					local Minus = button:CreateTexture(nil, 'OVERLAY');
 					Minus:SetSize(7, 1);
@@ -49,14 +62,14 @@ tinsert(C.Modules['Aurora'], function()
 					button.Plus = Plus;
 				end
 				
-				if ( not isHeader ) then
+				if(not isHeader) then
 					button.bg:Show();
 					button.Plus:Hide();
 					button.Minus:Hide();
 					
-					if ( extraCurrencyType == 1 ) then
+					if(extraCurrencyType == 1) then
 						button.icon:SetTexCoord(unpack(TexCoords));
-					elseif ( extraCurrencyType == 2 ) then
+					elseif(extraCurrencyType == 2) then
 						local factionGroup = UnitFactionGroup('player');
 						if ( factionGroup ) then
 							button.icon:SetTexture('Interface\\TargetingFrame\\UI-PVP-'..factionGroup);
@@ -72,7 +85,7 @@ tinsert(C.Modules['Aurora'], function()
 					button.bg:Hide();
 					button.Minus:Show();
 					
-					if ( not isExpanded ) then
+					if(not isExpanded) then
 						button.Plus:Show();
 					else
 						button.Plus:Hide();
@@ -80,17 +93,5 @@ tinsert(C.Modules['Aurora'], function()
 				end
 			end
 		end
-	end)
-	
-	F.ReskinScroll(TokenFrameContainerScrollBar);
-	
-	F.Reskin(TokenFrameCancelButton);
-	
-	F.StripTextures(TokenFramePopup);
-	F.CreateBD(TokenFramePopup);
-	
-	F.ReskinClose(TokenFramePopupCloseButton);
-	
-	F.ReskinCheck(TokenFramePopupInactiveCheckBox);
-	F.ReskinCheck(TokenFramePopupBackpackCheckBox);
+	end);
 end);

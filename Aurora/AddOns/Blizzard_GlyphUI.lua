@@ -20,7 +20,7 @@ C.Modules['Blizzard_GlyphUI'] = function()
 			self.bg:SetPoint('BOTTOMRIGHT', self.glyph, 1, -1);
 			self.bg:SetFrameLevel(self:GetFrameLevel() - 1);
 			
-			F.CreateBD(self.bg, .25);
+			F:CreateBD(self.bg, .25);
 		end
 	end);
 	

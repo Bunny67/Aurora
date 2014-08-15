@@ -5,8 +5,8 @@ local select = select;
 local pairs = pairs;
 
 C.Modules['Blizzard_RaidUI'] = function()
-	F.Reskin(RaidFrameRaidBrowserButton);
-	F.Reskin(RaidFrameReadyCheckButton);
+	F:Reskin(RaidFrameRaidBrowserButton);
+	F:Reskin(RaidFrameReadyCheckButton);
 	
 	do
 		local Group, GroupSlot;
@@ -30,8 +30,8 @@ C.Modules['Blizzard_RaidUI'] = function()
 		for i = 1, MAX_RAID_GROUPS * 5 do
 			GroupButton = _G['RaidGroupButton'..i];
 			
-			F.StyleButton(GroupButton);
-			F.Reskin(GroupButton);
+			F:StyleButton(GroupButton);
+			F:Reskin(GroupButton);
 			
 			GroupButton.Gradient = GroupButton:CreateTexture(nil, 'BORDER');
 			GroupButton.Gradient:SetPoint('TOPLEFT', 1, -1);

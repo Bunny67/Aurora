@@ -5,14 +5,14 @@ local select = select;
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
+	F:SetBD(GuildRegistrarFrame, 14, -19, -30, 68);
 	GuildRegistrarFramePortrait:Hide();
 	
 	for i = 2, 5 do
 		select(i, GuildRegistrarFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	F.ReskinClose(GuildRegistrarFrameCloseButton, 'TOPRIGHT', GuildRegistrarFrame, 'TOPRIGHT', -34, -23);
+	F:ReskinClose(GuildRegistrarFrameCloseButton, 'TOPRIGHT', GuildRegistrarFrame, 'TOPRIGHT', -34, -23);
 	
 	do
 		local Button;
@@ -32,10 +32,10 @@ tinsert(C.Modules['Aurora'], function()
 	
 	select(6, GuildRegistrarFrameEditBox:GetRegions()):SetTexture(nil);
 	select(7, GuildRegistrarFrameEditBox:GetRegions()):SetTexture(nil);
-	F.ReskinInput(GuildRegistrarFrameEditBox, 20);
+	F:ReskinInput(GuildRegistrarFrameEditBox, 20);
 	
-	F.Reskin(GuildRegistrarFramePurchaseButton);
-	F.Reskin(GuildRegistrarFrameCancelButton);
+	F:Reskin(GuildRegistrarFramePurchaseButton);
+	F:Reskin(GuildRegistrarFrameCancelButton);
 	
-	F.Reskin(GuildRegistrarFrameGoodbyeButton);
+	F:Reskin(GuildRegistrarFrameGoodbyeButton);
 end);

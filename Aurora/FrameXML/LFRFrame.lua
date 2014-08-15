@@ -5,7 +5,7 @@ local select = select;
 local tinsert = table.insert;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(LFRParentFrame, 15, -12, -1, 3);
+	F:SetBD(LFRParentFrame, 15, -12, -1, 3);
 	LFRParentFrameIcon:Hide();
 	
 	do
@@ -15,7 +15,7 @@ tinsert(C.Modules['Aurora'], function()
 			local Child = select(i, LFRParentFrame:GetChildren());
 			
 			if Child.GetPushedTexture and Child:GetPushedTexture() and not Child:GetName() then
-				F.ReskinClose(Child, 'TOPRIGHT', LFRParentFrame, 'TOPRIGHT', -5, -16);
+				F:ReskinClose(Child, 'TOPRIGHT', LFRParentFrame, 'TOPRIGHT', -5, -16);
 			end
 		end
 	end
@@ -65,7 +65,7 @@ tinsert(C.Modules['Aurora'], function()
 			Bottom:SetPoint('BOTTOMRIGHT', -5, 7);
 			
 			Button.checkButton:SetFrameLevel(Button:GetFrameLevel() + 2);
-			F.ReskinCheck(Button.checkButton);
+			F:ReskinCheck(Button.checkButton);
 		end
 	end
 	
@@ -75,23 +75,23 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, NUM_LFR_CHOICE_BUTTONS do
 			Button = _G['LFRQueueFrameSpecificListButton'..i];
 			
-			-- F.ReskinCheck(Button.enableButton);
+			-- F:ReskinCheck(Button.enableButton);
 			
-			F.ReskinExpandOrCollapse(Button.expandOrCollapseButton);
+			F:ReskinExpandOrCollapse(Button.expandOrCollapseButton);
 		end
 	end
 	
 	LFRQueueFrameSpecificListScrollFrame:DisableDrawLayer('BACKGROUND');
-	F.ReskinScroll(LFRQueueFrameSpecificListScrollFrameScrollBar);
+	F:ReskinScroll(LFRQueueFrameSpecificListScrollFrameScrollBar);
 	
-	F.Reskin(LFRQueueFrameFindGroupButton);
-	F.Reskin(LFRQueueFrameAcceptCommentButton);
+	F:Reskin(LFRQueueFrameFindGroupButton);
+	F:Reskin(LFRQueueFrameAcceptCommentButton);
 	
-	F.Reskin(LFRQueueFrameNoLFRWhileLFDLeaveQueueButton);
+	F:Reskin(LFRQueueFrameNoLFRWhileLFDLeaveQueueButton);
 	
 	LFRBrowseFrameLayout:SetTexture(nil);
 	
-	F.ReskinDropDown(LFRBrowseFrameRaidDropDown);
+	F:ReskinDropDown(LFRBrowseFrameRaidDropDown);
 	
 	do
 		local Header;
@@ -99,15 +99,15 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, 7 do
 			Header = _G['LFRBrowseFrameColumnHeader'..i];
 			
-			F.ReskinHeader(Header);
+			F:ReskinHeader(Header);
 		end
 	end
 	
-	F.ReskinScroll(LFRBrowseFrameListScrollFrameScrollBar);
+	F:ReskinScroll(LFRBrowseFrameListScrollFrameScrollBar);
 	
-	F.Reskin(LFRBrowseFrameSendMessageButton);
-	F.Reskin(LFRBrowseFrameInviteButton);
-	F.Reskin(LFRBrowseFrameRefreshButton);
+	F:Reskin(LFRBrowseFrameSendMessageButton);
+	F:Reskin(LFRBrowseFrameInviteButton);
+	F:Reskin(LFRBrowseFrameRefreshButton);
 	
 	do
 		local Tab;
@@ -115,7 +115,7 @@ tinsert(C.Modules['Aurora'], function()
 		for i = 1, 2 do
 			Tab = _G['LFRParentFrameTab'..i];
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 		end
 	end
 	

@@ -4,7 +4,7 @@ local _G = getfenv(0);
 local select = select;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(PetitionFrame, 15, -19, -30, 68);
+	F:SetBD(PetitionFrame, 15, -19, -30, 68);
 	PetitionFramePortrait:Hide();
 	
 	for i = 2, 5 do
@@ -32,13 +32,13 @@ tinsert(C.Modules['Aurora'], function()
 	
 	PetitionFrameInstructions:SetTextColor(1, 1, 1);
 	
-	F.Reskin(PetitionFrameCancelButton);
-	F.Reskin(PetitionFrameSignButton);
-	F.Reskin(PetitionFrameRequestButton);
+	F:Reskin(PetitionFrameCancelButton);
+	F:Reskin(PetitionFrameSignButton);
+	F:Reskin(PetitionFrameRequestButton);
 	
-	F.ReskinClose(PetitionFrameCloseButton, 'TOPRIGHT', PetitionFrame, 'TOPRIGHT', -34, -23);
+	F:ReskinClose(PetitionFrameCloseButton, 'TOPRIGHT', PetitionFrame, 'TOPRIGHT', -34, -23);
 	
 	PetitionFrameRenameButton:SetPoint('LEFT', PetitionFrameRequestButton, 'RIGHT', 1, 0);
 	PetitionFrameRenameButton:SetPoint('RIGHT', PetitionFrameCancelButton, 'LEFT', -1, 0);
-	F.Reskin(PetitionFrameRenameButton);
+	F:Reskin(PetitionFrameRenameButton);
 end);

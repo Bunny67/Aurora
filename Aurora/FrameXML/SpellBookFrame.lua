@@ -9,7 +9,7 @@ local strlen = string.len;
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	F.SetBD(SpellBookFrame, 13, -13, -31, 73);
+	F:SetBD(SpellBookFrame, 13, -13, -31, 73);
 	SpellBookFrameIcon:SetTexture(nil);
 	
 	for i = 2, 5 do
@@ -25,17 +25,17 @@ tinsert(C.Modules['Aurora'], function()
 			Tab:GetNormalTexture():SetTexture(nil);
 			Tab:GetDisabledTexture():SetTexture(nil);
 			
-			F.ReskinTab(Tab);
+			F:ReskinTab(Tab);
 			Tab:SetHeight(32);
 		end
 	end
 	
-	F.ReskinArrow(SpellBookPrevPageButton, 'Left');
-	F.ReskinArrow(SpellBookNextPageButton, 'Right');
+	F:ReskinArrow(SpellBookPrevPageButton, 'Left');
+	F:ReskinArrow(SpellBookNextPageButton, 'Right');
 	
-	F.ReskinClose(SpellBookCloseButton, 'TOPRIGHT', SpellBookFrame, 'TOPRIGHT', -35, -17);
+	F:ReskinClose(SpellBookCloseButton, 'TOPRIGHT', SpellBookFrame, 'TOPRIGHT', -35, -17);
 	
-	F.ReskinCheck(ShowAllSpellRanksCheckBox);
+	F:ReskinCheck(ShowAllSpellRanksCheckBox);
 	
 	do
 		local Button;
@@ -50,7 +50,7 @@ tinsert(C.Modules['Aurora'], function()
 			_G['SpellButton'..i..'Background']:SetTexture(nil);
 			
 			if ButtonIcon then
-				Button.BG = F.CreateBG(Button);
+				Button.BG = F:CreateBG(Button);
 				
 				ButtonIcon:SetTexCoord(unpack(TexCoords));
 			end
@@ -65,8 +65,8 @@ tinsert(C.Modules['Aurora'], function()
 			
 			select(1, Tab:GetRegions()):SetTexture(nil);
 			
-			F.StyleButton(Tab, nil, true);
-			F.CreateBD(Tab);
+			F:StyleButton(Tab, nil, true);
+			F:CreateBD(Tab);
 			
 			Tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
 			Tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);

@@ -11,7 +11,7 @@ local CALENDAR_DAYBUTTON_MAX_VISIBLE_EVENTS	= 4;
 local Noop = F.dummy;
 
 C.Modules['Blizzard_Calendar'] = function()
-	F.SetBD(CalendarFrame, 11, 0, -9, 4);
+	F:SetBD(CalendarFrame, 11, 0, -9, 4);
 	
 	CalendarFrame:DisableDrawLayer('BORDER');
 	
@@ -31,11 +31,11 @@ C.Modules['Blizzard_Calendar'] = function()
 	CalendarTodayTextureGlow:Hide();
 	CalendarTodayTexture:Hide();
 	
-	F.ReskinArrow(CalendarPrevMonthButton, 'Left');
-	F.ReskinArrow(CalendarNextMonthButton, 'Right');
+	F:ReskinArrow(CalendarPrevMonthButton, 'Left');
+	F:ReskinArrow(CalendarNextMonthButton, 'Right');
 	
-	F.CreateBD(CalendarFilterFrame, 0);
-	F.CreateGradient(CalendarFilterFrame);
+	F:CreateBD(CalendarFilterFrame, 0);
+	F:CreateGradient(CalendarFilterFrame);
 	
 	CalendarFilterFrameLeft:Hide();
 	CalendarFilterFrameMiddle:Hide();
@@ -51,9 +51,9 @@ C.Modules['Blizzard_Calendar'] = function()
 		DownTexture:SetVertexColor(1, 1, 1);
 	end
 	
-	F.Reskin(CalendarFilterButton);
+	F:Reskin(CalendarFilterButton);
 	
-	F.ReskinClose(CalendarCloseButton, 'TOPRIGHT', CalendarFrame, 'TOPRIGHT', -13, -4);
+	F:ReskinClose(CalendarCloseButton, 'TOPRIGHT', CalendarFrame, 'TOPRIGHT', -13, -4);
 	
 	if not(IsAddOnLoaded('CowTip') or IsAddOnLoaded('TipTac') or IsAddOnLoaded('FreebTip') or IsAddOnLoaded('lolTip') or IsAddOnLoaded('StarTip') or IsAddOnLoaded('TipTop')) then
 		local Tooltips = { CalendarContextMenu, CalendarArenaTeamContextMenu, CalendarInviteStatusContextMenu }
@@ -66,7 +66,7 @@ C.Modules['Blizzard_Calendar'] = function()
 			BG:SetPoint('BOTTOMRIGHT', -1, 2);
 			BG:SetFrameLevel(tooltip:GetFrameLevel() - 1);
 			
-			F.CreateBD(BG);
+			F:CreateBD(BG);
 		end
 	end
 	
@@ -115,7 +115,7 @@ C.Modules['Blizzard_Calendar'] = function()
 			VLine:SetSize(1, 546);
 			VLine:SetPoint('TOP', _G['CalendarDayButton'..i], 'TOPRIGHT');
 			
-			F.CreateBD(VLine);
+			F:CreateBD(VLine);
 		end
 	end
 	
@@ -127,11 +127,11 @@ C.Modules['Blizzard_Calendar'] = function()
 			HLine:SetSize(637, 1);
 			HLine:SetPoint('LEFT', _G['CalendarDayButton'..i], 'TOPLEFT');
 			
-			F.CreateBD(HLine);
+			F:CreateBD(HLine);
 		end
 	end
 	-- CalendarViewHolidayFrame;
-	F.CreateBD(CalendarViewHolidayFrame);
+	F:CreateBD(CalendarViewHolidayFrame);
 	
 	CalendarViewHolidayBackground:Hide();
 	CalendarViewHolidayInfoTexture:Hide();
@@ -141,10 +141,10 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarViewHolidayTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinClose(CalendarViewHolidayCloseButton);
+	F:ReskinClose(CalendarViewHolidayCloseButton);
 	select(4, CalendarViewHolidayCloseButton:GetRegions()):Hide();
 	-- CalendarViewRaidFrame;
-	F.CreateBD(CalendarViewRaidFrame);
+	F:CreateBD(CalendarViewRaidFrame);
 	
 	CalendarViewRaidBackground:Hide();
 	
@@ -152,10 +152,10 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarViewRaidTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinClose(CalendarViewRaidCloseButton);
+	F:ReskinClose(CalendarViewRaidCloseButton);
 	select(4, CalendarViewRaidCloseButton:GetRegions()):Hide();
 	-- CalendarViewEventFrame;
-	F.CreateBD(CalendarViewEventFrame);
+	F:CreateBD(CalendarViewEventFrame);
 	
 	CalendarViewEventBackground:Hide();
 	
@@ -163,25 +163,25 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarViewEventTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.CreateBD(CalendarViewEventDescriptionContainer, .25);
+	F:CreateBD(CalendarViewEventDescriptionContainer, .25);
 	
-	F.ReskinScroll(CalendarViewEventDescriptionScrollFrameScrollBar);
+	F:ReskinScroll(CalendarViewEventDescriptionScrollFrameScrollBar);
 	
 	CalendarViewEventDivider:Hide();
 	
-	F.Reskin(CalendarViewEventAcceptButton);
-	F.Reskin(CalendarViewEventTentativeButton);
-	F.Reskin(CalendarViewEventDeclineButton);
-	F.Reskin(CalendarViewEventRemoveButton);
+	F:Reskin(CalendarViewEventAcceptButton);
+	F:Reskin(CalendarViewEventTentativeButton);
+	F:Reskin(CalendarViewEventDeclineButton);
+	F:Reskin(CalendarViewEventRemoveButton);
 	
-	F.CreateBD(CalendarViewEventInviteList, .25);
+	F:CreateBD(CalendarViewEventInviteList, .25);
 	
-	F.ReskinScroll(CalendarViewEventInviteListScrollFrameScrollBar);
+	F:ReskinScroll(CalendarViewEventInviteListScrollFrameScrollBar);
 	
-	F.ReskinClose(CalendarViewEventCloseButton);
+	F:ReskinClose(CalendarViewEventCloseButton);
 	select(4, CalendarViewEventCloseButton:GetRegions()):Hide();
 	-- CalendarCreateEventFrame;
-	F.CreateBD(CalendarCreateEventFrame);
+	F:CreateBD(CalendarCreateEventFrame);
 	
 	CalendarCreateEventBackground:Hide();
 	CalendarCreateEventFrameButtonBackground:Hide();
@@ -190,47 +190,47 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarCreateEventTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinInput(CalendarCreateEventTitleEdit);
+	F:ReskinInput(CalendarCreateEventTitleEdit);
 	
-	F.ReskinDropDown(CalendarCreateEventTypeDropDown);
-	F.ReskinDropDown(CalendarCreateEventHourDropDown);
+	F:ReskinDropDown(CalendarCreateEventTypeDropDown);
+	F:ReskinDropDown(CalendarCreateEventHourDropDown);
 	CalendarCreateEventHourDropDown:SetWidth(80);
-	F.ReskinDropDown(CalendarCreateEventMinuteDropDown);
+	F:ReskinDropDown(CalendarCreateEventMinuteDropDown);
 	CalendarCreateEventMinuteDropDown:SetWidth(80);
-	F.ReskinDropDown(CalendarCreateEventAMPMDropDown);
+	F:ReskinDropDown(CalendarCreateEventAMPMDropDown);
 	CalendarCreateEventAMPMDropDown:SetWidth(90);
-	F.ReskinDropDown(CalendarCreateEventRepeatOptionDropDown);
+	F:ReskinDropDown(CalendarCreateEventRepeatOptionDropDown);
 	
-	F.CreateBD(CalendarCreateEventDescriptionContainer, .25);
+	F:CreateBD(CalendarCreateEventDescriptionContainer, .25);
 	
-	F.ReskinScroll(CalendarCreateEventDescriptionScrollFrameScrollBar);
+	F:ReskinScroll(CalendarCreateEventDescriptionScrollFrameScrollBar);
 	
 	CalendarCreateEventDivider:Hide();
 	
-	F.ReskinCheck(CalendarCreateEventAutoApproveCheck);
-	F.ReskinCheck(CalendarCreateEventLockEventCheck);
+	F:ReskinCheck(CalendarCreateEventAutoApproveCheck);
+	F:ReskinCheck(CalendarCreateEventLockEventCheck);
 	
-	F.CreateBD(CalendarCreateEventInviteList, .25);
+	F:CreateBD(CalendarCreateEventInviteList, .25);
 	
-	F.ReskinScroll(CalendarCreateEventInviteListScrollFrameScrollBar);
+	F:ReskinScroll(CalendarCreateEventInviteListScrollFrameScrollBar);
 	
-	F.ReskinInput(CalendarCreateEventInviteEdit);
+	F:ReskinInput(CalendarCreateEventInviteEdit);
 	CalendarCreateEventInviteEdit:SetPoint('TOPLEFT', CalendarCreateEventInviteList, 'BOTTOMLEFT', 2, -3);
 	
-	F.Reskin(CalendarCreateEventInviteButton);
+	F:Reskin(CalendarCreateEventInviteButton);
 	CalendarCreateEventInviteButton:SetPoint('TOPLEFT', CalendarCreateEventInviteEdit, 'TOPRIGHT', 1, 1);
 	
-	F.Reskin(CalendarCreateEventMassInviteButton);
+	F:Reskin(CalendarCreateEventMassInviteButton);
 	CalendarCreateEventMassInviteButtonBorder:Hide();
-	F.Reskin(CalendarCreateEventRaidInviteButton);
+	F:Reskin(CalendarCreateEventRaidInviteButton);
 	CalendarCreateEventRaidInviteButtonBorder:Hide();
-	F.Reskin(CalendarCreateEventCreateButton);
+	F:Reskin(CalendarCreateEventCreateButton);
 	CalendarCreateEventCreateButtonBorder:Hide();
 	
-	F.ReskinClose(CalendarCreateEventCloseButton);
+	F:ReskinClose(CalendarCreateEventCloseButton);
 	select(4, CalendarCreateEventCloseButton:GetRegions()):Hide();
 	-- CalendarMassInviteFrame;
-	F.CreateBD(CalendarMassInviteFrame);
+	F:CreateBD(CalendarMassInviteFrame);
 	
 	CalendarMassInviteFrameDivider:Hide();
 	
@@ -238,20 +238,20 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarMassInviteTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinInput(CalendarMassInviteGuildMinLevelEdit);
-	F.ReskinInput(CalendarMassInviteGuildMaxLevelEdit);
+	F:ReskinInput(CalendarMassInviteGuildMinLevelEdit);
+	F:ReskinInput(CalendarMassInviteGuildMaxLevelEdit);
 	
-	F.ReskinDropDown(CalendarMassInviteGuildRankMenu);
+	F:ReskinDropDown(CalendarMassInviteGuildRankMenu);
 	
-	F.Reskin(CalendarMassInviteGuildAcceptButton);
-	F.Reskin(CalendarMassInviteArenaButton2);
-	F.Reskin(CalendarMassInviteArenaButton3);
-	F.Reskin(CalendarMassInviteArenaButton5);
+	F:Reskin(CalendarMassInviteGuildAcceptButton);
+	F:Reskin(CalendarMassInviteArenaButton2);
+	F:Reskin(CalendarMassInviteArenaButton3);
+	F:Reskin(CalendarMassInviteArenaButton5);
 	
-	F.ReskinClose(CalendarMassInviteCloseButton);
+	F:ReskinClose(CalendarMassInviteCloseButton);
 	select(4, CalendarMassInviteCloseButton:GetRegions()):Hide();
 	-- CalendarEventPickerFrame;
-	F.CreateBD(CalendarEventPickerFrame);
+	F:CreateBD(CalendarEventPickerFrame);
 	
 	CalendarEventPickerFrameButtonBackground:Hide();
 	
@@ -259,12 +259,12 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarEventPickerTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinScroll(CalendarEventPickerScrollBar);
+	F:ReskinScroll(CalendarEventPickerScrollBar);
 	
-	F.Reskin(CalendarEventPickerCloseButton);
+	F:Reskin(CalendarEventPickerCloseButton);
 	CalendarEventPickerCloseButtonBorder:Hide();
 	-- CalendarTexturePickerFrame;
-	F.CreateBD(CalendarTexturePickerFrame);
+	F:CreateBD(CalendarTexturePickerFrame);
 	
 	CalendarTexturePickerFrameButtonBackground:Hide();
 	
@@ -272,11 +272,11 @@ C.Modules['Blizzard_Calendar'] = function()
 		select(i, CalendarTexturePickerTitleFrame:GetRegions()):Hide();
 	end
 	
-	F.ReskinScroll(CalendarTexturePickerScrollBar);
+	F:ReskinScroll(CalendarTexturePickerScrollBar);
 	
-	F.Reskin(CalendarTexturePickerCancelButton);
+	F:Reskin(CalendarTexturePickerCancelButton);
 	CalendarTexturePickerCancelButtonBorder:Hide();
-	F.Reskin(CalendarTexturePickerAcceptButton);
+	F:Reskin(CalendarTexturePickerAcceptButton);
 	CalendarTexturePickerAcceptButtonBorder:Hide();
 	-- CalendarClassButtonContainer;
 	do
@@ -286,7 +286,7 @@ C.Modules['Blizzard_Calendar'] = function()
 		for i, class in ipairs(CLASS_SORT_ORDER) do
 			Button = _G['CalendarClassButton'..i];
 			
-			F.CreateBG(Button);
+			F:CreateBG(Button);
 			Button:GetRegions():Hide();
 			
 			TCoords = CLASS_ICON_TCOORDS[class]
@@ -298,7 +298,7 @@ C.Modules['Blizzard_Calendar'] = function()
 	
 	CalendarClassButton1:SetPoint('TOPLEFT', CalendarClassButtonContainer, 'TOPLEFT', 5, 0);
 	
-	F.CreateBD(CalendarClassTotalsButton);
+	F:CreateBD(CalendarClassTotalsButton);
 	CalendarClassTotalsButtonBackgroundTop:Hide();
 	CalendarClassTotalsButtonBackgroundMiddle:Hide();
 	CalendarClassTotalsButtonBackgroundBottom:Hide();

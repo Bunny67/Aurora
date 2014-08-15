@@ -12,8 +12,8 @@ tinsert(C.Modules['Aurora'], function()
 			local Backdrop = _G['DropDownList'..i..'Backdrop'];
 			
 			if not Backdrop.reskinned then
-				F.CreateBD(MenuBackdrop);
-				F.CreateBD(Backdrop);
+				F:CreateBD(MenuBackdrop);
+				F:CreateBD(Backdrop);
 				
 				Backdrop.reskinned = true;
 			end

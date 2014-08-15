@@ -4,31 +4,38 @@ local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
 
+local TexCoords = F.TexCoords;
+
 tinsert(C.Modules['Aurora'], function()
-	F.StripTextures(PetPaperDollFrame, true);
+	for i = 2, 5 do
+		select(i, PetPaperDollFrame:GetRegions()):SetTexture(nil);
+	end
 	
-	F.StripTextures(PetPaperDollFrameExpBar);
+	for i = 1, 2 do
+		select(i, PetPaperDollFrameExpBar:GetRegions()):SetTexture(nil);
+	end
+	
 	PetPaperDollFrameExpBar:SetStatusBarTexture(C.Media.Backdrop);
-	F.CreateBDFrame(PetPaperDollFrameExpBar, .25);
+	F:CreateBDFrame(PetPaperDollFrameExpBar, .25);
 	
-	F.ReskinArrow(PetModelFrameRotateLeftButton, 'Left');
-	F.ReskinArrow(PetModelFrameRotateRightButton, 'Right');
+	F:ReskinArrow(PetModelFrameRotateLeftButton, 'Left');
+	F:ReskinArrow(PetModelFrameRotateRightButton, 'Right');
 	
-	F.Reskin(PetPaperDollCloseButton);
+	F:Reskin(PetPaperDollCloseButton);
 	
-	F.StripTextures(PetAttributesFrame);
+	PetAttributesFrame:DisableDrawLayer('BACKGROUND');
 	
 	local PlayerStatsLeft = CreateFrame('Frame', nil, PetAttributesFrame)
 	PlayerStatsLeft:SetPoint('TOPLEFT', -1, -1);
 	PlayerStatsLeft:SetPoint('BOTTOMRIGHT', -116, 1);
-	F.CreateBD(PlayerStatsLeft, .25);
+	F:CreateBD(PlayerStatsLeft, .25);
 	
 	local PlayerStatsRight = CreateFrame('Frame', nil, PetAttributesFrame)
 	PlayerStatsRight:SetPoint('TOPLEFT', 116, -1);
 	PlayerStatsRight:SetPoint('BOTTOMRIGHT', -1, 1);
-	F.CreateBD(PlayerStatsRight, .25);
+	F:CreateBD(PlayerStatsRight, .25);
 	
-	F.CreateBDFrame(PetResistanceFrame);
+	F:CreateBDFrame(PetResistanceFrame);
 	PetResistanceFrame:SetSize(28, 140);
 	
 	PetMagicResFrame1:SetSize(28, 28);
@@ -42,49 +49,65 @@ tinsert(C.Modules['Aurora'], function()
 	PetMagicResFrame5:SetSize(28, 28);
 	select(1, PetMagicResFrame5:GetRegions()):SetTexCoord(0.21875, 0.78125, 0.4765625, 0.546875);
 	
-	F.StripTextures(PetPaperDollFrameCompanionFrame);
+	for i = 1, 2 do
+		select(i, PetPaperDollFrameCompanionFrame:GetRegions()):SetTexture(nil);
+	end
 	
-	F.CreateBD(CompanionModelFrame, .25);
+	F:CreateBD(CompanionModelFrame, .25);
 	
 	CompanionModelFrameRotateLeftButton:SetPoint('TOPLEFT', PetPaperDollFrame, 39, -90);
-	F.ReskinArrow(CompanionModelFrameRotateLeftButton, 'Left');
-	F.ReskinArrow(CompanionModelFrameRotateRightButton, 'Right');
+	F:ReskinArrow(CompanionModelFrameRotateLeftButton, 'Left');
+	F:ReskinArrow(CompanionModelFrameRotateRightButton, 'Right');
 	
-	F.Reskin(CompanionSummonButton);
+	F:Reskin(CompanionSummonButton);
 	
-	hooksecurefunc('PetPaperDollFrame_UpdateCompanions', function()
-		local Button, IconNormal, IconDisabled, ActiveTexture;
+	do
+		local Button, ActiveTexture;
 		
 		for i = 1, NUM_COMPANIONS_PER_PAGE do
-			Button = _G["CompanionButton"..i];
-			IconNormal = Button:GetNormalTexture();
-			IconDisabled = Button:GetDisabledTexture();
+			Button = _G['CompanionButton'..i];
 			ActiveTexture = _G['CompanionButton'..i..'ActiveTexture'];
 			
-			F.StyleButton(Button, nil, true);
-			F.CreateBD(Button, .25);
-			
-			if ( IconNormal ) then
-				IconNormal:SetPoint('TOPLEFT', 1, -1);
-				IconNormal:SetPoint('BOTTOMRIGHT', -1, 1);
-				IconNormal:SetTexCoord(unpack(F.TexCoords));
-			end
-			
-			IconDisabled:SetTexture(nil);
+			F:StyleButton(Button, nil, true);
+			F:CreateBD(Button, .25);
 			
 			ActiveTexture:SetPoint('TOPLEFT', Button, 1, -1);
 			ActiveTexture:SetPoint('BOTTOMRIGHT', Button, -1, 1);
 			ActiveTexture:SetTexture(1, 1, 1, .25);
 		end
-	end)
+	end
 	
 	CompanionPrevPageButton:SetPoint('BOTTOMLEFT', 123, 91);
-	F.ReskinArrow(CompanionPrevPageButton, 'Left');
-    F.ReskinArrow(CompanionNextPageButton, 'Right');
+	F:ReskinArrow(CompanionPrevPageButton, 'Left');
+    F:ReskinArrow(CompanionNextPageButton, 'Right');
 	
-	for i = 1, 3 do
-		local Tab = _G['PetPaperDollFrameTab'..i];
+	do
+		local Tab;
 		
-		F.StripTextures(Tab);
+		for i = 1, 3 do
+			Tab = _G['PetPaperDollFrameTab'..i];
+			
+			Tab:DisableDrawLayer('BACKGROUND');
+			
+			Tab:SetHighlightTexture(nil);
+		end
 	end
+	
+	hooksecurefunc('PetPaperDollFrame_UpdateCompanions', function()
+		local Button, IconNormal, IconDisabled;
+		
+		for i = 1, NUM_COMPANIONS_PER_PAGE do
+			Button = _G['CompanionButton'..i];
+			IconNormal = Button:GetNormalTexture();
+			IconDisabled = Button:GetDisabledTexture();
+			
+			if(IconNormal) then
+				IconNormal:SetPoint('TOPLEFT', 1, -1);
+				IconNormal:SetPoint('BOTTOMRIGHT', -1, 1);
+				IconNormal:SetTexCoord(unpack(TexCoords));
+			end
+			
+			IconDisabled:SetTexture(nil);
+		end
+	end);
 end);
