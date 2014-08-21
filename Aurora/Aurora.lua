@@ -2,8 +2,9 @@
 --  /,\| | | | , |/ _ \| , | /,\  --
 -- / _ | |_| |   \ (_) |   \/ _ \ --
 --/_/ \_\__,_|_|\_\___/|_|\_\/ \_\--
-local alpha, useButtonGradientColour
-local addon, core = ...
+local LATEST_API_VERSION = '1.31';
+
+local addon, core = ...;
 
 core[1] = {}
 core[2] = {}
@@ -68,7 +69,8 @@ C.Defaults = {
 
 C.Frames = {}
 
--- [[ Functions ]]
+local alpha, useButtonGradientColour;
+
 _, F.Class = UnitClass('player')
 
 if CUSTOM_CLASS_COLORS then
@@ -744,6 +746,34 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 		end
 		
 		C.r, C.g, C.b = r, g, b;
+		
+		local CustomStyle = AURORA_CUSTOM_STYLE;
+		
+		if(CustomStyle and CustomStyle.ApiVersion ~= nil and CustomStyle.ApiVersion == LATEST_API_VERSION) then
+			if(CustomStyle.Functions) then
+				for FuncName, Func in pairs(CustomStyle.Functions) do
+					if(F[FuncName]) then
+						F[FuncName] = Func;
+					end
+				end
+			end
+			
+			if(CustomStyle.ClassColors) then
+				C.classcolours = CustomStyle.ClassColors;
+				
+				if(not AuroraConfig.useCustomColour) then
+					r, g, b = C.classcolours[F.Class].r, C.classcolours[F.Class].g, C.classcolours[F.Class].b;
+					C.r, C.g, C.b = r, g, b;
+				end
+			end
+			
+			local HighlightColour = CustomStyle.HighlightColor;
+			
+			if(HighlightColour) then
+				r, g, b = HighlightColour.r, HighlightColour.g, HighlightColour.b;
+				C.r, C.g, C.b = r, g, b;
+			end
+		end
 	elseif(event == 'PLAYER_LOGIN') then
 		SetCVar('useUiScale', 1);
 		SetCVar('uiScale', 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)'));
