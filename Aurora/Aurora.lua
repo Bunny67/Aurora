@@ -759,7 +759,7 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 			end
 			
 			if(CustomStyle.ClassColors) then
-				C.classcolours = CustomStyle.ClassColors;
+				C.ClassColors = CustomStyle.ClassColors;
 				
 				if(not AuroraConfig.useCustomColour) then
 					r, g, b = C.classcolours[F.Class].r, C.classcolours[F.Class].g, C.classcolours[F.Class].b;
@@ -983,4 +983,4 @@ Delay:SetScript('OnEvent', function()
 
 		F:CreateBD(FriendsTooltip)
 	end
-end)
+end);
