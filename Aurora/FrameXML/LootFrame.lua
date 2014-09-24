@@ -1,9 +1,9 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
-local select = select;
 local unpack = unpack;
+local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 local TexCoords = F.TexCoords;
 

@@ -1,7 +1,9 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
+local unpack = unpack;
+local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	F:SetBD(CharacterFrame, 13, -13, -32, 74);
@@ -10,12 +12,12 @@ tinsert(C.Modules['Aurora'], function()
 	F:ReskinClose(CharacterFrameCloseButton, 'TOPRIGHT', CharacterFrame, 'TOPRIGHT', -36, -17);
 	
 	do
-		local Tab;
+		local tab;
 		
 		for i = 1, #CHARACTERFRAME_SUBFRAMES do
-			Tab = _G['CharacterFrameTab'..i];
+			tab = _G['CharacterFrameTab'..i];
 			
-			F:ReskinTab(Tab);
+			F:ReskinTab(tab);
 		end
 	end
 end);

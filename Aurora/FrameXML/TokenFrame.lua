@@ -1,8 +1,9 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
 local unpack = unpack;
+local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 local TexCoords = F.TexCoords;
 
@@ -21,6 +22,18 @@ tinsert(C.Modules['Aurora'], function()
 	F:ReskinCheck(TokenFramePopupBackpackCheckBox);
 	
 	F:ReskinClose(TokenFramePopupCloseButton);
+	-- BackpackTokenFrame;
+	BackpackTokenFrame:DisableDrawLayer('BACKGROUND');
+	
+	do
+		local watchButton;
+		
+		for i = 1, MAX_WATCHED_TOKENS do
+			watchButton = _G['BackpackTokenFrameToken'..i];
+			
+			watchButton.icon:SetTexCoord(unpack(TexCoords));
+		end
+	end
 	
 	hooksecurefunc('TokenFrame_Update', function()
 		local scrollFrame = TokenFrameContainer;

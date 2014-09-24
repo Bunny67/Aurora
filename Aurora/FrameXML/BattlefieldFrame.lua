@@ -1,7 +1,8 @@
-local F, C = unpack(select(2, ...));
-
+local unpack = unpack;
 local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	F:SetBD(BattlefieldFrame, 12, -12, -34, 74);

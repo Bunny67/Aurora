@@ -1,8 +1,8 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
-local select = select;
 local unpack = unpack;
+local select = select;
+
+local F, C = unpack(select(2, ...));
 
 local TexCoords = F.TexCoords;
 
@@ -118,33 +118,15 @@ tinsert(C.Modules['Aurora'], function()
 			end
 		end
 		
-		if ( AuroraConfig.QualityColour ) then
-			hooksecurefunc('PaperDollItemSlotButton_Update', function(self)
-				local Slot, SlotPopout, SlotInfo, ItemId;
-				
-				for i = 1, #Slots do
-					Slot = _G['Character'..Slots[i]];
-					SlotPopout = _G['Character'..Slots[i]..'PopoutButton'];
-					SlotInfo, _, _ = GetInventorySlotInfo(Slots[i]);
-					ItemId = GetInventoryItemID('player', SlotInfo);
-					
-					if ( ItemId ) then
-						local _, _, Rarity, _, _, _, _, _, _, _, _ = GetItemInfo(ItemId);
-						
-						if ( Rarity and Rarity > 1 ) then
-							Slot:SetBackdropBorderColor(GetItemQualityColor(Rarity));
-							SlotPopout.Arrow:SetVertexColor(GetItemQualityColor(Rarity));
-						else
-							Slot:SetBackdropBorderColor(0, 0, 0);
-							SlotPopout.Arrow:SetVertexColor(C.r, C.g, C.b);
-						end
-					else
-						Slot:SetBackdropBorderColor(0, 0, 0);
-						SlotPopout.Arrow:SetVertexColor(C.r, C.g, C.b);
-					end
-				end
-			end);
-		end
+		hooksecurefunc('PaperDollItemSlotButton_Update', function(self)
+			local quality = GetInventoryItemQuality("player", self:GetID());
+			
+			if(quality and quality > ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[quality]) then
+				self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[quality].r, BAG_ITEM_QUALITY_COLORS[quality].g, BAG_ITEM_QUALITY_COLORS[quality].b);
+			else
+				self:SetBackdropBorderColor(0, 0, 0);
+			end
+		end);
 		
 		CharacterAmmoSlot:SetNormalTexture('');
 		F:StyleButton(CharacterAmmoSlot);

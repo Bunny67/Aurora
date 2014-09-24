@@ -1,8 +1,8 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
 local unpack = unpack;
 local select = select;
+
+local F, C = unpack(select(2, ...));
 
 local TexCoords = F.TexCoords;
 

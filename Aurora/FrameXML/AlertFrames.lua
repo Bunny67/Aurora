@@ -1,7 +1,8 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
 local unpack = unpack;
+local select = select;
+
+local F, C = unpack(select(2, ...));
 
 local TexCoords = F.TexCoords;
 
@@ -16,7 +17,7 @@ tinsert(C.Modules['Aurora'], function()
 			frameIcon = _G['AchievementAlertFrame'..i..'Icon'];
 			frameIconTexture = _G['AchievementAlertFrame'..i..'IconTexture'];
 			
-			if ( frame and not frame.BG ) then
+			if(frame and not frame.BG) then
 				frame.BG = CreateFrame('Frame', nil, frame);
 				frame.BG:SetPoint('TOPLEFT', 2, -6);
 				frame.BG:SetPoint('BOTTOMRIGHT', -2, 6);
@@ -35,7 +36,7 @@ tinsert(C.Modules['Aurora'], function()
 				
 				frameIconTexture:SetTexCoord(unpack(TexCoords));
 				
-				if ( not frameIconTexture.BG ) then
+				if(not frameIconTexture.BG) then
 					frameIconTexture.BG = CreateFrame('Frame', nil, frame);
 					frameIconTexture.BG:SetPoint('TOPLEFT', frameIconTexture, -1, 1);
 					frameIconTexture.BG:SetPoint('BOTTOMRIGHT', frameIconTexture, 1, -1);
@@ -53,7 +54,7 @@ tinsert(C.Modules['Aurora'], function()
 			frameDungeonTexture = _G['DungeonCompletionAlertFrame'..i..'DungeonTexture'];
 			frameGlowFrame = _G['DungeonCompletionAlertFrame'..i..'GlowFrame'];
 			
-			if ( frame and not frame.BG ) then
+			if(frame and not frame.BG) then
 				frame.BG = CreateFrame('Frame', nil, frame);
 				frame.BG:SetPoint('TOPLEFT', 0, -6);
 				frame.BG:SetPoint('BOTTOMRIGHT', 0, -3);
@@ -65,7 +66,7 @@ tinsert(C.Modules['Aurora'], function()
 				
 				frameDungeonTexture:SetTexCoord(unpack(TexCoords));
 				
-				if ( not frameDungeonTexture.BG ) then
+				if(not frameDungeonTexture.BG) then
 					frameDungeonTexture.BG = CreateFrame('Frame', nil, frame);
 					frameDungeonTexture.BG:SetFrameLevel(0);
 					F:CreateBD(frameDungeonTexture.BG);

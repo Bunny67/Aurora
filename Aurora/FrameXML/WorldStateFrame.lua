@@ -1,8 +1,9 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
+local unpack = unpack;
 local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	F:SetBD(WorldStateScoreFrame, 12, -16, -115, 71);

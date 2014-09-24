@@ -4,11 +4,14 @@
 	<Script file="ArenaRegistrarFrame.lua"/>
 	<Script file="AudioOptionsFrame.lua"/>
 	<Script file="AudioOptionsPanels.lua"/>
+	<Script file="AutoComplete.lua"/>
+	<Script file="BankFrame.lua"/>
 	<Script file="BattlefieldFrame.lua"/>
 	<Script file="ChannelFrame.lua"/>
 	<Script file="CharacterFrame.lua"/>
 	<Script file="ChatConfigFrame.lua"/>
 	<Script file="CoinPickupFrame.lua"/>
+	<Script file="ContainerFrame.lua"/>
 	<Script file="DressUpFrame.lua"/>
 	<Script file="FriendsFrame.lua"/>
 	<Script file="GameMenuFrame.lua"/>

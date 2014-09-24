@@ -1,7 +1,9 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
+local unpack = unpack;
+local select = select;
 local tinsert = table.insert;
+
+local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	SkillFrame:DisableDrawLayer('BACKGROUND');
@@ -18,58 +20,57 @@ tinsert(C.Modules['Aurora'], function()
 	SkillDetailScrollFrame:DisableDrawLayer('ARTWORK');
 	F:ReskinScroll(SkillDetailScrollFrameScrollBar);
 	
-	hooksecurefunc('SkillFrame_SetStatusBar', function(statusBarID, skillIndex, numSkills, adjustedSkillPoints)
-		local _, Header, IsExpanded, _, _, _, _, _, _, _, _, _ = GetSkillLineInfo(skillIndex);
+	SkillDetailStatusBar:SetStatusBarTexture(C.Media.Backdrop);
+	F:CreateBD(SkillDetailStatusBar, .25);
+	
+	SkillDetailStatusBarBorder:SetAlpha(0);
+	SkillDetailStatusBarBackground:SetTexture(nil);
+	
+	do
+		local statusBar, statusBarLabel;
 		
-		local StatusBar = _G['SkillRankFrame'..statusBarID];
-		
-		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
-		F:CreateBD(StatusBar, .25);
-		
-		_G['SkillRankFrame'..statusBarID..'Border']:SetAlpha(0);
-		_G['SkillRankFrame'..statusBarID..'Background']:SetTexture(nil);
-		
-		local Label = _G['SkillTypeLabel'..statusBarID];
-		
-		if ( not Label.Style ) then
-			F:ReskinExpandOrCollapse(Label);
+		for i = 1, SKILLS_TO_DISPLAY do
+			statusBar = _G['SkillRankFrame'..i];
+			statusBarLabel = _G['SkillTypeLabel'..i];
 			
-			Label.Style = true;
+			statusBar:SetStatusBarTexture(C.Media.Backdrop);
+			F:CreateBD(statusBar, .25);
+			
+			_G['SkillRankFrame'..i..'Border']:SetAlpha(0);
+			_G['SkillRankFrame'..i..'Background']:SetTexture(nil);
+			
+			F:ReskinExpandOrCollapse(statusBarLabel);
 		end
+	end
+	
+	hooksecurefunc('SkillFrame_SetStatusBar', function(statusBarID, skillIndex, numSkills, adjustedSkillPoints)
+		local _, header, isExpanded, _, _, _, _, _, _, _, _, _ = GetSkillLineInfo(skillIndex);
 		
-		if ( Header ) then
-			if ( IsExpanded ) then
-				Label.Plus:Hide();
+		local statusBarLabel = _G['SkillTypeLabel'..statusBarID];
+		
+		if(header) then
+			if(isExpanded) then
+				statusBarLabel.Plus:Hide();
 			else
-				Label.Plus:Show();
+				statusBarLabel.Plus:Show();
 			end
 		else
-			Label.Plus:Hide();
+			statusBarLabel.Plus:Hide();
 		end
-	end);
-	
-	hooksecurefunc('SkillDetailFrame_SetStatusBar', function()
-		local StatusBar = _G['SkillDetailStatusBar'];
-		
-		StatusBar:SetStatusBarTexture(C.Media.Backdrop);
-		F:CreateBD(StatusBar, .25);
-		
-		_G['SkillDetailStatusBarBorder']:SetAlpha(0);
-		_G['SkillDetailStatusBarBackground']:SetTexture(nil);
 	end);
 	
 	hooksecurefunc('SkillFrame_UpdateSkills', function()
-		local NumSkills = GetNumSkillLines();
+		local numSkills = GetNumSkillLines();
 		
 		SkillFrameCollapseAllButton.isExpanded = 1;
 		SkillFrameCollapseAllButton.Minus:Show();
 		SkillFrameCollapseAllButton.Plus:Hide();
 		
-		for i = 1, NumSkills do
+		for i = 1, numSkills do
 			local temp, header, isExpanded = GetSkillLineInfo(i);
 			
-			if ( header ) then
-				if ( not isExpanded ) then
+			if(header) then
+				if(not isExpanded) then
 					SkillFrameCollapseAllButton.isExpanded = nil;
 					SkillFrameCollapseAllButton.Plus:Show();
 					

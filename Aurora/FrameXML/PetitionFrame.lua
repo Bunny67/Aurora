@@ -1,7 +1,8 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
+local unpack = unpack;
 local select = select;
+
+local F, C = unpack(select(2, ...));
 
 tinsert(C.Modules['Aurora'], function()
 	F:SetBD(PetitionFrame, 15, -19, -30, 68);

@@ -79,6 +79,23 @@ end
 
 local r, g, b = C.ClassColors[F.Class].r, C.ClassColors[F.Class].g, C.ClassColors[F.Class].b
 
+ITEM_QUALITY_POOR = 0;
+ITEM_QUALITY_COMMON = 1;
+ITEM_QUALITY_UNCOMMON = 2;
+ITEM_QUALITY_RARE = 3;
+ITEM_QUALITY_EPIC = 4;
+ITEM_QUALITY_LEGENDARY = 5;
+ITEM_QUALITY_HEIRLOOM = 7;
+
+BAG_ITEM_QUALITY_COLORS = {
+	[ITEM_QUALITY_COMMON] = { r = 0.65882,g = 0.65882, b = 0.65882 },
+	[ITEM_QUALITY_UNCOMMON] = { r = 0.08235, g = 0.70196, b = 0 },
+	[ITEM_QUALITY_RARE] = { r = 0, g = 0.56863, b = 0.94902 },
+	[ITEM_QUALITY_EPIC] = { r = 0.78431, g = 0.27059, b = 0.98039 },
+	[ITEM_QUALITY_LEGENDARY] = { r = 1, g = 0.50196, b = 0 },
+	[ITEM_QUALITY_HEIRLOOM] = { r = 0.90196, g = 0.8, b = 0.50196 }
+};
+
 F.TexCoords = {.08, .92, .08, .92};
 F.dummy = function() end;
 
@@ -798,100 +815,6 @@ local Delay = CreateFrame('Frame')
 Delay:RegisterEvent('PLAYER_ENTERING_WORLD')
 Delay:SetScript('OnEvent', function()
 	Delay:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	-- Сумки
-	if AuroraConfig.Bags == true and not(IsAddOnLoaded('Baggins') or IsAddOnLoaded('Stuffing') or IsAddOnLoaded('Combuctor') or IsAddOnLoaded('cargBags') or IsAddOnLoaded('famBags') or IsAddOnLoaded('ArkInventory') or IsAddOnLoaded('Bagnon')) then
-		for i = 1, 12 do
-			local Container = _G['ContainerFrame'..i];
-			local ContainerCloseButton = _G['ContainerFrame'..i..'CloseButton'];
-			
-			F.StripTextures(Container, true);
-			F:SetBD(Container, 1, -1, -1, 1);
-			
-			F:ReskinClose(ContainerCloseButton, 'TOPRIGHT', Container, 'TOPRIGHT', -5, -5);
-
-			for k = 1, MAX_CONTAINER_ITEMS do
-				local ContainerItem = 'ContainerFrame'..i..'Item'..k;
-				local ContainerItemButton = _G[ContainerItem];
-				local ContainerItemIconTexture = _G[ContainerItem..'IconTexture'];
-
-				_G[ContainerItem..'IconQuestTexture']:SetAlpha(0);
-
-				F.StripTextures(ContainerItemButton);
-				F:StyleButton(ContainerItemButton);
-				F:CreateBD(ContainerItemButton, .25);
-				
-				ContainerItemIconTexture:SetTexCoord(unpack(F.TexCoords));
-				ContainerItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-				ContainerItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			end
-			
-			if i == 1 then
-				F.StripTextures(BackpackTokenFrame);
-				
-				for i = 1, MAX_WATCHED_TOKENS do
-					local TokenIcon = _G['BackpackTokenFrameToken'..i..'Icon'];
-					
-					TokenIcon:SetTexCoord(unpack(F.TexCoords));
-				end
-			end
-		end
-		
-		if ( AuroraConfig.QualityColour ) then
-			hooksecurefunc('ContainerFrame_Update', function(self)
-				local ID = self:GetID();
-				local Name = self:GetName();
-
-				for i = 1, self.size, 1 do
-					local Button = _G[Name..'Item'..i];
-					local ItemID = GetContainerItemID(ID, Button:GetID());
-					
-					F:ColourQuality(Button, ItemID);
-				end
-			end);
-		end
-		
-		F.StripTextures(BankFrame, true);
-		F:SetBD(BankFrame, 10, -11, -25, 91);
-		
-		F:ReskinClose(BankCloseButton, 'TOPRIGHT', BankFrame, 'TOPRIGHT', -29, -15);
-		
-		F:Reskin(BankFramePurchaseButton);
-
-		for i = 1, 28 do
-			local BankItem = 'BankFrameItem'..i;
-			local BankItemButton = _G[BankItem];
-			local BankItemIconTexture = _G[BankItem..'IconTexture'];
-
-			_G[BankItem..'IconQuestTexture']:SetAlpha(0);
-			
-			F.StripTextures(BankItemButton);
-			F:StyleButton(BankItemButton);
-			F:CreateBD(BankItemButton, .25);
-			
-			BankItemIconTexture:SetPoint('TOPLEFT', 1, -1);
-			BankItemIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			BankItemIconTexture:SetTexCoord(unpack(F.TexCoords));
-		end
-
-		for i = 1, 7 do
-			local BankFrameBag = _G['BankFrameBag'..i];
-			local BankFrameBagIconTexture = _G['BankFrameBag'..i..'IconTexture'];
-			
-			F.StripTextures(BankFrameBag);
-			F:StyleButton(BankFrameBag);
-			F:CreateBD(BankFrameBag, .25);
-			
-			BankFrameBagIconTexture:SetPoint('TOPLEFT', 1, -1);
-			BankFrameBagIconTexture:SetPoint('BOTTOMRIGHT', -1, 1);
-			BankFrameBagIconTexture:SetTexCoord(unpack(F.TexCoords));
-		end
-		
-		if ( AuroraConfig.QualityColour ) then
-			hooksecurefunc('BankFrameItemButton_Update', function(self)
-				F:ColourQuality(self, GetInventoryItemID('player', self:GetInventorySlot()));
-			end);
-		end
-	end
 	-- Сообщения в облачках
 	if AuroraConfig.ChatBubbles then
 		local ChatBubblesHook = CreateFrame('Frame')
@@ -944,7 +867,7 @@ Delay:SetScript('OnEvent', function()
 	end
 	-- Подсказки
 	if AuroraConfig.Tooltips == true and not(IsAddOnLoaded('CowTip') or IsAddOnLoaded('TipTac') or IsAddOnLoaded('FreebTip') or IsAddOnLoaded('lolTip') or IsAddOnLoaded('StarTip') or IsAddOnLoaded('TipTop')) then
-		local Tooltips = {'GameTooltip', 'ItemRefTooltip', 'ShoppingTooltip1', 'ShoppingTooltip2', 'ShoppingTooltip3', 'WorldMapTooltip', 'ChatMenu', 'EmoteMenu', 'LanguageMenu', 'VoiceMacroMenu'}
+		local Tooltips = {'GameTooltip', 'ItemRefTooltip', 'AutoCompleteBox', 'ShoppingTooltip1', 'ShoppingTooltip2', 'ShoppingTooltip3', 'WorldMapTooltip', 'ChatMenu', 'EmoteMenu', 'LanguageMenu', 'VoiceMacroMenu'}
 
 		local Backdrop = {bgFile = C.Media.Backdrop, edgeFile = C.Media.Backdrop, edgeSize = 1}
 		local GetBackdrop = function() return Backdrop end
