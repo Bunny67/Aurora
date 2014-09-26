@@ -75,7 +75,9 @@ tinsert(C.Modules['Aurora'], function()
 
 	hooksecurefunc('StaticPopup_Show', function(which, text_arg1, text_arg2, data)
 		local info = StaticPopupDialogs[which];
-		if not info then return; end
+		if(not info) then
+			return nil;
+		end
 
 		local dialog = nil;
 		dialog = StaticPopup_FindVisible(which, data);
@@ -104,7 +106,9 @@ tinsert(C.Modules['Aurora'], function()
 			end
 		end
 
-		if not dialog then return; end
+		if(not dialog) then
+			return nil;
+		end
 
 		if info.closeButton then
 			local CloseButton = _G[dialog:GetName()..'CloseButton'];

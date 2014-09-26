@@ -25,16 +25,6 @@ tinsert(C.Modules['Aurora'], function()
 	
 	PetAttributesFrame:DisableDrawLayer('BACKGROUND');
 	
-	local PlayerStatsLeft = CreateFrame('Frame', nil, PetAttributesFrame)
-	PlayerStatsLeft:SetPoint('TOPLEFT', -1, -1);
-	PlayerStatsLeft:SetPoint('BOTTOMRIGHT', -116, 1);
-	F:CreateBD(PlayerStatsLeft, .25);
-	
-	local PlayerStatsRight = CreateFrame('Frame', nil, PetAttributesFrame)
-	PlayerStatsRight:SetPoint('TOPLEFT', 116, -1);
-	PlayerStatsRight:SetPoint('BOTTOMRIGHT', -1, 1);
-	F:CreateBD(PlayerStatsRight, .25);
-	
 	F:CreateBDFrame(PetResistanceFrame);
 	PetResistanceFrame:SetSize(28, 140);
 	
@@ -53,27 +43,24 @@ tinsert(C.Modules['Aurora'], function()
 		select(i, PetPaperDollFrameCompanionFrame:GetRegions()):SetTexture(nil);
 	end
 	
-	F:CreateBD(CompanionModelFrame, .25);
-	
-	CompanionModelFrameRotateLeftButton:SetPoint('TOPLEFT', PetPaperDollFrame, 39, -90);
 	F:ReskinArrow(CompanionModelFrameRotateLeftButton, 'Left');
 	F:ReskinArrow(CompanionModelFrameRotateRightButton, 'Right');
 	
 	F:Reskin(CompanionSummonButton);
 	
 	do
-		local Button, ActiveTexture;
+		local button;
 		
 		for i = 1, NUM_COMPANIONS_PER_PAGE do
-			Button = _G['CompanionButton'..i];
-			ActiveTexture = _G['CompanionButton'..i..'ActiveTexture'];
+			button = _G['CompanionButton'..i];
 			
-			F:StyleButton(Button, nil, true);
-			F:CreateBD(Button, .25);
+			F:StyleButton(button, nil, true);
+			button.Hover:SetAllPoints();
+			button.Checked:SetAllPoints();
 			
-			ActiveTexture:SetPoint('TOPLEFT', Button, 1, -1);
-			ActiveTexture:SetPoint('BOTTOMRIGHT', Button, -1, 1);
-			ActiveTexture:SetTexture(1, 1, 1, .25);
+			button.background = F:CreateBG(button);
+			
+			_G['CompanionButton'..i..'ActiveTexture']:SetTexture(1, 1, 1, .25);
 		end
 	end
 	
@@ -82,32 +69,33 @@ tinsert(C.Modules['Aurora'], function()
     F:ReskinArrow(CompanionNextPageButton, 'Right');
 	
 	do
-		local Tab;
+		local tab;
 		
 		for i = 1, 3 do
-			Tab = _G['PetPaperDollFrameTab'..i];
+			tab = _G['PetPaperDollFrameTab'..i];
 			
-			Tab:DisableDrawLayer('BACKGROUND');
+			tab:DisableDrawLayer('BACKGROUND');
 			
-			Tab:SetHighlightTexture(nil);
+			tab:SetHighlightTexture(nil);
 		end
 	end
 	
 	hooksecurefunc('PetPaperDollFrame_UpdateCompanions', function()
-		local Button, IconNormal, IconDisabled;
+		local button, iconTexture;
 		
 		for i = 1, NUM_COMPANIONS_PER_PAGE do
-			Button = _G['CompanionButton'..i];
-			IconNormal = Button:GetNormalTexture();
-			IconDisabled = Button:GetDisabledTexture();
+			button = _G['CompanionButton'..i];
+			iconTexture = button:GetNormalTexture();
+		
+			button:SetDisabledTexture('');
 			
-			if(IconNormal) then
-				IconNormal:SetPoint('TOPLEFT', 1, -1);
-				IconNormal:SetPoint('BOTTOMRIGHT', -1, 1);
-				IconNormal:SetTexCoord(unpack(TexCoords));
+			if(button.creatureID) then
+				button.background:Show();
+				
+				iconTexture:SetTexCoord(unpack(TexCoords));
+			else
+				button.background:Hide();
 			end
-			
-			IconDisabled:SetTexture(nil);
 		end
 	end);
 end);

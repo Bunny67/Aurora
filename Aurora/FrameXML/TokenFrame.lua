@@ -49,9 +49,9 @@ tinsert(C.Modules['Aurora'], function()
 
 			button = buttons[i];
 			if(name or name == '') then
-				F.Kill(button.categoryLeft);
-				F.Kill(button.categoryRight);
-				F.Kill(button.highlight);
+				button.categoryLeft:Hide();
+				button.categoryRight:Hide();
+				button.highlight:Hide();
 				
 				button.expandIcon:SetTexture(nil);
 				

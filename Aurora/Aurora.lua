@@ -21,6 +21,8 @@ local pairs = pairs;
 local pcall = pcall;
 local type = type;
 
+local match = string.match;
+
 C.ClassColors = {
 	['HUNTER'] = { r = 0.58, g = 0.86, b = 0.49 },
 	['WARLOCK'] = { r = 0.6, g = 0.47, b = 0.85 },
@@ -130,9 +132,9 @@ function F:StyleButton(Button, NoHover, NoPushed, NoChecked)
 	
 	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] 
 	if Cooldown then
-		Cooldown:ClearAllPoints();
-		Cooldown:SetPoint('TOPLEFT', -1, 1);
-		Cooldown:SetPoint('BOTTOMRIGHT', -1, 1);
+	--	Cooldown:ClearAllPoints();
+		--Cooldown:SetPoint('TOPLEFT', 1, -1);
+		--Cooldown:SetPoint('BOTTOMRIGHT', -1, 1);
 	end
 end
 
@@ -334,7 +336,13 @@ function F:ReskinDropDown(self)
 	local Name = self:GetName();
 	local Button = _G[Name..'Button'];
 	
-	F.StripTextures(self);
+	local left = _G[Name..'Left'];
+	local middle = _G[Name..'Middle'];
+	local right = _G[Name..'Right'];
+
+	if(left) then left:SetAlpha(0); end
+	if(middle) then middle:SetAlpha(0); end
+	if(right) then right:SetAlpha(0); end
 	
 	Button:SetSize(20, 20);
 	Button:ClearAllPoints();
@@ -691,32 +699,6 @@ function F:ColourQuality(self, ID)
 	end
 end
 
-F.Kill = function(object)
-	if object.UnregisterAllEvents then
-		object:UnregisterAllEvents()
-	end
-	
-	object.Show = F.dummy
-	object:Hide()
-end
-
-F.StripTextures = function(object, kill)
-	for i=1, object:GetNumRegions() do
-		local region = select(i, object:GetRegions())
-		if region and region:GetObjectType() == 'Texture' then
-			if kill and type(kill) == 'boolean' then
-				F.Kill(region)
-			elseif region:GetDrawLayer() == kill then
-				region:SetTexture(nil)
-			elseif kill and type(kill) == 'string' and region:GetTexture() ~= kill then
-				region:SetTexture(nil)
-			else
-				region:SetTexture(nil)
-			end
-		end
-	end
-end
-
 C.Modules = {}
 C.Modules['Aurora'] = {}
 
@@ -793,7 +775,7 @@ Skin:SetScript('OnEvent', function(self, event, addon)
 		end
 	elseif(event == 'PLAYER_LOGIN') then
 		SetCVar('useUiScale', 1);
-		SetCVar('uiScale', 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)'));
+		SetCVar('uiScale', 768/match(({GetScreenResolutions()})[GetCurrentResolution()], '%d+x(%d+)'));
 	end
 
 	for module, moduleFunc in pairs(C.Modules) do
