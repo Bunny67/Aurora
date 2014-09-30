@@ -8,7 +8,7 @@ local F, C = unpack(select(2, ...));
 local TexCoords = F.TexCoords;
 
 tinsert(C.Modules['Aurora'], function()
-	hooksecurefunc('QuestInfo_Display', function()								
+	hooksecurefunc('QuestInfo_Display', function()
 		-- Headers
 		QuestInfoTitleHeader:SetTextColor(1, 1, 1);
 		QuestInfoTitleHeader:SetShadowColor(0, 0, 0);
