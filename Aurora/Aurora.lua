@@ -42,7 +42,6 @@ C.Media = {
 	['ArrowLeft'] = [[Interface\AddOns\Aurora\Media\Arrow-Left-Active]],
 	['ArrowRight'] = [[Interface\AddOns\Aurora\Media\Arrow-Right-Active]],
 	['Backdrop'] = [[Interface\BUTTONS\WHITE8X8]],
-	['Checked'] = [[Interface\AddOns\Aurora\Media\CheckButtonHilight]],
 	['Font'] = [[Interface\AddOns\Aurora\Media\Font.ttf]],						-- Шрифт
 	['Glow'] = [[Interface\AddOns\Aurora\Media\Glow]],
 	['Gradient'] = [[Interface\AddOns\Aurora\Media\Gradient]],
