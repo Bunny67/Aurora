@@ -125,16 +125,15 @@ C.Modules['Blizzard_InspectUI'] = function()
 	InspectTalentFrame:DisableDrawLayer('ARTWORK');
 	
 	do
-		local Tab;
-		
+		local tab;
 		for i = 1, MAX_TALENT_TABS do
-			Tab = _G['InspectTalentFrameTab'..i];
+			tab = _G['InspectTalentFrameTab'..i];
 			
 			for j = 1, 6 do
-				select(j, Tab:GetRegions()):SetTexture(nil);
+				select(j, tab:GetRegions()):SetTexture(nil);
 			end
 			
-			select(8, Tab:GetRegions()):SetTexture(nil);
+			select(8, tab:GetRegions()):SetTexture(nil);
 		end
 	end
 	
@@ -147,23 +146,34 @@ C.Modules['Blizzard_InspectUI'] = function()
 	F:ReskinScroll(InspectTalentFrameScrollFrameScrollBar);
 	
 	do
-		local Talent, TalentIcon;
-		
+		local button, buttonIcon, buttonRank;
 		for i = 1, MAX_NUM_TALENTS do
-			Talent = _G['InspectTalentFrameTalent'..i];
-			TalentIcon = _G['InspectTalentFrameTalent'..i..'IconTexture'];
+			button = _G['InspectTalentFrameTalent'..i];
+			buttonIcon = _G['InspectTalentFrameTalent'..i..'IconTexture'];
+			buttonRank = _G['InspectTalentFrameTalent'..i..'RankBorder'];
 			
-			Talent:SetNormalTexture(nil);
-			F:CreateBG(Talent);
-			F:StyleButton(Talent);
+			button:SetNormalTexture(nil);
+			F:StyleButton(button);
+			button.background = F:CreateBG(button);
 			
-			Talent.Hover:SetAllPoints();
-			Talent.Pushed:SetAllPoints();
+			button.Hover:SetAllPoints();
+			button.Pushed:SetAllPoints();
 			
 			_G['InspectTalentFrameTalent'..i..'Slot']:SetTexture(nil);
-			_G['InspectTalentFrameTalent'..i..'RankBorder']:SetTexture(nil);
+			buttonRank:SetTexture(nil);
 			
-			TalentIcon:SetTexCoord(unpack(TexCoords));
+			local testRankFrame = CreateFrame('Frame', nil, button);
+			testRankFrame:SetPoint('TOPLEFT', buttonRank, 17, -17);
+			testRankFrame:SetPoint('BOTTOMRIGHT', buttonRank, -3, 3);
+			
+			F:CreateGradient(testRankFrame);
+			F:CreateBD(testRankFrame, 0);
+			button.RankFrame = testRankFrame;
+			
+			_G['InspectTalentFrameTalent'..i..'Rank']:SetParent(testRankFrame);
+			_G['InspectTalentFrameTalent'..i..'Rank']:SetPoint('CENTER');
+			
+			buttonIcon:SetTexCoord(unpack(TexCoords));
 		end
 	end
 end

@@ -1,9 +1,10 @@
-local F, C = unpack(select(2, ...));
-
 local _G = getfenv(0);
 local unpack = unpack;
+local select = select;
 
-local TexCoords = F.TexCoords;
+local F, C = unpack(select(2, ...));
+
+local texCoords = F.TexCoords;
 
 C.Modules['Blizzard_TalentUI'] = function()
 	F:SetBD(PlayerTalentFrame, 13, -12, -31, 74);
@@ -34,53 +35,58 @@ C.Modules['Blizzard_TalentUI'] = function()
 	F:ReskinScroll(PlayerTalentFrameScrollFrameScrollBar);
 	
 	do
-		local Talent, TalentIcon;
-		
+		local button, buttonIcon, buttonRank;
 		for i = 1, MAX_NUM_TALENTS do
-			Talent = _G['PlayerTalentFrameTalent'..i];
-			TalentIcon = _G['PlayerTalentFrameTalent'..i..'IconTexture'];
+			button = _G['PlayerTalentFrameTalent'..i];
+			buttonIcon = _G['PlayerTalentFrameTalent'..i..'IconTexture'];
+			buttonRank = _G['PlayerTalentFrameTalent'..i..'RankBorder'];
 			
-			Talent:SetNormalTexture(nil);
-			F:CreateBG(Talent);
-			F:StyleButton(Talent);
+			button:SetNormalTexture(nil);
+			F:StyleButton(button);
+			button.background = F:CreateBG(button);
 			
-			Talent.Hover:SetAllPoints();
-			Talent.Pushed:SetAllPoints();
+			button.Hover:SetAllPoints();
+			button.Pushed:SetAllPoints();
 			
 			_G['PlayerTalentFrameTalent'..i..'Slot']:SetTexture(nil);
-			_G['PlayerTalentFrameTalent'..i..'RankBorder']:SetTexture(nil);
+			buttonRank:SetTexture(nil);
 			
-			TalentIcon:SetTexCoord(unpack(TexCoords));
+			local testRankFrame = CreateFrame('Frame', nil, button);
+			testRankFrame:SetPoint('TOPLEFT', buttonRank, 17, -17);
+			testRankFrame:SetPoint('BOTTOMRIGHT', buttonRank, -3, 3);
+			
+			F:CreateGradient(testRankFrame);
+			F:CreateBD(testRankFrame, 0);
+			button.RankFrame = testRankFrame;
+			
+			_G['PlayerTalentFrameTalent'..i..'Rank']:SetParent(testRankFrame);
+			_G['PlayerTalentFrameTalent'..i..'Rank']:SetPoint('CENTER');
+			
+			buttonIcon:SetTexCoord(unpack(texCoords));
 		end
 	end
 	
 	do
-		local Tab;
-		
+		local tab;
 		for i = 1, 4 do
-			Tab = _G['PlayerTalentFrameTab'..i];
+			tab = _G['PlayerTalentFrameTab'..i];
 			
-			F:ReskinTab(Tab);
+			F:ReskinTab(tab);
 		end
 	end
 	
 	do
-		local Tab;
-		
-		for i = 1, MAX_TALENT_TABS do
-			local Tab = _G['PlayerSpecTab'..i];
+		local tab;
+		for i = 1, 3 do
+			local tab = _G['PlayerSpecTab'..i];
+			tab:GetRegions():Hide();
 			
-			if ( Tab ) then
-				local Regions = Tab:GetRegions();
-				Regions:Hide();
-				
-				F:CreateBD(Tab);
-				F:StyleButton(Tab, nil, true);
-				
-				Tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
-				Tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
-				Tab:GetNormalTexture():SetTexCoord(unpack(TexCoords));
-			end
+			F:CreateBD(tab);
+			F:StyleButton(tab, nil, true);
+			
+			tab:GetNormalTexture():SetPoint('TOPLEFT', 1, -1);
+			tab:GetNormalTexture():SetPoint('BOTTOMRIGHT', -1, 1);
+			tab:GetNormalTexture():SetTexCoord(unpack(texCoords));
 		end
 	end
 end

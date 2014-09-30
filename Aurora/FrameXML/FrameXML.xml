@@ -47,6 +47,7 @@
 	<Script file="StaticPopup.lua"/>
 	<Script file="Fonts.lua"/>
 	<Script file="TabardFrame.lua"/>
+	<Script file="TalentFrameBase.lua"/>
 	<Script file="TaxiFrame.lua"/>
 	<Script file="TokenFrame.lua"/>
 	<Script file="TradeFrame.lua"/>
