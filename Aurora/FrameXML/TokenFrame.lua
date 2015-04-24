@@ -35,6 +35,8 @@ tinsert(C.Modules['Aurora'], function()
 		end
 	end
 	
+	select(4, TokenFrame:GetChildren()):Hide();
+	
 	hooksecurefunc('TokenFrame_Update', function()
 		local scrollFrame = TokenFrameContainer;
 		local offset = HybridScrollFrame_GetOffset(scrollFrame);
